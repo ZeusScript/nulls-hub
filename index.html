@@ -99,7 +99,7 @@
       
       <!-- LOGO & LINGUA -->
       <div class="flex items-center justify-between w-full">
-        <div class="flex items-center gap-3 cursor-pointer" onclick="openTab('home')">
+        <div id="logo-home" class="flex items-center gap-3 cursor-pointer">
           <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 via-amber-400 to-purple-500 p-[2px]">
             <div class="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center font-gaming text-cyan-400 font-black text-xl">
               Z
@@ -115,20 +115,20 @@
 
         <!-- LINGUA -->
         <div class="flex items-center gap-1 text-xs font-bold bg-slate-900 p-1 rounded-xl border border-slate-800">
-          <button type="button" id="lang-it" onclick="changeLanguage('it')" class="px-2 py-1 rounded-lg bg-cyan-500 text-slate-950 font-black transition-all">🇮🇹 IT</button>
-          <button type="button" id="lang-en" onclick="changeLanguage('en')" class="px-2 py-1 rounded-lg text-slate-400 transition-all">🇬🇧 EN</button>
+          <button type="button" id="lang-it" class="px-2 py-1 rounded-lg bg-cyan-500 text-slate-950 font-black transition-all">🇮🇹 IT</button>
+          <button type="button" id="lang-en" class="px-2 py-1 rounded-lg text-slate-400 transition-all">🇬🇧 EN</button>
         </div>
       </div>
 
       <!-- BOTTONI MENU -->
       <nav class="flex items-center gap-2 overflow-x-auto w-full pb-1">
-        <button type="button" onclick="openTab('home')" id="tabbtn-home" class="nav-tab-btn px-4 py-2 rounded-xl bg-cyan-500 text-slate-950 font-black text-xs whitespace-nowrap shadow-lg shadow-cyan-500/25 transition-all" data-it="🏠 Home" data-en="🏠 Home">🏠 Home</button>
-        <button type="button" onclick="openTab('download')" id="tabbtn-download" class="nav-tab-btn px-4 py-2 rounded-xl bg-slate-900 text-slate-400 font-bold text-xs whitespace-nowrap transition-all" data-it="⬇️ Giochi Null's" data-en="⬇️ Null's Games">⬇️ Giochi Null's</button>
-        <button type="button" onclick="openTab('campionato')" id="tabbtn-campionato" class="nav-tab-btn px-4 py-2 rounded-xl bg-slate-900 text-slate-400 font-bold text-xs whitespace-nowrap transition-all" data-it="🏆 League" data-en="🏆 League">🏆 League</button>
-        <button type="button" onclick="openTab('globale')" id="tabbtn-globale" class="nav-tab-btn px-4 py-2 rounded-xl bg-slate-900 text-slate-400 font-bold text-xs whitespace-nowrap transition-all" data-it="🌍 Top Coppe" data-en="🌍 Top Trophies">🌍 Top Coppe</button>
-        <button type="button" onclick="openTab('brawlers')" id="tabbtn-brawlers" class="nav-tab-btn px-4 py-2 rounded-xl bg-slate-900 text-slate-400 font-bold text-xs whitespace-nowrap transition-all" data-it="⚡ Meta" data-en="⚡ Meta">⚡ Meta</button>
-        <button type="button" onclick="openTab('social')" id="tabbtn-social" class="nav-tab-btn px-4 py-2 rounded-xl bg-slate-900 text-slate-400 font-bold text-xs whitespace-nowrap transition-all" data-it="💬 Social" data-en="💬 Social">💬 Social</button>
-        <button type="button" onclick="openTab('features')" id="tabbtn-features" class="nav-tab-btn px-4 py-2 rounded-xl bg-slate-900 text-slate-400 font-bold text-xs whitespace-nowrap transition-all" data-it="⚙️ Comandi" data-en="⚙️ Commands">⚙️ Comandi</button>
+        <button type="button" data-tab="home" class="nav-tab-btn px-4 py-2 rounded-xl bg-cyan-500 text-slate-950 font-black text-xs whitespace-nowrap shadow-lg shadow-cyan-500/25 transition-all" data-it="🏠 Home" data-en="🏠 Home">🏠 Home</button>
+        <button type="button" data-tab="download" class="nav-tab-btn px-4 py-2 rounded-xl bg-slate-900 text-slate-400 font-bold text-xs whitespace-nowrap transition-all" data-it="⬇️ Giochi Null's" data-en="⬇️ Null's Games">⬇️ Giochi Null's</button>
+        <button type="button" data-tab="campionato" class="nav-tab-btn px-4 py-2 rounded-xl bg-slate-900 text-slate-400 font-bold text-xs whitespace-nowrap transition-all" data-it="🏆 League" data-en="🏆 League">🏆 League</button>
+        <button type="button" data-tab="globale" class="nav-tab-btn px-4 py-2 rounded-xl bg-slate-900 text-slate-400 font-bold text-xs whitespace-nowrap transition-all" data-it="🌍 Top Coppe" data-en="🌍 Top Trophies">🌍 Top Coppe</button>
+        <button type="button" data-tab="brawlers" class="nav-tab-btn px-4 py-2 rounded-xl bg-slate-900 text-slate-400 font-bold text-xs whitespace-nowrap transition-all" data-it="⚡ Meta" data-en="⚡ Meta">⚡ Meta</button>
+        <button type="button" data-tab="social" class="nav-tab-btn px-4 py-2 rounded-xl bg-slate-900 text-slate-400 font-bold text-xs whitespace-nowrap transition-all" data-it="💬 Social" data-en="💬 Social">💬 Social</button>
+        <button type="button" data-tab="features" class="nav-tab-btn px-4 py-2 rounded-xl bg-slate-900 text-slate-400 font-bold text-xs whitespace-nowrap transition-all" data-it="⚙️ Comandi" data-en="⚙️ Commands">⚙️ Comandi</button>
       </nav>
 
     </div>
@@ -138,7 +138,7 @@
   <main class="max-w-6xl mx-auto px-4 mt-6">
 
     <!-- 1. HOME -->
-    <section id="tab-home" class="page-tab animate-tab space-y-6">
+    <section id="tab-home" class="page-tab space-y-6">
       <div class="glass-panel p-6 md:p-10 rounded-3xl border border-cyan-500/30 space-y-4 shadow-2xl">
         <span class="px-3 py-1 rounded-full text-[10px] font-black bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 uppercase tracking-widest" data-it="OFFICIAL HUB" data-en="OFFICIAL HUB">OFFICIAL HUB</span>
         
@@ -154,14 +154,14 @@
           Risultati della Zenik League, download diretti di tutti i server Null's, classifiche e risorse per la community.
         </p>
         <div class="flex flex-wrap gap-3 pt-2">
-          <button type="button" onclick="openTab('download')" class="btn-shine px-5 py-3 rounded-xl bg-cyan-500 text-slate-950 font-black text-xs font-gaming shadow-lg shadow-cyan-500/20" data-it="⬇️ SCARICA I GIOCHI" data-en="⬇️ DOWNLOAD GAMES">⬇️ SCARICA I GIOCHI</button>
-          <button type="button" onclick="openTab('campionato')" class="btn-shine px-5 py-3 rounded-xl glass-panel text-amber-300 border border-amber-500/30 font-bold text-xs" data-it="🏆 CLASSIFICA LEAGUE" data-en="🏆 LEAGUE STANDINGS">🏆 CLASSIFICA LEAGUE</button>
+          <button type="button" data-tab-target="download" class="btn-shine px-5 py-3 rounded-xl bg-cyan-500 text-slate-950 font-black text-xs font-gaming shadow-lg shadow-cyan-500/20" data-it="⬇️ SCARICA I GIOCHI" data-en="⬇️ DOWNLOAD GAMES">⬇️ SCARICA I GIOCHI</button>
+          <button type="button" data-tab-target="campionato" class="btn-shine px-5 py-3 rounded-xl glass-panel text-amber-300 border border-amber-500/30 font-bold text-xs" data-it="🏆 CLASSIFICA LEAGUE" data-en="🏆 LEAGUE STANDINGS">🏆 CLASSIFICA LEAGUE</button>
         </div>
       </div>
     </section>
 
     <!-- 2. GIOCHI NULL'S -->
-    <section id="tab-download" class="page-tab animate-tab hidden space-y-6">
+    <section id="tab-download" class="page-tab hidden space-y-6">
       <h2 class="text-2xl font-black font-gaming text-cyan-400" data-it="⬇️ SERVERS & GIOCHI NULL'S" data-en="⬇️ NULL'S SERVERS & GAMES">⬇️ SERVERS & GIOCHI NULL'S</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         
@@ -214,7 +214,7 @@
     </section>
 
     <!-- 3. CAMPIONATO LEAGUE -->
-    <section id="tab-campionato" class="page-tab animate-tab hidden space-y-6">
+    <section id="tab-campionato" class="page-tab hidden space-y-6">
       <h2 class="text-2xl font-black font-gaming text-amber-400" data-it="🏆 ZENIK LEAGUE" data-en="🏆 ZENIK LEAGUE">🏆 ZENIK LEAGUE</h2>
       <div class="glass-panel rounded-2xl overflow-x-auto border border-slate-800">
         <table class="w-full text-left text-xs">
@@ -245,7 +245,7 @@
     </section>
 
     <!-- 4. TOP GLOBALE -->
-    <section id="tab-globale" class="page-tab animate-tab hidden space-y-4">
+    <section id="tab-globale" class="page-tab hidden space-y-4">
       <h2 class="text-2xl font-black font-gaming text-cyan-400" data-it="🌍 TOP PLAYERS GLOBAL" data-en="🌍 TOP PLAYERS GLOBAL">🌍 TOP PLAYERS GLOBAL</h2>
       <div class="glass-panel glass-card-hover p-4 rounded-2xl flex items-center justify-between border border-cyan-500/20">
         <div>
@@ -257,7 +257,7 @@
     </section>
 
     <!-- 5. META BRAWLERS -->
-    <section id="tab-brawlers" class="page-tab animate-tab hidden space-y-4">
+    <section id="tab-brawlers" class="page-tab hidden space-y-4">
       <h2 class="text-2xl font-black font-gaming text-purple-400" data-it="⚡ META BRAWLERS (ULTIMO AGGIORNAMENTO)" data-en="⚡ META BRAWLERS (LATEST UPDATE)">⚡ META BRAWLERS</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         
@@ -290,4 +290,4 @@
             [ Immagine Lily ]
           </div>
           <h3 class="font-black text-lg text-purple-300 font-gaming">LILY</h3>
-          <p class="text-xs
+          <p class="text-xs text-slate-300" data-it="Letale assassina in grado di teletrasportarsi nell'ombra vicina ai nemici, perfetta per imboscate rapide in singolo o 3v3." data-en="Deadly assassin capable of shadow-teleporting near enemies, perfect for quick ambushes in solo or 3v3.">Letale assassina in grado di teletrasportarsi nell'ombra vicina ai nemici, perfetta per 
