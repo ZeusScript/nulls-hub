@@ -70,7 +70,7 @@
         </div>
         <div>
           <h1 class="text-xl font-black font-gaming bg-gradient-to-r from-cyan-400 via-amber-300 to-purple-400 bg-clip-text text-transparent">ZENIK HUB</h1>
-          <p class="text-[9px] text-slate-400 font-bold uppercase tracking-widest">Multi-Gaming Portal</p>
+          <p class="text-[9px] text-slate-400 font-bold uppercase tracking-widest" data-i18n="portalSub">Multi-Gaming Portal</p>
         </div>
       </div>
       <div class="flex items-center gap-2">
@@ -89,30 +89,30 @@
     <!-- SCHERMATA BENEVENUTO / GATEWAY -->
     <section id="view-gateway" class="space-y-8 animate-tab py-10">
       <div class="text-center space-y-4 max-w-2xl mx-auto">
-        <span class="px-3 py-1 rounded-full text-[10px] font-black bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 uppercase tracking-widest">BENVENUTO NEL PORTALE</span>
-        <h2 class="text-3xl md:text-5xl font-black font-gaming text-white">
+        <span class="px-3 py-1 rounded-full text-[10px] font-black bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 uppercase tracking-widest" data-i18n="gatewayBadge">BENVENUTO NEL PORTALE</span>
+        <h2 class="text-3xl md:text-5xl font-black font-gaming text-white" data-i18n="gatewayTitle">
           BENVENUTO NELLA <span class="text-cyan-400">ZENIK HUB</span>
         </h2>
-        <p class="text-xs md:text-sm text-slate-400">Scegli quale hub esplorare tra Null's Network e Roblox Script Hub. Puoi tornare qui quando vuoi.</p>
+        <p class="text-xs md:text-sm text-slate-400" data-i18n="gatewayDesc">Scegli quale hub esplorare tra Null's Network e Roblox Script Hub. Puoi tornare qui quando vuoi.</p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto pt-4">
         <button type="button" onclick="switchHub('nulls')" class="glass-panel glass-card-hover p-8 rounded-3xl border border-cyan-500/30 text-left space-y-4 group">
           <div class="w-14 h-14 rounded-2xl bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center text-cyan-400 text-2xl group-hover:scale-110 transition-transform">⚡</div>
           <div>
-            <h3 class="text-2xl font-black font-gaming text-white">Null's Servers Hub</h3>
-            <p class="text-xs text-slate-400 mt-1">Tutti i server privati Null's: Brawl, Clash, Royale, Royale Infinity e Rush.</p>
+            <h3 class="text-2xl font-black font-gaming text-white" data-i18n="nullsCardTitle">Null's Servers Hub</h3>
+            <p class="text-xs text-slate-400 mt-1" data-i18n="nullsCardDesc">Tutti i server privati Null's: Brawl, Clash, Royale, Royale Infinity e Rush.</p>
           </div>
-          <span class="inline-block text-xs font-bold text-cyan-400 font-gaming pt-2">ENTRA NEL HUB ➔</span>
+          <span class="inline-block text-xs font-bold text-cyan-400 font-gaming pt-2" data-i18n="nullsCardBtn">ENTRA NEL HUB ➔</span>
         </button>
 
         <button type="button" onclick="switchHub('roblox')" class="glass-panel glass-card-hover p-8 rounded-3xl border border-purple-500/30 text-left space-y-4 group">
           <div class="w-14 h-14 rounded-2xl bg-purple-500/20 border border-purple-500/40 flex items-center justify-center text-purple-400 text-2xl group-hover:scale-110 transition-transform">🎮</div>
           <div>
-            <h3 class="text-2xl font-black font-gaming text-white">Roblox Scripts Hub</h3>
-            <p class="text-xs text-slate-400 mt-1">Script Lua, executor consigliati e hub dedicati per i tuoi giochi preferiti.</p>
+            <h3 class="text-2xl font-black font-gaming text-white" data-i18n="robloxCardTitle">Roblox Scripts Hub</h3>
+            <p class="text-xs text-slate-400 mt-1" data-i18n="robloxCardDesc">Script Lua, executor consigliati e hub dedicati per i tuoi giochi preferiti.</p>
           </div>
-          <span class="inline-block text-xs font-bold text-purple-400 font-gaming pt-2">ENTRA NEL HUB ➔</span>
+          <span class="inline-block text-xs font-bold text-purple-400 font-gaming pt-2" data-i18n="robloxCardBtn">ENTRA NEL HUB ➔</span>
         </button>
       </div>
     </section>
@@ -120,7 +120,7 @@
     <!-- CONTAINER NULL'S NETWORK HUB -->
     <div id="hub-nulls" class="hidden space-y-6">
       <div class="flex items-center justify-between glass-panel p-2 rounded-2xl border border-slate-800">
-        <button type="button" onclick="switchHub('gateway')" class="px-3 py-2 rounded-xl bg-slate-900 text-slate-300 hover:text-white font-bold text-xs transition-all flex items-center gap-1">
+        <button type="button" onclick="switchHub('gateway')" class="px-3 py-2 rounded-xl bg-slate-900 text-slate-300 hover:text-white font-bold text-xs transition-all flex items-center gap-1" data-i18n="backToGateway">
           🏠 Torna alla Scelta
         </button>
         <nav class="flex items-center gap-2 overflow-x-auto pb-1">
@@ -227,7 +227,7 @@
       <div id="nulls-leaderboard" class="nulls-section hidden space-y-4 animate-tab">
         <div class="flex items-center justify-between">
           <h2 class="text-2xl font-black font-gaming text-cyan-400">⚡ Classifica Live</h2>
-          <span class="px-3 py-1 rounded-full text-xs font-black bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 uppercase tracking-widest">In corso...</span>
+          <span class="px-3 py-1 rounded-full text-xs font-black bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 uppercase tracking-widest animate-pulse">In corso...</span>
         </div>
         <div class="glass-panel rounded-2xl overflow-hidden border border-slate-800">
           <div id="live-leaderboard-container" class="divide-y divide-slate-800"></div>
@@ -238,7 +238,7 @@
       <div id="nulls-league" class="nulls-section hidden space-y-4 animate-tab">
         <div class="flex items-center justify-between">
           <h2 class="text-2xl font-black font-gaming text-amber-400">🏆 Zenik League Standings</h2>
-          <span class="px-3 py-1 rounded-full text-xs font-black bg-amber-500/20 text-amber-300 border border-amber-500/30 uppercase tracking-widest">In corso (Squadre: 0/8)</span>
+          <span class="px-3 py-1 rounded-full text-xs font-black bg-amber-500/20 text-amber-300 border border-amber-500/30 uppercase tracking-widest animate-pulse">In corso (Squadre: 0/8)</span>
         </div>
         <div class="glass-panel p-8 rounded-2xl text-center space-y-3 border border-slate-800">
           <p class="text-sm text-slate-200 font-bold">Il torneo è attualmente <span class="text-amber-400">In corso</span>.</p>
@@ -271,13 +271,21 @@
         </div>
       </div>
 
-      <!-- SOTTOSEZIONE 5: SOCIAL -->
+      <!-- SOTTOSEZIONE 5: SOCIAL (AGGIUNTI DISCORD E TELEGRAM) -->
       <div id="nulls-social" class="nulls-section hidden space-y-4 animate-tab">
         <h2 class="text-2xl font-black font-gaming text-amber-400">💬 Community & Social</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
           <a href="https://nulls.gg/" target="_blank" class="glass-panel glass-card-hover p-5 rounded-2xl border border-cyan-500/30 flex justify-between items-center">
-            <div><p class="font-black text-white font-gaming">🌐 SITO NULL'S</p><p class="text-xs text-slate-400">Portali e community ufficiale</p></div>
+            <div><p class="font-black text-white font-gaming">🌐 SITO NULL'S</p><p class="text-xs text-slate-400">Portale ufficiale</p></div>
             <span class="text-xs text-cyan-400 font-bold">Visita ➔</span>
+          </a>
+          <a href="https://discord.com" target="_blank" class="glass-panel glass-card-hover p-5 rounded-2xl border border-indigo-500/30 flex justify-between items-center">
+            <div><p class="font-black text-white font-gaming">💬 DISCORD</p><p class="text-xs text-slate-400">Canale Discord ufficiale</p></div>
+            <span class="text-xs text-indigo-400 font-bold">Unisciti ➔</span>
+          </a>
+          <a href="https://telegram.org" target="_blank" class="glass-panel glass-card-hover p-5 rounded-2xl border border-sky-500/30 flex justify-between items-center">
+            <div><p class="font-black text-white font-gaming">📢 TELEGRAM</p><p class="text-xs text-slate-400">Canale Telegram ufficiale</p></div>
+            <span class="text-xs text-sky-400 font-bold">Segui ➔</span>
           </a>
         </div>
       </div>
@@ -291,21 +299,24 @@
         <span class="text-xs font-black font-gaming text-purple-400">ROBLOX SCRIPTS & EXECUTORS HUB</span>
       </div>
 
-      <!-- EXECUTORS CONSIGLIATI CON LINK DOWNLOAD -->
+      <!-- EXECUTORS CONSIGLIATI CON LINK DOWNLOAD E TARGHETTA THE BEST -->
       <div class="space-y-3">
         <h3 class="text-xl font-black font-gaming text-purple-400">🛠️ Executor Consigliati & Download</h3>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
           
-          <!-- Delta -->
-          <div class="glass-panel p-4 rounded-2xl border border-purple-500/30 space-y-3 flex flex-col justify-between">
+          <!-- Delta (The Best) -->
+          <div class="glass-panel p-4 rounded-2xl border border-amber-500/40 space-y-3 flex flex-col justify-between relative overflow-hidden shadow-lg shadow-amber-500/10">
+            <div class="absolute -right-12 -top-12 w-24 h-24 bg-amber-500/10 rounded-full blur-xl pointer-events-none"></div>
             <div class="space-y-1">
               <div class="flex justify-between items-center">
-                <h4 class="font-gaming font-black text-white text-sm">Delta Executor</h4>
-                <span class="text-[10px] bg-purple-500/20 text-purple-300 px-2 py-0.5 rounded-full font-bold">Mobile / PC</span>
+                <h4 class="font-gaming font-black text-white text-sm flex items-center gap-1.5">
+                  Delta Executor
+                </h4>
+                <span class="px-2 py-0.5 rounded-full text-[9px] font-black bg-amber-400 text-slate-950 font-gaming shadow-md animate-pulse">⭐ THE BEST</span>
               </div>
               <p class="text-[11px] text-slate-400">Molto stabile per dispositivi mobili Android e iOS.</p>
             </div>
-            <a href="https://delta-executor.com/" target="_blank" class="w-full py-2 rounded-xl bg-slate-900 border border-purple-500/30 text-purple-300 font-bold text-xs text-center font-gaming hover:bg-purple-500 hover:text-slate-950 transition-all">
+            <a href="https://delta-executor.com/" target="_blank" class="w-full py-2 rounded-xl bg-amber-500 text-slate-950 font-black text-xs text-center font-gaming hover:bg-amber-400 transition-all shadow-md shadow-amber-500/20">
               📥 DOWNLOAD DELTA
             </a>
           </div>
@@ -367,6 +378,59 @@
 
   <!-- JAVASCRIPT LOGIC -->
   <script>
+    // Sistema di traduzione lingue funzionante
+    const translations = {
+      it: {
+        portalSub: "Multi-Gaming Portal",
+        gatewayBadge: "BENVENUTO NEL PORTALE",
+        gatewayTitle: 'BENVENUTO NELLA <span class="text-cyan-400">ZENIK HUB</span>',
+        gatewayDesc: "Scegli quale hub esplorare tra Null's Network e Roblox Script Hub. Puoi tornare qui quando vuoi.",
+        nullsCardTitle: "Null's Servers Hub",
+        nullsCardDesc: "Tutti i server privati Null's: Brawl, Clash, Royale, Royale Infinity e Rush.",
+        nullsCardBtn: "ENTRA NEL HUB ➔",
+        robloxCardTitle: "Roblox Scripts Hub",
+        robloxCardDesc: "Script Lua, executor consigliati e hub dedicati per i tuoi giochi preferiti.",
+        robloxCardBtn: "ENTRA NEL HUB ➔",
+        backToGateway: "🏠 Torna alla Scelta"
+      },
+      en: {
+        portalSub: "Multi-Gaming Portal",
+        gatewayBadge: "WELCOME TO THE PORTAL",
+        gatewayTitle: 'WELCOME TO <span class="text-cyan-400">ZENIK HUB</span>',
+        gatewayDesc: "Choose which hub to explore between Null's Network and Roblox Script Hub. You can come back here whenever you want.",
+        nullsCardTitle: "Null's Servers Hub",
+        nullsCardDesc: "All Null's private servers: Brawl, Clash, Royale, Royale Infinity and Rush.",
+        nullsCardBtn: "ENTER HUB ➔",
+        robloxCardTitle: "Roblox Scripts Hub",
+        robloxCardDesc: "Lua scripts, recommended executors and dedicated hubs for your favorite games.",
+        robloxCardBtn: "ENTER HUB ➔",
+        backToGateway: "🏠 Back to Selection"
+      },
+      es: {
+        portalSub: "Portal Multi-Gaming",
+        gatewayBadge: "BIENVENIDO AL PORTAL",
+        gatewayTitle: 'BIENVENIDO A <span class="text-cyan-400">ZENIK HUB</span>',
+        gatewayDesc: "Elige qué centro explorar entre Null's Network y Roblox Script Hub. Puedes volver aquí cuando quieras.",
+        nullsCardTitle: "Null's Servers Hub",
+        nullsCardDesc: "Todos los servidores privados de Null's: Brawl, Clash, Royale, Royale Infinity y Rush.",
+        nullsCardBtn: "ENTRAR AL HUB ➔",
+        robloxCardTitle: "Roblox Scripts Hub",
+        robloxCardDesc: "Scripts de Lua, ejecutores recomendados y hubs dedicados para tus juegos favoritos.",
+        robloxCardBtn: "ENTRAR AL HUB ➔",
+        backToGateway: "🏠 Volver al inicio"
+      }
+    };
+
+    document.getElementById('language-select').addEventListener('change', (e) => {
+      const lang = e.target.value;
+      const t = translations[lang];
+      if (!t) return;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (t[key]) el.innerHTML = t[key];
+      });
+    });
+
     function switchHub(hubName) {
       const gateway = document.getElementById('view-gateway');
       const nullsHub = document.getElementById('hub-nulls');
