@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Null's Brawl Ultimate Hub</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Teko:wght@600;700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .font-esports { font-family: 'Teko', sans-serif; letter-spacing: 1px; }
+  </style>
+</head>
+<body class="bg-gray-950 text-gray-100 min-h-screen pb-12">
+
+  <!-- HEADER / MENU PRINCIPALE -->
+  <header class="border-b border-cyan-500/30 bg-gray-900 sticky top-0 z-50 shadow-lg">
+    <div class="max-w-5xl mx-auto px-4 py-3 flex flex-col md:flex-row items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <span class="text-2xl">⚡</span>
+        <h1 class="text-3xl font-esports text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-yellow-400">
+          NULL'S HUB
+        </h1>
+      </div>
+      <!-- TASTI NAVIGAZIONE SCHEDE -->
+      <nav class="flex gap-2 text-xs md:text-sm font-semibold overflow-x-auto w-full md:w-auto pb-1 md:pb-0">
+        <button onclick="showTab('home')" id="btn-home" class="tab-btn px-3 py-1.5 rounded-lg bg-cyan-500 text-gray-950 font-bold">Home</button>
+        <button onclick="showTab('campionato')" id="btn-campionato" class="tab-btn px-3 py-1.5 rounded-lg bg-gray-800 text-gray-300">Campionato</button>
+        <button onclick="showTab('globale')" id="btn-globale" class="tab-btn px-3 py-1.5 rounded-lg bg-gray-800 text-gray-300">Top Coppe</button>
+        <button onclick="showTab('features')" id="btn-features" class="tab-btn px-3 py-1.5 rounded-lg bg-gray-800 text-gray-300">Comandi & Feature</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-5xl mx-auto px-4 mt-6">
+
+    <!-- SEZIONE 1: HOME -->
+    <div id="tab-home" class="tab-content space-y-6">
+      <div class="bg-gradient-to-r from-cyan-900/40 to-purple-900/40 border border-cyan-500/30 p-6 rounded-2xl text-center">
+        <h2 class="text-4xl font-esports text-yellow-400">BENVENUTO SU NULL'S BRAWL HUB</h2>
+        <p class="text-gray-300 text-sm mt-2">Il punto di riferimento per tornei, classifiche mondiali e notizie su Null's Brawl.</p>
+        <button onclick="showTab('campionato')" class="mt-4 px-6 py-2 bg-yellow-400 text-gray-950 font-bold rounded-xl shadow-lg">Vedi il Campionato</button>
+      </div>
+    </div>
+
+    <!-- SEZIONE 2: CAMPIONATO -->
+    <div id="tab-campionato" class="tab-content hidden space-y-6">
+      <h2 class="text-3xl font-esports text-yellow-400">🏆 Zenik League - Classifica</h2>
+      <div class="overflow-x-auto bg-gray-900 border border-gray-800 rounded-xl">
+        <table class="w-full text-left text-sm">
+          <thead class="bg-gray-800/60 text-gray-400 text-xs uppercase">
+            <tr>
+              <th class="p-3">#</th>
+              <th class="p-3">Squadra</th>
+              <th class="p-3 text-center">PG</th>
+              <th class="p-3 text-center">Punti</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-800">
+            <tr><td class="p-3 font-bold text-yellow-400">1</td><td class="p-3 font-semibold">Team Alpha</td><td class="p-3 text-center">1</td><td class="p-3 text-center font-bold text-yellow-400">3</td></tr>
+            <tr><td class="p-3 font-bold text-gray-300">2</td><td class="p-3 font-semibold">Brawl Kings</td><td class="p-3 text-center">1</td><td class="p-3 text-center font-bold text-yellow-400">2</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- SEZIONE 3: CLASSIFICA GLOBALE -->
+    <div id="tab-globale" class="tab-content hidden space-y-6">
+      <h2 class="text-3xl font-esports text-cyan-400">🌍 Top Player Mondiali Coppe</h2>
+      <div class="bg-gray-900 border border-gray-800 p-4 rounded-xl">
+        <p class="text-sm text-gray-400 mb-4">Classifica aggiornata dei migliori giocatori del server:</p>
+        <ul class="space-y-2 text-sm">
+          <li class="flex justify-between bg-gray-950 p-2.5 rounded border border-gray-800"><span class="font-bold text-yellow-400">#1 ProPlayer99</span><span>🏆 150,000</span></li>
+          <li class="flex justify-between bg-gray-950 p-2.5 rounded border border-gray-800"><span class="font-bold text-gray-300">#2 NullMaster</span><span>🏆 142,500</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- SEZIONE 4: FEATURE -->
+    <div id="tab-features" class="tab-content hidden space-y-6">
+      <h2 class="text-3xl font-esports text-purple-400">✨ Comandi Utili Server</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="bg-gray-900 border border-gray-800 p-4 rounded-xl">
+          <p class="font-bold text-cyan-400">/clean</p>
+          <p class="text-xs text-gray-400 mt-1">Resetta l'account portandolo allo stato iniziale.</p>
+        </div>
+        <div class="bg-gray-900 border border-gray-800 p-4 rounded-xl">
+          <p class="font-bold text-cyan-400">/full</p>
+          <p class="text-xs text-gray-400 mt-1">Sblocca tutti i Brawler e le abilità al massimo livello.</p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- JAVASCRIPT PER CAMBIARE SCHEDA -->
+  <script>
+    function showTab(tabName) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.tab-btn').forEach(el => {
+        el.classList.remove('bg-cyan-500', 'text-gray-950', 'font-bold');
+        el.classList.add('bg-gray-800', 'text-gray-300');
+      });
+      document.getElementById('tab-' + tabName).classList.remove('hidden');
+      const activeBtn = document.getElementById('btn-' + tabName);
+      activeBtn.classList.remove('bg-gray-800', 'text-gray-300');
+      activeBtn.classList.add('bg-cyan-500', 'text-gray-950', 'font-bold');
+    }
+  </script>
+</body>
+                </html>
+                
