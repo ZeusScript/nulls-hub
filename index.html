@@ -1,112 +1,400 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="it" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Null's Brawl Ultimate Hub</title>
+  <title>ZENIK HUB | Null's Brawl Ultimate Portal</title>
+  
+  <!-- TAILWIND CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Teko:wght@600;700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  
+  <!-- FONTS GAMING -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800;900&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            gaming: ['Orbitron', 'sans-serif'],
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
   <style>
-    body { font-family: 'Inter', sans-serif; }
-    .font-esports { font-family: 'Teko', sans-serif; letter-spacing: 1px; }
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.35; transform: scale(1); }
+      50% { opacity: 0.7; transform: scale(1.05); }
+    }
+    @keyframes tabEnter {
+      from { opacity: 0; transform: translateY(10px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    @keyframes shine {
+      100% { left: 125%; }
+    }
+
+    .animate-glow { animation: pulseGlow 6s ease-in-out infinite; }
+    .animate-tab { animation: tabEnter 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+    .glass-panel {
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .glass-card-hover {
+      transition: all 0.3s ease;
+    }
+    .glass-card-hover:hover {
+      transform: translateY(-4px);
+      border-color: rgba(34, 211, 238, 0.4);
+      box-shadow: 0 12px 30px -10px rgba(6, 182, 212, 0.25);
+    }
+
+    .btn-shine {
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-shine::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -60%;
+      width: 20%;
+      height: 200%;
+      background: rgba(255, 255, 255, 0.25);
+      transform: rotate(30deg);
+      transition: all 0.6s ease;
+    }
+    .btn-shine:hover::after {
+      animation: shine 1.2s ease-out;
+    }
+
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #030712; }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 99px; }
+    ::-webkit-scrollbar-thumb:hover { background: #06b6d4; }
   </style>
 </head>
-<body class="bg-gray-950 text-gray-100 min-h-screen pb-12">
+<body class="bg-slate-950 text-slate-100 min-h-screen font-sans pb-20 relative overflow-x-hidden">
 
-  <!-- HEADER / MENU PRINCIPALE -->
-  <header class="border-b border-cyan-500/30 bg-gray-900 sticky top-0 z-50 shadow-lg">
-    <div class="max-w-5xl mx-auto px-4 py-3 flex flex-col md:flex-row items-center justify-between gap-3">
-      <div class="flex items-center gap-2">
-        <span class="text-2xl">⚡</span>
-        <h1 class="text-3xl font-esports text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-yellow-400">
-          NULL'S HUB
-        </h1>
+  <!-- BACKGROUND NEON ORBS -->
+  <div class="fixed top-[-10%] left-[20%] w-[500px] h-[500px] bg-cyan-600/15 rounded-full blur-[140px] pointer-events-none animate-glow"></div>
+  <div class="fixed bottom-[-10%] right-[10%] w-[450px] h-[450px] bg-purple-600/15 rounded-full blur-[140px] pointer-events-none animate-glow" style="animation-delay: 3s;"></div>
+
+  <!-- STICKY NAVBAR -->
+  <header class="sticky top-0 z-50 glass-panel border-b border-slate-800/80">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex flex-col md:flex-row items-center justify-between gap-3">
+      
+      <div class="flex items-center gap-3 cursor-pointer" onclick="showTab('home')">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-cyan-500 via-amber-400 to-purple-500 p-[2px] shadow-lg shadow-cyan-500/20">
+          <div class="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center font-gaming text-cyan-400 font-black text-2xl">
+            Z
+          </div>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="text-2xl font-black font-gaming tracking-wider bg-gradient-to-r from-cyan-400 via-amber-300 to-purple-400 bg-clip-text text-transparent">
+              ZENIK HUB
+            </h1>
+            <span class="px-2 py-0.5 text-[9px] font-extrabold bg-cyan-500/20 text-cyan-300 rounded-full border border-cyan-500/30">v2.0</span>
+          </div>
+          <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span> Esports & Community
+          </p>
+        </div>
       </div>
-      <!-- TASTI NAVIGAZIONE SCHEDE -->
-      <nav class="flex gap-2 text-xs md:text-sm font-semibold overflow-x-auto w-full md:w-auto pb-1 md:pb-0">
-        <button onclick="showTab('home')" id="btn-home" class="tab-btn px-3 py-1.5 rounded-lg bg-cyan-500 text-gray-950 font-bold">Home</button>
-        <button onclick="showTab('campionato')" id="btn-campionato" class="tab-btn px-3 py-1.5 rounded-lg bg-gray-800 text-gray-300">Campionato</button>
-        <button onclick="showTab('globale')" id="btn-globale" class="tab-btn px-3 py-1.5 rounded-lg bg-gray-800 text-gray-300">Top Coppe</button>
-        <button onclick="showTab('features')" id="btn-features" class="tab-btn px-3 py-1.5 rounded-lg bg-gray-800 text-gray-300">Comandi & Feature</button>
+
+      <nav class="flex items-center gap-1.5 text-xs font-bold overflow-x-auto w-full md:w-auto pb-1 md:pb-0">
+        <button onclick="showTab('home')" id="btn-home" class="tab-btn px-4 py-2.5 rounded-xl bg-cyan-500 text-slate-950 font-black whitespace-nowrap shadow-lg shadow-cyan-500/25">🏠 Home</button>
+        <button onclick="showTab('campionato')" id="btn-campionato" class="tab-btn px-4 py-2.5 rounded-xl bg-slate-900/80 text-slate-400 hover:text-white whitespace-nowrap">🏆 League</button>
+        <button onclick="showTab('globale')" id="btn-globale" class="tab-btn px-4 py-2.5 rounded-xl bg-slate-900/80 text-slate-400 hover:text-white whitespace-nowrap">🌍 Top Coppe</button>
+        <button onclick="showTab('brawlers')" id="btn-brawlers" class="tab-btn px-4 py-2.5 rounded-xl bg-slate-900/80 text-slate-400 hover:text-white whitespace-nowrap">⚡ Brawlers</button>
+        <button onclick="showTab('download')" id="btn-download" class="tab-btn px-4 py-2.5 rounded-xl bg-slate-900/80 text-slate-400 hover:text-white whitespace-nowrap">⬇️ Download</button>
+        <button onclick="showTab('social')" id="btn-social" class="tab-btn px-4 py-2.5 rounded-xl bg-slate-900/80 text-slate-400 hover:text-white whitespace-nowrap">💬 Social</button>
+        <button onclick="showTab('features')" id="btn-features" class="tab-btn px-4 py-2.5 rounded-xl bg-slate-900/80 text-slate-400 hover:text-white whitespace-nowrap">⚙️ Comandi</button>
       </nav>
+
     </div>
   </header>
 
-  <main class="max-w-5xl mx-auto px-4 mt-6">
+  <!-- MAIN CONTAINER -->
+  <main class="max-w-6xl mx-auto px-4 mt-8">
 
-    <!-- SEZIONE 1: HOME -->
-    <div id="tab-home" class="tab-content space-y-6">
-      <div class="bg-gradient-to-r from-cyan-900/40 to-purple-900/40 border border-cyan-500/30 p-6 rounded-2xl text-center">
-        <h2 class="text-4xl font-esports text-yellow-400">BENVENUTO SU NULL'S BRAWL HUB</h2>
-        <p class="text-gray-300 text-sm mt-2">Il punto di riferimento per tornei, classifiche mondiali e notizie su Null's Brawl.</p>
-        <button onclick="showTab('campionato')" class="mt-4 px-6 py-2 bg-yellow-400 text-gray-950 font-bold rounded-xl shadow-lg">Vedi il Campionato</button>
+    <!-- TAB 1: HOME -->
+    <div id="tab-home" class="tab-content animate-tab space-y-8">
+      <div class="relative overflow-hidden rounded-3xl glass-panel p-8 md:p-12 border border-cyan-500/30 shadow-2xl">
+        <div class="relative z-10 space-y-5">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-black bg-cyan-500/10 text-cyan-300 border border-cyan-500/30 uppercase tracking-widest">
+            <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span> Null's Brawl Official Hub
+          </div>
+          <h2 class="text-3xl md:text-6xl font-black font-gaming text-white leading-tight">
+            IL CENTRO DEL TUO <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-amber-300 to-purple-400">GAMING</span>
+          </h2>
+          <p class="text-slate-300 text-sm md:text-base leading-relaxed">
+            Risultati in tempo reale della <strong>Zenik League</strong>, classifiche globali aggiornate, risorse ufficiali di Null's e comandi rapidi.
+          </p>
+          <div class="flex flex-wrap gap-4 pt-2">
+            <button onclick="showTab('campionato')" class="btn-shine px-6 py-3.5 rounded-2xl bg-gradient-to-r from-amber-400 to-yellow-500 text-slate-950 font-black font-gaming text-xs tracking-wider shadow-xl shadow-amber-500/20">
+              🏆 CLASSIFICA TORNEO
+            </button>
+            <button onclick="showTab('download')" class="btn-shine px-6 py-3.5 rounded-2xl glass-panel text-cyan-300 font-bold text-xs border border-cyan-500/30">
+              ⬇️ SCARICA NULL'S GIOCHI
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="glass-panel p-5 rounded-2xl text-center space-y-1">
+          <div class="text-3xl font-black font-gaming text-cyan-400">8</div>
+          <div class="text-[11px] text-slate-400 font-bold uppercase">Team In Torneo</div>
+        </div>
+        <div class="glass-panel p-5 rounded-2xl text-center space-y-1">
+          <div class="text-3xl font-black font-gaming text-amber-400">14</div>
+          <div class="text-[11px] text-slate-400 font-bold uppercase">Giornate</div>
+        </div>
+        <div class="glass-panel p-5 rounded-2xl text-center space-y-1">
+          <div class="text-3xl font-black font-gaming text-purple-400">BO3</div>
+          <div class="text-[11px] text-slate-400 font-bold uppercase">Formato</div>
+        </div>
+        <div class="glass-panel p-5 rounded-2xl text-center space-y-1">
+          <div class="text-3xl font-black font-gaming text-emerald-400">24/7</div>
+          <div class="text-[11px] text-slate-400 font-bold uppercase">Community</div>
+        </div>
       </div>
     </div>
 
-    <!-- SEZIONE 2: CAMPIONATO -->
-    <div id="tab-campionato" class="tab-content hidden space-y-6">
-      <h2 class="text-3xl font-esports text-yellow-400">🏆 Zenik League - Classifica</h2>
-      <div class="overflow-x-auto bg-gray-900 border border-gray-800 rounded-xl">
-        <table class="w-full text-left text-sm">
-          <thead class="bg-gray-800/60 text-gray-400 text-xs uppercase">
-            <tr>
-              <th class="p-3">#</th>
-              <th class="p-3">Squadra</th>
-              <th class="p-3 text-center">PG</th>
-              <th class="p-3 text-center">Punti</th>
+    <!-- TAB 2: CAMPIONATO -->
+    <div id="tab-campionato" class="tab-content animate-tab hidden space-y-6">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="text-3xl font-black font-gaming text-amber-400">🏆 ZENIK LEAGUE</h2>
+          <p class="text-xs text-slate-400 mt-1">Classifica Ufficiale • Stagione 1</p>
+        </div>
+        <span class="px-4 py-1.5 rounded-full text-xs font-bold bg-amber-400/10 text-amber-300 border border-amber-400/30">🟢 Live</span>
+      </div>
+
+      <div class="overflow-x-auto glass-panel rounded-3xl border border-slate-800">
+        <table class="w-full text-left text-sm border-collapse">
+          <thead>
+            <tr class="bg-slate-900/90 text-slate-400 text-[11px] font-black uppercase border-b border-slate-800">
+              <th class="p-4 text-center">POS</th>
+              <th class="p-4">SQUADRA</th>
+              <th class="p-4 text-center">PARTITE</th>
+              <th class="p-4 text-center">V - P</th>
+              <th class="p-4 text-center text-amber-400 font-extrabold">PUNTI</th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-gray-800">
-            <tr><td class="p-3 font-bold text-yellow-400">1</td><td class="p-3 font-semibold">Team Alpha</td><td class="p-3 text-center">1</td><td class="p-3 text-center font-bold text-yellow-400">3</td></tr>
-            <tr><td class="p-3 font-bold text-gray-300">2</td><td class="p-3 font-semibold">Brawl Kings</td><td class="p-3 text-center">1</td><td class="p-3 text-center font-bold text-yellow-400">2</td></tr>
+          <tbody class="divide-y divide-slate-800/60 font-semibold">
+            <tr>
+              <td class="p-4 text-center font-black text-amber-400 text-lg">🥇 1</td>
+              <td class="p-4 text-white font-bold">Team Alpha</td>
+              <td class="p-4 text-center text-slate-300">1</td>
+              <td class="p-4 text-center text-slate-300">1 - 0</td>
+              <td class="p-4 text-center font-black text-amber-400 text-lg font-gaming">3</td>
+            </tr>
+            <tr>
+              <td class="p-4 text-center font-black text-slate-300 text-lg">🥈 2</td>
+              <td class="p-4 text-white font-bold">Brawl Kings</td>
+              <td class="p-4 text-center text-slate-300">1</td>
+              <td class="p-4 text-center text-slate-300">1 - 0</td>
+              <td class="p-4 text-center font-black text-amber-400 text-lg font-gaming">2</td>
+            </tr>
+            <tr>
+              <td class="p-4 text-center font-black text-amber-700 text-lg">🥉 3</td>
+              <td class="p-4 text-white font-bold">Null Stars</td>
+              <td class="p-4 text-center text-slate-300">1</td>
+              <td class="p-4 text-center text-slate-300">0 - 1</td>
+              <td class="p-4 text-center font-black text-amber-400 text-lg font-gaming">1</td>
+            </tr>
           </tbody>
         </table>
       </div>
     </div>
 
-    <!-- SEZIONE 3: CLASSIFICA GLOBALE -->
-    <div id="tab-globale" class="tab-content hidden space-y-6">
-      <h2 class="text-3xl font-esports text-cyan-400">🌍 Top Player Mondiali Coppe</h2>
-      <div class="bg-gray-900 border border-gray-800 p-4 rounded-xl">
-        <p class="text-sm text-gray-400 mb-4">Classifica aggiornata dei migliori giocatori del server:</p>
-        <ul class="space-y-2 text-sm">
-          <li class="flex justify-between bg-gray-950 p-2.5 rounded border border-gray-800"><span class="font-bold text-yellow-400">#1 ProPlayer99</span><span>🏆 150,000</span></li>
-          <li class="flex justify-between bg-gray-950 p-2.5 rounded border border-gray-800"><span class="font-bold text-gray-300">#2 NullMaster</span><span>🏆 142,500</span></li>
-        </ul>
+    <!-- TAB 3: TOP PLAYERS -->
+    <div id="tab-globale" class="tab-content animate-tab hidden space-y-6">
+      <div>
+        <h2 class="text-3xl font-black font-gaming text-cyan-400">🌍 TOP PLAYERS GLOBAL</h2>
+        <p class="text-xs text-slate-400 mt-1">Classifica d'Onore dei migliori giocatori di Null's Brawl</p>
+      </div>
+
+      <div class="space-y-3">
+        <div class="glass-panel glass-card-hover p-5 rounded-2xl flex items-center justify-between">
+          <div class="flex items-center gap-4">
+            <span class="text-3xl">🥇</span>
+            <div>
+              <p class="font-black text-base text-white font-gaming">⚡ ZeusGod_99</p>
+              <p class="text-xs text-slate-400">Club: Nulls Legends</p>
+            </div>
+          </div>
+          <div class="text-right">
+            <p class="font-black text-lg text-amber-400 font-gaming">🏆 185,400</p>
+          </div>
+        </div>
+
+        <div class="glass-panel glass-card-hover p-5 rounded-2xl flex items-center justify-between">
+          <div class="flex items-center gap-4">
+            <span class="text-3xl">🥈</span>
+            <div>
+              <p class="font-black text-base text-white font-gaming">🔥 CyberMortis</p>
+              <p class="text-xs text-slate-400">Club: Team SoloNull</p>
+            </div>
+          </div>
+          <div class="text-right">
+            <p class="font-black text-lg text-amber-400 font-gaming">🏆 178,900</p>
+          </div>
+        </div>
+
+        <div class="glass-panel glass-card-hover p-5 rounded-2xl flex items-center justify-between">
+          <div class="flex items-center gap-4">
+            <span class="text-3xl">🥉</span>
+            <div>
+              <p class="font-black text-base text-white font-gaming">👑 ZenikMaster</p>
+              <p class="text-xs text-slate-400">Club: Zenik Esport</p>
+            </div>
+          </div>
+          <div class="text-right">
+            <p class="font-black text-lg text-amber-400 font-gaming">🏆 171,200</p>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- SEZIONE 4: FEATURE -->
-    <div id="tab-features" class="tab-content hidden space-y-6">
-      <h2 class="text-3xl font-esports text-purple-400">✨ Comandi Utili Server</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div class="bg-gray-900 border border-gray-800 p-4 rounded-xl">
-          <p class="font-bold text-cyan-400">/clean</p>
-          <p class="text-xs text-gray-400 mt-1">Resetta l'account portandolo allo stato iniziale.</p>
+    <!-- TAB 4: BRAWLERS -->
+    <div id="tab-brawlers" class="tab-content animate-tab hidden space-y-6">
+      <div>
+        <h2 class="text-3xl font-black font-gaming text-purple-400">⚡ META BRAWLERS</h2>
+        <p class="text-xs text-slate-400 mt-1">Brawler consigliati per i tornei competitive</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="glass-panel p-6 rounded-3xl border border-purple-500/30 space-y-3">
+          <h3 class="font-black text-xl font-gaming text-purple-300">MORTIS</h3>
+          <p class="text-xs text-slate-300">Letale in Knockout e Brawl Ball per eliminazioni veloci.</p>
+          <span class="inline-block px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 font-extrabold text-[10px]">S+ TIER</span>
         </div>
-        <div class="bg-gray-900 border border-gray-800 p-4 rounded-xl">
-          <p class="font-bold text-cyan-400">/full</p>
-          <p class="text-xs text-gray-400 mt-1">Sblocca tutti i Brawler e le abilità al massimo livello.</p>
+        <div class="glass-panel p-6 rounded-3xl border border-rose-500/30 space-y-3">
+          <h3 class="font-black text-xl font-gaming text-rose-300">EDGAR</h3>
+          <p class="text-xs text-slate-300">Dominatore 1v1 grazie al lifesteal e alla Super automatica.</p>
+          <span class="inline-block px-3 py-1 rounded-full bg-rose-500/20 text-rose-300 font-extrabold text-[10px]">S TIER</span>
+        </div>
+        <div class="glass-panel p-6 rounded-3xl border border-emerald-500/30 space-y-3">
+          <h3 class="font-black text-xl font-gaming text-emerald-300">SPIKE</h3>
+          <p class="text-xs text-slate-300">Controllo mappa totale con spina curva e danni ingenti.</p>
+          <span class="inline-block px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 font-extrabold text-[10px]">S TIER</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 5: DOWNLOAD -->
+    <div id="tab-download" class="tab-content animate-tab hidden space-y-6">
+      <div>
+        <h2 class="text-3xl font-black font-gaming text-cyan-400">⬇️ DOWNLOAD GIOCHI NULL'S</h2>
+        <p class="text-xs text-slate-400 mt-1">Scarica le ultime versioni dei server privati ufficiali</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="glass-panel p-6 rounded-3xl border border-cyan-500/30 space-y-4 text-center">
+          <span class="text-4xl block">🔥</span>
+          <h3 class="font-black font-gaming text-white text-lg">NULL'S BRAWL</h3>
+          <a href="https://nulls.gg" target="_blank" class="btn-shine block w-full py-3 rounded-2xl bg-cyan-500 text-slate-950 font-black text-xs font-gaming">
+            DOWNLOAD APK/iOS
+          </a>
+        </div>
+        <div class="glass-panel p-6 rounded-3xl border border-purple-500/30 space-y-4 text-center">
+          <span class="text-4xl block">👑</span>
+          <h3 class="font-black font-gaming text-white text-lg">NULL'S ROYALE</h3>
+          <a href="https://nulls.gg" target="_blank" class="btn-shine block w-full py-3 rounded-2xl bg-purple-500 text-slate-950 font-black text-xs font-gaming">
+            DOWNLOAD APK/iOS
+          </a>
+        </div>
+        <div class="glass-panel p-6 rounded-3xl border border-amber-500/30 space-y-4 text-center">
+          <span class="text-4xl block">⚔️</span>
+          <h3 class="font-black font-gaming text-white text-lg">NULL'S CLASH</h3>
+          <a href="https://nulls.gg" target="_blank" class="btn-shine block w-full py-3 rounded-2xl bg-amber-400 text-slate-950 font-black text-xs font-gaming">
+            DOWNLOAD APK/iOS
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 6: SOCIAL -->
+    <div id="tab-social" class="tab-content animate-tab hidden space-y-6">
+      <div>
+        <h2 class="text-3xl font-black font-gaming text-amber-400">💬 COMMUNITY & SOCIAL</h2>
+        <p class="text-xs text-slate-400 mt-1">Unisciti ai nostri canali ufficiali</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <a href="https://discord.gg" target="_blank" class="glass-panel p-5 rounded-2xl flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <span class="text-3xl">👾</span>
+            <span class="font-black text-sm text-white">DISCORD</span>
+          </div>
+          <span class="text-xs text-cyan-400 font-bold">Entra ➔</span>
+        </a>
+        <a href="https://tiktok.com" target="_blank" class="glass-panel p-5 rounded-2xl flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <span class="text-3xl">🎵</span>
+            <span class="font-black text-sm text-white">TIKTOK</span>
+          </div>
+          <span class="text-xs text-rose-400 font-bold">Segui ➔</span>
+        </a>
+        <a href="https://whatsapp.com" target="_blank" class="glass-panel p-5 rounded-2xl flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <span class="text-3xl">📱</span>
+            <span class="font-black text-sm text-white">WHATSAPP</span>
+          </div>
+          <span class="text-xs text-emerald-400 font-bold">Entra ➔</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- TAB 7: COMANDI -->
+    <div id="tab-features" class="tab-content animate-tab hidden space-y-6">
+      <div>
+        <h2 class="text-3xl font-black font-gaming text-emerald-400">⚙️ COMANDI SERVER</h2>
+        <p class="text-xs text-slate-400 mt-1">Tocca un pulsante per copiare il comando</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="glass-panel p-5 rounded-2xl flex items-center justify-between">
+          <div>
+            <span class="font-mono font-black text-cyan-400 text-lg">/clean</span>
+            <p class="text-xs text-slate-400">Resetta l'account</p>
+          </div>
+          <button onclick="copyText('/clean')" class="px-4 py-2 rounded-xl bg-cyan-500/20 text-cyan-300 font-bold text-xs">📋 Copia</button>
+        </div>
+        <div class="glass-panel p-5 rounded-2xl flex items-center justify-between">
+          <div>
+            <span class="font-mono font-black text-cyan-400 text-lg">/full</span>
+            <p class="text-xs text-slate-400">Sblocca tutto</p>
+          </div>
+          <button onclick="copyText('/full')" class="px-4 py-2 rounded-xl bg-cyan-500/20 text-cyan-300 font-bold text-xs">📋 Copia</button>
         </div>
       </div>
     </div>
 
   </main>
 
-  <!-- JAVASCRIPT PER CAMBIARE SCHEDA -->
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+    <div class="glass-panel px-5 py-3 rounded-2xl border border-cyan-500/40 text-cyan-300 text-xs font-bold flex items-center gap-2">
+      <span>✅</span> <span id="toast-msg">Comando copiato!</span>
+    </div>
+  </div>
+
+  <!-- SCRIPT JAVASCRIPT -->
   <script>
     function showTab(tabName) {
       document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-      document.querySelectorAll('.tab-btn').forEach(el => {
-        el.classList.remove('bg-cyan-500', 'text-gray-950', 'font-bold');
-        el.classList.add('bg-gray-800', 'text-gray-300');
-      });
-      document.getElementById('tab-' + tabName).classList.remove('hidden');
-      const activeBtn = document.getElementById('btn-' + tabName);
-      activeBtn.classList.remove('bg-gray-800', 'text-gray-300');
-      activeBtn.classList.add('bg-cyan-500', 'text-gray-950', 'font-bold');
-    }
-  </script>
-</body>
-                </html>
-                
+      document.querySelectorAll('.tab
