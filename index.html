@@ -27,298 +27,273 @@
   </script>
 
   <style>
-    /* Rimuove l'effetto bianco da pressione su mobile */
+    /* Disabilita evidenziatura bianca da tap su smartphone */
     * {
       -webkit-tap-highlight-color: transparent;
+      user-select: none;
     }
-
-    @keyframes pulseGlow {
-      0%, 100% { opacity: 0.35; transform: scale(1); }
-      50% { opacity: 0.7; transform: scale(1.05); }
-    }
-    @keyframes tabEnter {
-      from { opacity: 0; transform: translateY(10px) scale(0.98); }
-      to { opacity: 1; transform: translateY(0) scale(1); }
-    }
-    @keyframes shine {
-      100% { left: 125%; }
-    }
-
-    .animate-glow { animation: pulseGlow 6s ease-in-out infinite; }
-    .animate-tab { animation: tabEnter 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
 
     .glass-panel {
-      background: rgba(15, 23, 42, 0.75);
+      background: rgba(15, 23, 42, 0.85);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .glass-card-hover {
-      transition: all 0.3s ease;
-    }
-    .glass-card-hover:hover {
-      transform: translateY(-4px);
-      border-color: rgba(34, 211, 238, 0.4);
-      box-shadow: 0 12px 30px -10px rgba(6, 182, 212, 0.25);
     }
 
     .btn-shine {
       position: relative;
       overflow: hidden;
     }
-    .btn-shine::after {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -60%;
-      width: 20%;
-      height: 200%;
-      background: rgba(255, 255, 255, 0.25);
-      transform: rotate(30deg);
-      transition: all 0.6s ease;
-    }
-    .btn-shine:hover::after {
-      animation: shine 1.2s ease-out;
-    }
 
+    /* Scrollbar personalizzata */
     ::-webkit-scrollbar { width: 6px; height: 6px; }
     ::-webkit-scrollbar-track { background: #030712; }
     ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 99px; }
-    ::-webkit-scrollbar-thumb:hover { background: #06b6d4; }
   </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen font-sans pb-20 relative overflow-x-hidden">
 
-  <!-- BACKGROUND NEON ORBS -->
-  <div class="fixed top-[-10%] left-[20%] w-[500px] h-[500px] bg-cyan-600/15 rounded-full blur-[140px] pointer-events-none animate-glow"></div>
-  <div class="fixed bottom-[-10%] right-[10%] w-[450px] h-[450px] bg-purple-600/15 rounded-full blur-[140px] pointer-events-none animate-glow" style="animation-delay: 3s;"></div>
+  <!-- BACKGROUND GLOW -->
+  <div class="fixed top-[-10%] left-[20%] w-[400px] h-[400px] bg-cyan-600/15 rounded-full blur-[120px] pointer-events-none"></div>
+  <div class="fixed bottom-[-10%] right-[10%] w-[400px] h-[400px] bg-purple-600/15 rounded-full blur-[120px] pointer-events-none"></div>
 
-  <!-- STICKY NAVBAR -->
-  <header class="sticky top-0 z-50 glass-panel border-b border-slate-800/80">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex flex-col md:flex-row items-center justify-between gap-3">
+  <!-- HEADER / NAVBAR -->
+  <header class="sticky top-0 z-50 glass-panel border-b border-slate-800">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex flex-col gap-3">
       
-      <!-- BRAND LOGO & TRADUZIONE -->
-      <div class="flex items-center justify-between w-full md:w-auto">
-        <div class="flex items-center gap-3 cursor-pointer" onclick="showTab('home')">
-          <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-cyan-500 via-amber-400 to-purple-500 p-[2px] shadow-lg shadow-cyan-500/20">
-            <div class="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center font-gaming text-cyan-400 font-black text-2xl">
+      <!-- LOGO & LINGUA -->
+      <div class="flex items-center justify-between w-full">
+        <div class="flex items-center gap-3 cursor-pointer" onclick="openTab('home')">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 via-amber-400 to-purple-500 p-[2px]">
+            <div class="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center font-gaming text-cyan-400 font-black text-xl">
               Z
             </div>
           </div>
           <div>
-            <div class="flex items-center gap-2">
-              <h1 class="text-2xl font-black font-gaming tracking-wider bg-gradient-to-r from-cyan-400 via-amber-300 to-purple-400 bg-clip-text text-transparent">
-                ZENIK HUB
-              </h1>
-              <span class="px-2 py-0.5 text-[9px] font-extrabold bg-cyan-500/20 text-cyan-300 rounded-full border border-cyan-500/30">v2.0</span>
-            </div>
-            <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest flex items-center gap-1.5">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span> Esports & Community
-            </p>
+            <h1 class="text-xl font-black font-gaming bg-gradient-to-r from-cyan-400 via-amber-300 to-purple-400 bg-clip-text text-transparent">
+              ZENIK HUB
+            </h1>
+            <p class="text-[9px] text-slate-400 font-bold uppercase tracking-widest">Esports & Community</p>
           </div>
         </div>
 
-        <!-- LANGUAGE SWITCHER -->
-        <div class="flex items-center gap-1 text-xs font-bold bg-slate-900/90 p-1 rounded-xl border border-slate-800">
-          <button id="btn-lang-it" onclick="setLang('it')" class="px-2.5 py-1 rounded-lg border border-cyan-400 text-cyan-400 font-extrabold transition-all">🇮🇹 IT</button>
-          <button id="btn-lang-en" onclick="setLang('en')" class="px-2.5 py-1 rounded-lg border border-transparent text-slate-400 hover:text-white transition-all">🇬🇧 EN</button>
+        <!-- LINGUA -->
+        <div class="flex items-center gap-1 text-xs font-bold bg-slate-900 p-1 rounded-xl border border-slate-800">
+          <button id="lang-it" onclick="changeLanguage('it')" class="px-2 py-1 rounded-lg bg-cyan-500 text-slate-950 font-black">🇮🇹 IT</button>
+          <button id="lang-en" onclick="changeLanguage('en')" class="px-2 py-1 rounded-lg text-slate-400">🇬🇧 EN</button>
         </div>
       </div>
 
-      <!-- TASTI NAVIGAZIONE TAB -->
-      <nav class="flex items-center gap-1.5 text-xs font-bold overflow-x-auto w-full md:w-auto pb-1 md:pb-0">
-        <button onclick="showTab('home')" id="btn-home" class="tab-btn px-4 py-2.5 rounded-xl bg-cyan-500 text-slate-950 font-black whitespace-nowrap shadow-lg shadow-cyan-500/25" data-it="🏠 Home" data-en="🏠 Home">🏠 Home</button>
-        <button onclick="showTab('download')" id="btn-download" class="tab-btn px-4 py-2.5 rounded-xl bg-slate-900/80 text-slate-400 whitespace-nowrap" data-it="⬇️ Giochi Null's" data-en="⬇️ Null's Games">⬇️ Giochi Null's</button>
-        <button onclick="showTab('campionato')" id="btn-campionato" class="tab-btn px-4 py-2.5 rounded-xl bg-slate-900/80 text-slate-400 whitespace-nowrap" data-it="🏆 League" data-en="🏆 League">🏆 League</button>
-        <button onclick="showTab('globale')" id="btn-globale" class="tab-btn px-4 py-2.5 rounded-xl bg-slate-900/80 text-slate-400 whitespace-nowrap" data-it="🌍 Top Coppe" data-en="🌍 Top Trophies">🌍 Top Coppe</button>
-        <button onclick="showTab('brawlers')" id="btn-brawlers" class="tab-btn px-4 py-2.5 rounded-xl bg-slate-900/80 text-slate-400 whitespace-nowrap" data-it="⚡ Meta" data-en="⚡ Meta">⚡ Meta</button>
-        <button onclick="showTab('social')" id="btn-social" class="tab-btn px-4 py-2.5 rounded-xl bg-slate-900/80 text-slate-400 whitespace-nowrap" data-it="💬 Social" data-en="💬 Social">💬 Social</button>
-        <button onclick="showTab('features')" id="btn-features" class="tab-btn px-4 py-2.5 rounded-xl bg-slate-900/80 text-slate-400 whitespace-nowrap" data-it="⚙️ Comandi" data-en="⚙️ Commands">⚙️ Comandi</button>
+      <!-- BOTTONI MENU (SCROLLABILI) -->
+      <nav class="flex items-center gap-2 overflow-x-auto w-full pb-1">
+        <button type="button" onclick="openTab('home')" id="tabbtn-home" class="nav-tab-btn px-4 py-2 rounded-xl bg-cyan-500 text-slate-950 font-black text-xs whitespace-nowrap">🏠 Home</button>
+        <button type="button" onclick="openTab('download')" id="tabbtn-download" class="nav-tab-btn px-4 py-2 rounded-xl bg-slate-900 text-slate-400 font-bold text-xs whitespace-nowrap">⬇️ Giochi Null's</button>
+        <button type="button" onclick="openTab('campionato')" id="tabbtn-campionato" class="nav-tab-btn px-4 py-2 rounded-xl bg-slate-900 text-slate-400 font-bold text-xs whitespace-nowrap">🏆 League</button>
+        <button type="button" onclick="openTab('globale')" id="tabbtn-globale" class="nav-tab-btn px-4 py-2 rounded-xl bg-slate-900 text-slate-400 font-bold text-xs whitespace-nowrap">🌍 Top Coppe</button>
+        <button type="button" onclick="openTab('brawlers')" id="tabbtn-brawlers" class="nav-tab-btn px-4 py-2 rounded-xl bg-slate-900 text-slate-400 font-bold text-xs whitespace-nowrap">⚡ Meta</button>
+        <button type="button" onclick="openTab('social')" id="tabbtn-social" class="nav-tab-btn px-4 py-2 rounded-xl bg-slate-900 text-slate-400 font-bold text-xs whitespace-nowrap">💬 Social</button>
+        <button type="button" onclick="openTab('features')" id="tabbtn-features" class="nav-tab-btn px-4 py-2 rounded-xl bg-slate-900 text-slate-400 font-bold text-xs whitespace-nowrap">⚙️ Comandi</button>
       </nav>
 
     </div>
   </header>
 
-  <!-- MAIN CONTAINER -->
-  <main class="max-w-6xl mx-auto px-4 mt-8">
+  <!-- CONTENUTO PAGINA -->
+  <main class="max-w-6xl mx-auto px-4 mt-6">
 
-    <!-- TAB 1: HOME -->
-    <div id="tab-home" class="tab-content animate-tab space-y-8" style="display: block;">
-      <div class="relative overflow-hidden rounded-3xl glass-panel p-8 md:p-12 border border-cyan-500/30 shadow-2xl">
-        <div class="relative z-10 space-y-5">
-          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-black bg-cyan-500/10 text-cyan-300 border border-cyan-500/30 uppercase tracking-widest">
-            <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span> Null's Brawl Official Hub
-          </div>
-          <h2 class="text-3xl md:text-6xl font-black font-gaming text-white leading-tight" data-it="IL CENTRO DEL TUO GAMING" data-en="YOUR GAMING HUB">
-            IL CENTRO DEL TUO <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-amber-300 to-purple-400">GAMING</span>
-          </h2>
-          <p class="text-slate-300 text-sm md:text-base leading-relaxed" data-it="Risultati della Zenik League, download diretti di tutti i server Null's, classifiche e risorse per la community." data-en="Zenik League results, direct downloads for all Null's servers, leaderboards, and community resources.">
-            Risultati della <strong>Zenik League</strong>, download diretti di tutti i server Null's, classifiche e risorse per la community.
-          </p>
-          <div class="flex flex-wrap gap-4 pt-2">
-            <button onclick="showTab('download')" class="btn-shine px-6 py-3.5 rounded-2xl bg-gradient-to-r from-cyan-400 to-cyan-500 text-slate-950 font-black font-gaming text-xs tracking-wider shadow-xl shadow-cyan-500/20" data-it="⬇️ SCARICA I GIOCHI NULL'S" data-en="⬇️ DOWNLOAD NULL'S GAMES">
-              ⬇️ SCARICA I GIOCHI NULL'S
-            </button>
-            <button onclick="showTab('campionato')" class="btn-shine px-6 py-3.5 rounded-2xl glass-panel text-amber-300 font-bold text-xs border border-amber-500/30" data-it="🏆 CLASSIFICA LEAGUE" data-en="🏆 LEAGUE LEADERBOARD">
-              🏆 CLASSIFICA LEAGUE
-            </button>
-          </div>
+    <!-- 1. HOME -->
+    <section id="tab-home" class="page-tab space-y-6">
+      <div class="glass-panel p-6 md:p-10 rounded-3xl border border-cyan-500/30 space-y-4">
+        <span class="px-3 py-1 rounded-full text-[10px] font-black bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">OFFICIAL HUB</span>
+        <h2 class="text-3xl md:text-5xl font-black font-gaming text-white" data-it="IL CENTRO DEL TUO GAMING" data-en="YOUR GAMING HUB">
+          IL CENTRO DEL TUO <span class="text-cyan-400">GAMING</span>
+        </h2>
+        <p class="text-slate-300 text-xs md:text-sm leading-relaxed" data-it="Risultati della Zenik League, download diretti di tutti i server Null's, classifiche e risorse per la community." data-en="Zenik League results, direct downloads for all Null's servers, leaderboards, and community resources.">
+          Risultati della <strong>Zenik League</strong>, download diretti di tutti i server Null's, classifiche e risorse per la community.
+        </p>
+        <div class="flex flex-wrap gap-3 pt-2">
+          <button type="button" onclick="openTab('download')" class="px-5 py-3 rounded-xl bg-cyan-500 text-slate-950 font-black text-xs font-gaming">⬇️ SCARICA I GIOCHI</button>
+          <button type="button" onclick="openTab('campionato')" class="px-5 py-3 rounded-xl bg-slate-900 text-amber-300 border border-amber-500/30 font-bold text-xs">🏆 CLASSIFICA LEAGUE</button>
         </div>
       </div>
+    </section>
 
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div class="glass-panel p-5 rounded-2xl text-center space-y-1">
-          <div class="text-3xl font-black font-gaming text-cyan-400">5</div>
-          <div class="text-[11px] text-slate-400 font-bold uppercase" data-it="Server Null's" data-en="Null's Servers">Server Null's</div>
-        </div>
-        <div class="glass-panel p-5 rounded-2xl text-center space-y-1">
-          <div class="text-3xl font-black font-gaming text-amber-400">8</div>
-          <div class="text-[11px] text-slate-400 font-bold uppercase" data-it="Team League" data-en="League Teams">Team League</div>
-        </div>
-        <div class="glass-panel p-5 rounded-2xl text-center space-y-1">
-          <div class="text-3xl font-black font-gaming text-purple-400">BO3</div>
-          <div class="text-[11px] text-slate-400 font-bold uppercase" data-it="Formato Torneo" data-en="Tournament Format">Formato Torneo</div>
-        </div>
-        <div class="glass-panel p-5 rounded-2xl text-center space-y-1">
-          <div class="text-3xl font-black font-gaming text-emerald-400">24/7</div>
-          <div class="text-[11px] text-slate-400 font-bold uppercase" data-it="Community" data-en="Community">Community</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- TAB 2: DOWNLOAD GIOCHI NULL'S -->
-    <div id="tab-download" class="tab-content animate-tab space-y-6" style="display: none;">
-      <div>
-        <h2 class="text-3xl font-black font-gaming text-cyan-400" data-it="⬇️ SERVERS & GIOCHI NULL'S" data-en="⬇️ NULL'S SERVERS & GAMES">⬇️ SERVERS & GIOCHI NULL'S</h2>
-        <p class="text-xs text-slate-400 mt-1" data-it="Scarica le ultime versioni dei server privati ufficiali dal portale Null's" data-en="Download the latest versions of official private servers from the Null's portal">Scarica le ultime versioni dei server privati ufficiali dal portale Null's</p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-        <!-- 1. NULL'S BRAWL -->
-        <div class="glass-panel glass-card-hover p-6 rounded-3xl border border-cyan-500/30 flex flex-col justify-between space-y-4">
-          <div class="flex items-start gap-4">
-            <img src="https://via.placeholder.com/80/06b6d4/ffffff?text=Brawl" alt="Null's Brawl" class="w-16 h-16 rounded-2xl border border-cyan-400/30 object-cover shadow-lg">
-            <div class="space-y-1">
-              <div class="flex items-center gap-2">
-                <h3 class="font-black font-gaming text-white text-lg">Null's Brawl</h3>
-                <span class="px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 font-extrabold text-[10px] border border-cyan-500/30">v68.279</span>
-              </div>
-              <p class="text-xs text-slate-300 leading-relaxed" data-it="Server privato di Brawl Stars con gemme, oro e cassettoni illimitati." data-en="Brawl Stars private server with unlimited gems, gold and boxes.">
-                Server privato di Brawl Stars con gemme, oro e cassettoni illimitati.
-              </p>
-            </div>
-          </div>
-          <a href="https://nulls.gg/servers/nulls-brawl/" target="_blank" class="btn-shine block w-full py-3 rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 font-black text-xs font-gaming text-center shadow-lg shadow-cyan-500/20">
-            DOWNLOAD NULL'S BRAWL ➔
-          </a>
+    <!-- 2. GIOCHI NULL'S -->
+    <section id="tab-download" class="page-tab hidden space-y-6">
+      <h2 class="text-2xl font-black font-gaming text-cyan-400">⬇️ SERVERS & GIOCHI NULL'S</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        
+        <div class="glass-panel p-5 rounded-2xl border border-cyan-500/30 space-y-3">
+          <h3 class="font-black font-gaming text-white text-lg">Null's Brawl <span class="text-xs text-cyan-400">v68.279</span></h3>
+          <p class="text-xs text-slate-300">Server privato di Brawl Stars con gemme, oro e cassettoni illimitati.</p>
+          <a href="https://nulls.gg/servers/nulls-brawl/" target="_blank" class="block text-center py-2.5 rounded-xl bg-cyan-500 text-slate-950 font-black text-xs font-gaming">DOWNLOAD NULL'S BRAWL ➔</a>
         </div>
 
-        <!-- 2. NULL'S CLASH -->
-        <div class="glass-panel glass-card-hover p-6 rounded-3xl border border-amber-500/30 flex flex-col justify-between space-y-4">
-          <div class="flex items-start gap-4">
-            <img src="https://via.placeholder.com/80/fbbf24/ffffff?text=Clash" alt="Null's Clash" class="w-16 h-16 rounded-2xl border border-amber-400/30 object-cover shadow-lg">
-            <div class="space-y-1">
-              <div class="flex items-center gap-2">
-                <h3 class="font-black font-gaming text-white text-lg">Null's Clash</h3>
-                <span class="px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 font-extrabold text-[10px] border border-amber-500/30">v18.400.7</span>
-              </div>
-              <p class="text-xs text-slate-300 leading-relaxed" data-it="Costruisci la tua base dei sogni e attacca i villaggi con qualsiasi truppa senza limiti." data-en="Build your dream base and attack villages with any troops without limits.">
-                Costruisci la tua base dei sogni e attacca i villaggi con qualsiasi truppa senza limiti.
-              </p>
-            </div>
-          </div>
-          <a href="https://nulls.gg/servers/nulls-clash/" target="_blank" class="btn-shine block w-full py-3 rounded-2xl bg-gradient-to-r from-amber-400 to-yellow-500 text-slate-950 font-black text-xs font-gaming text-center shadow-lg shadow-amber-500/20">
-            DOWNLOAD NULL'S CLASH ➔
-          </a>
+        <div class="glass-panel p-5 rounded-2xl border border-amber-500/30 space-y-3">
+          <h3 class="font-black font-gaming text-white text-lg">Null's Clash <span class="text-xs text-amber-400">v18.400.7</span></h3>
+          <p class="text-xs text-slate-300">Costruisci la tua base dei sogni con risorse infinite.</p>
+          <a href="https://nulls.gg/servers/nulls-clash/" target="_blank" class="block text-center py-2.5 rounded-xl bg-amber-400 text-slate-950 font-black text-xs font-gaming">DOWNLOAD NULL'S CLASH ➔</a>
         </div>
 
-        <!-- 3. NULL'S ROYALE -->
-        <div class="glass-panel glass-card-hover p-6 rounded-3xl border border-purple-500/30 flex flex-col justify-between space-y-4">
-          <div class="flex items-start gap-4">
-            <img src="https://via.placeholder.com/80/a855f7/ffffff?text=Royale" alt="Null's Royale" class="w-16 h-16 rounded-2xl border border-purple-400/30 object-cover shadow-lg">
-            <div class="space-y-1">
-              <div class="flex items-center gap-2">
-                <h3 class="font-black font-gaming text-white text-lg">Null's Royale</h3>
-                <span class="px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 font-extrabold text-[10px] border border-purple-500/30">v15.535.13</span>
-              </div>
-              <p class="text-xs text-slate-300 leading-relaxed" data-it="Duelli caotici su Clash Royale con Bauletti Segreti da 150K carte." data-en="Chaotic Clash Royale duels with Secret Bags of 150K cards.">
-                Duelli caotici su Clash Royale con Bauletti Segreti da 150K carte.
-              </p>
-            </div>
-          </div>
-          <a href="https://nulls.gg/servers/nulls-royale/" target="_blank" class="btn-shine block w-full py-3 rounded-2xl bg-gradient-to-r from-purple-500 to-indigo-600 text-white font-black text-xs font-gaming text-center shadow-lg shadow-purple-500/20">
-            DOWNLOAD NULL'S ROYALE ➔
-          </a>
+        <div class="glass-panel p-5 rounded-2xl border border-purple-500/30 space-y-3">
+          <h3 class="font-black font-gaming text-white text-lg">Null's Royale <span class="text-xs text-purple-400">v15.535.13</span></h3>
+          <p class="text-xs text-slate-300">Duelli caotici su Clash Royale con Bauletti Segreti.</p>
+          <a href="https://nulls.gg/servers/nulls-royale/" target="_blank" class="block text-center py-2.5 rounded-xl bg-purple-500 text-white font-black text-xs font-gaming">DOWNLOAD NULL'S ROYALE ➔</a>
         </div>
 
-        <!-- 4. NULL'S ROYALE INFINITY -->
-        <div class="glass-panel glass-card-hover p-6 rounded-3xl border border-rose-500/30 flex flex-col justify-between space-y-4">
-          <div class="flex items-start gap-4">
-            <img src="https://via.placeholder.com/80/f43f5e/ffffff?text=Infinity" alt="Null's Royale Infinity" class="w-16 h-16 rounded-2xl border border-rose-400/30 object-cover shadow-lg">
-            <div class="space-y-1">
-              <div class="flex items-center gap-2">
-                <h3 class="font-black font-gaming text-white text-lg">Null's Royale Infinity</h3>
-                <span class="px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-300 font-extrabold text-[10px] border border-rose-500/30">v14.593.1</span>
-              </div>
-              <p class="text-xs text-slate-300 leading-relaxed" data-it="Un'esperienza caotica con carte moddate e abilita speciali." data-en="A chaotic experience featuring modded cards and special abilities.">
-                Un'esperienza caotica con carte moddate e abilità speciali.
-              </p>
-            </div>
-          </div>
-          <a href="https://nulls.gg/servers/nulls-royale-infinity/" target="_blank" class="btn-shine block w-full py-3 rounded-2xl bg-gradient-to-r from-rose-500 to-pink-600 text-white font-black text-xs font-gaming text-center shadow-lg shadow-rose-500/20">
-            DOWNLOAD ROYALE INFINITY ➔
-          </a>
-        </div>
-
-        <!-- 5. NULL'S RUSH -->
-        <div class="glass-panel glass-card-hover p-6 rounded-3xl border border-emerald-500/30 flex flex-col justify-between space-y-4 md:col-span-2">
-          <div class="flex items-start gap-4">
-            <img src="https://via.placeholder.com/80/10b981/ffffff?text=Rush" alt="Null's Rush" class="w-16 h-16 rounded-2xl border border-emerald-400/30 object-cover shadow-lg">
-            <div class="space-y-1">
-              <div class="flex items-center gap-2">
-                <h3 class="font-black font-gaming text-white text-lg">Null's Rush</h3>
-                <span class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-extrabold text-[10px] border border-emerald-500/30">v0.284</span>
-              </div>
-              <p class="text-xs text-slate-300 leading-relaxed" data-it="Il ritorno ai vecchi tempi! Un tuffo nella nostalgia del gioco classico." data-en="Good old days nostalgia! A blast from the past with classic gameplay.">
-                Il ritorno ai vecchi tempi! Un tuffo nella nostalgia del gioco classico.
-              </p>
-            </div>
-          </div>
-          <a href="https://nulls.gg/servers/nulls-rush/" target="_blank" class="btn-shine block w-full py-3 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 text-slate-950 font-black text-xs font-gaming text-center shadow-lg shadow-emerald-500/20">
-            DOWNLOAD NULL'S RUSH ➔
-          </a>
+        <div class="glass-panel p-5 rounded-2xl border border-rose-500/30 space-y-3">
+          <h3 class="font-black font-gaming text-white text-lg">Null's Royale Infinity</h3>
+          <p class="text-xs text-slate-300">Un'esperienza caotica con carte moddate e abilità speciali.</p>
+          <a href="https://nulls.gg/servers/nulls-royale-infinity/" target="_blank" class="block text-center py-2.5 rounded-xl bg-rose-500 text-white font-black text-xs font-gaming">DOWNLOAD ROYALE INFINITY ➔</a>
         </div>
 
       </div>
-    </div>
+    </section>
 
-    <!-- TAB 3: CAMPIONATO -->
-    <div id="tab-campionato" class="tab-content animate-tab space-y-6" style="display: none;">
-      <div class="flex items-center justify-between">
-        <div>
-          <h2 class="text-3xl font-black font-gaming text-amber-400">🏆 ZENIK LEAGUE</h2>
-          <p class="text-xs text-slate-400 mt-1" data-it="Classifica Ufficiale Torneo • Stagione 1" data-en="Official Tournament Leaderboard • Season 1">Classifica Ufficiale Torneo • Stagione 1</p>
-        </div>
-        <span class="px-4 py-1.5 rounded-full text-xs font-bold bg-amber-400/10 text-amber-300 border border-amber-400/30">🟢 Live</span>
-      </div>
-
-      <div class="overflow-x-auto glass-panel rounded-3xl border border-slate-800">
-        <table class="w-full text-left text-sm border-collapse">
-          <thead>
-            <tr class="bg-slate-900/90 text-slate-400 text-[11px] font-black uppercase border-b border-slate-800">
-              <th class="p-4 text-center">POS</th>
-              <th class="p-4" data-it="SQUADRA" data-en="TEAM">SQUADRA</th>
-              <th class="p-4 text-center" data-it="PARTITE" data-en="MATCHES">PARTITE</th>
-              <th class="p-4 text-center">V - P</th>
-              <th class="p-4 text-center text-amber-400 font-extrabold" data-it="PUNTI" data-en="POINTS">PUNTI</th>
+    <!-- 3. CAMPIONATO LEAGUE -->
+    <section id="tab-campionato" class="page-tab hidden space-y-6">
+      <h2 class="text-2xl font-black font-gaming text-amber-400">🏆 ZENIK LEAGUE</h2>
+      <div class="glass-panel rounded-2xl overflow-x-auto border border-slate-800">
+        <table class="w-full text-left text-xs">
+          <thead class="bg-slate-900 text-slate-400 uppercase font-black">
+            <tr>
+              <th class="p-3 text-center">POS</th>
+              <th class="p-3">SQUADRA</th>
+              <th class="p-3 text-center">PARTITE</th>
+              <th class="p-3 text-center text-amber-400">PUNTI</th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-slate-800/60 font-semibold">
+          <tbody class="divide-y divide-slate-800">
             <tr>
-              <td class="p-4 text-center font-black text-amber-400 text-lg">🥇 1</td>
-              <td class="p-4 text-white font-bold">Team Alpha</td>
-              <td class="p-4 text-center text-slate-300">1</td>
-              <td class="p-4 text-center text-slate-300">1 - 0</td>
-              <td class="p-4 text-center font-black te
+              <td class="p-3 text-center font-bold text-amber-400">🥇 1</td>
+              <td class="p-3 font-bold text-white">Team Alpha</td>
+              <td class="p-3 text-center">1</td>
+              <td class="p-3 text-center font-bold text-amber-400 font-gaming">3</td>
+            </tr>
+            <tr>
+              <td class="p-3 text-center font-bold text-slate-300">🥈 2</td>
+              <td class="p-3 font-bold text-white">Brawl Kings</td>
+              <td class="p-3 text-center">1</td>
+              <td class="p-3 text-center font-bold text-amber-400 font-gaming">2</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 4. TOP GLOBALE -->
+    <section id="tab-globale" class="page-tab hidden space-y-4">
+      <h2 class="text-2xl font-black font-gaming text-cyan-400">🌍 TOP PLAYERS GLOBAL</h2>
+      <div class="glass-panel p-4 rounded-2xl flex items-center justify-between">
+        <div>
+          <p class="font-black text-white font-gaming">🥇 ZeusGod_99</p>
+          <p class="text-xs text-slate-400">Club: Nulls Legends</p>
+        </div>
+        <p class="font-black text-amber-400 font-gaming">🏆 185,400</p>
+      </div>
+    </section>
+
+    <!-- 5. META BRAWLERS -->
+    <section id="tab-brawlers" class="page-tab hidden space-y-4">
+      <h2 class="text-2xl font-black font-gaming text-purple-400">⚡ META BRAWLERS</h2>
+      <div class="glass-panel p-5 rounded-2xl border border-purple-500/30 space-y-2">
+        <h3 class="font-black text-lg text-purple-300">MORTIS</h3>
+        <p class="text-xs text-slate-300">Letale in Knockout e Brawl Ball per eliminazioni veloci.</p>
+      </div>
+    </section>
+
+    <!-- 6. SOCIAL & COMMUNITY -->
+    <section id="tab-social" class="page-tab hidden space-y-4">
+      <h2 class="text-2xl font-black font-gaming text-amber-400">💬 SOCIAL & COMMUNITY</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <a href="https://discord.gg/NkjRYpCBcj" target="_blank" class="glass-panel p-5 rounded-2xl border border-cyan-500/30 flex justify-between items-center">
+          <div>
+            <p class="font-black text-white font-gaming">👾 DISCORD NULL'S</p>
+            <p class="text-xs text-slate-400">Server Ufficiale Community</p>
+          </div>
+          <span class="text-xs text-cyan-400 font-bold">Entra ➔</span>
+        </a>
+        <a href="https://t.me/nulls_en" target="_blank" class="glass-panel p-5 rounded-2xl border border-blue-500/30 flex justify-between items-center">
+          <div>
+            <p class="font-black text-white font-gaming">✈️ TELEGRAM NULL'S</p>
+            <p class="text-xs text-slate-400">Canale Ufficiale Notizie</p>
+          </div>
+          <span class="text-xs text-blue-400 font-bold">Segui ➔</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- 7. COMANDI SERVER -->
+    <section id="tab-features" class="page-tab hidden space-y-4">
+      <h2 class="text-2xl font-black font-gaming text-emerald-400">⚙️ COMANDI SERVER NULL'S</h2>
+      <div class="glass-panel p-4 rounded-2xl flex justify-between items-center">
+        <div>
+          <span class="font-mono font-black text-cyan-400 text-lg">/full</span>
+          <p class="text-xs text-slate-400">Sblocca tutti i brawler al massimo</p>
+        </div>
+        <button type="button" onclick="copyCommand('/full')" class="px-3 py-1.5 rounded-xl bg-cyan-500/20 text-cyan-300 font-bold text-xs">📋 Copia</button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- SCRIPT INFALLIBILE PER IL CAMBIO SCHEDE -->
+  <script>
+    function openTab(tabName) {
+      // 1. Nascondi tutte le sezioni
+      var pages = document.getElementsByClassName("page-tab");
+      for (var i = 0; i < pages.length; i++) {
+        pages[i].classList.add("hidden");
+      }
+
+      // 2. Mostra la sezione cliccata
+      var targetPage = document.getElementById("tab-" + tabName);
+      if (targetPage) {
+        targetPage.classList.remove("hidden");
+      }
+
+      // 3. Ripristina i colori di tutti i pulsanti
+      var buttons = document.getElementsByClassName("nav-tab-btn");
+      for (var j = 0; j < buttons.length; j++) {
+        buttons[j].className = "nav-tab-btn px-4 py-2 rounded-xl bg-slate-900 text-slate-400 font-bold text-xs whitespace-nowrap";
+      }
+
+      // 4. Illumina il pulsante attivo
+      var activeButton = document.getElementById("tabbtn-" + tabName);
+      if (activeButton) {
+        activeButton.className = "nav-tab-btn px-4 py-2 rounded-xl bg-cyan-500 text-slate-950 font-black text-xs whitespace-nowrap";
+      }
+
+      // 5. Torna in alto
+      window.scrollTo(0, 0);
+    }
+
+    function copyCommand(text) {
+      navigator.clipboard.writeText(text);
+      alert("Comando copiato: " + text);
+    }
+
+    function changeLanguage(lang) {
+      var itBtn = document.getElementById("lang-it");
+      var enBtn = document.getElementById("lang-en");
+
+      if (lang === 'it') {
+        itBtn.className = "px-2 py-1 rounded-lg bg-cyan-500 text-slate-950 font-black";
+        enBtn.className = "px-2 py-1 rounded-lg text-slate-400";
+      } else {
+        enBtn.className = "px-2 py-1 rounded-lg bg-cyan-500 text-slate-950 font-black";
+        itBtn.className = "px-2 py-1 rounded-lg text-slate-400";
+      }
+
+      var elements = document.querySelectorAll("[data-it]");
+      elements.forEach(function(el) {
+        if (lang === 'it') {
+          el.innerText = el.getAttribute("data-it");
+        } else {
+          el.innerText = el.getAttribute("data-en");
+        }
+      });
+    }
+  </script>
+</body>
+</html>
