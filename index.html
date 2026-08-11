@@ -70,7 +70,7 @@
         </div>
         <div>
           <h1 class="text-xl font-black font-gaming bg-gradient-to-r from-cyan-400 via-amber-300 to-purple-400 bg-clip-text text-transparent">ZENIK HUB</h1>
-          <p class="text-[9px] text-slate-400 font-bold uppercase tracking-widest" data-key="subtitle">Multi-Gaming Portal</p>
+          <p class="text-[9px] text-slate-400 font-bold uppercase tracking-widest">Multi-Gaming Portal</p>
         </div>
       </div>
       <div class="flex items-center gap-2">
@@ -89,72 +89,144 @@
     <!-- SCHERMATA BENEVENUTO / GATEWAY -->
     <section id="view-gateway" class="space-y-8 animate-tab py-10">
       <div class="text-center space-y-4 max-w-2xl mx-auto">
-        <span class="px-3 py-1 rounded-full text-[10px] font-black bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 uppercase tracking-widest" data-key="gateway_badge">BENVENUTO NEL PORTALE</span>
+        <span class="px-3 py-1 rounded-full text-[10px] font-black bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 uppercase tracking-widest">BENVENUTO NEL PORTALE</span>
         <h2 class="text-3xl md:text-5xl font-black font-gaming text-white">
           BENVENUTO NELLA <span class="text-cyan-400">ZENIK HUB</span>
         </h2>
-        <p class="text-xs md:text-sm text-slate-400" data-key="gateway_desc">Scegli quale hub esplorare tra Null's Brawl e Roblox Script Hub. Puoi tornare qui quando vuoi.</p>
+        <p class="text-xs md:text-sm text-slate-400">Scegli quale hub esplorare tra Null's Network e Roblox Script Hub. Puoi tornare qui quando vuoi.</p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto pt-4">
         <button type="button" onclick="switchHub('nulls')" class="glass-panel glass-card-hover p-8 rounded-3xl border border-cyan-500/30 text-left space-y-4 group">
           <div class="w-14 h-14 rounded-2xl bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center text-cyan-400 text-2xl group-hover:scale-110 transition-transform">⚡</div>
           <div>
-            <h3 class="text-2xl font-black font-gaming text-white" data-key="nulls_title">Null's Brawl Hub</h3>
-            <p class="text-xs text-slate-400 mt-1" data-key="nulls_desc">Download, server privati, classifica live, Zenik League, comandi e social.</p>
+            <h3 class="text-2xl font-black font-gaming text-white">Null's Servers Hub</h3>
+            <p class="text-xs text-slate-400 mt-1">Tutti i server privati Null's: Brawl, Clash, Royale, Royale Infinity e Rush.</p>
           </div>
-          <span class="inline-block text-xs font-bold text-cyan-400 font-gaming pt-2" data-key="btn_enter">ENTRA NEL HUB ➔</span>
+          <span class="inline-block text-xs font-bold text-cyan-400 font-gaming pt-2">ENTRA NEL HUB ➔</span>
         </button>
 
         <button type="button" onclick="switchHub('roblox')" class="glass-panel glass-card-hover p-8 rounded-3xl border border-purple-500/30 text-left space-y-4 group">
           <div class="w-14 h-14 rounded-2xl bg-purple-500/20 border border-purple-500/40 flex items-center justify-center text-purple-400 text-2xl group-hover:scale-110 transition-transform">🎮</div>
           <div>
-            <h3 class="text-2xl font-black font-gaming text-white" data-key="roblox_title">Roblox Scripts Hub</h3>
-            <p class="text-xs text-slate-400 mt-1" data-key="roblox_desc">Script Lua, executor consigliati e hub dedicati per i tuoi giochi preferiti.</p>
+            <h3 class="text-2xl font-black font-gaming text-white">Roblox Scripts Hub</h3>
+            <p class="text-xs text-slate-400 mt-1">Script Lua, executor consigliati e hub dedicati per i tuoi giochi preferiti.</p>
           </div>
-          <span class="inline-block text-xs font-bold text-purple-400 font-gaming pt-2" data-key="btn_enter">ENTRA NEL HUB ➔</span>
+          <span class="inline-block text-xs font-bold text-purple-400 font-gaming pt-2">ENTRA NEL HUB ➔</span>
         </button>
       </div>
     </section>
 
-    <!-- CONTAINER NULL'S BRAWL HUB -->
+    <!-- CONTAINER NULL'S NETWORK HUB -->
     <div id="hub-nulls" class="hidden space-y-6">
       <div class="flex items-center justify-between glass-panel p-2 rounded-2xl border border-slate-800">
         <button type="button" onclick="switchHub('gateway')" class="px-3 py-2 rounded-xl bg-slate-900 text-slate-300 hover:text-white font-bold text-xs transition-all flex items-center gap-1">
-          🏠 <span data-key="back_gateway">Torna alla Scelta</span>
+          🏠 Torna alla Scelta
         </button>
         <nav class="flex items-center gap-2 overflow-x-auto pb-1">
-          <button type="button" onclick="switchNullsTab('home')" class="nulls-tab-btn px-4 py-2 rounded-xl bg-cyan-500 text-slate-950 font-black text-xs whitespace-nowrap transition-all" data-key="tab_home">Home & Download</button>
-          <button type="button" onclick="switchNullsTab('leaderboard')" class="nulls-tab-btn px-4 py-2 rounded-xl bg-slate-900 text-slate-400 font-bold text-xs whitespace-nowrap transition-all" data-key="tab_leaderboard">Classifica Live</button>
-          <button type="button" onclick="switchNullsTab('league')" class="nulls-tab-btn px-4 py-2 rounded-xl bg-slate-900 text-slate-400 font-bold text-xs whitespace-nowrap transition-all" data-key="tab_league">Zenik League</button>
-          <button type="button" onclick="switchNullsTab('commands')" class="nulls-tab-btn px-4 py-2 rounded-xl bg-slate-900 text-slate-400 font-bold text-xs whitespace-nowrap transition-all" data-key="tab_commands">Comandi Server</button>
-          <button type="button" onclick="switchNullsTab('social')" class="nulls-tab-btn px-4 py-2 rounded-xl bg-slate-900 text-slate-400 font-bold text-xs whitespace-nowrap transition-all" data-key="tab_social">Social</button>
+          <button type="button" onclick="switchNullsTab('home')" class="nulls-tab-btn px-4 py-2 rounded-xl bg-cyan-500 text-slate-950 font-black text-xs whitespace-nowrap transition-all">Server & Download</button>
+          <button type="button" onclick="switchNullsTab('leaderboard')" class="nulls-tab-btn px-4 py-2 rounded-xl bg-slate-900 text-slate-400 font-bold text-xs whitespace-nowrap transition-all">Classifica Live</button>
+          <button type="button" onclick="switchNullsTab('league')" class="nulls-tab-btn px-4 py-2 rounded-xl bg-slate-900 text-slate-400 font-bold text-xs whitespace-nowrap transition-all">Zenik League</button>
+          <button type="button" onclick="switchNullsTab('commands')" class="nulls-tab-btn px-4 py-2 rounded-xl bg-slate-900 text-slate-400 font-bold text-xs whitespace-nowrap transition-all">Comandi Server</button>
+          <button type="button" onclick="switchNullsTab('social')" class="nulls-tab-btn px-4 py-2 rounded-xl bg-slate-900 text-slate-400 font-bold text-xs whitespace-nowrap transition-all">Social</button>
         </nav>
       </div>
 
+      <!-- SOTTOSEZIONE 1: SERVER & DOWNLOAD NULL'S -->
       <div id="nulls-home" class="nulls-section space-y-6 animate-tab">
-        <div class="glass-panel p-6 md:p-10 rounded-3xl border border-cyan-500/30 space-y-4 shadow-2xl">
-          <span class="px-3 py-1 rounded-full text-[10px] font-black bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 uppercase tracking-widest">NULL'S BRAWL DOWNLOAD & INFO</span>
-          <h2 class="text-3xl md:text-5xl font-black font-gaming text-white">
-            SCARICA <span class="text-cyan-400">NULL'S BRAWL</span>
-          </h2>
-          <p class="text-slate-300 text-xs md:text-sm leading-relaxed" data-key="nulls_home_desc">
-            Ottieni l'ultima versione aggiornata del server privato. Sblocca tutti i brawler, risorse illimitate e gioca con la community.
-          </p>
-          <div class="flex flex-wrap gap-4 pt-2">
-            <a href="https://d.nulls.gg/" target="_blank" class="px-6 py-3 rounded-xl bg-cyan-500 text-slate-950 font-black text-xs font-gaming shadow-lg shadow-cyan-500/20 flex items-center gap-2 hover:bg-cyan-400 transition-all">
-              📥 <span data-key="btn_download_apk">DOWNLOAD ANDROID (APK)</span>
-            </a>
-            <a href="https://d.nulls.gg/" target="_blank" class="px-6 py-3 rounded-xl bg-slate-900 text-cyan-400 border border-cyan-500/30 font-black text-xs font-gaming flex items-center gap-2 hover:bg-slate-800 transition-all">
-              🍏 <span data-key="btn_download_ios">DOWNLOAD IOS / IPA</span>
+        <div class="glass-panel p-6 md:p-8 rounded-3xl border border-cyan-500/30 space-y-4 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6">
+          <div>
+            <span class="px-3 py-1 rounded-full text-[10px] font-black bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 uppercase tracking-widest">SITO UFFICIALE NULL'S</span>
+            <h2 class="text-2xl md:text-4xl font-black font-gaming text-white mt-2">
+              PORTALE <span class="text-cyan-400">NULL'S.GG</span>
+            </h2>
+            <p class="text-slate-300 text-xs md:text-sm mt-1">Accedi al portale principale di Null's per scoprire tutte le novità e gli aggiornamenti dei server.</p>
+          </div>
+          <a href="https://nulls.gg/" target="_blank" class="px-6 py-3 rounded-xl bg-cyan-500 text-slate-950 font-black text-xs font-gaming shadow-lg shadow-cyan-500/20 hover:bg-cyan-400 transition-all whitespace-nowrap">
+            🌐 VISITA NULLS.GG
+          </a>
+        </div>
+
+        <!-- LISTA GIOCHI NULL'S -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          
+          <!-- Null's Brawl -->
+          <div class="glass-panel glass-card-hover p-6 rounded-3xl border border-cyan-500/20 space-y-3 flex flex-col justify-between">
+            <div class="space-y-2">
+              <div class="flex justify-between items-start">
+                <h3 class="text-xl font-black font-gaming text-white">Null's Brawl</h3>
+                <span class="px-2.5 py-1 rounded-full text-[10px] font-black bg-cyan-500/20 text-cyan-300">v68.279</span>
+              </div>
+              <p class="text-xs text-slate-300">Null's Brawl is a Brawl Stars private server with unlimited gems, gold and boxes. Play with friends on any brawler you want.</p>
+            </div>
+            <a href="https://nulls.gg/servers/nulls-brawl/" target="_blank" class="w-full py-2.5 rounded-xl bg-slate-900 border border-cyan-500/30 text-cyan-400 font-bold text-xs font-gaming text-center hover:bg-cyan-500 hover:text-slate-950 transition-all">
+              📥 DOWNLOAD NULL'S BRAWL
             </a>
           </div>
+
+          <!-- Null's Clash -->
+          <div class="glass-panel glass-card-hover p-6 rounded-3xl border border-amber-500/20 space-y-3 flex flex-col justify-between">
+            <div class="space-y-2">
+              <div class="flex justify-between items-start">
+                <h3 class="text-xl font-black font-gaming text-white">Null's Clash</h3>
+                <span class="px-2.5 py-1 rounded-full text-[10px] font-black bg-amber-500/20 text-amber-300">v18.400.7</span>
+              </div>
+              <p class="text-xs text-slate-300">Null's Clash is your dream! You can build huge base and attack others with any troops you want.</p>
+            </div>
+            <a href="https://nulls.gg/servers/nulls-clash/" target="_blank" class="w-full py-2.5 rounded-xl bg-slate-900 border border-amber-500/30 text-amber-400 font-bold text-xs font-gaming text-center hover:bg-amber-500 hover:text-slate-950 transition-all">
+              📥 DOWNLOAD NULL'S CLASH
+            </a>
+          </div>
+
+          <!-- Null's Royale -->
+          <div class="glass-panel glass-card-hover p-6 rounded-3xl border border-purple-500/20 space-y-3 flex flex-col justify-between">
+            <div class="space-y-2">
+              <div class="flex justify-between items-start">
+                <h3 class="text-xl font-black font-gaming text-white">Null's Royale</h3>
+                <span class="px-2.5 py-1 rounded-full text-[10px] font-black bg-purple-500/20 text-purple-300">v15.535.13</span>
+              </div>
+              <p class="text-xs text-slate-300">Have you heard about the most ridiculous duel in Clash Royale? They are even more ridiculous now. Secret Bags with 150K cards are included.</p>
+            </div>
+            <a href="https://nulls.gg/servers/nulls-royale/" target="_blank" class="w-full py-2.5 rounded-xl bg-slate-900 border border-purple-500/30 text-purple-400 font-bold text-xs font-gaming text-center hover:bg-purple-500 hover:text-slate-950 transition-all">
+              📥 DOWNLOAD NULL'S ROYALE
+            </a>
+          </div>
+
+          <!-- Null's Royale Infinity -->
+          <div class="glass-panel glass-card-hover p-6 rounded-3xl border border-pink-500/20 space-y-3 flex flex-col justify-between">
+            <div class="space-y-2">
+              <div class="flex justify-between items-start">
+                <h3 class="text-xl font-black font-gaming text-white">Null's Royale Infinity</h3>
+                <span class="px-2.5 py-1 rounded-full text-[10px] font-black bg-pink-500/20 text-pink-300">v14.593.1</span>
+              </div>
+              <p class="text-xs text-slate-300">A brand new unique and chaotic Clash Royale experience with modded cards!</p>
+            </div>
+            <a href="https://nulls.gg/servers/nulls-royale-infinity/" target="_blank" class="w-full py-2.5 rounded-xl bg-slate-900 border border-pink-500/30 text-pink-400 font-bold text-xs font-gaming text-center hover:bg-pink-500 hover:text-slate-950 transition-all">
+              📥 DOWNLOAD INFINITY
+            </a>
+          </div>
+
+          <!-- Null's Rush -->
+          <div class="glass-panel glass-card-hover p-6 rounded-3xl border border-emerald-500/20 space-y-3 flex flex-col justify-between md:col-span-2">
+            <div class="space-y-2">
+              <div class="flex justify-between items-start">
+                <h3 class="text-xl font-black font-gaming text-white">Null's Rush</h3>
+                <span class="px-2.5 py-1 rounded-full text-[10px] font-black bg-emerald-500/20 text-emerald-300">v0.284</span>
+              </div>
+              <p class="text-xs text-slate-300">Good old days... Do you remember this game?</p>
+            </div>
+            <a href="https://nulls.gg/servers/nulls-rush/" target="_blank" class="w-full py-2.5 rounded-xl bg-slate-900 border border-emerald-500/30 text-emerald-400 font-bold text-xs font-gaming text-center hover:bg-emerald-500 hover:text-slate-950 transition-all">
+              📥 DOWNLOAD NULL'S RUSH
+            </a>
+          </div>
+
         </div>
       </div>
 
+      <!-- SOTTOSEZIONE 2: CLASSIFICA LIVE -->
       <div id="nulls-leaderboard" class="nulls-section hidden space-y-4 animate-tab">
         <div class="flex items-center justify-between">
-          <h2 class="text-2xl font-black font-gaming text-cyan-400" data-key="live_lb_title">⚡ Classifica Live in Tempo Reale</h2>
+          <h2 class="text-2xl font-black font-gaming text-cyan-400">⚡ Classifica Live in Tempo Reale</h2>
           <span class="flex items-center gap-2 text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-3 py-1 rounded-full font-bold">
             <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> AUTO SYNC
           </span>
@@ -164,16 +236,17 @@
         </div>
       </div>
 
+      <!-- SOTTOSEZIONE 3: ZENIK LEAGUE -->
       <div id="nulls-league" class="nulls-section hidden space-y-4 animate-tab">
-        <h2 class="text-2xl font-black font-gaming text-amber-400" data-key="league_title">🏆 Zenik League Standings</h2>
+        <h2 class="text-2xl font-black font-gaming text-amber-400">🏆 Zenik League Standings</h2>
         <div class="glass-panel rounded-2xl overflow-x-auto border border-slate-800">
           <table class="w-full text-left text-xs">
             <thead class="bg-slate-900 text-slate-400 uppercase font-black">
               <tr>
                 <th class="p-3 text-center">POS</th>
-                <th class="p-3" data-key="th_team">SQUADRA</th>
-                <th class="p-3 text-center" data-key="th_matches">PARTITE</th>
-                <th class="p-3 text-center text-amber-400" data-key="th_points">PUNTI</th>
+                <th class="p-3">SQUADRA</th>
+                <th class="p-3 text-center">PARTITE</th>
+                <th class="p-3 text-center text-amber-400">PUNTI</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-slate-800">
@@ -194,81 +267,68 @@
         </div>
       </div>
 
+      <!-- SOTTOSEZIONE 4: COMANDI SERVER -->
       <div id="nulls-commands" class="nulls-section hidden space-y-4 animate-tab">
-        <h2 class="text-2xl font-black font-gaming text-emerald-400" data-key="commands_title">⚙️ Comandi Server Null's Brawl</h2>
-        <p class="text-xs text-slate-400" data-key="commands_howto">Per utilizzare i comandi, scrivili nella chat del club con la barra obliqua (/)</p>
+        <h2 class="text-2xl font-black font-gaming text-emerald-400">⚙️ Comandi Server Null's</h2>
+        <p class="text-xs text-slate-400">Per utilizzare i comandi, scrivili nella chat del club con la barra obliqua (/)</p>
+        
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div class="glass-panel glass-card-hover p-4 rounded-2xl border border-emerald-500/20 flex justify-between items-center">
-            <div><span class="font-mono font-black text-cyan-400 text-base">/help</span><p class="text-xs text-slate-400 mt-1" data-key="cmd_help">Visualizza i comandi disponibili sul server</p></div>
-            <button type="button" data-copy="/help" class="copy-btn px-3 py-1.5 rounded-xl bg-cyan-500/20 text-cyan-300 font-bold text-xs" data-key="btn_copy">📋 Copia</button>
+            <div><span class="font-mono font-black text-cyan-400 text-base">/help</span><p class="text-xs text-slate-400 mt-1">Visualizza i comandi disponibili sul server</p></div>
+            <button type="button" data-copy="/help" class="copy-btn px-3 py-1.5 rounded-xl bg-cyan-500/20 text-cyan-300 font-bold text-xs">📋 Copia</button>
           </div>
           <div class="glass-panel glass-card-hover p-4 rounded-2xl border border-emerald-500/20 flex justify-between items-center">
-            <div><span class="font-mono font-black text-cyan-400 text-base">/unlock</span><p class="text-xs text-slate-400 mt-1" data-key="cmd_unlock">Sblocca tutti i brawler immediatamente</p></div>
-            <button type="button" data-copy="/unlock" class="copy-btn px-3 py-1.5 rounded-xl bg-cyan-500/20 text-cyan-300 font-bold text-xs" data-key="btn_copy">📋 Copia</button>
+            <div><span class="font-mono font-black text-cyan-400 text-base">/unlock</span><p class="text-xs text-slate-400 mt-1">Sblocca tutti i contenuti immediatamente</p></div>
+            <button type="button" data-copy="/unlock" class="copy-btn px-3 py-1.5 rounded-xl bg-cyan-500/20 text-cyan-300 font-bold text-xs">📋 Copia</button>
           </div>
           <div class="glass-panel glass-card-hover p-4 rounded-2xl border border-emerald-500/20 flex justify-between items-center">
-            <div><span class="font-mono font-black text-cyan-400 text-base">/full</span><p class="text-xs text-slate-400 mt-1" data-key="cmd_full">Migliora tutti i brawler al livello massimo</p></div>
-            <button type="button" data-copy="/full" class="copy-btn px-3 py-1.5 rounded-xl bg-cyan-500/20 text-cyan-300 font-bold text-xs" data-key="btn_copy">📋 Copia</button>
+            <div><span class="font-mono font-black text-cyan-400 text-base">/full</span><p class="text-xs text-slate-400 mt-1">Migliora tutto al livello massimo</p></div>
+            <button type="button" data-copy="/full" class="copy-btn px-3 py-1.5 rounded-xl bg-cyan-500/20 text-cyan-300 font-bold text-xs">📋 Copia</button>
           </div>
           <div class="glass-panel glass-card-hover p-4 rounded-2xl border border-emerald-500/20 flex justify-between items-center">
-            <div><span class="font-mono font-black text-cyan-400 text-base">/clean</span><p class="text-xs text-slate-400 mt-1" data-key="cmd_clean">Ripristina l'account al livello iniziale</p></div>
-            <button type="button" data-copy="/clean" class="copy-btn px-3 py-1.5 rounded-xl bg-cyan-500/20 text-cyan-300 font-bold text-xs" data-key="btn_copy">📋 Copia</button>
-          </div>
-          <div class="glass-panel glass-card-hover p-4 rounded-2xl border border-emerald-500/20 flex justify-between items-center">
-            <div><span class="font-mono font-black text-cyan-400 text-base">/status</span><p class="text-xs text-slate-400 mt-1" data-key="cmd_status">Mostra informazioni sulla versione e giocatori</p></div>
-            <button type="button" data-copy="/status" class="copy-btn px-3 py-1.5 rounded-xl bg-cyan-500/20 text-cyan-300 font-bold text-xs" data-key="btn_copy">📋 Copia</button>
-          </div>
-          <div class="glass-panel glass-card-hover p-4 rounded-2xl border border-emerald-500/20 flex justify-between items-center">
-            <div><span class="font-mono font-black text-cyan-400 text-base">/addscore</span><p class="text-xs text-slate-400 mt-1" data-key="cmd_addscore">Aggiunge 85 trofei a ciascun brawler</p></div>
-            <button type="button" data-copy="/addscore" class="copy-btn px-3 py-1.5 rounded-xl bg-cyan-500/20 text-cyan-300 font-bold text-xs" data-key="btn_copy">📋 Copia</button>
-          </div>
-          <div class="glass-panel glass-card-hover p-4 rounded-2xl border border-emerald-500/20 flex justify-between items-center md:col-span-2">
-            <div><span class="font-mono font-black text-cyan-400 text-base">/latency</span><p class="text-xs text-slate-400 mt-1" data-key="cmd_latency">Mostra la latenza verso il server (min/max in ms)</p></div>
-            <button type="button" data-copy="/latency" class="copy-btn px-3 py-1.5 rounded-xl bg-cyan-500/20 text-cyan-300 font-bold text-xs" data-key="btn_copy">📋 Copia</button>
+            <div><span class="font-mono font-black text-cyan-400 text-base">/clean</span><p class="text-xs text-slate-400 mt-1">Ripristina l'account al livello iniziale</p></div>
+            <button type="button" data-copy="/clean" class="copy-btn px-3 py-1.5 rounded-xl bg-cyan-500/20 text-cyan-300 font-bold text-xs">📋 Copia</button>
           </div>
         </div>
       </div>
 
+      <!-- SOTTOSEZIONE 5: SOCIAL -->
       <div id="nulls-social" class="nulls-section hidden space-y-4 animate-tab">
-        <h2 class="text-2xl font-black font-gaming text-amber-400" data-key="social_title">💬 Community & Social</h2>
+        <h2 class="text-2xl font-black font-gaming text-amber-400">💬 Community & Social</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <a href="https://discord.gg/NkjRYpCBcj" target="_blank" class="glass-panel glass-card-hover p-5 rounded-2xl border border-cyan-500/30 flex justify-between items-center">
-            <div><p class="font-black text-white font-gaming">👾 DISCORD NULL'S</p><p class="text-xs text-slate-400" data-key="discord_desc">Server Ufficiale Community</p></div>
-            <span class="text-xs text-cyan-400 font-bold" data-key="btn_join">Entra ➔</span>
-          </a>
-          <a href="https://t.me/nulls_en" target="_blank" class="glass-panel glass-card-hover p-5 rounded-2xl border border-blue-500/30 flex justify-between items-center">
-            <div><p class="font-black text-white font-gaming">✈️ TELEGRAM NULL'S</p><p class="text-xs text-slate-400" data-key="telegram_desc">Canale Ufficiale Notizie</p></div>
-            <span class="text-xs text-blue-400 font-bold" data-key="btn_follow">Segui ➔</span>
+          <a href="https://nulls.gg/" target="_blank" class="glass-panel glass-card-hover p-5 rounded-2xl border border-cyan-500/30 flex justify-between items-center">
+            <div><p class="font-black text-white font-gaming">🌐 SITO NULL'S</p><p class="text-xs text-slate-400">Portali e community ufficiale</p></div>
+            <span class="text-xs text-cyan-400 font-bold">Visita ➔</span>
           </a>
         </div>
       </div>
-    </div>
-    <!-- CONTAINER ROBLOX SCRIPTS HUB -->
+
+      </div><!-- CONTAINER ROBLOX SCRIPTS HUB -->
     <div id="hub-roblox" class="hidden space-y-6">
       <div class="flex items-center justify-between glass-panel p-3 rounded-2xl border border-slate-800">
         <button type="button" onclick="switchHub('gateway')" class="px-3 py-2 rounded-xl bg-slate-900 text-slate-300 hover:text-white font-bold text-xs transition-all flex items-center gap-1">
-          🏠 <span data-key="back_gateway">Torna alla Scelta</span>
+          🏠 Torna alla Scelta
         </button>
         <span class="text-xs font-black font-gaming text-purple-400">ROBLOX SCRIPTS & EXECUTORS HUB</span>
       </div>
 
       <!-- EXECUTORS CONSIGLIATI -->
       <div class="space-y-3">
-        <h3 class="text-xl font-black font-gaming text-purple-400" data-key="executors_title">🛠️ Executor Consigliati</h3>
+        <h3 class="text-xl font-black font-gaming text-purple-400">🛠️ Executor Consigliati</h3>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div class="glass-panel p-4 rounded-2xl border border-purple-500/30 space-y-2">
             <h4 class="font-gaming font-black text-white text-sm">Delta Executor</h4>
-            <p class="text-[11px] text-slate-400" data-key="exec_delta_desc">Molto stabile per dispositivi mobili Android e iOS.</p>
+            <p class="text-[11px] text-slate-400">Molto stabile per dispositivi mobili Android e iOS.</p>
             <span class="inline-block text-[10px] bg-purple-500/20 text-purple-300 px-2.5 py-1 rounded-full font-bold">Mobile / PC</span>
           </div>
           <div class="glass-panel p-4 rounded-2xl border border-purple-500/30 space-y-2">
             <h4 class="font-gaming font-black text-white text-sm">Codex</h4>
-            <p class="text-[11px] text-slate-400" data-key="exec_codex_desc">Ottima esecuzione di script complessi con UI moderna.</p>
+            <p class="text-[11px] text-slate-400">Ottima esecuzione di script complessi con UI moderna.</p>
             <span class="inline-block text-[10px] bg-purple-500/20 text-purple-300 px-2.5 py-1 rounded-full font-bold">Multiplatform</span>
           </div>
           <div class="glass-panel p-4 rounded-2xl border border-purple-500/30 space-y-2">
             <h4 class="font-gaming font-black text-white text-sm">Hydrogen</h4>
-            <p class="text-[11px] text-slate-400" data-key="exec_hydro_desc">Leggero, veloce e con supporto avanzato a librerie UI.</p>
+            <p class="text-[11px] text-slate-400">Leggero, veloce e con supporto avanzato a librerie UI.</p>
             <span class="inline-block text-[10px] bg-purple-500/20 text-purple-300 px-2.5 py-1 rounded-full font-bold">Stable</span>
           </div>
         </div>
@@ -276,23 +336,24 @@
 
       <!-- SCRIPT LUA -->
       <div class="space-y-3 pt-2">
-        <h3 class="text-xl font-black font-gaming text-purple-400" data-key="scripts_title">📜 Script Lua in Evidenza</h3>
+        <h3 class="text-xl font-black font-gaming text-purple-400">📜 Script Lua in Evidenza</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div class="glass-panel glass-card-hover p-5 rounded-2xl border border-purple-500/30 space-y-3">
             <div class="flex items-center justify-between">
               <h4 class="font-black font-gaming text-white text-base">Zenik Universal Hub</h4>
               <span class="text-[10px] px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300">Lua</span>
             </div>
-            <p class="text-xs text-slate-300" data-key="rbx_script1_desc">Script universale con ESP, Fly e Speed hack per vari giochi.</p>
+            <p class="text-xs text-slate-300">Script universale con ESP, Fly e Speed hack per vari giochi.</p>
             <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 font-mono text-[11px] text-purple-300 overflow-x-auto select-all">
               loadstring(game:HttpGet("https://raw.githubusercontent.com/zenik/hub/main/loader.lua"))()
             </div>
-            <button type="button" data-copy='loadstring(game:HttpGet("https://raw.githubusercontent.com/zenik/hub/main/loader.lua"))()' class="copy-btn w-full py-2.5 rounded-xl bg-purple-500 text-white font-black text-xs font-gaming shadow-lg shadow-purple-500/20 transition-all" data-key="btn_copyscript">
+            <button type="button" data-copy='loadstring(game:HttpGet("https://raw.githubusercontent.com/zenik/hub/main/loader.lua"))()' class="copy-btn w-full py-2.5 rounded-xl bg-purple-500 text-white font-black text-xs font-gaming shadow-lg shadow-purple-500/20 transition-all">
               📋 COPIA SCRIPT
             </button>
           </div>
         </div>
       </div>
+
     </div>
 
   </main>
@@ -361,7 +422,7 @@
               <span class="font-gaming font-black text-sm w-6 text-center ${medal}">#${player.rank}</span>
               <div>
                 <p class="font-black text-white text-xs md:text-sm font-gaming">${player.name}</p>
-                <p class="text-[10px] text-slate-400">Club: ${player.club}</p>
+                <p class="text-[10px] text-slate-400">Server: Active</p>
               </div>
             </div>
             <div class="text-right">
@@ -375,160 +436,13 @@
     updateLiveLeaderboard();
     setInterval(updateLiveLeaderboard, 4000);
 
-    const translations = {
-      it: {
-        subtitle: "Portale Multi-Gaming Ufficiale",
-        gateway_badge: "BENVENUTO NEL PORTALE",
-        nulls_title: "Null's Brawl Hub",
-        nulls_desc: "Download, server privati, classifica live, Zenik League, comandi e social.",
-        roblox_title: "Roblox Scripts Hub",
-        roblox_desc: "Script Lua, executor consigliati e hub dedicati per i tuoi giochi preferiti.",
-        back_gateway: "Torna alla Scelta",
-        btn_enter: "ENTRA NEL HUB ➔",
-        tab_home: "Home & Download",
-        tab_leaderboard: "Classifica Live",
-        tab_league: "Zenik League",
-        tab_commands: "Comandi Server",
-        tab_social: "Social",
-        nulls_home_desc: "Ottieni l'ultima versione aggiornata del server privato. Sblocca tutti i brawler, risorse illimitate e gioca con la community.",
-        btn_download_apk: "DOWNLOAD ANDROID (APK)",
-        btn_download_ios: "DOWNLOAD IOS / IPA",
-        live_lb_title: "⚡ Classifica Live in Tempo Reale",
-        league_title: "🏆 Classifica Zenik League",
-        th_team: "SQUADRA", th_matches: "PARTITE", th_points: "PUNTI",
-        commands_title: "⚙️ Comandi Server Null's Brawl",
-        commands_howto: "Per utilizzare i comandi, scrivili nella chat del club con la barra obliqua (/)",
-        cmd_help: "Visualizza i comandi disponibili sul server",
-        cmd_unlock: "Sblocca tutti i brawler immediatamente",
-        cmd_full: "Migliora tutti i brawler al livello massimo",
-        cmd_clean: "Ripristina l'account al livello iniziale",
-        cmd_status: "Mostra informazioni sulla versione e giocatori",
-        cmd_addscore: "Aggiunge 85 trofei a ciascun brawler",
-        cmd_latency: "Mostra la latenza verso il server (min/max in ms)",
-        btn_copy: "📋 Copia",
-        social_title: "💬 Community & Social",
-        discord_desc: "Server Ufficiale Community",
-        telegram_desc: "Canale Ufficiale Notizie",
-        btn_join: "Entra ➔",
-        btn_follow: "Segui ➔",
-        executors_title: "🛠️ Executor Consigliati",
-        exec_delta_desc: "Molto stabile per dispositivi mobili Android e iOS.",
-        exec_codex_desc: "Ottima esecuzione di script complessi con UI moderna.",
-        exec_hydro_desc: "Leggero, veloce e con supporto avanzato a librerie UI.",
-        scripts_title: "📜 Script Lua in Evidenza",
-        rbx_script1_desc: "Script universale con ESP, Fly e Speed hack per vari giochi.",
-        btn_copyscript: "📋 COPIA SCRIPT"
-      },
-      en: {
-        subtitle: "Official Multi-Gaming Portal",
-        gateway_badge: "WELCOME TO THE PORTAL",
-        nulls_title: "Null's Brawl Hub",
-        nulls_desc: "Downloads, private servers, live leaderboard, Zenik League, commands, and socials.",
-        roblox_title: "Roblox Scripts Hub",
-        roblox_desc: "Lua scripts, recommended executors, and dedicated hubs for your favorite games.",
-        back_gateway: "Back to Selection",
-        btn_enter: "ENTER HUB ➔",
-        tab_home: "Home & Download",
-        tab_leaderboard: "Live Leaderboard",
-        tab_league: "Zenik League",
-        tab_commands: "Server Commands",
-        tab_social: "Social",
-        nulls_home_desc: "Get the latest updated version of the private server. Unlock all brawlers, unlimited resources, and play with the community.",
-        btn_download_apk: "DOWNLOAD ANDROID (APK)",
-        btn_download_ios: "DOWNLOAD IOS / IPA",
-        live_lb_title: "⚡ Real-Time Live Leaderboard",
-        league_title: "🏆 Zenik League Standings",
-        th_team: "TEAM", th_matches: "MATCHES", th_points: "POINTS",
-        commands_title: "⚙️ Null's Brawl Server Commands",
-        commands_howto: "To use commands, type them in the club chat starting with a slash (/)",
-        cmd_help: "Displays available commands on the server",
-        cmd_unlock: "Unlocks all brawlers immediately",
-        cmd_full: "Upgrades all brawlers to maximum level",
-        cmd_clean: "Resets account to initial level",
-        cmd_status: "Shows version info and online players",
-        cmd_addscore: "Adds 85 trophies to each brawler",
-        cmd_latency: "Shows server latency (min/max in ms)",
-        btn_copy: "📋 Copy",
-        social_title: "💬 Community & Social",
-        discord_desc: "Official Community Server",
-        telegram_desc: "Official News Channel",
-        btn_join: "Join ➔",
-        btn_follow: "Follow ➔",
-        executors_title: "🛠️ Recommended Executors",
-        exec_delta_desc: "Very stable for Android and iOS mobile devices.",
-        exec_codex_desc: "Great execution of complex scripts with a modern UI.",
-        exec_hydro_desc: "Lightweight, fast with advanced UI library support.",
-        scripts_title: "📜 Featured Lua Scripts",
-        rbx_script1_desc: "Universal script with ESP, Fly, and Speed hack for various games.",
-        btn_copyscript: "📋 COPY SCRIPT"
-      },
-      es: {
-        subtitle: "Portal Multi-Gaming Oficial",
-        gateway_badge: "BIENVENIDO AL PORTAL",
-        nulls_title: "Null's Brawl Hub",
-        nulls_desc: "Descargas, servidores privados, clasificación en vivo, Zenik League y redes sociales.",
-        roblox_title: "Roblox Scripts Hub",
-        roblox_desc: "Scripts Lua, executors recomendados y hubs dedicados para tus juegos favoritos.",
-        back_gateway: "Volver al Selector",
-        btn_enter: "ENTRAR AL HUB ➔",
-        tab_home: "Inicio y Descargas",
-        tab_leaderboard: "Clasificación En Vivo",
-        tab_league: "Zenik League",
-        tab_commands: "Comandos de Servidor",
-        tab_social: "Social",
-        nulls_home_desc: "Obtén la última versión actualizada del servidor privado. Desbloquea todos los brawlers y recursos ilimitados.",
-        btn_download_apk: "DESCARGAR ANDROID (APK)",
-        btn_download_ios: "DESCARGAR IOS / IPA",
-        live_lb_title: "⚡ Clasificación en Vivo en Tiempo Real",
-        league_title: "🏆 Posiciones Zenik League",
-        th_team: "EQUIPO", th_matches: "PARTIDAS", th_points: "PUNTOS",
-        commands_title: "⚙️ Comandos del Servidor Null's Brawl",
-        commands_howto: "Para usar los comandos, escríbelos en el chat del club con una barra diagonal (/)",
-        cmd_help: "Muestra los comandos disponibles en el servidor",
-        cmd_unlock: "Desbloquea todos los brawlers inmediatamente",
-        cmd_full: "Mejora todos los brawlers al nivel máximo",
-        cmd_clean: "Restablece la cuenta al nivel inicial",
-        cmd_status: "Muestra información de versión y jugadores",
-        cmd_addscore: "Agrega 85 trofeos a cada brawler",
-        cmd_latency: "Muestra la latenza del servidor (mín/máx en ms)",
-        btn_copy: "📋 Copiar",
-        social_title: "💬 Comunidad y Redes",
-        discord_desc: "Servidor Oficial de la Comunidad",
-        telegram_desc: "Canal Oficial de Noticias",
-        btn_join: "Unirse ➔",
-        btn_follow: "Seguir ➔",
-        executors_title: "🛠️ Executors Recomendados",
-        exec_delta_desc: "Muy estable para dispositivos móviles Android e iOS.",
-        exec_codex_desc: "Gran ejecución de scripts complejos con interfaz moderna.",
-        exec_hydro_desc: "Ligero, rápido y con soporte avanzado de UI.",
-        scripts_title: "📜 Scripts Lua Destacados",
-        rbx_script1_desc: "Script universal con ESP, Fly y Speed hack para varios juegos.",
-        btn_copyscript: "📋 COPIAR SCRIPT"
-      }
-    };
-
-    function changeLanguage(lang) {
-      document.querySelectorAll("[data-key]").forEach(el => {
-        const key = el.getAttribute("data-key");
-        if (translations[lang] && translations[lang][key]) {
-          el.innerText = translations[lang][key];
-        }
-      });
-    }
-
-    document.getElementById("language-select").addEventListener("change", (e) => {
-      changeLanguage(e.target.value);
-    });
-
     document.querySelectorAll(".copy-btn").forEach(btn => {
       btn.addEventListener("click", () => {
         const text = btn.getAttribute("data-copy");
         navigator.clipboard.writeText(text);
-        const currentLang = document.getElementById("language-select").value;
-        const msg = currentLang === 'en' ? "Command copied: " : currentLang === 'es' ? "¡Comando copiado: " : "Comando copiato: ";
-        alert(msg + text);
+        alert("Comando copiato: " + text);
       });
     });
   </script>
 </body>
-              </html>
+</html>
