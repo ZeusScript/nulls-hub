@@ -27,6 +27,11 @@
   </script>
 
   <style>
+    /* Rimuove l'effetto bianco da pressione su mobile */
+    * {
+      -webkit-tap-highlight-color: transparent;
+    }
+
     @keyframes pulseGlow {
       0%, 100% { opacity: 0.35; transform: scale(1); }
       50% { opacity: 0.7; transform: scale(1.05); }
@@ -93,7 +98,7 @@
   <header class="sticky top-0 z-50 glass-panel border-b border-slate-800/80">
     <div class="max-w-6xl mx-auto px-4 py-3 flex flex-col md:flex-row items-center justify-between gap-3">
       
-      <!-- BRAND LOGO -->
+      <!-- BRAND LOGO & TRADUZIONE -->
       <div class="flex items-center justify-between w-full md:w-auto">
         <div class="flex items-center gap-3 cursor-pointer" onclick="showTab('home')">
           <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-cyan-500 via-amber-400 to-purple-500 p-[2px] shadow-lg shadow-cyan-500/20">
@@ -114,7 +119,7 @@
           </div>
         </div>
 
-        <!-- LANGUAGE SWITCHER (MOBILE & DESKTOP) -->
+        <!-- LANGUAGE SWITCHER -->
         <div class="flex items-center gap-1 text-xs font-bold bg-slate-900/90 p-1 rounded-xl border border-slate-800">
           <button id="btn-lang-it" onclick="setLang('it')" class="px-2.5 py-1 rounded-lg border border-cyan-400 text-cyan-400 font-extrabold transition-all">🇮🇹 IT</button>
           <button id="btn-lang-en" onclick="setLang('en')" class="px-2.5 py-1 rounded-lg border border-transparent text-slate-400 hover:text-white transition-all">🇬🇧 EN</button>
@@ -124,12 +129,12 @@
       <!-- TASTI NAVIGAZIONE TAB -->
       <nav class="flex items-center gap-1.5 text-xs font-bold overflow-x-auto w-full md:w-auto pb-1 md:pb-0">
         <button onclick="showTab('home')" id="btn-home" class="tab-btn px-4 py-2.5 rounded-xl bg-cyan-500 text-slate-950 font-black whitespace-nowrap shadow-lg shadow-cyan-500/25" data-it="🏠 Home" data-en="🏠 Home">🏠 Home</button>
-        <button onclick="showTab('download')" id="btn-download" class="tab-btn px-4 py-2.5 rounded-xl bg-slate-900/80 text-slate-400 hover:text-white whitespace-nowrap" data-it="⬇️ Giochi Null's" data-en="⬇️ Null's Games">⬇️ Giochi Null's</button>
-        <button onclick="showTab('campionato')" id="btn-campionato" class="tab-btn px-4 py-2.5 rounded-xl bg-slate-900/80 text-slate-400 hover:text-white whitespace-nowrap" data-it="🏆 League" data-en="🏆 League">🏆 League</button>
-        <button onclick="showTab('globale')" id="btn-globale" class="tab-btn px-4 py-2.5 rounded-xl bg-slate-900/80 text-slate-400 hover:text-white whitespace-nowrap" data-it="🌍 Top Coppe" data-en="🌍 Top Trophies">🌍 Top Coppe</button>
-        <button onclick="showTab('brawlers')" id="btn-brawlers" class="tab-btn px-4 py-2.5 rounded-xl bg-slate-900/80 text-slate-400 hover:text-white whitespace-nowrap" data-it="⚡ Meta" data-en="⚡ Meta">⚡ Meta</button>
-        <button onclick="showTab('social')" id="btn-social" class="tab-btn px-4 py-2.5 rounded-xl bg-slate-900/80 text-slate-400 hover:text-white whitespace-nowrap" data-it="💬 Social" data-en="💬 Social">💬 Social</button>
-        <button onclick="showTab('features')" id="btn-features" class="tab-btn px-4 py-2.5 rounded-xl bg-slate-900/80 text-slate-400 hover:text-white whitespace-nowrap" data-it="⚙️ Comandi" data-en="⚙️ Commands">⚙️ Comandi</button>
+        <button onclick="showTab('download')" id="btn-download" class="tab-btn px-4 py-2.5 rounded-xl bg-slate-900/80 text-slate-400 whitespace-nowrap" data-it="⬇️ Giochi Null's" data-en="⬇️ Null's Games">⬇️ Giochi Null's</button>
+        <button onclick="showTab('campionato')" id="btn-campionato" class="tab-btn px-4 py-2.5 rounded-xl bg-slate-900/80 text-slate-400 whitespace-nowrap" data-it="🏆 League" data-en="🏆 League">🏆 League</button>
+        <button onclick="showTab('globale')" id="btn-globale" class="tab-btn px-4 py-2.5 rounded-xl bg-slate-900/80 text-slate-400 whitespace-nowrap" data-it="🌍 Top Coppe" data-en="🌍 Top Trophies">🌍 Top Coppe</button>
+        <button onclick="showTab('brawlers')" id="btn-brawlers" class="tab-btn px-4 py-2.5 rounded-xl bg-slate-900/80 text-slate-400 whitespace-nowrap" data-it="⚡ Meta" data-en="⚡ Meta">⚡ Meta</button>
+        <button onclick="showTab('social')" id="btn-social" class="tab-btn px-4 py-2.5 rounded-xl bg-slate-900/80 text-slate-400 whitespace-nowrap" data-it="💬 Social" data-en="💬 Social">💬 Social</button>
+        <button onclick="showTab('features')" id="btn-features" class="tab-btn px-4 py-2.5 rounded-xl bg-slate-900/80 text-slate-400 whitespace-nowrap" data-it="⚙️ Comandi" data-en="⚙️ Commands">⚙️ Comandi</button>
       </nav>
 
     </div>
@@ -138,8 +143,8 @@
   <!-- MAIN CONTAINER -->
   <main class="max-w-6xl mx-auto px-4 mt-8">
 
-    <!-- ================= TAB 1: HOME ================= -->
-    <div id="tab-home" class="tab-content animate-tab space-y-8">
+    <!-- TAB 1: HOME -->
+    <div id="tab-home" class="tab-content animate-tab space-y-8" style="display: block;">
       <div class="relative overflow-hidden rounded-3xl glass-panel p-8 md:p-12 border border-cyan-500/30 shadow-2xl">
         <div class="relative z-10 space-y-5">
           <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-black bg-cyan-500/10 text-cyan-300 border border-cyan-500/30 uppercase tracking-widest">
@@ -182,8 +187,8 @@
       </div>
     </div>
 
-    <!-- ================= TAB 2: DOWNLOAD GIOCHI NULL'S ================= -->
-    <div id="tab-download" class="tab-content animate-tab hidden space-y-6">
+    <!-- TAB 2: DOWNLOAD GIOCHI NULL'S -->
+    <div id="tab-download" class="tab-content animate-tab space-y-6" style="display: none;">
       <div>
         <h2 class="text-3xl font-black font-gaming text-cyan-400" data-it="⬇️ SERVERS & GIOCHI NULL'S" data-en="⬇️ NULL'S SERVERS & GAMES">⬇️ SERVERS & GIOCHI NULL'S</h2>
         <p class="text-xs text-slate-400 mt-1" data-it="Scarica le ultime versioni dei server privati ufficiali dal portale Null's" data-en="Download the latest versions of official private servers from the Null's portal">Scarica le ultime versioni dei server privati ufficiali dal portale Null's</p>
@@ -200,12 +205,12 @@
                 <h3 class="font-black font-gaming text-white text-lg">Null's Brawl</h3>
                 <span class="px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 font-extrabold text-[10px] border border-cyan-500/30">v68.279</span>
               </div>
-              <p class="text-xs text-slate-300 leading-relaxed" data-it="Server privato di Brawl Stars con gemme, oro e cassettoni illimitati. Gioca con tutti i brawler sbloccati." data-en="Brawl Stars private server with unlimited gems, gold and boxes. Play with any unlocked brawler.">
-                Server privato di Brawl Stars con gemme, oro e cassettoni illimitati. Gioca con tutti i brawler sbloccati.
+              <p class="text-xs text-slate-300 leading-relaxed" data-it="Server privato di Brawl Stars con gemme, oro e cassettoni illimitati." data-en="Brawl Stars private server with unlimited gems, gold and boxes.">
+                Server privato di Brawl Stars con gemme, oro e cassettoni illimitati.
               </p>
             </div>
           </div>
-          <a href="https://nulls.gg/servers/nulls-brawl/" target="_blank" rel="noopener noreferrer" class="btn-shine block w-full py-3 rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 font-black text-xs font-gaming text-center shadow-lg shadow-cyan-500/20">
+          <a href="https://nulls.gg/servers/nulls-brawl/" target="_blank" class="btn-shine block w-full py-3 rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 font-black text-xs font-gaming text-center shadow-lg shadow-cyan-500/20">
             DOWNLOAD NULL'S BRAWL ➔
           </a>
         </div>
@@ -224,7 +229,7 @@
               </p>
             </div>
           </div>
-          <a href="https://nulls.gg/servers/nulls-clash/" target="_blank" rel="noopener noreferrer" class="btn-shine block w-full py-3 rounded-2xl bg-gradient-to-r from-amber-400 to-yellow-500 text-slate-950 font-black text-xs font-gaming text-center shadow-lg shadow-amber-500/20">
+          <a href="https://nulls.gg/servers/nulls-clash/" target="_blank" class="btn-shine block w-full py-3 rounded-2xl bg-gradient-to-r from-amber-400 to-yellow-500 text-slate-950 font-black text-xs font-gaming text-center shadow-lg shadow-amber-500/20">
             DOWNLOAD NULL'S CLASH ➔
           </a>
         </div>
@@ -238,12 +243,12 @@
                 <h3 class="font-black font-gaming text-white text-lg">Null's Royale</h3>
                 <span class="px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 font-extrabold text-[10px] border border-purple-500/30">v15.535.13</span>
               </div>
-              <p class="text-xs text-slate-300 leading-relaxed" data-it="Duelli caotici su Clash Royale con Bauletti Segreti contenenti oltre 150K carte." data-en="Chaotic Clash Royale duels with Secret Bags containing over 150K cards.">
-                Duelli caotici su Clash Royale con Bauletti Segreti contenenti oltre 150K carte.
+              <p class="text-xs text-slate-300 leading-relaxed" data-it="Duelli caotici su Clash Royale con Bauletti Segreti da 150K carte." data-en="Chaotic Clash Royale duels with Secret Bags of 150K cards.">
+                Duelli caotici su Clash Royale con Bauletti Segreti da 150K carte.
               </p>
             </div>
           </div>
-          <a href="https://nulls.gg/servers/nulls-royale/" target="_blank" rel="noopener noreferrer" class="btn-shine block w-full py-3 rounded-2xl bg-gradient-to-r from-purple-500 to-indigo-600 text-white font-black text-xs font-gaming text-center shadow-lg shadow-purple-500/20">
+          <a href="https://nulls.gg/servers/nulls-royale/" target="_blank" class="btn-shine block w-full py-3 rounded-2xl bg-gradient-to-r from-purple-500 to-indigo-600 text-white font-black text-xs font-gaming text-center shadow-lg shadow-purple-500/20">
             DOWNLOAD NULL'S ROYALE ➔
           </a>
         </div>
@@ -257,12 +262,12 @@
                 <h3 class="font-black font-gaming text-white text-lg">Null's Royale Infinity</h3>
                 <span class="px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-300 font-extrabold text-[10px] border border-rose-500/30">v14.593.1</span>
               </div>
-              <p class="text-xs text-slate-300 leading-relaxed" data-it="Un'esperienza unica e completamente folle con carte moddate e abilita speciali custom." data-en="A unique and crazy experience featuring modded cards and custom abilities.">
-                Un'esperienza unica e completamente folle con carte moddate e abilità speciali custom.
+              <p class="text-xs text-slate-300 leading-relaxed" data-it="Un'esperienza caotica con carte moddate e abilita speciali." data-en="A chaotic experience featuring modded cards and special abilities.">
+                Un'esperienza caotica con carte moddate e abilità speciali.
               </p>
             </div>
           </div>
-          <a href="https://nulls.gg/servers/nulls-royale-infinity/" target="_blank" rel="noopener noreferrer" class="btn-shine block w-full py-3 rounded-2xl bg-gradient-to-r from-rose-500 to-pink-600 text-white font-black text-xs font-gaming text-center shadow-lg shadow-rose-500/20">
+          <a href="https://nulls.gg/servers/nulls-royale-infinity/" target="_blank" class="btn-shine block w-full py-3 rounded-2xl bg-gradient-to-r from-rose-500 to-pink-600 text-white font-black text-xs font-gaming text-center shadow-lg shadow-rose-500/20">
             DOWNLOAD ROYALE INFINITY ➔
           </a>
         </div>
@@ -281,7 +286,7 @@
               </p>
             </div>
           </div>
-          <a href="https://nulls.gg/servers/nulls-rush/" target="_blank" rel="noopener noreferrer" class="btn-shine block w-full py-3 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 text-slate-950 font-black text-xs font-gaming text-center shadow-lg shadow-emerald-500/20">
+          <a href="https://nulls.gg/servers/nulls-rush/" target="_blank" class="btn-shine block w-full py-3 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 text-slate-950 font-black text-xs font-gaming text-center shadow-lg shadow-emerald-500/20">
             DOWNLOAD NULL'S RUSH ➔
           </a>
         </div>
@@ -289,8 +294,8 @@
       </div>
     </div>
 
-    <!-- ================= TAB 3: CAMPIONATO LEAGUE ================= -->
-    <div id="tab-campionato" class="tab-content animate-tab hidden space-y-6">
+    <!-- TAB 3: CAMPIONATO -->
+    <div id="tab-campionato" class="tab-content animate-tab space-y-6" style="display: none;">
       <div class="flex items-center justify-between">
         <div>
           <h2 class="text-3xl font-black font-gaming text-amber-400">🏆 ZENIK LEAGUE</h2>
@@ -310,4 +315,10 @@
               <th class="p-4 text-center text-amber-400 font-extrabold" data-it="PUNTI" data-en="POINTS">PUNTI</th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-
+          <tbody class="divide-y divide-slate-800/60 font-semibold">
+            <tr>
+              <td class="p-4 text-center font-black text-amber-400 text-lg">🥇 1</td>
+              <td class="p-4 text-white font-bold">Team Alpha</td>
+              <td class="p-4 text-center text-slate-300">1</td>
+              <td class="p-4 text-center text-slate-300">1 - 0</td>
+              <td class="p-4 text-center font-black te
