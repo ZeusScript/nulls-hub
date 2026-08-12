@@ -1,377 +1,127 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zenik Hub</title>
+    <title>Delta</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
             background-color: #0b0f19;
             color: #ffffff;
             font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            overflow-x: hidden;
         }
-        .delta-bg {
-            background: rgba(255, 255, 255, 0.03);
+        .browser-bar {
+            background-color: #121624;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .url-box {
+            background-color: #1a1f30;
+        }
+        .btn-purple {
+            background: linear-gradient(135deg, #8a75ff, #7353f7);
+            box-shadow: 0 4px 20px rgba(115, 83, 247, 0.4);
+        }
+        .btn-outline {
+            background-color: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: all 0.2s ease;
-        }
-        .delta-bg:hover {
-            border-color: rgba(147, 51, 234, 0.4);
-        }
-        .btn-delta {
-            background: linear-gradient(135deg, #8b5cf6, #6d28d9);
-            box-shadow: 0 10px 25px rgba(139, 92, 246, 0.25);
-            transition: all 0.2s ease;
-        }
-        .btn-delta:hover {
-            opacity: 0.9;
-            transform: translateY(-1px);
-        }
-        .menu-overlay {
-            background: rgba(11, 15, 25, 0.98);
-            backdrop-filter: blur(20px);
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-        }
-        .search-input {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.2s ease;
-        }
-        .search-input:focus {
-            border-color: #8b5cf6;
-            outline: none;
-            background: rgba(255, 255, 255, 0.07);
         }
     </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between selection:bg-purple-500 selection:text-white">
 
-    <!-- HEADER IDENTICO A DELTA -->
-    <header class="w-full py-6 px-6 md:px-12 flex items-center justify-between max-w-6xl mx-auto">
-        <a href="#" onclick="showSection('home')" class="text-2xl font-black tracking-tight cursor-pointer">Zenik</a>
-        
-        <div class="flex items-center gap-4">
-            <a href="#" onclick="showSection('executors')" class="hidden sm:inline-block px-5 py-2.5 rounded-xl border border-white/10 text-sm font-bold text-white hover:bg-white/5 transition">Download</a>
-            <button onclick="toggleMenu()" class="w-11 h-11 rounded-xl border border-white/10 flex items-center justify-center hover:bg-white/5 transition focus:outline-none cursor-pointer">
-                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                </svg>
-            </button>
+    <!-- MOBILE BROWSER CHROME (TOP) -->
+    <div class="w-full browser-bar py-2 px-3 sticky top-0 z-50">
+        <!-- Status Bar -->
+        <div class="flex justify-between items-center text-xs text-slate-300 pb-2 px-1">
+            <span class="font-medium">11:18</span>
+            <div class="flex items-center space-x-2 text-slate-400">
+                <!-- Status icons placeholders / emojis -->
+                <span>📶</span>
+                <span>🔋</span>
+                <span class="text-white font-bold text-[10px]">78</span>
+            </div>
         </div>
-    </header>
 
-    <!-- MENU A TENDINA A SCHERMO INTERO (Stile Immagine 3) -->
-    <div id="dropdownMenu" class="fixed inset-0 z-50 menu-overlay opacity-0 invisible flex flex-col items-center justify-center p-6">
-        <button onclick="toggleMenu()" class="absolute top-6 right-6 w-12 h-12 rounded-2xl border border-white/10 flex items-center justify-center text-white text-xl hover:bg-white/10 transition cursor-pointer">✕</button>
-        
-        <div class="w-full max-w-xs space-y-3 text-center">
-            <button onclick="navigate('executors')" class="w-full py-4 rounded-xl border border-white/15 text-white font-bold tracking-wider hover:bg-white/10 transition cursor-pointer">EXECUTORS</button>
-            <button onclick="navigate('scripts')" class="w-full py-4 rounded-xl border border-white/15 text-white font-bold tracking-wider hover:bg-white/10 transition cursor-pointer">SCRIPTS HUB</button>
-            <button onclick="navigate('support')" class="w-full py-4 rounded-xl border border-white/15 text-white font-bold tracking-wider hover:bg-white/10 transition cursor-pointer">SUPPORTO</button>
-            <button onclick="navigate('credits')" class="w-full py-4 rounded-xl border border-white/15 text-white font-bold tracking-wider hover:bg-white/10 transition cursor-pointer">CREDITI</button>
+        <!-- URL & Navigation Bar -->
+        <div class="flex items-center justify-between gap-2 px-1 py-1">
+            <button class="text-slate-300 p-1">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+            </button>
+            
+            <div class="url-box flex-grow flex items-center justify-between px-4 py-2 rounded-full text-sm text-slate-200 border border-white/5 shadow-inner">
+                <div class="flex items-center space-x-2 truncate">
+                    <span class="text-slate-400 text-xs">🔒</span>
+                    <span class="tracking-wide text-xs font-normal">deltaexploits.gg</span>
+                </div>
+                <div class="flex items-center space-x-3 text-slate-400">
+                    <span class="text-xs">▶</span>
+                    <span class="text-xs bg-slate-700/50 px-1.5 py-0.2 rounded text-slate-300 font-bold">36</span>
+                </div>
+            </div>
+
+            <button class="text-slate-300 p-1">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path></svg>
+            </button>
         </div>
     </div>
 
-    <!-- CONTENUTO DINAMICO DELLE SEZIONI -->
-    <main class="flex-grow max-w-4xl mx-auto w-full px-6 py-8">
-
-        <!-- 1. HOME SECTION -->
-        <section id="sec-home" class="page-section text-center py-12 md:py-20 space-y-6">
-            <p class="text-purple-400 font-bold uppercase text-xs tracking-widest">THE SKY IS THE LIMIT</p>
-            <h1 class="text-4xl md:text-6xl font-black tracking-tight max-w-2xl mx-auto leading-tight">Revolutionizing the future of execution</h1>
-            <p class="text-slate-400 text-sm md:text-base max-w-md mx-auto">A premium experience embedded with the latest technologies to enhance your scripting experience to the next level.</p>
-            
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-                <button onclick="showSection('executors')" class="btn-delta w-full sm:w-auto px-8 py-4 rounded-xl font-bold text-sm text-white cursor-pointer">Download</button>
-                <button onclick="showSection('scripts')" class="w-full sm:w-auto px-8 py-4 rounded-xl border border-white/15 font-bold text-sm text-white hover:bg-white/5 transition flex items-center justify-center gap-2 cursor-pointer">Learn more →</button>
+    <!-- MAIN WEBSITE CONTENT -->
+    <main class="flex-grow flex flex-col justify-center px-6 py-8 max-w-md mx-auto w-full text-center">
+        
+        <!-- HEADER (LOGO & NAV) -->
+        <header class="flex items-center justify-between w-full mb-12">
+            <h1 class="text-2xl font-bold tracking-tight text-white">Delta</h1>
+            <div class="flex items-center space-x-3">
+                <a href="#" class="btn-outline px-4 py-1.5 rounded-xl text-xs font-medium text-slate-200">Download</a>
+                <button class="text-white p-1 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
             </div>
-        </section>
+        </header>
 
-        <!-- 2. EXECUTORS SECTION (3 Executor con link web reali) -->
-        <section id="sec-executors" class="page-section hidden space-y-8">
-            <div class="text-center space-y-2">
-                <h2 class="text-3xl font-black">Roblox Executors</h2>
-                <p class="text-slate-400 text-sm">I 3 migliori executor testati e sicuri per Roblox.</p>
-            </div>
+        <!-- HERO SECTION -->
+        <div class="space-y-4 mb-8">
+            <p class="text-purple-400 font-bold text-[10px] tracking-widest uppercase">THE SKY IS THE LIMIT</p>
+            <h2 class="text-4xl font-extrabold tracking-tight text-white leading-tight">
+                Revolutionizing<br>the future of<br>execution
+            </h2>
+            <p class="text-slate-400 text-xs leading-relaxed max-w-[280px] mx-auto px-2">
+                A premium experience embedded with the latest technologies to enhance your scripting experience to the next level.
+            </p>
+        </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <!-- Delta -->
-                <div class="delta-bg p-6 rounded-2xl space-y-4 flex flex-col justify-between">
-                    <div class="space-y-2">
-                        <div class="flex justify-between items-center">
-                            <h3 class="font-bold text-base">Delta Executor</h3>
-                            <span class="text-[10px] bg-purple-500/20 text-purple-300 px-2.5 py-0.5 rounded-full border border-purple-500/30 font-bold">⭐ Best</span>
-                        </div>
-                        <p class="text-xs text-slate-400">Il re incontrastato degli executor mobile e PC con script hub integrato.</p>
-                    </div>
-                    <a href="https://deltaexploits.gg" target="_blank" class="btn-delta block text-center py-3 rounded-xl font-bold text-xs uppercase tracking-wider text-white">Download Delta</a>
-                </div>
+        <!-- ACTION BUTTONS -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3 w-full">
+            <a href="#" class="btn-purple w-full py-3.5 rounded-xl font-semibold text-xs text-white text-center shadow-lg">Download</a>
+            <a href="#" class="btn-outline w-full py-3.5 rounded-xl font-semibold text-xs text-white text-center flex items-center justify-center space-x-2">
+                <span>Learn more</span>
+                <span class="text-sm">→</span>
+            </a>
+        </div>
 
-                <!-- Hydrogen -->
-                <div class="delta-bg p-6 rounded-2xl space-y-4 flex flex-col justify-between">
-                    <div class="space-y-2">
-                        <div class="flex justify-between items-center">
-                            <h3 class="font-bold text-base">Hydrogen</h3>
-                            <span class="text-[10px] bg-green-500/20 text-green-300 px-2.5 py-0.5 rounded-full border border-green-500/30 font-bold">Mobile</span>
-                        </div>
-                        <p class="text-xs text-slate-400">Interfaccia pulita, leggerissimo e altamente compatibile con Android.</p>
-                    </div>
-                    <a href="https://hydrogen.sh" target="_blank" class="btn-delta block text-center py-3 rounded-xl font-bold text-xs uppercase tracking-wider text-white">Download Hydrogen</a>
-                </div>
-
-                <!-- Codex -->
-                <div class="delta-bg p-6 rounded-2xl space-y-4 flex flex-col justify-between">
-                    <div class="space-y-2">
-                        <div class="flex justify-between items-center">
-                            <h3 class="font-bold text-base">Codex Executor</h3>
-                            <span class="text-[10px] bg-blue-500/20 text-blue-300 px-2.5 py-0.5 rounded-full border border-blue-500/30 font-bold">iOS/Android</span>
-                        </div>
-                        <p class="text-xs text-slate-400">Famoso per la sua incredibile stabilità e supporto multi-piattaforma.</p>
-                    </div>
-                    <a href="https://codex.lol" target="_blank" class="btn-delta block text-center py-3 rounded-xl font-bold text-xs uppercase tracking-wider text-white">Download Codex</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- 3. SCRIPTS SECTION (10 Mappe + Barra di Ricerca + Tasto Copia) -->
-        <section id="sec-scripts" class="page-section hidden space-y-6">
-            <div class="text-center space-y-2">
-                <h2 class="text-3xl font-black">Roblox Scripts Hub</h2>
-                <p class="text-slate-400 text-sm">Cerca tra i migliori script per le mappe di Roblox e copiali con un click.</p>
-            </div>
-
-            <!-- Barra di Ricerca -->
-            <div class="max-w-md mx-auto">
-                <input type="text" id="scriptSearch" onkeyup="filterScripts()" placeholder="Cerca mappa o script (es. Blox Fruits, BedWars...)" class="search-input w-full p-4 rounded-xl text-sm text-white placeholder-slate-500">
-            </div>
-
-            <!-- Griglia dei 10 Script -->
-            <div id="scriptsContainer" class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
-                
-                <!-- Script 1 -->
-                <div class="script-card delta-bg p-5 rounded-2xl space-y-3" data-name="blox fruits auto farm op">
-                    <div class="flex justify-between items-center">
-                        <h3 class="font-bold text-sm text-purple-300">⚔️ Blox Fruits</h3>
-                        <span class="text-[10px] bg-white/10 px-2 py-0.5 rounded text-slate-300">Universal Hub</span>
-                    </div>
-                    <p class="text-xs text-slate-400">Auto Farm Level, Boss Hop, Devil Fruit Sniper.</p>
-                    <div class="flex items-center gap-2">
-                        <input type="text" readonly value='loadstring(game:HttpGet("https://raw.githubusercontent.com/Zenik/BloxFruits.lua"))()' class="search-input w-full p-2.5 rounded-lg text-xs font-mono text-purple-200 select-all truncate">
-                        <button onclick="copyScript(this)" class="btn-delta px-4 py-2.5 rounded-lg text-xs font-bold whitespace-nowrap cursor-pointer">Copia</button>
-                    </div>
-                </div>
-
-                <!-- Script 2 -->
-                <div class="script-card delta-bg p-5 rounded-2xl space-y-3" data-name="arsenal aimbot esp">
-                    <div class="flex justify-between items-center">
-                        <h3 class="font-bold text-sm text-purple-300">🔫 Arsenal</h3>
-                        <span class="text-[10px] bg-white/10 px-2 py-0.5 rounded text-slate-300">FPS Hub</span>
-                    </div>
-                    <p class="text-xs text-slate-400">Aimbot personalizzabile, ESP, Wallhack e Silent Aim.</p>
-                    <div class="flex items-center gap-2">
-                        <input type="text" readonly value='loadstring(game:HttpGet("https://raw.githubusercontent.com/Zenik/Arsenal.lua"))()' class="search-input w-full p-2.5 rounded-lg text-xs font-mono text-purple-200 select-all truncate">
-                        <button onclick="copyScript(this)" class="btn-delta px-4 py-2.5 rounded-lg text-xs font-bold whitespace-nowrap cursor-pointer">Copia</button>
-                    </div>
-                </div>
-
-                <!-- Script 3 -->
-                <div class="script-card delta-bg p-5 rounded-2xl space-y-3" data-name="pet sim 99 auto hatch farm">
-                    <div class="flex justify-between items-center">
-                        <h3 class="font-bold text-sm text-purple-300">🐾 Pet Simulator 99</h3>
-                        <span class="text-[10px] bg-white/10 px-2 py-0.5 rounded text-slate-300">Simulator</span>
-                    </div>
-                    <p class="text-xs text-slate-400">Auto Farm, Auto Hatch Eggs, Claim Rewards.</p>
-                    <div class="flex items-center gap-2">
-                        <input type="text" readonly value='loadstring(game:HttpGet("https://raw.githubusercontent.com/Zenik/PetSim99.lua"))()' class="search-input w-full p-2.5 rounded-lg text-xs font-mono text-purple-200 select-all truncate">
-                        <button onclick="copyScript(this)" class="btn-delta px-4 py-2.5 rounded-lg text-xs font-bold whitespace-nowrap cursor-pointer">Copia</button>
-                    </div>
-                </div>
-
-                <!-- Script 4 -->
-                <div class="script-card delta-bg p-5 rounded-2xl space-y-3" data-name="BedWars kit unlocker killaura">
-                    <div class="flex justify-between items-center">
-                        <h3 class="font-bold text-sm text-purple-300">🛌 BedWars</h3>
-                        <span class="text-[10px] bg-white/10 px-2 py-0.5 rounded text-slate-300">PvP Hub</span>
-                    </div>
-                    <p class="text-xs text-slate-400">Killaura, Velocity, ESP Player, Auto Build.</p>
-                    <div class="flex items-center gap-2">
-                        <input type="text" readonly value='loadstring(game:HttpGet("https://raw.githubusercontent.com/Zenik/BedWars.lua"))()' class="search-input w-full p-2.5 rounded-lg text-xs font-mono text-purple-200 select-all truncate">
-                        <button onclick="copyScript(this)" class="btn-delta px-4 py-2.5 rounded-lg text-xs font-bold whitespace-nowrap cursor-pointer">Copia</button>
-                    </div>
-                </div>
-
-                <!-- Script 5 -->
-                <div class="script-card delta-bg p-5 rounded-2xl space-y-3" data-name="brookhaven rp admin gui spawn">
-                    <div class="flex justify-between items-center">
-                        <h3 class="font-bold text-sm text-purple-300">🏠 Brookhaven RP</h3>
-                        <span class="text-[10px] bg-white/10 px-2 py-0.5 rounded text-slate-300">Roleplay</span>
-                    </div>
-                    <p class="text-xs text-slate-400">Admin GUI, Music ID bypass, Car Speed, Trolling tools.</p>
-                    <div class="flex items-center gap-2">
-                        <input type="text" readonly value='loadstring(game:HttpGet("https://raw.githubusercontent.com/Zenik/Brookhaven.lua"))()' class="search-input w-full p-2.5 rounded-lg text-xs font-mono text-purple-200 select-all truncate">
-                        <button onclick="copyScript(this)" class="btn-delta px-4 py-2.5 rounded-lg text-xs font-bold whitespace-nowrap cursor-pointer">Copia</button>
-                    </div>
-                </div>
-
-                <!-- Script 6 -->
-                <div class="script-card delta-bg p-5 rounded-2xl space-y-3" data-name="blade ball auto parry spammer">
-                    <div class="flex justify-between items-center">
-                        <h3 class="font-bold text-sm text-purple-300">⚔️ Blade Ball</h3>
-                        <span class="text-[10px] bg-white/10 px-2 py-0.5 rounded text-slate-300">Action</span>
-                    </div>
-                    <p class="text-xs text-slate-400">Auto Parry, Spam Clicker, Curve Ball visualizer.</p>
-                    <div class="flex items-center gap-2">
-                        <input type="text" readonly value='loadstring(game:HttpGet("https://raw.githubusercontent.com/Zenik/BladeBall.lua"))()' class="search-input w-full p-2.5 rounded-lg text-xs font-mono text-purple-200 select-all truncate">
-                        <button onclick="copyScript(this)" class="btn-delta px-4 py-2.5 rounded-lg text-xs font-bold whitespace-nowrap cursor-pointer">Copia</button>
-                    </div>
-                </div>
-
-                <!-- Script 7 -->
-                <div class="script-card delta-bg p-5 rounded-2xl space-y-3" data-name="door elevator floor 2 speed bypass">
-                    <div class="flex justify-between items-center">
-                        <h3 class="font-bold text-sm text-purple-300">🚪 DOORS</h3>
-                        <span class="text-[10px] bg-white/10 px-2 py-0.5 rounded text-slate-300">Horror</span>
-                    </div>
-                    <p class="text-xs text-slate-400">Entity ESP, Fullbright, Speed Bypass, Auto Rooms.</p>
-                    <div class="flex items-center gap-2">
-                        <input type="text" readonly value='loadstring(game:HttpGet("https://raw.githubusercontent.com/Zenik/Doors.lua"))()' class="search-input w-full p-2.5 rounded-lg text-xs font-mono text-purple-200 select-all truncate">
-                        <button onclick="copyScript(this)" class="btn-delta px-4 py-2.5 rounded-lg text-xs font-bold whitespace-nowrap cursor-pointer">Copia</button>
-                    </div>
-                </div>
-
-                <!-- Script 8 -->
-                <div class="script-card delta-bg p-5 rounded-2xl space-y-3" data-name="mm2 murder mystery 2 sheriff gun esp">
-                    <div class="flex justify-between items-center">
-                        <h3 class="font-bold text-sm text-purple-300">🔪 Murder Mystery 2</h3>
-                        <span class="text-[10px] bg-white/10 px-2 py-0.5 rounded text-slate-300">Mini-game</span>
-                    </div>
-                    <p class="text-xs text-slate-400">Show Roles (Murderer/Sheriff), Gun Finder, Auto Farm coins.</p>
-                    <div class="flex items-center gap-2">
-                        <input type="text" readonly value='loadstring(game:HttpGet("https://raw.githubusercontent.com/Zenik/MM2.lua"))()' class="search-input w-full p-2.5 rounded-lg text-xs font-mono text-purple-200 select-all truncate">
-                        <button onclick="copyScript(this)" class="btn-delta px-4 py-2.5 rounded-lg text-xs font-bold whitespace-nowrap cursor-pointer">Copia</button>
-                    </div>
-                </div>
-
-                <!-- Script 9 -->
-                <div class="script-card delta-bg p-5 rounded-2xl space-y-3" data-name="jailbreak auto rob money card">
-                    <div class="flex justify-between items-center">
-                        <h3 class="font-bold text-sm text-purple-300">👮 Jailbreak</h3>
-                        <span class="text-[10px] bg-white/10 px-2 py-0.5 rounded text-slate-300">Open World</span>
-                    </div>
-                    <p class="text-xs text-slate-400">Auto Rob, Infinite Ammo, Noclip, Car Fly.</p>
-                    <div class="flex items-center gap-2">
-                        <input type="text" readonly value='loadstring(game:HttpGet("https://raw.githubusercontent.com/Zenik/Jailbreak.lua"))()' class="search-input w-full p-2.5 rounded-lg text-xs font-mono text-purple-200 select-all truncate">
-                        <button onclick="copyScript(this)" class="btn-delta px-4 py-2.5 rounded-lg text-xs font-bold whitespace-nowrap cursor-pointer">Copia</button>
-                    </div>
-                </div>
-
-                <!-- Script 10 -->
-                <div class="script-card delta-bg p-5 rounded-2xl space-y-3" data-name="da hood cash aura macro godmode">
-                    <div class="flex justify-between items-center">
-                        <h3 class="font-bold text-sm text-purple-300">🏙️ Da Hood</h3>
-                        <span class="text-[10px] bg-white/10 px-2 py-0.5 rounded text-slate-300">PvP / Hood</span>
-                    </div>
-                    <p class="text-xs text-slate-400">Macro, Cash Aura, Anti-Stomp, Godmode setup.</p>
-                    <div class="flex items-center gap-2">
-                        <input type="text" readonly value='loadstring(game:HttpGet("https://raw.githubusercontent.com/Zenik/DaHood.lua"))()' class="search-input w-full p-2.5 rounded-lg text-xs font-mono text-purple-200 select-all truncate">
-                        <button onclick="copyScript(this)" class="btn-delta px-4 py-2.5 rounded-lg text-xs font-bold whitespace-nowrap cursor-pointer">Copia</button>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- 4. SUPPORTO SECTION -->
-        <section id="sec-support" class="page-section hidden space-y-6 max-w-lg mx-auto">
-            <div class="text-center space-y-2">
-                <h2 class="text-3xl font-black">Supporto</h2>
-                <p class="text-slate-400 text-sm">Hai riscontrato problemi con gli executor o gli script? Scrivici.</p>
-            </div>
-            <form onsubmit="event.preventDefault(); alert('Messaggio inviato con successo!');" class="space-y-4">
-                <input type="text" placeholder="Il tuo Username Roblox" required class="search-input w-full p-4 rounded-xl text-sm text-white placeholder-slate-500">
-                <textarea placeholder="Descrivi il tuo problema..." rows="4" required class="search-input w-full p-4 rounded-xl text-sm text-white placeholder-slate-500 resize-none"></textarea>
-                <button type="submit" class="btn-delta w-full py-4 rounded-xl font-bold text-sm uppercase tracking-wider text-white cursor-pointer">Invia Richiesta</button>
-            </form>
-        </section>
-
-        <!-- 5. CREDITI SECTION -->
-        <section id="sec-credits" class="page-section hidden text-center space-y-6 py-10">
-            <h2 class="text-3xl font-black">Crediti & Note Legali</h2>
-            <div class="delta-bg p-6 rounded-2xl max-w-md mx-auto space-y-3 text-xs text-slate-400">
-                <p class="font-bold text-white tracking-wider">CREATO E GESTITO DA ZENIK HUB</p>
-                <p>© 2026 Zenik Hub. Tutti i diritti riservati.</p>
-                <p class="text-[10px]">Questo sito non è affiliato, associato o sponsorizzato da Roblox Corporation.</p>
-            </div>
-        </section>
+        <!-- CAROUSEL INDICATOR DOT -->
+        <div class="flex justify-center mt-10">
+            <div class="w-2 h-2 rounded-full bg-purple-500/60"></div>
+        </div>
 
     </main>
 
-    <!-- FOOTER MINIMALE -->
-    <footer class="w-full py-6 text-center text-xs text-slate-500 border-t border-white/5">
-        <p>Zenik Hub &bull; Non affiliato con Roblox Corporation</p>
-    </footer>
+    <!-- MOBILE NAVIGATION BAR (BOTTOM) -->
+    <div class="w-full py-3 bg-[#080b13] border-t border-white/5 flex justify-around items-center text-slate-400 text-sm">
+        <button class="p-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+        <button class="p-2">
+            <div class="w-4 h-4 border-2 border-slate-400 rounded-sm"></div>
+        </button>
+        <button class="p-2">
+            <svg class="w-5 h-5 rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+        </button>
+    </div>
 
-    <!-- LOGICA JAVASCRIPT -->
-    <script>
-        function toggleMenu() {
-            const menu = document.getElementById('dropdownMenu');
-            if (menu.classList.contains('opacity-0')) {
-                menu.classList.remove('opacity-0', 'invisible');
-                menu.classList.add('opacity-100', 'visible');
-            } else {
-                menu.classList.remove('opacity-100', 'visible');
-                menu.classList.add('opacity-0', 'invisible');
-            }
-        }
-
-        function showSection(sectionId) {
-            document.querySelectorAll('.page-section').forEach(sec => {
-                sec.classList.add('hidden');
-            });
-            document.getElementById('sec-' + sectionId).classList.remove('hidden');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function navigate(sectionId) {
-            toggleMenu();
-            showSection(sectionId);
-        }
-
-        // Funzione per copiare lo script con feedback visivo sul tasto
-        function copyScript(button) {
-            const inputField = button.previousElementSibling;
-            inputField.select();
-            inputField.setSelectionRange(0, 99999); // Per dispositivi mobili
-            
-            navigator.clipboard.writeText(inputField.value).then(() => {
-                const originalText = button.textContent;
-                button.textContent = "Copiato!";
-                button.style.background = "linear-gradient(135deg, #22c55e, #16a34a)";
-                
-                setTimeout(() => {
-                    button.textContent = originalText;
-                    button.style.background = "";
-                }, 2000);
-            }).catch(err => {
-                alert("Errore durante la copia dello script.");
-            });
-        }
-
-        // Funzione barra di ricerca script in tempo reale
-        function filterScripts() {
-            const query = document.getElementById('scriptSearch').value.toLowerCase();
-            const cards = document.querySelectorAll('.script-card');
-
-            cards.forEach(card => {
-                const name = card.getAttribute('data-name');
-                if (name.includes(query)) {
-                    card.style.display = "block";
-                } else {
-                    card.style.display = "none";
-                }
-            });
-        }
-    </script>
 </body>
-</html>
+    </html>
