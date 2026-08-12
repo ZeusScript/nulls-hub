@@ -236,7 +236,7 @@
         .search-bar:focus { border-color: var(--primary); box-shadow: 0 0 25px rgba(139, 92, 246, 0.25); background: rgba(15, 23, 42, 0.85); }
         .search-container i { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: var(--primary); font-size: 1.1rem; }
 
-        .social-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; margin-top: 20px; }
+        .social-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 15px; }
         .social-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 18px; padding: 22px; text-align: center; transition: all 0.3s ease; text-decoration: none; color: inherit; display: block; backdrop-filter: blur(16px); }
         .social-card:hover { border-color: var(--primary); transform: translateY(-4px); box-shadow: 0 10px 30px rgba(139, 92, 246, 0.2); }
         .social-card i { font-size: 2.2rem; margin-bottom: 12px; color: var(--primary); }
@@ -688,43 +688,58 @@
             <h2 data-i18n="soc_title">Social & Crediti</h2>
             <p class="section-sub" data-i18n="soc_sub">Unisciti alla nostra community ufficiale e contattaci direttamente.</p>
             
-            <div class="grid" style="grid-template-columns: 1fr 1fr; margin-bottom: 25px;">
-                <div class="card" style="height: 100%;">
-                    <h3 data-i18n="cred_title"><i class="fa-solid fa-crown" style="color: var(--gold);"></i> Crediti del Progetto</h3>
-                    <p data-i18n="cred_desc" style="margin-top: 10px;">ZHub è stato ideato, sviluppato e mantenuto da developer indipendenti appassionati di scripting e sicurezza su Roblox. Tutti i diritti riservati.</p>
-                    <div class="social-grid" style="margin-top: auto; grid-template-columns: repeat(3, 1fr);">
-                        <a href="https://discord.com" target="_blank" class="social-card" style="padding: 10px;"><i class="fa-brands fa-discord" style="font-size: 1.5rem; margin-bottom: 0;"></i></a>
-                        <a href="https://youtube.com" target="_blank" class="social-card" style="padding: 10px;"><i class="fa-brands fa-youtube" style="font-size: 1.5rem; color: #ef4444; margin-bottom: 0;"></i></a>
-                        <a href="https://telegram.org" target="_blank" class="social-card" style="padding: 10px;"><i class="fa-brands fa-telegram" style="font-size: 1.5rem; color: #38bdf8; margin-bottom: 0;"></i></a>
-                    </div>
+            <!-- 1. SOCIAL BOTTONI IN ALTO -->
+            <div class="card" style="margin-bottom: 25px;">
+                <h3 style="margin-bottom: 5px;"><i class="fa-solid fa-share-nodes" style="color: var(--primary);"></i> Community Social</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0;">Seguici sui nostri canali ufficiali per rimanere sempre aggiornato.</p>
+                <div class="social-grid">
+                    <a href="https://discord.com" target="_blank" class="social-card">
+                        <i class="fa-brands fa-discord"></i>
+                        <h4 style="font-size: 1rem; font-weight: 700;">Discord</h4>
+                    </a>
+                    <a href="https://youtube.com" target="_blank" class="social-card">
+                        <i class="fa-brands fa-youtube" style="color: #ef4444;"></i>
+                        <h4 style="font-size: 1rem; font-weight: 700;">YouTube</h4>
+                    </a>
+                    <a href="https://telegram.org" target="_blank" class="social-card">
+                        <i class="fa-brands fa-telegram" style="color: #38bdf8;"></i>
+                        <h4 style="font-size: 1rem; font-weight: 700;">Telegram</h4>
+                    </a>
                 </div>
+            </div>
 
-                <div class="card">
-                    <h3 data-i18n="contact_box_title"><i class="fa-solid fa-envelope" style="color: var(--primary);"></i> Mandami un Messaggio</h3>
-                    <p data-i18n="contact_box_sub" style="margin-bottom: 10px; font-size: 0.85rem;">Hai domande o richieste? Scrivimi direttamente qui sotto:</p>
+            <!-- 2. LASCIA UN MESSAGGIO AL CENTRO -->
+            <div class="card" style="margin-bottom: 25px;">
+                <h3 data-i18n="contact_box_title"><i class="fa-solid fa-envelope" style="color: var(--primary);"></i> Mandami un Messaggio</h3>
+                <p data-i18n="contact_box_sub" style="margin-bottom: 10px; font-size: 0.85rem;">Hai domande o richieste? Scrivimi direttamente qui sotto:</p>
+                
+                <form action="https://api.web3forms.com/submit" method="POST" id="contactForm" class="contact-form">
+                    <input type="hidden" name="access_key" value="4c4df93b-5964-4782-bc16-299a864dec68">
                     
-                    <form action="https://api.web3forms.com/submit" method="POST" id="contactForm" class="contact-form">
-                        <input type="hidden" name="access_key" value="4c4df93b-5964-4782-bc16-299a864dec68">
-                        
-                        <div class="form-group">
-                            <label data-i18n="form_name">Il tuo Nome</label>
-                            <input type="text" name="name" class="form-input" required data-i18n-placeholder="form_name_ph" placeholder="Es. Mario">
-                        </div>
-                        <div class="form-group">
-                            <label data-i18n="form_email">La tua Email</label>
-                            <input type="email" name="email" class="form-input" required placeholder="tua@email.com">
-                        </div>
-                        <div class="form-group">
-                            <label data-i18n="form_message">Messaggio</label>
-                            <textarea name="message" class="form-textarea" required data-i18n-placeholder="form_msg_ph" placeholder="Scrivi qui il tuo messaggio..."></textarea>
-                        </div>
-                        
-                        <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+                    <div class="form-group">
+                        <label data-i18n="form_name">Il tuo Nome</label>
+                        <input type="text" name="name" class="form-input" required data-i18n-placeholder="form_name_ph" placeholder="Es. Mario">
+                    </div>
+                    <div class="form-group">
+                        <label data-i18n="form_email">La tua Email</label>
+                        <input type="email" name="email" class="form-input" required placeholder="tua@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label data-i18n="form_message">Messaggio</label>
+                        <textarea name="message" class="form-textarea" required data-i18n-placeholder="form_msg_ph" placeholder="Scrivi qui il tuo messaggio..."></textarea>
+                    </div>
+                    
+                    <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
 
-                        <button type="submit" class="btn"><i class="fa-solid fa-paper-plane"></i> <span data-i18n="form_btn">Invia Messaggio</span></button>
-                        <div id="formResult"></div>
-                    </form>
-                </div>
+                    <button type="submit" class="btn"><i class="fa-solid fa-paper-plane"></i> <span data-i18n="form_btn">Invia Messaggio</span></button>
+                    <div id="formResult"></div>
+                </form>
+            </div>
+
+            <!-- 3. CREDITI IN BASSO -->
+            <div class="card">
+                <h3 data-i18n="cred_title"><i class="fa-solid fa-crown" style="color: var(--gold);"></i> Crediti del Progetto</h3>
+                <p data-i18n="cred_desc" style="margin-top: 10px; margin-bottom: 0;">ZHub è stato ideato, sviluppato e mantenuto da developer indipendenti appassionati di scripting e sicurezza su Roblox. Tutti i diritti riservati.</p>
             </div>
         </div>
 
@@ -1073,13 +1088,12 @@
             showToast(translation.toast_lang || texts['en'].toast_lang);
         }
 
-        // Rilevamento automatico della lingua del browser all'avvio
         function initAutoLanguage() {
             const browserLang = (navigator.language || navigator.userLanguage || 'it').substring(0, 2).toLowerCase();
             if (texts[browserLang]) {
                 changeLang(browserLang);
             } else {
-                changeLang('it'); // Fallback predefinito
+                changeLang('it');
             }
         }
 
@@ -1222,7 +1236,6 @@
             });
         });
 
-        // Avvia il rilevamento automatico della lingua all'apertura della pagina
         window.onload = function() {
             initAutoLanguage();
         };
