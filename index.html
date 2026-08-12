@@ -3,54 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zenik Hub | Brawl Stars & Roblox Platform</title>
+    <title>Zenik Hub | Ultimate Roblox Scripts & Executors</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        /* Effetto Liquid Glass ispirato a iOS */
         .liquid-glass {
-            background: rgba(255, 255, 255, 0.04);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02));
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .liquid-glass:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 16px 50px 0 rgba(0, 0, 0, 0.6);
+            border-color: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.3);
         }
-        .liquid-card-accent {
-            background: linear-gradient(135deg, rgba(234, 179, 8, 0.1), rgba(255, 255, 255, 0.02));
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(234, 179, 8, 0.2);
+        .liquid-glass-featured {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(255, 255, 255, 0.03));
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1.5px solid rgba(168, 85, 247, 0.4);
+            box-shadow: 0 20px 50px rgba(168, 85, 247, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.3);
         }
-        .btn-animated {
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        .btn-ios {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            transition: all 0.2s ease;
         }
-        .btn-animated:hover {
+        .btn-ios:hover {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.1));
             transform: scale(1.02);
         }
-        .btn-animated:active {
+        .btn-ios:active {
             transform: scale(0.97);
+        }
+        .btn-purple-ios {
+            background: linear-gradient(180deg, rgba(168, 85, 247, 0.8), rgba(126, 34, 206, 0.9));
+            border: 1px solid rgba(216, 180, 254, 0.4);
+            box-shadow: 0 8px 20px rgba(168, 85, 247, 0.4);
+            transition: all 0.2s ease;
+        }
+        .btn-purple-ios:hover {
+            background: linear-gradient(180deg, rgba(192, 132, 252, 0.9), rgba(147, 51, 234, 0.95));
+            box-shadow: 0 12px 25px rgba(168, 85, 247, 0.6);
+            transform: scale(1.02);
         }
     </style>
 </head>
-<body class="bg-[#060913] text-white font-sans antialiased selection:bg-yellow-500 selection:text-black min-h-screen pb-12">
+<body class="bg-[#05070e] text-white font-sans antialiased selection:bg-purple-500 selection:text-white min-h-screen pb-12">
 
     <!-- Header Principale con Selettore 10 Lingue -->
     <header class="max-w-4xl mx-auto pt-6 px-4 md:px-6">
-        <div class="liquid-glass p-6 rounded-3xl flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="liquid-glass p-6 rounded-[28px] flex flex-col sm:flex-row items-center justify-between gap-4">
             <div class="flex items-center gap-4">
-                <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-yellow-400 via-amber-500 to-yellow-600 p-[2px] shadow-lg shadow-yellow-500/20">
-                    <div class="w-full h-full bg-[#080e1b] rounded-[14px] flex items-center justify-center font-black text-2xl text-yellow-400">Z</div>
+                <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 via-indigo-600 to-purple-800 p-[2px] shadow-lg shadow-purple-500/30">
+                    <div class="w-full h-full bg-[#080e1b] rounded-[14px] flex items-center justify-center font-black text-2xl text-purple-400">Z</div>
                 </div>
                 <div>
-                    <h1 class="text-2xl md:text-3xl font-black tracking-tighter">ZENIK HUB</h1>
-                    <p class="text-yellow-500 font-bold uppercase text-[10px] md:text-xs tracking-widest" data-translate="subtitle">Brawl Stars & Roblox Hub</p>
+                    <h1 class="text-2xl md:text-3xl font-black tracking-tight">ZENIK HUB</h1>
+                    <p class="text-purple-400 font-bold uppercase text-[10px] md:text-xs tracking-widest" data-translate="subtitle">Liquid Glass Roblox Platform</p>
                 </div>
             </div>
             
             <div class="flex items-center gap-3">
-                <select id="languageSelect" onchange="changeLanguage()" class="bg-black/40 border border-white/10 text-xs font-bold text-yellow-400 px-3 py-2 rounded-xl focus:outline-none focus:border-yellow-500 cursor-pointer">
+                <select id="languageSelect" onchange="changeLanguage()" class="bg-black/40 border border-white/15 text-xs font-bold text-purple-300 px-3 py-2.5 rounded-xl focus:outline-none focus:border-purple-500 cursor-pointer backdrop-blur-md">
                     <option value="it" class="bg-[#080e1b] text-white">ITA 🇮🇹</option>
                     <option value="en" class="bg-[#080e1b] text-white">ENG 🇬🇧</option>
                     <option value="es" class="bg-[#080e1b] text-white">ESP 🇪🇸</option>
@@ -63,9 +81,9 @@
                     <option value="zh" class="bg-[#080e1b] text-white">CHI 🇨🇳</option>
                 </select>
 
-                <div class="hidden sm:flex items-center gap-2 bg-yellow-500/10 border border-yellow-500/30 px-4 py-2 rounded-full">
+                <div class="hidden sm:flex items-center gap-2 bg-purple-500/10 border border-purple-500/30 px-4 py-2.5 rounded-full backdrop-blur-md">
                     <span class="w-2.5 h-2.5 rounded-full bg-green-400 animate-pulse"></span>
-                    <span class="text-yellow-400 text-xs font-black uppercase tracking-wider" data-translate="status">Online</span>
+                    <span class="text-purple-300 text-xs font-black uppercase tracking-wider" data-translate="status">Online</span>
                 </div>
             </div>
         </div>
@@ -73,80 +91,143 @@
 
     <main class="max-w-4xl mx-auto px-4 md:px-6 mt-6 space-y-6">
 
-        <!-- Sezione Roblox: Script & Executor -->
-        <div class="liquid-glass p-6 md:p-8 rounded-3xl space-y-6">
-            <div class="flex items-center justify-between border-b border-white/5 pb-4">
+        <!-- Sezione Top 5 Executor con Delta al Primo Posto (Evidenziato) -->
+        <div class="space-y-4">
+            <div class="flex items-center justify-between px-2">
+                <div>
+                    <h2 class="text-xl font-black text-white flex items-center gap-2">
+                        <span class="text-purple-400">⚡</span> <span data-translate="executors_title">TOP 5 ROBLOX EXECUTORS</span>
+                    </h2>
+                    <p class="text-xs text-slate-400" data-translate="executors_desc">I migliori executor testati, sicuri e aggiornati</p>
+                </div>
+                <span class="text-[10px] font-black bg-purple-500/20 text-purple-300 border border-purple-500/30 px-3 py-1 rounded-full uppercase">Updated 2026</span>
+            </div>
+
+            <!-- 1. DELTA (Il Migliore in assoluto con targhetta) -->
+            <div class="liquid-glass-featured p-5 rounded-[24px] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div class="space-y-1">
+                    <div class="flex items-center gap-2.5">
+                        <h3 class="font-black text-lg text-white">Delta Executor</h3>
+                        <span class="bg-gradient-to-r from-yellow-400 to-amber-500 text-black text-[10px] font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider shadow-md shadow-yellow-500/20" data-translate="best_choice">⭐ BEST CHOICE</span>
+                        <span class="bg-green-500/20 text-green-400 border border-green-500/30 text-[10px] font-black px-2.5 py-0.5 rounded-full uppercase">Working</span>
+                    </div>
+                    <p class="text-xs text-slate-300" data-translate="delta_desc">Il re incontrastato degli executor mobile e PC. Stabile, velocissimo e con script hub integrato.</p>
+                </div>
+                <a href="https://deltaexploits.gg" target="_blank" class="btn-purple-ios w-full sm:w-auto text-center px-6 py-3 rounded-xl font-black text-xs uppercase tracking-wider text-white flex items-center justify-center gap-2">
+                    <span>📥</span> <span data-translate="btn_download">Download</span>
+                </a>
+            </div>
+
+            <!-- Gli altri 4 Executor -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <!-- 2. Wave -->
+                <div class="liquid-glass p-4 rounded-2xl flex flex-col justify-between gap-3">
+                    <div class="space-y-1">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-black text-sm text-white">Wave Executor</h3>
+                            <span class="bg-green-500/15 text-green-400 border border-green-500/30 text-[10px] font-black px-2 py-0.5 rounded-full uppercase">PC / Web</span>
+                        </div>
+                        <p class="text-[11px] text-slate-400" data-translate="wave_desc">Eccellente livello di sicurezza e ottima esecuzione degli script complessi.</p>
+                    </div>
+                    <a href="#" target="_blank" class="btn-ios text-center py-2.5 rounded-xl font-black text-xs text-purple-300 flex items-center justify-center gap-2">
+                        <span>📥</span> <span data-translate="btn_download">Download</span>
+                    </a>
+                </div>
+
+                <!-- 3. Hydrogen -->
+                <div class="liquid-glass p-4 rounded-2xl flex flex-col justify-between gap-3">
+                    <div class="space-y-1">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-black text-sm text-white">Hydrogen</h3>
+                            <span class="bg-green-500/15 text-green-400 border border-green-500/30 text-[10px] font-black px-2 py-0.5 rounded-full uppercase">Mobile</span>
+                        </div>
+                        <p class="text-[11px] text-slate-400" data-translate="hydrogen_desc">Interfaccia pulita, leggerissimo e compatibile con tantissimi dispositivi.</p>
+                    </div>
+                    <a href="#" target="_blank" class="btn-ios text-center py-2.5 rounded-xl font-black text-xs text-purple-300 flex items-center justify-center gap-2">
+                        <span>📥</span> <span data-translate="btn_download">Download</span>
+                    </a>
+                </div>
+
+                <!-- 4. Celery -->
+                <div class="liquid-glass p-4 rounded-2xl flex flex-col justify-between gap-3">
+                    <div class="space-y-1">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-black text-sm text-white">Celery</h3>
+                            <span class="bg-yellow-500/15 text-yellow-400 border border-yellow-500/30 text-[10px] font-black px-2 py-0.5 rounded-full uppercase">Updating</span>
+                        </div>
+                        <p class="text-[11px] text-slate-400" data-translate="celery_desc">Ottima alternativa gratuita per PC, frequentemente aggiornata dopo le patch.</p>
+                    </div>
+                    <a href="#" target="_blank" class="btn-ios text-center py-2.5 rounded-xl font-black text-xs text-purple-300 flex items-center justify-center gap-2">
+                        <span>📥</span> <span data-translate="btn_download">Download</span>
+                    </a>
+                </div>
+
+                <!-- 5. Codex -->
+                <div class="liquid-glass p-4 rounded-2xl flex flex-col justify-between gap-3">
+                    <div class="space-y-1">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-black text-sm text-white">Codex</h3>
+                            <span class="bg-green-500/15 text-green-400 border border-green-500/30 text-[10px] font-black px-2 py-0.5 rounded-full uppercase">Mobile</span>
+                        </div>
+                        <p class="text-[11px] text-slate-400" data-translate="codex_desc">Famoso per la sua stabilità su iOS e Android con script hub integrato.</p>
+                    </div>
+                    <a href="#" target="_blank" class="btn-ios text-center py-2.5 rounded-xl font-black text-xs text-purple-300 flex items-center justify-center gap-2">
+                        <span>📥</span> <span data-translate="btn_download">Download</span>
+                    </a>
+                </div>
+            </div>
+    </div>
+                          <!-- Sezione Script in Evidenza -->
+        <div class="liquid-glass p-6 md:p-8 rounded-[28px] space-y-6">
+            <div class="flex items-center justify-between border-b border-white/10 pb-4">
                 <div class="flex items-center gap-3">
-                    <span class="text-2xl">⚡</span>
+                    <span class="text-2xl">📜</span>
                     <div>
-                        <h2 class="text-lg font-black text-white" data-translate="roblox_title">ROBLOX SCRIPTS & EXECUTORS</h2>
-                        <p class="text-xs text-slate-400" data-translate="roblox_desc">Strumenti e script aggiornati per i tuoi giochi preferiti</p>
+                        <h2 class="text-lg font-black text-white" data-translate="scripts_title">TOP SCRIPT HUB & GAMES</h2>
+                        <p class="text-xs text-slate-400" data-translate="scripts_desc">Script testati, sicuri e privi di chiave o con key system facile</p>
                     </div>
                 </div>
-                <span class="text-[10px] font-black bg-purple-500/20 text-purple-300 border border-purple-500/30 px-3 py-1 rounded-full uppercase">Roblox Hub</span>
+                <span class="text-[10px] font-black bg-purple-500/20 text-purple-300 border border-purple-500/30 px-3 py-1 rounded-full uppercase">Verified</span>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="bg-black/30 border border-white/5 p-5 rounded-2xl space-y-3">
-                    <h3 class="font-black text-sm text-yellow-400 flex items-center gap-2"><span>📜</span> <span data-translate="scripts_card">Script Consigliati</span></h3>
-                    <p class="text-xs text-slate-300 leading-relaxed" data-translate="scripts_desc">Raccolta di script sicuri e testati per exploit e script hub popolari su Roblox.</p>
-                    <a href="#contatti" class="inline-block text-xs font-bold text-yellow-400 hover:underline" data-translate="req_script">Richiedi uno script &rarr;</a>
+                <div class="bg-black/30 border border-white/10 p-5 rounded-2xl space-y-3 backdrop-blur-md">
+                    <h3 class="font-black text-sm text-purple-400 flex items-center gap-2"><span>⚔️</span> Blox Fruits Hub</h3>
+                    <p class="text-xs text-slate-300 leading-relaxed" data-translate="script_1_desc">Auto Farm, Boss Hop, Devil Fruit Sniper e configurazione avanzata.</p>
+                    <span class="inline-block text-[10px] font-black bg-purple-500/10 text-purple-300 border border-purple-500/20 px-2.5 py-1 rounded">Universal / Mobile</span>
                 </div>
-                <div class="bg-black/30 border border-white/5 p-5 rounded-2xl space-y-3">
-                    <h3 class="font-black text-sm text-yellow-400 flex items-center gap-2"><span>⚙️</span> <span data-translate="executor_card">Executor Status</span></h3>
-                    <p class="text-xs text-slate-300 leading-relaxed" data-translate="executor_desc">Verifica lo stato di funzionamento degli executor aggiornati dopo le patch.</p>
-                    <span class="inline-block text-[10px] font-black bg-green-500/10 text-green-400 border border-green-500/20 px-2 py-1 rounded" data-translate="safe_status">Aggiornati & Sicuri</span>
+                <div class="bg-black/30 border border-white/10 p-5 rounded-2xl space-y-3 backdrop-blur-md">
+                    <h3 class="font-black text-sm text-purple-400 flex items-center gap-2"><span>🔫</span> Arsenal & FPS Hub</h3>
+                    <p class="text-xs text-slate-300 leading-relaxed" data-translate="script_2_desc">Aimbot personalizzabile, ESP, Wallhack e Silent Aim sicuro.</p>
+                    <span class="inline-block text-[10px] font-black bg-purple-500/10 text-purple-300 border border-purple-500/20 px-2.5 py-1 rounded">PC & Mobile</span>
                 </div>
-            </div>
-                      </div>
-          <!-- Classifica Ufficiale Zenik League (Brawl Stars - 8 Posti) -->
-        <div class="liquid-card-accent p-6 md:p-8 rounded-3xl shadow-xl">
-            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-2">
-                <div>
-                    <h2 class="text-xl font-black text-white flex items-center gap-2">
-                        <span class="text-yellow-400">🏆</span> <span data-translate="league_title">ZENIK LEAGUE (BRAWL STARS)</span>
-                    </h2>
-                    <p class="text-xs text-slate-400" data-translate="league_desc">Torneo ufficiale e-sport con 8 slot disponibili</p>
-                </div>
-                <span class="text-xs font-black bg-yellow-500 text-black px-3 py-1 rounded-full uppercase" data-translate="slots_badge">8 Slot Disponibili</span>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div class="liquid-glass p-3.5 rounded-2xl flex justify-between items-center"><span class="font-bold text-slate-400 text-sm">1° Posto</span><span class="text-green-400 font-black text-xs uppercase bg-green-500/10 px-3 py-1 rounded-lg border border-green-500/20" data-translate="slot_free">LIBERO</span></div>
-                <div class="liquid-glass p-3.5 rounded-2xl flex justify-between items-center"><span class="font-bold text-slate-400 text-sm">2° Posto</span><span class="text-green-400 font-black text-xs uppercase bg-green-500/10 px-3 py-1 rounded-lg border border-green-500/20" data-translate="slot_free">LIBERO</span></div>
-                <div class="liquid-glass p-3.5 rounded-2xl flex justify-between items-center"><span class="font-bold text-slate-400 text-sm">3° Posto</span><span class="text-green-400 font-black text-xs uppercase bg-green-500/10 px-3 py-1 rounded-lg border border-green-500/20" data-translate="slot_free">LIBERO</span></div>
-                <div class="liquid-glass p-3.5 rounded-2xl flex justify-between items-center"><span class="font-bold text-slate-400 text-sm">4° Posto</span><span class="text-green-400 font-black text-xs uppercase bg-green-500/10 px-3 py-1 rounded-lg border border-green-500/20" data-translate="slot_free">LIBERO</span></div>
-                <div class="liquid-glass p-3.5 rounded-2xl flex justify-between items-center"><span class="font-bold text-slate-400 text-sm">5° Posto</span><span class="text-green-400 font-black text-xs uppercase bg-green-500/10 px-3 py-1 rounded-lg border border-green-500/20" data-translate="slot_free">LIBERO</span></div>
-                <div class="liquid-glass p-3.5 rounded-2xl flex justify-between items-center"><span class="font-bold text-slate-400 text-sm">6° Posto</span><span class="text-green-400 font-black text-xs uppercase bg-green-500/10 px-3 py-1 rounded-lg border border-green-500/20" data-translate="slot_free">LIBERO</span></div>
-                <div class="liquid-glass p-3.5 rounded-2xl flex justify-between items-center"><span class="font-bold text-slate-400 text-sm">7° Posto</span><span class="text-green-400 font-black text-xs uppercase bg-green-500/10 px-3 py-1 rounded-lg border border-green-500/20" data-translate="slot_free">LIBERO</span></div>
-                <div class="liquid-glass p-3.5 rounded-2xl flex justify-between items-center"><span class="font-bold text-slate-400 text-sm">8° Posto</span><span class="text-green-400 font-black text-xs uppercase bg-green-500/10 px-3 py-1 rounded-lg border border-green-500/20" data-translate="slot_free">LIBERO</span></div>
             </div>
         </div>
 
-        <!-- Form di Contatto e Feedback (Web3Forms) -->
-        <div id="contatti" class="liquid-glass p-6 md:p-8 rounded-3xl">
-            <h3 class="text-xl font-black mb-2 text-white" data-translate="contact_title">CONTATTI & SUPPORTO</h3>
-            <p class="text-xs text-slate-400 mb-6" data-translate="contact_desc">Manda un messaggio per iscriverti alla Zenik League, segnalare un bug sugli script Roblox o chiedere informazioni[span_0](start_span)[span_0](end_span).</p>
+        <!-- Form di Contatto e Richiesta Script -->
+        <div id="contatti" class="liquid-glass p-6 md:p-8 rounded-[28px]">
+            <h3 class="text-xl font-black mb-2 text-white" data-translate="contact_title">RICHIEDI SCRIPT O SUPPORTO</h3>
+            <p class="text-xs text-slate-400 mb-6" data-translate="contact_desc">Hai bisogno di uno script specifico o un executor non funziona? Scrivici un messaggio.</p>
             
             <form action="https://api.web3forms.com/submit" method="POST" class="space-y-4">
                 <input type="hidden" name="access_key" value="4c4df93b-5964-4782-bc16-299a864dec68">
                 <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <input type="text" name="name" id="inputName" placeholder="Il tuo Nome / Tag" required class="w-full bg-black/30 border border-white/10 p-4 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-yellow-500 transition-colors text-sm">
-                    <input type="email" name="email" id="inputEmail" placeholder="La tua Email di Contatto" required class="w-full bg-black/30 border border-white/10 p-4 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-yellow-500 transition-colors text-sm">
+                    <input type="text" name="name" id="inputName" placeholder="Il tuo Nome / Roblox Username" required class="w-full bg-black/40 border border-white/15 p-4 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-purple-500 transition-colors text-sm backdrop-blur-md">
+                    <input type="email" name="email" id="inputEmail" placeholder="La tua Email di Contatto" required class="w-full bg-black/40 border border-white/15 p-4 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-purple-500 transition-colors text-sm backdrop-blur-md">
                 </div>
 
-                <textarea name="message" id="inputMsg" placeholder="Scrivi qui la tua richiesta (es. iscrizione torneo o segnalazione script)..." required class="w-full bg-black/30 border border-white/10 p-4 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-yellow-500 transition-colors h-32 resize-none text-sm"></textarea>
+                <textarea name="message" id="inputMsg" placeholder="Scrivi qui quale script ti serve o che problema riscontri..." required class="w-full bg-black/40 border border-white/15 p-4 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-purple-500 transition-colors h-32 resize-none text-sm backdrop-blur-md"></textarea>
                 
-                <button type="submit" class="btn-animated w-full bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-300 hover:to-amber-400 text-black font-black py-4 rounded-xl shadow-lg shadow-yellow-500/20 uppercase tracking-wider text-sm cursor-pointer" data-translate="btn_send">
-                    Invia Messaggio
+                <button type="submit" class="btn-purple-ios w-full py-4 rounded-xl font-black uppercase tracking-wider text-sm cursor-pointer text-white text-center flex items-center justify-center gap-2" data-translate="btn_send">
+                    Invia Richiesta
                 </button>
             </form>
         </div>
 
-                                                                                                </main>
-    <!-- Footer -->
+                        </main>
+           <!-- Footer -->
     <footer class="max-w-4xl mx-auto text-center mt-12 text-slate-500 text-xs">
         <p>&copy; 2026 Zenik Hub. Tutti i diritti riservati.</p>
     </footer>
@@ -155,94 +236,154 @@
     <script>
         const translations = {
             it: {
-                subtitle: "Brawl Stars & Roblox Hub", status: "Online",
-                roblox_title: "ROBLOX SCRIPTS & EXECUTORS", roblox_desc: "Strumenti e script aggiornati per i tuoi giochi preferiti",
-                scripts_card: "Script Consigliati", scripts_desc: "Raccolta di script sicuri e testati per exploit e script hub popolari su Roblox.",
-                req_script: "Richiedi uno script →", executor_card: "Executor Status",
-                executor_desc: "Verifica lo stato di funzionamento degli executor aggiornati dopo le patch.", safe_status: "Aggiornati & Sicuri",
-                league_title: "ZENIK LEAGUE (BRAWL STARS)", league_desc: "Torneo ufficiale e-sport con 8 slot disponibili", slots_badge: "8 Slot Disponibili", slot_free: "LIBERO",
-                contact_title: "CONTATTI & SUPPORTO", contact_desc: "Manda un messaggio per iscriverti alla Zenik League, segnalare un bug sugli script Roblox o chiedere informazioni.", btn_send: "Invia Messaggio"
+                subtitle: "Liquid Glass Roblox Platform", status: "Online",
+                executors_title: "TOP 5 ROBLOX EXECUTORS", executors_desc: "I migliori executor testati, sicuri e aggiornati",
+                best_choice: "⭐ SCELTA MIGLIORE", btn_download: "Download",
+                delta_desc: "Il re incontrastato degli executor mobile e PC. Stabile, velocissimo e con script hub integrato.",
+                wave_desc: "Eccellente livello di sicurezza e ottima esecuzione degli script complessi.",
+                hydrogen_desc: "Interfaccia pulita, leggerissimo e compatibile con tantissimi dispositivi.",
+                celery_desc: "Ottima alternativa gratuita per PC, frequentemente aggiornata dopo le patch.",
+                codex_desc: "Famoso per la sua stabilità su iOS e Android con script hub integrato.",
+                scripts_title: "TOP SCRIPT HUB & GAMES", scripts_desc: "Script testati, sicuri e privi di chiave o con key system facile",
+                script_1_desc: "Auto Farm, Boss Hop, Devil Fruit Sniper e configurazione avanzata.",
+                script_2_desc: "Aimbot personalizzabile, ESP, Wallhack e Silent Aim sicuro.",
+                contact_title: "RICHIEDI SCRIPT O SUPPORTO", contact_desc: "Hai bisogno di uno script specifico o un executor non funziona? Scrivici un messaggio.",
+                btn_send: "Invia Richiesta"
             },
             en: {
-                subtitle: "Brawl Stars & Roblox Hub", status: "Online",
-                roblox_title: "ROBLOX SCRIPTS & EXECUTORS", roblox_desc: "Updated tools and scripts for your favorite games",
-                scripts_card: "Featured Scripts", scripts_desc: "Collection of safe and tested scripts for popular exploits and script hubs on Roblox.",
-                req_script: "Request a script →", executor_card: "Executor Status",
-                executor_desc: "Check the operational status of updated executors after patches.", safe_status: "Updated & Safe",
-                league_title: "ZENIK LEAGUE (BRAWL STARS)", league_desc: "Official esports tournament with 8 available slots", slots_badge: "8 Slots Available", slot_free: "FREE",
-                contact_title: "CONTACT & SUPPORT", contact_desc: "Send a message to join the Zenik League, report a bug on Roblox scripts, or ask questions.", btn_send: "Send Message"
+                subtitle: "Liquid Glass Roblox Platform", status: "Online",
+                executors_title: "TOP 5 ROBLOX EXECUTORS", executors_desc: "The best tested, safe and updated executors",
+                best_choice: "⭐ BEST CHOICE", btn_download: "Download",
+                delta_desc: "The undisputed king of mobile and PC executors. Stable, lightning-fast with built-in script hub.",
+                wave_desc: "Excellent security level and great execution for complex scripts.",
+                hydrogen_desc: "Clean interface, lightweight, and compatible with numerous devices.",
+                celery_desc: "Great free alternative for PC, frequently updated after patches.",
+                codex_desc: "Famous for its stability on iOS and Android with an integrated script hub.",
+                scripts_title: "TOP SCRIPT HUB & GAMES", scripts_desc: "Tested, safe scripts with no key or easy key systems",
+                script_1_desc: "Auto Farm, Boss Hop, Devil Fruit Sniper and advanced configuration.",
+                script_2_desc: "Customizable Aimbot, ESP, Wallhack, and safe Silent Aim.",
+                contact_title: "REQUEST SCRIPT OR SUPPORT", contact_desc: "Need a specific script or facing issues with an executor? Send us a message.",
+                btn_send: "Send Request"
             },
             es: {
-                subtitle: "Brawl Stars y Roblox Hub", status: "En línea",
-                roblox_title: "SCRIPTS Y EJECUTORES DE ROBLOX", roblox_desc: "Herramientas y scripts actualizados para tus juegos favoritos",
-                scripts_card: "Scripts Recomendados", scripts_desc: "Colección de scripts seguros y probados para exploits populares en Roblox.",
-                req_script: "Solicitar un script →", executor_card: "Estado del Ejecutor",
-                executor_desc: "Verifica el estado operativo de los ejecutores actualizados tras los parches.", safe_status: "Actualizado y Seguro",
-                league_title: "ZENIK LEAGUE (BRAWL STARS)", league_desc: "Torneo oficial de e-sports con 8 espacios disponibles", slots_badge: "8 Espacios Disponibles", slot_free: "LIBRE",
-                contact_title: "CONTACTO Y SOPORTE", contact_desc: "Envía un mensaje para unirte a la Zenik League, reportar un error o hacer preguntas.", btn_send: "Enviar Mensaje"
+                subtitle: "Plataforma Roblox Liquid Glass", status: "En línea",
+                executors_title: "TOP 5 EJECUTORES DE ROBLOX", executors_desc: "Los mejores ejecutores probados, seguros y actualizados",
+                best_choice: "⭐ MEJOR OPCIÓN", btn_download: "Descargar",
+                delta_desc: "El rey indiscutible de ejecutores móviles y PC. Estable y rápido.",
+                wave_desc: "Excelente nivel de seguridad y gran ejecución de scripts complejos.",
+                hydrogen_desc: "Interfaz limpia, muy ligero y compatible con muchos dispositivos.",
+                celery_desc: "Excelente alternativa gratuita para PC, actualizada tras parches.",
+                codex_desc: "Famoso por su estabilidad en iOS y Android con script hub integrado.",
+                scripts_title: "MEJORES SCRIPTS Y JUEGOS", scripts_desc: "Scripts seguros y probados sin clave o con sistemas sencillos",
+                script_1_desc: "Auto Farm, Boss Hop, Devil Fruit Sniper y configuración avanzada.",
+                script_2_desc: "Aimbot personalizable, ESP, Wallhack y Silent Aim seguro.",
+                contact_title: "SOLICITAR SCRIPT O SOPORTE", contact_desc: "¿Necesitas un script específico o tienes problemas? Envíanos un mensaje.",
+                btn_send: "Enviar Solicitud"
             },
             fr: {
-                subtitle: "Brawl Stars & Roblox Hub", status: "En ligne",
-                roblox_title: "SCRIPTS ET EXécUTEURS ROBLOX", roblox_desc: "Outils et scripts mis à jour pour vos jeux préférés",
-                scripts_card: "Scripts Recommandés", scripts_desc: "Collection de scripts sûrs et testés pour les hubs de scripts populaires sur Roblox.",
-                req_script: "Demander un script →", executor_card: "Statut des Exécuteurs",
-                executor_desc: "Vérifiez l'état de fonctionnement des exécuteurs mis à jour après les patchs.", safe_status: "Mis à jour & Sécurisé",
-                league_title: "ZENIK LEAGUE (BRAWL STARS)", league_desc: "Tournoi e-sport officiel avec 8 emplacements disponibles", slots_badge: "8 Places Disponibles", slot_free: "LIBRE",
-                contact_title: "CONTACT & SUPPORT", contact_desc: "Envoyez un message pour vous inscrire à la Zenik League ou poser des questions.", btn_send: "Envoyer le Message"
+                subtitle: "Plateforme Roblox Liquid Glass", status: "En ligne",
+                executors_title: "TOP 5 EXÉCUTEURS ROBLOX", executors_desc: "Les meilleurs exécuteurs testés, sûrs et mis à jour",
+                best_choice: "⭐ MEILLEUR CHOIX", btn_download: "Télécharger",
+                delta_desc: "Le roi incontesté des exécuteurs mobile et PC. Stable et ultra-rapide.",
+                wave_desc: "Excellent niveau de sécurité et exécution fluide de scripts complexes.",
+                hydrogen_desc: "Interface épurée, très léger et compatible avec de nombreux appareils.",
+                celery_desc: "Excellente alternative gratuite pour PC, mise à jour après les patchs.",
+                codex_desc: "Célèbre pour sa stabilité sur iOS et Android avec hub intégré.",
+                scripts_title: "MEILLEURS SCRIPTS ET JEUX", scripts_desc: "Scripts testés et sécurisés sans clé ou avec système facile",
+                script_1_desc: "Auto Farm, Boss Hop, Devil Fruit Sniper et configuration avancée.",
+                script_2_desc: "Aimbot personnalisable, ESP, Wallhack et Silent Aim sécurisé.",
+                contact_title: "DEMANDER UN SCRIPT OU DU SUPPORT", contact_desc: "Besoin d'un script spécifique ou un problème ? Envoyez-nous un message.",
+                btn_send: "Envoyer la Demande"
             },
             de: {
-                subtitle: "Brawl Stars & Roblox Hub", status: "Online",
-                roblox_title: "ROBLOX SCRIPTS & EXECUTORS", roblox_desc: "Aktualisierte Tools und Skripte für deine Lieblingsspiele",
-                scripts_card: "Empfohlene Skripte", scripts_desc: "Sammlung sicherer und getesteter Skripte für beliebte Exploits auf Roblox.",
-                req_script: "Skript anfordern →", executor_card: "Executor-Status",
-                executor_desc: "Überprüfe den Betriebsstatus aktualisierter Executor nach Patches.", safe_status: "Aktualisiert & Sicher",
-                league_title: "ZENIK LEAGUE (BRAWL STARS)", league_desc: "Offizielles E-Sports-Turnier mit 8 verfügbaren Plätzen", slots_badge: "8 Plätze Verfügbar", slot_free: "FREI",
-                contact_title: "KONTAKT & SUPPORT", contact_desc: "Sende eine Nachricht, um der Zenik League beizutreten oder Fragen zu stellen.", btn_send: "Nachricht Senden"
+                subtitle: "Liquid Glass Roblox Platform", status: "Online",
+                executors_title: "TOP 5 ROBLOX EXECUTORS", executors_desc: "Die besten getesteten, sicheren und aktualisierten Executor",
+                best_choice: "⭐ BESTE WAHL", btn_download: "Herunterladen",
+                delta_desc: "Der unbestrittene König der Mobile- und PC-Executor. Stabil und blitzschnell.",
+                wave_desc: "Ausgezeichnetes Sicherheitsniveau und hervorragende Skriptausführung.",
+                hydrogen_desc: "Saubere Oberfläche, sehr leicht und kompatibel mit vielen Geräten.",
+                celery_desc: "Tolle kostenlose PC-Alternative, nach Patches regelmäßig aktualisiert.",
+                codex_desc: "Bekannt für Stabilität auf iOS und Android mit integriertem Hub.",
+                scripts_title: "TOP SCRIPT HUB & SPIELE", scripts_desc: "Getestete, sichere Skripte ohne Key oder mit einfachem Key-System",
+                script_1_desc: "Auto Farm, Boss Hop, Devil Fruit Sniper und erweiterte Konfiguration.",
+                script_2_desc: "Anpassbarer Aimbot, ESP, Wallhack und sicheres Silent Aim.",
+                contact_title: "SKRIPT ODER SUPPORT ANFRAGEN", contact_desc: "Brauchst du ein spezifisches Skript oder hast Probleme? Sende uns eine Nachricht.",
+                btn_send: "Anfrage Senden"
             },
             pt: {
-                subtitle: "Brawl Stars & Roblox Hub", status: "Online",
-                roblox_title: "SCRIPTS E EXECUTORES DO ROBLOX", roblox_desc: "Ferramentas e scripts atualizados para os seus jogos favoritos",
-                scripts_card: "Scripts Recomendados", scripts_desc: "Coleção de scripts seguros e testados para exploits populares no Roblox.",
-                req_script: "Pedir um script →", executor_card: "Status do Executor",
-                executor_desc: "Verifique o estado operacional dos executores atualizados após os patches.", safe_status: "Atualizado & Seguro",
-                league_title: "ZENIK LEAGUE (BRAWL STARS)", league_desc: "Torneio oficial de e-sports com 8 vagas disponíveis", slots_badge: "8 Vagas Disponíveis", slot_free: "LIVRE",
-                contact_title: "CONTATO E SUPORTE", contact_desc: "Envie uma mensagem para entrar na Zenik League ou tirar dúvidas.", btn_send: "Enviar Mensagem"
+                subtitle: "Plataforma Roblox Liquid Glass", status: "Online",
+                executors_title: "TOP 5 EXECUTORES DO ROBLOX", executors_desc: "Os melhores executores testados, seguros e atualizados",
+                best_choice: "⭐ MELHOR ESCOLHA", btn_download: "Baixar",
+                delta_desc: "O rei indiscutível dos executores mobile e PC. Estável e rápido.",
+                wave_desc: "Excelente nível de segurança e ótima execução de scripts complexos.",
+                hydrogen_desc: "Interface limpa, muito leve e compatível com diversos dispositivos.",
+                celery_desc: "Ótima alternativa gratuita para PC, atualizada após patches.",
+                codex_desc: "Famoso pela estabilidade no iOS e Android com hub integrado.",
+                scripts_title: "MELHORES SCRIPTS E JOGOS", scripts_desc: "Scripts testados e seguros, sem chave ou com sistema fácil",
+                script_1_desc: "Auto Farm, Boss Hop, Devil Fruit Sniper e configuração avançada.",
+                script_2_desc: "Aimbot personalizável, ESP, Wallhack e Silent Aim seguro.",
+                contact_title: "SOLICITAR SCRIPT OU SUPORTE", contact_desc: "Precisa de um script específico ou encontrou problemas? Envie uma mensagem.",
+                btn_send: "Enviar Solicitação"
             },
             ru: {
-                subtitle: "Brawl Stars и Roblox Hub", status: "Онлайн",
-                roblox_title: "СКРИПТЫ И ЭКЗЕКУТОРЫ ROBLOX", roblox_desc: "Обновленные инструменты и скрипты для ваших любимых игр",
-                scripts_card: "Рекомендуемые скрипты", scripts_desc: "Коллекция безопасных и протестированных скриптов для Roblox.",
-                req_script: "Запросить скрипт →", executor_card: "Статус экзекуторов",
-                executor_desc: "Проверьте статус работы обновленных экзекуторов после патчей.", safe_status: "Обновлено и безопасно",
-                league_title: "ZENIK LEAGUE (BRAWL STARS)", league_desc: "Официальный киберспортивный турнир на 8 мест", slots_badge: "8 Свободных мест", slot_free: "СВОБОДНО",
-                contact_title: "КОНТАКТЫ И ПОДДЕРЖКА", contact_desc: "Отправьте сообщение, чтобы присоединиться к турниру или задать вопрос.", btn_send: "Отправить Сообщение"
+                subtitle: "Платформа Roblox Liquid Glass", status: "Онлайн",
+                executors_title: "ТОП 5 ЭКЗЕКУТОРОВ ROBLOX", executors_desc: "Лучшие проверенные, безопасные и обновленные экзекуторы",
+                best_choice: "⭐ ЛУЧШИЙ ВЫБОР", btn_download: "Скачать",
+                delta_desc: "Бесспорный король мобильных и ПК экзекуторов. Стабильный и быстрый.",
+                wave_desc: "Отличный уровень безопасности и выполнение сложных скриптов.",
+                hydrogen_desc: "Чистый интерфейс, легкий вес и совместимость с устройствами.",
+                celery_desc: "Отличная бесплатная альтернатива для ПК, обновляется после патчей.",
+                codex_desc: "Известен своей стабильностью на iOS и Android со встроенным хабом.",
+                scripts_title: "ЛУЧШИЕ СКРИПТЫ И ИГРЫ", scripts_desc: "Проверенные и безопасные скрипты без ключа или с легким доступом",
+                script_1_desc: "Автофарм, телепорт по боссам, снайпер фруктов и расширенные настройки.",
+                script_2_desc: "Настраиваемый Aimbot, ESP, Wallhack и безопасный Silent Aim.",
+                contact_title: "ЗАПРОСИТЬ СКРИПТ ИЛИ ПОДДЕРЖКУ", contact_desc: "Нужен особый скрипт или возникли проблемы? Напишите нам.",
+                btn_send: "Отправить Запрос"
             },
             tr: {
-                subtitle: "Brawl Stars & Roblox Hub", status: "Çevrimiçi",
-                roblox_title: "ROBLOX SCRIPTS & EXECUTORS", roblox_desc: "En sevdiğiniz oyunlar için güncellenmiş araçlar ve betikler",
-                scripts_card: "Önerilen Scriptler", scripts_desc: "Roblox'taki popüler exploit'ler için güvenli ve test edilmiş scriptler.",
-                req_script: "Script İste →", executor_card: "Executor Durumu",
-                executor_desc: "Güncellenen executor'ların yamalardan sonraki çalışma durumunu kontrol edin.", safe_status: "Güncel ve Güvenli",
-                league_title: "ZENIK LEAGUE (BRAWL STARS)", league_desc: "8 boş slot içeren resmi espor turnuvası", slots_badge: "8 Boş Slot", slot_free: "BOŞ",
-                contact_title: "İLETİŞİM & DESTEK", contact_desc: "Zenik League'e katılmak veya soru sormak için bir mesaj gönderin.", btn_send: "Mesaj Gönder"
+                subtitle: "Liquid Glass Roblox Platformu", status: "Çevrimiçi",
+                executors_title: "EN İYİ 5 ROBLOX EXECUTOR", executors_desc: "En iyi test edilmiş, güvenli ve güncel executorlar",
+                best_choice: "⭐ EN İYİ SEÇİM", btn_download: "İndir",
+                delta_desc: "Mobil ve PC executor'larının tartışmasız kralı. Stabil ve hızlı.",
+                wave_desc: "Mükemmel güvenlik seviyesi ve karmaşık scriptlerin kusursuz çalışması.",
+                hydrogen_desc: "Temiz arayüz, hafif yapı ve çok sayıda cihazla uyumluluk.",
+                celery_desc: "PC için harika ücretsiz alternatif, yamalardan sonra güncellenir.",
+                codex_desc: "iOS ve Android'de entegre script hub ile kararlılığıyla bilinir.",
+                scripts_title: "EN İYİ SCRIPT HUB & OYUNLAR", scripts_desc: "Keysiz veya kolay key sistemli, test edilmiş güvenli scriptler",
+                script_1_desc: "Auto Farm, Boss Hop, Devil Fruit Sniper ve gelişmiş yapılandırma.",
+                script_2_desc: "Özelleştirilebilir Aimbot, ESP, Wallhack ve güvenli Silent Aim.",
+                contact_title: "SCRIPT VEYA DESTEK İSTE", contact_desc: "Özel bir script mi lazım veya bir sorun mu var? Bize mesaj gönder.",
+                btn_send: "İsteği Gönder"
             },
             ja: {
-                subtitle: "Brawl Stars & Roblox Hub", status: "オンライン",
-                roblox_title: "ROBLOX スクリプト ＆ エグゼキューター", roblox_desc: "お気に入りのゲーム向けの最新ツールとスクリプト",
-                scripts_card: "おすすめスクリプト", scripts_desc: "Robloxの人気エクスプロイト向けに安全にテストされたスクリプトのコレクション。",
-                req_script: "スクリプトをリクエスト →", executor_card: "エグゼキューターのステータス",
-                executor_desc: "パッチ適用後のアップデートされたエグゼキューターの稼働状況を確認します。", safe_status: "最新＆安全",
-                league_title: "ZENIK LEAGUE (BRAWL STARS)", league_desc: "8つのスロットを備えた公式eスポーツトーナメント", slots_badge: "8枠空きあり", slot_free: "空き",
-                contact_title: "お問い合わせ・サポート", contact_desc: "Zenik Leagueへの参加や質問をするにはメッセージを送信してください。", btn_send: "メッセージを送信"
+                subtitle: "Liquid Glass Roblox プラットフォーム", status: "オンライン",
+                executors_title: "トップ5 Roblox エグゼキューター", executors_desc: "テスト済みで安全、最新のエグゼキューター",
+                best_choice: "⭐ ベストチョイス", btn_download: "ダウンロード",
+                delta_desc: "モバイルおよびPCエグゼキューターの王様。安定して高速。",
+                wave_desc: "優れたセキュリティレベルと高度なスクリプトの実行。",
+                hydrogen_desc: "クリーンなインターフェース、軽量で多くのデバイスに対応。",
+                celery_desc: "PC向けの優れた無料代替品、パッチ後に頻繁に更新。",
+                codex_desc: "iOSおよびAndroidでの安定性と統合ハブで有名。",
+                scripts_title: "トップスクリプトハブ＆ゲーム", scripts_desc: "キー不要または簡単なキーシステムで安全にテストされたスクリプト",
+                script_1_desc: "自動ファーム、ボスホップ、悪魔の実スナイパーなどの高度な設定。",
+                script_2_desc: "カスタマイズ可能なエイムボット、ESP、ウォールハック。",
+                contact_title: "スクリプトまたはサポートのリクエスト", contact_desc: "特定のスクリプトが必要ですか？メッセージを送ってください。",
+                btn_send: "リクエストを送信"
             },
             zh: {
-                subtitle: "Brawl Stars & Roblox Hub", status: "在线",
-                roblox_title: "ROBLOX 脚本与注入器", roblox_desc: "为你喜爱游戏更新的实用工具与脚本",
-                scripts_card: "推荐脚本", scripts_desc: "为 Roblox 热门脚本中心收集的安全且经过测试的脚本。",
-                req_script: "请求脚本 →", executor_card: "注入器状态",
-                executor_desc: "检查补丁更新后各个注入器的运行状态。", safe_status: "已更新且安全",
-                league_title: "ZENIK LEAGUE (BRAWL STARS)", league_desc: "拥有 8 个席位的官方电竞赛事", slots_badge: "8个可用席位", slot_free: "空闲",
-                contact_title: "联系与支持", contact_desc: "发送消息以加入 Zenik League、报告问题或咨询信息。", btn_send: "发送消息"
+                subtitle: "Liquid Glass Roblox 平台", status: "在线",
+                executors_title: "热门 5 大 ROBLOX 注入器", executors_desc: "经过测试、安全且更新的最佳注入器",
+                best_choice: "⭐ 最佳选择", btn_download: "下载",
+                delta_desc: "手机与电脑端当之无愧的注入器之王。稳定、极速且自带脚本中心。",
+                wave_desc: "出色的安全级别，完美运行复杂脚本。",
+                hydrogen_desc: "界面简洁、极其轻量，兼容多种设备。",
+                celery_desc: "出色的电脑端免费替代品，补丁后更新频繁。",
+                codex_desc: "以 iOS 和 Android 端的稳定性和内置脚本中心闻名。",
+                scripts_title: "顶级脚本中心与游戏", scripts_desc: "经过测试的安全脚本，无密钥或简易密钥系统",
+                script_1_desc: "自动刷怪、BOSS传送、恶魔果实狙击及高级配置。",
+                script_2_desc: "可定制自瞄、透视、墙透以及安全的静默自瞄。",
+                contact_title: "请求脚本或获取支持", contact_desc: "需要特定的脚本或遇到注入器问题？给我们发消息吧。",
+                btn_send: "发送请求"
             }
         };
 
@@ -260,48 +401,47 @@
             const msgInput = document.getElementById('inputMsg');
 
             if (lang === 'en') {
-                nameInput.placeholder = "Your Name / Tag";
+                nameInput.placeholder = "Your Name / Roblox Username";
                 emailInput.placeholder = "Your Contact Email";
-                msgInput.placeholder = "Write your request here (e.g. tournament signup or script report)...";
+                msgInput.placeholder = "Write which script you need or what issue you are facing...";
             } else if (lang === 'es') {
-                nameInput.placeholder = "Tu Nombre / Tag";
+                nameInput.placeholder = "Tu Nombre / Usuario de Roblox";
                 emailInput.placeholder = "Tu Email de Contacto";
-                msgInput.placeholder = "Escribe tu solicitud aquí (ej. inscripción o reporte)...";
+                msgInput.placeholder = "Escribe qué script necesitas o qué problema tienes...";
             } else if (lang === 'fr') {
-                nameInput.placeholder = "Votre Nom / Tag";
+                nameInput.placeholder = "Votre Nom / Pseudo Roblox";
                 emailInput.placeholder = "Votre Email de Contact";
-                msgInput.placeholder = "Écrivez votre demande ici...";
+                msgInput.placeholder = "Écrivez le script dont vous avez besoin...";
             } else if (lang === 'de') {
-                nameInput.placeholder = "Dein Name / Tag";
+                nameInput.placeholder = "Dein Name / Roblox Benutzername";
                 emailInput.placeholder = "Deine Kontakt-E-Mail";
-                msgInput.placeholder = "Schreibe hier deine Anfrage...";
+                msgInput.placeholder = "Schreibe, welches Skript du benötigst...";
             } else if (lang === 'pt') {
-                nameInput.placeholder = "Seu Nome / Tag";
+                nameInput.placeholder = "Seu Nome / Usuário do Roblox";
                 emailInput.placeholder = "Seu E-mail de Contato";
-                msgInput.placeholder = "Escreva sua solicitação aqui...";
+                msgInput.placeholder = "Escreva qual script você precisa...";
             } else if (lang === 'ru') {
-                nameInput.placeholder = "Ваше имя / Тэг";
+                nameInput.placeholder = "Ваше имя / Ник в Roblox";
                 emailInput.placeholder = "Ваш email для связи";
-                msgInput.placeholder = "Напишите ваш запрос здесь...";
+                msgInput.placeholder = "Напишите, какой скрипт вам нужен...";
             } else if (lang === 'tr') {
-                nameInput.placeholder = "Adınız / Tag";
+                nameInput.placeholder = "Adınız / Roblox Kullanıcı Adı";
                 emailInput.placeholder = "İletişim E-postanız";
-                msgInput.placeholder = "İsteğinizi buraya yazın...";
+                msgInput.placeholder = "Hangi script'e ihtiyacın var yaz...";
             } else if (lang === 'ja') {
-                nameInput.placeholder = "お名前 / タグ";
+                nameInput.placeholder = "お名前 / Robloxユーザー名";
                 emailInput.placeholder = "連絡先メールアドレス";
-                msgInput.placeholder = "ここにリクエストを入力してください...";
+                msgInput.placeholder = "必要なスクリプトや問題を入力してください...";
             } else if (lang === 'zh') {
-                nameInput.placeholder = "你的名字 / 标签";
+                nameInput.placeholder = "你的名字 / Roblox 用户名";
                 emailInput.placeholder = "你的联系邮箱";
-                msgInput.placeholder = "在此处输入您的请求...";
+                msgInput.placeholder = "写下你需要什么脚本或遇到的问题...";
             } else {
-                nameInput.placeholder = "Il tuo Nome / Tag";
+                nameInput.placeholder = "Il tuo Nome / Roblox Username";
                 emailInput.placeholder = "La tua Email di Contatto";
-                msgInput.placeholder = "Scrivi qui la tua richiesta (es. iscrizione torneo o segnalazione script)...";
+                msgInput.placeholder = "Scrivi qui quale script ti serve o che problema riscontri...";
             }
         }
     </script>
 </body>
-  </html>
-  
+</html>
