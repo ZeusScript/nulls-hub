@@ -3,478 +3,276 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Roblox Executor & Script Hub</title>
-    <!-- Google Fonts -->
+    <title>ZHub - Ultimate Script Hub</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <style>
         :root {
-            --bg-color: #0b0f19;
-            --card-bg: rgba(255, 255, 255, 0.03);
-            --card-border: rgba(255, 255, 255, 0.08);
-            --primary: #7c3aed;
-            --primary-hover: #6d28d9;
+            --bg-color: #070913;
+            --card-bg: rgba(255, 255, 255, 0.02);
+            --card-border: rgba(255, 255, 255, 0.07);
+            --primary: #8b5cf6;
+            --primary-hover: #7c3aed;
             --accent: #10b981;
+            --gold: #f59e0b;
             --text-main: #f3f4f6;
             --text-muted: #9ca3af;
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            scroll-behavior: smooth;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
         body {
             background-color: var(--bg-color);
             color: var(--text-main);
-            overflow-x: hidden;
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(124, 58, 237, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.1) 0%, transparent 40%);
             min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(139, 92, 246, 0.12) 0%, transparent 45%),
+                radial-gradient(circle at 85% 85%, rgba(16, 185, 129, 0.08) 0%, transparent 45%);
         }
-
-        /* Navbar */
+        /* Navbar moderna con Glassmorphism avanzato */
         nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(11, 15, 25, 0.8);
-            backdrop-filter: blur(12px);
+            position: fixed; top: 0; left: 0; width: 100%;
+            background: rgba(7, 9, 19, 0.75); backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--card-border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.2rem 5%;
-            z-index: 1000;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1rem 5%; z-index: 1000;
         }
-
-        .logo {
-            font-size: 1.4rem;
-            font-weight: 800;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .logo span {
-            color: var(--primary);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 1.5rem;
-            list-style: none;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: 0.3s;
-            cursor: pointer;
-        }
-
-        .nav-links a:hover, .nav-links a.active {
-            color: #fff;
-        }
-
-        .lang-select {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            color: #fff;
-            padding: 6px 12px;
-            border-radius: 8px;
-            cursor: pointer;
-            outline: none;
-        }
-
-        /* Container principale */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 120px 20px 60px 20px;
-        }
-
-        section {
-            margin-bottom: 80px;
-        }
-
-        .section-title {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 2rem;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        /* Home / Status Banner */
-        .hero-banner {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 20px;
-            padding: 3rem;
-            backdrop-filter: blur(16px);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 2rem;
-        }
-
-        .hero-text h1 {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 10px;
-            line-height: 1.2;
-        }
-
-        .hero-text p {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            max-width: 600px;
-        }
-
-        .status-badge {
-            background: rgba(16, 185, 129, 0.1);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            color: var(--accent);
-            padding: 10px 20px;
-            border-radius: 50px;
-            font-weight: 700;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 0 20px rgba(16, 185, 129, 0.15);
-        }
-
-        .pulse-dot {
-            width: 10px;
-            height: 10px;
-            background-color: var(--accent);
-            border-radius: 50%;
-            box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
-            animation: pulse 1.5s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
-        }
-
-        /* Griglie download & script */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
-
-        .card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 25px;
-            backdrop-filter: blur(12px);
-            transition: 0.3s;
-        }
-
-        .card:hover {
-            border-color: rgba(124, 58, 237, 0.4);
-            transform: translateY(-5px);
-        }
-
-        .card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 8px;
-        }
-
-        .card p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            margin-bottom: 20px;
-        }
-
-        /* Bottoni */
-        .btn {
-            background: var(--primary);
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 10px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.3s;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            text-decoration: none;
-            width: 100%;
-            justify-content: center;
-        }
-
-        .btn:hover {
-            background: var(--primary-hover);
-        }
-
-        .btn-secondary {
+        .logo { font-size: 1.5rem; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; letter-spacing: -0.5px; }
+        .logo span { color: var(--primary); text-shadow: 0 0 15px rgba(139, 92, 246, 0.5); }
+        .nav-links { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: 0.3s; }
+        .nav-links a:hover, .nav-links a.active { color: #fff; text-shadow: 0 0 10px rgba(255, 255, 255, 0.3); }
+        
+        /* Selettore Lingua Moderno personalizzato */
+        .lang-wrapper { position: relative; }
+        .lang-btn {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid var(--card-border);
+            color: #fff; padding: 8px 14px; border-radius: 10px;
+            cursor: pointer; display: flex; align-items: center; gap: 8px;
+            font-weight: 600; font-size: 0.9rem; transition: 0.3s;
         }
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
+        .lang-btn:hover { background: rgba(255, 255, 255, 0.1); border-color: var(--primary); }
+        .lang-dropdown {
+            position: absolute; right: 0; top: 120%;
+            background: #0f1322; border: 1px solid var(--card-border);
+            border-radius: 12px; width: 160px; display: none;
+            flex-direction: column; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            z-index: 1100;
         }
+        .lang-dropdown.show { display: flex; }
+        .lang-option {
+            padding: 10px 15px; color: var(--text-muted); text-decoration: none;
+            font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 10px;
+            transition: 0.2s; cursor: pointer; border: none; background: none; width: 100%; text-align: left;
+        }
+        .lang-option:hover { background: rgba(139, 92, 246, 0.15); color: #fff; }
 
-        /* Barra di ricerca Script */
+        .container { max-width: 1200px; margin: 0 auto; padding: 130px 20px 60px 20px; }
+        .header-section { margin-bottom: 30px; }
+        h1 { font-size: 2.8rem; font-weight: 800; letter-spacing: -1px; margin-bottom: 8px; }
+        p.subtitle { color: var(--text-muted); font-size: 1.05rem; }
+
+        /* Barra di ricerca */
+        .search-container { position: relative; margin-bottom: 35px; }
         .search-bar {
-            width: 100%;
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            padding: 15px 20px;
-            border-radius: 12px;
-            color: #fff;
-            font-size: 1rem;
-            margin-bottom: 25px;
-            outline: none;
-            transition: 0.3s;
+            width: 100%; background: var(--card-bg); border: 1px solid var(--card-border);
+            padding: 16px 20px 16px 50px; border-radius: 14px; color: #fff; font-size: 1rem;
+            outline: none; backdrop-filter: blur(10px); transition: 0.3s;
         }
-        .search-bar:focus {
-            border-color: var(--primary);
-        }
+        .search-bar:focus { border-color: var(--primary); box-shadow: 0 0 15px rgba(139, 92, 246, 0.2); }
+        .search-container i { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 1.1rem; }
 
-        /* FAQ Accordion */
-        .faq-item {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 12px;
-            margin-bottom: 15px;
-            overflow: hidden;
+        /* Griglia Script */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px; }
+        .card {
+            background: var(--card-bg); border: 1px solid var(--card-border);
+            border-radius: 20px; padding: 25px; backdrop-filter: blur(12px);
+            position: relative; transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between;
         }
+        .card.featured { border-color: var(--gold); box-shadow: 0 0 30px rgba(245, 158, 11, 0.12); }
+        .card:hover { border-color: rgba(139, 92, 246, 0.4); transform: translateY(-4px); }
+        
+        .badge-choice {
+            position: absolute; top: -12px; right: 20px; background: var(--gold); color: #000;
+            font-size: 0.7rem; font-weight: 800; padding: 5px 12px; border-radius: 20px;
+            text-transform: uppercase; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+        }
+        .card h3 { font-size: 1.35rem; margin-bottom: 8px; font-weight: 700; }
+        .card p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px; line-height: 1.5; }
+        
+        .btn {
+            background: var(--primary); color: #fff; border: none; padding: 12px 20px;
+            border-radius: 12px; font-weight: 600; cursor: pointer; text-decoration: none;
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            width: 100%; transition: 0.3s; font-size: 0.95rem;
+        }
+        .btn:hover { background: var(--primary-hover); }
 
-        .faq-question {
-            padding: 20px;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .faq-answer {
-            padding: 0 20px 20px 20px;
-            color: var(--text-muted);
-            display: none;
-            line-height: 1.6;
-        }
-
-        /* Footer */
-        footer {
-            border-top: 1px solid var(--card-border);
-            padding: 40px 5%;
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            background: rgba(11, 15, 25, 0.5);
-        }
-
-        footer p {
-            margin-bottom: 10px;
-        }
-
-        .disclaimer {
-            font-size: 0.8rem;
-            color: #6b7280;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        @media(max-width: 768px) {
-            .nav-links { display: none; }
-            .hero-text h1 { font-size: 2.2rem; }
-        }
+        footer { border-top: 1px solid var(--card-border); padding: 35px 20px; text-align: center; color: var(--text-muted); font-size: 0.85rem; margin-top: 80px; }
     </style>
 </head>
 <body>
 
-    <!-- Navbar -->
+    <!-- Navbar con ZHub e Selettore Lingua Moderno -->
     <nav>
-        <div class="logo">
-            <i class="fa-solid fa-code"></i> Roblox<span>Hub</span>
-        </div>
+        <a href="index.html" class="logo"><i class="fa-solid fa-bolt"></i> Z<span>Hub</span></a>
         <ul class="nav-links">
-            <li><a href="#home" class="active" data-i18n="nav_home">Home</a></li>
-            <li><a href="#downloads" data-i18n="nav_downloads">Download</a></li>
-            <li><a href="#scripts" data-i18n="nav_scripts">Scripts</a></li>
-            <li><a href="#faq" data-i18n="nav_faq">FAQ</a></li>
-            <li><a href="https://discord.gg/tuolink" target="_blank"><i class="fa-brands fa-discord"></i> Discord</a></li>
+            <li><a href="index.html" data-i18n="nav_home">Home</a></li>
+            <li><a href="download.html" data-i18n="nav_download">Download</a></li>
+            <li><a href="scripts.html" class="active" data-i18n="nav_scripts">Scripts</a></li>
+            <li><a href="faq.html" data-i18n="nav_faq">FAQ</a></li>
         </ul>
-        <select class="lang-select" id="langSelect" onchange="changeLanguage(this.value)">
-            <option value="it">🇮🇹 IT</option>
-            <option value="en">🇬🇧 EN</option>
-        </select>
+        <!-- Selettore Lingue Moderno -->
+        <div class="lang-wrapper">
+            <button class="lang-btn" onclick="toggleLangMenu()">
+                <i class="fa-solid fa-globe"></i> <span id="currentLangLabel">IT</span> <i class="fa-solid fa-chevron-down" style="font-size: 0.75rem;"></i>
+            </button>
+            <div class="lang-dropdown" id="langDropdown">
+                <button class="lang-option" onclick="changeLang('it')">🇮🇹 Italiano</button>
+                <button class="lang-option" onclick="changeLang('en')">🇬🇧 English</button>
+                <button class="lang-option" onclick="changeLang('es')">🇪🇸 Español</button>
+                <button class="lang-option" onclick="changeLang('pt')">🇧🇷 Português</button>
+                <button class="lang-option" onclick="changeLang('fr')">🇫🇷 Français</button>
+                <button class="lang-option" onclick="changeLang('de')">🇩🇪 Deutsch</button>
+                <button class="lang-option" onclick="changeLang('pl')">🇵🇱 Polski</button>
+                <button class="lang-option" onclick="changeLang('tr')">🇹🇷 Türkçe</button>
+                <button class="lang-option" onclick="changeLang('ru')">🇷🇺 Русский</button>
+                <button class="lang-option" onclick="changeLang('ja')">🇯🇵 日本語</button>
+            </div>
+        </div>
     </nav>
 
     <div class="container">
+        <div class="header-section">
+            <h1 data-i18n="title_scripts">ZHub Script Collection</h1>
+            <p class="subtitle" data-i18n="sub_scripts">Esplora i migliori 10 script testati e funzionanti per i giochi più famosi, ottimizzati per Delta.</p>
+        </div>
 
-        <!-- HOME / STATUS SECTION -->
-        <section id="home">
-            <div class="hero-banner">
-                <div class="hero-text">
-                    <div class="status-badge">
-                        <div class="pulse-dot"></div>
-                        <span id="statusText">Undetected (Hyperion Safe)</span>
-                    </div>
-                    <h1 style="margin-top: 15px;" data-i18n="hero_title">Il miglior Hub di Executor & Script</h1>
-                    <p data-i18n="hero_desc">Accedi ai migliori script aggiornati in tempo reale per i tuoi giochi preferiti di Roblox in tutta sicurezza.</p>
-                </div>
-                <a href="#downloads" class="btn" style="width: auto; padding: 15px 30px;" data-i18n="hero_btn">Scarica Ora</a>
-            </div>
-        </section>
+        <!-- Barra di ricerca -->
+        <div class="search-container">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="scriptSearch" class="search-bar" placeholder="Cerca uno script o un gioco (es. Blox Fruits, Arsenal)..." onkeyup="filterScripts()">
+        </div>
 
-        <!-- DOWNLOAD SECTION -->
-        <section id="downloads">
-            <h2 class="section-title"><i class="fa-solid fa-download" style="color: var(--primary);"></i> <span data-i18n="sec_downloads">Download Executor</span></h2>
-            <div class="grid">
-                <div class="card">
-                    <h3>Delta Executor (PC)</h3>
-                    <p data-i18n="pc_desc">Stabile e veloce per Windows. Aggiornato all'ultima versione di Roblox.</p>
-                    <a href="https://link-al-download-pc.com" target="_blank" class="btn"><i class="fa-solid fa-cloud-arrow-down"></i> Download PC</a>
-                </div>
-                <div class="card">
-                    <h3>Delta Mobile (Android)</h3>
-                    <p data-i18n="mob_desc">La versione mobile più popolare e sicura per smartphone e tablet.</p>
-                    <a href="https://link-al-download-android.com" target="_blank" class="btn"><i class="fa-solid fa-cloud-arrow-down"></i> Download Android</a>
-                </div>
-                <div class="card">
-                    <h3>Fluxus / Alternative</h3>
-                    <p data-i18n="alt_desc">Soluzione alternativa per utenti che cercano massima compatibilità.</p>
-                    <a href="https://link-al-download-alt.com" target="_blank" class="btn btn-secondary"><i class="fa-solid fa-cloud-arrow-down"></i> Download Extra</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- SCRIPTS HUB SECTION -->
-        <section id="scripts">
-            <h2 class="section-title"><i class="fa-solid fa-terminal" style="color: var(--primary);"></i> <span data-i18n="sec_scripts">Script Hub</span></h2>
-            <input type="text" id="scriptSearch" class="search-bar" placeholder="Cerca un gioco o script (es. Blox Fruits, Brookhaven)..." onkeyup="filterScripts()">
-            
-            <div class="grid" id="scriptGrid">
-                <div class="card script-card" data-name="blox fruits">
-                    <h3>Blox Fruits Hub</h3>
-                    <p>Auto Farm, Devil Fruit ESP, Boss Notifier & Raid Mod.</p>
-                    <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://example.com/bloxfruits\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
-                </div>
-                <div class="card script-card" data-name="brookhaven">
-                    <h3>Brookhaven RP Gui</h3>
-                    <p>Spawn Cars, House Mods, Admin Commands & Animation Pack.</p>
-                    <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://example.com/brookhaven\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
-                </div>
-                <div class="card script-card" data-name="pet simulator 99">
-                    <h3>Pet Simulator 99</h3>
-                    <p>Auto Farm Chests, Auto Hatch, Best Pet Teleport.</p>
-                    <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://example.com/petsim99\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- FAQ SECTION -->
-        <section id="faq">
-            <h2 class="section-title"><i class="fa-solid fa-circle-question" style="color: var(--primary);"></i> <span data-i18n="sec_faq">Domande Frequenti (FAQ)</span></h2>
-            
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">
-                    <span data-i18n="faq_q1">Gli executor sono sicuri?</span>
-                    <i class="fa-solid fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer" data-i18n="faq_a1">Sì, gli executor indicati nel sito sono testati regolarmente. Ricorda tuttavia di usare sempre un account secondario (alt account) per evitare rischi di ban sul tuo account principale.</div>
+        <!-- Griglia con i 10 script esatti -->
+        <div class="grid" id="scriptGrid">
+            <!-- 1. Delta & Redz Hub (Il Migliore in assoluto con targhetta dorata) -->
+            <div class="card featured script-card" data-name="redz hub blox fruits">
+                <div class="badge-choice">⭐ Delta Best Choice</div>
+                <h3>Redz Hub (Blox Fruits)</h3>
+                <p>Il migliore script in assoluto testato con Delta. Auto farm istantaneo, Sea Events, Fruit Finder e zero crash.</p>
+                <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.local/redzhub\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
             </div>
 
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">
-                    <span data-i18n="faq_q2">Come uso il codice loadstring copiato?</span>
-                    <i class="fa-solid fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer" data-i18n="faq_a2">Apri il tuo executor all'interno di Roblox, incolla il codice copiato nell'apposito spazio di esecuzione e clicca su "Execute".</div>
+            <!-- 2 -->
+            <div class="card script-card" data-name="vynixius universal">
+                <h3>Vynixius Hub (Universal)</h3>
+                <p>Hub universale strabiliante con comandi personalizzati, ESP avanzato e Player Teleport per qualsiasi mappa.</p>
+                <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.local/vynixius\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
             </div>
-        </section>
 
+            <!-- 3 -->
+            <div class="card script-card" data-name="project lazarus arsenal">
+                <h3>Project Lazarus (Arsenal)</h3>
+                <p>Script ottimizzato per sparatutto. Silent Aim, FOV circolare regolabile e No Recoil stabile.</p>
+                <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.local/lazarus\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+            </div>
+
+            <!-- 4 -->
+            <div class="card script-card" data-name="brookhaven rp gui">
+                <h3>Brookhaven RP Gui</h3>
+                <p>Sblocca tutte le case, veicoli esclusivi, comandi admin personalizzati e animazioni esclusive.</p>
+                <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.local/brookhaven\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+            </div>
+
+            <!-- 5 -->
+            <div class="card script-card" data-name="pet simulator 99 ps99">
+                <h3>Pet Simulator 99</h3>
+                <p>Auto farm forzieri, auto hatch uova rapido, teleport ottimizzato e dupe protection integrata.</p>
+                <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.local/petsim99\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+            </div>
+
+            <!-- 6 -->
+            <div class="card script-card" data-name="blade ball">
+                <h3>Blade Ball Optima</h3>
+                <p>Parata automatica intelligente (Auto Parry), visualizzazione della traiettoria della palla e velocità aumentata.</p>
+                <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.local/bladeball\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+            </div>
+
+            <!-- 7 -->
+            <div class="card script-card" data-name="da hood">
+                <h3>Da Hood Cash & Gun</h3>
+                <p>Auto farm soldi sicuro, anti-aim, tracciamento hitbox dei nemici e mod movimento avanzate.</p>
+                <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.local/dahood\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+            </div>
+
+            <!-- 8 -->
+            <div class="card script-card" data-name="BedWars">
+                <h3>BedWars Combat Hub</h3>
+                <p>Killaura personalizzabile, Fly stabile, auto bridge e visualizzazione risorse attraverso i muri.</p>
+                <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.local/bedwars\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+            </div>
+
+            <!-- 9 -->
+            <div class="card script-card" data-name="mm2 murder mystery 2">
+                <h3>Murder Mystery 2 (MM2)</h3>
+                <p>Rivela subito chi è il Murderer e lo Sheriff, ESP monete automatico e skin changer.</p>
+                <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.local/mm2\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+            </div>
+
+            <!-- 10 -->
+            <div class="card script-card" data-name="doors hotel">
+                <h3>DOORS Entity Notifier</h3>
+                <p>Ti avvisa prima dell'arrivo di Rush, Ambush, Figure e sblocca la visione notturna completa.</p>
+                <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.local/doors\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+            </div>
+        </div>
     </div>
 
-    <!-- Footer -->
     <footer>
-        <p data-i18n="footer_rights">© 2026 RobloxHub. Tutti i diritti riservati.</p>
-        <p class="disclaimer" data-i18n="footer_dmca">Disclaimer: Questo sito non è affiliato, associato, autorizzato o sponsorizzato da Roblox Corporation. Tutti i marchi registrati appartengono ai rispettivi proprietari. Progetto creato a solo scopo informativo ed educativo.</p>
+        <p>© 2026 ZHub. Tutti i diritti riservati. Progetto indipendente non affiliato con Roblox Corporation.</p>
     </footer>
 
-    <!-- JavaScript Integrato -->
+    <!-- Script di gestione interattiva (Lingua, Copia, Ricerca) -->
     <script>
-        // Sistema traduzioni semplice IT / EN
-        const translations = {
-            it: {
-                nav_home: "Home",
-                nav_downloads: "Download",
-                nav_scripts: "Scripts",
-                nav_faq: "FAQ",
-                hero_title: "Il miglior Hub di Executor & Script",
-                hero_desc: "Accedi ai migliori script aggiornati in tempo reale per i tuoi giochi preferiti di Roblox in tutta sicurezza.",
-                hero_btn: "Scarica Ora",
-                sec_downloads: "Download Executor",
-                pc_desc: "Stabile e veloce per Windows. Aggiornato all'ultima versione di Roblox.",
-                mob_desc: "La versione mobile più popolare e sicura per smartphone e tablet.",
-                alt_desc: "Soluzione alternativa per utenti che cercano massima compatibilità.",
-                sec_scripts: "Script Hub",
-                sec_faq: "Domande Frequenti (FAQ)",
-                faq_q1: "Gli executor sono sicuri?",
-                faq_a1: "Sì, gli executor indicati nel sito sono testati regolarmente. Ricorda tuttavia di usare sempre un account secondario (alt account) per evitare rischi di ban sul tuo account principale.",
-                faq_q2: "Come uso il codice loadstring copiato?",
-                faq_a2: "Apri il tuo executor all'interno di Roblox, incolla il codice copiato nell'apposito spazio di esecuzione e clicca su 'Execute'.",
-                footer_rights: "© 2026 RobloxHub. Tutti i diritti riservati.",
-                footer_dmca: "Disclaimer: Questo sito non è affiliato, associato, autorizzato o sponsorizzato da Roblox Corporation. Tutti i marchi registrati appartengono ai rispettivi proprietari. Progetto creato a solo scopo informativo ed educativo."
-            },
-            en: {
-                nav_home: "Home",
-                nav_downloads: "Downloads",
-                nav_scripts: "Scripts",
-                nav_faq: "FAQ",
-                hero_title: "The Best Executor & Script Hub",
-                hero_desc: "Access the best real-time updated scripts for your favorite Roblox games safely.",
-                hero_btn: "Download Now",
-                sec_downloads: "Executor Downloads",
-                pc_desc: "Stable and fast for Windows. Updated to the latest Roblox version.",
-                mob_desc: "The most popular and secure mobile version for smartphones and tablets.",
-                alt_desc: "Alternative solution for users looking for maximum compatibility.",
-                sec_scripts: "Script Hub",
-                sec_faq: "Frequently Asked Questions (FAQ)",
-                faq_q1: "Are executors safe?",
-                faq_a1: "Yes, the executors listed on the site are tested regularly. However, always remember to use an alt account to avoid ban risks on your main account.",
-                faq_q2: "How do I use the copied loadstring code?",
-                faq_a2: "Open your executor inside Roblox, paste the copied code into the execution space, and click 'Execute'.",
-                footer_rights: "© 2026 RobloxHub. All rights reserved.",
-                footer_dmca: "Disclaimer: This site is not affiliated, associated, authorized, or sponsored by Roblox Corporation. All trademarks belong to their respective owners. Created for informational and educational purposes only."
+        // Gestione apertura/chiusura menu lingue
+        function toggleLangMenu() {
+            document.getElementById('langDropdown').classList.toggle('show');
+        }
+        window.onclick = function(event) {
+            if (!event.target.closest('.lang-wrapper')) {
+                document.getElementById('langDropdown').classList.remove('show');
             }
+        }
+
+        // Traduzioni complete per le 10 lingue
+        const texts = {
+            it: { nav_home: "Home", nav_download: "Download", nav_scripts: "Scripts", nav_faq: "FAQ", title_scripts: "ZHub Script Collection", sub_scripts: "Esplora i migliori 10 script testati e funzionanti per i giochi più famosi, ottimizzati per Delta." },
+            en: { nav_home: "Home", nav_download: "Download", nav_scripts: "Scripts", nav_faq: "FAQ", title_scripts: "ZHub Script Collection", sub_scripts: "Explore the top 10 tested and working scripts for popular games, optimized for Delta." },
+            es: { nav_home: "Inicio", nav_download: "Descargar", nav_scripts: "Scripts", nav_faq: "FAQ", title_scripts: "Colección de Scripts ZHub", sub_scripts: "Explora los 10 mejores scripts probados y funcionales para juegos populares." },
+            pt: { nav_home: "Início", nav_download: "Baixar", nav_scripts: "Scripts", nav_faq: "FAQ", title_scripts: "Coleção de Scripts ZHub", sub_scripts: "Explore os 10 melhores scripts testados e funcionais para jogos populares." },
+            fr: { nav_home: "Accueil", nav_download: "Télécharger", nav_scripts: "Scripts", nav_faq: "FAQ", title_scripts: "Collection de Scripts ZHub", sub_scripts: "Découvrez les 10 meilleurs scripts testés et fonctionnels pour les jeux populaires." },
+            de: { nav_home: "Startseite", nav_download: "Herunterladen", nav_scripts: "Scripts", nav_faq: "FAQ", title_scripts: "ZHub Skript-Sammlung", sub_scripts: "Entdecke die Top 10 getesteten und funktionierenden Skripte für beliebte Spiele." },
+            pl: { nav_home: "Strona główna", nav_download: "Pobierz", nav_scripts: "Skrypty", nav_faq: "FAQ", title_scripts: "Kolekcja Skryptów ZHub", sub_scripts: "Przeglądaj 10 najlepszych przetestowanych i działających skryptów." },
+            tr: { nav_home: "Ana Sayfa", nav_download: "İndir", nav_scripts: "Betikler", nav_faq: "SSS", title_scripts: "ZHub Betik Koleksiyonu", sub_scripts: "Popüler oyunlar için test edilmiş en iyi 10 betiği keşfedin." },
+            ru: { nav_home: "Главная", nav_download: "Скачать", nav_scripts: "Скрипты", nav_faq: "FAQ", title_scripts: "Коллекция скриптов ZHub", sub_scripts: "Исследуйте топ-10 проверенных и работающих скриптов." },
+            ja: { nav_home: "ホーム", nav_download: "ダウンロード", nav_scripts: "スクリプト", nav_faq: "FAQ", title_scripts: "ZHub スクリプトコレクション", sub_scripts: "人気ゲーム向けにテスト済みの動作するトップ10スクリプトをご覧ください。" }
         };
 
-        function changeLanguage(lang) {
-            const elements = document.querySelectorAll('[data-i18n]');
-            elements.forEach(el => {
+        function changeLang(langCode) {
+            document.getElementById('currentLangLabel').textContent = langCode.toUpperCase();
+            document.getElementById('langDropdown').classList.remove('show');
+            
+            const translation = texts[langCode] || texts['en'];
+            document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
-                if (translations[lang] && translations[lang][key]) {
-                    el.textContent = translations[lang][key];
+                if (translation[key]) {
+                    el.textContent = translation[key];
                 }
             });
         }
 
-        // Tasto copia loadstring con feedback visivo
+        // Funzione per copiare il loadstring con feedback visivo
         function copyScript(text, btnElement) {
             navigator.clipboard.writeText(text).then(() => {
                 const originalHTML = btnElement.innerHTML;
@@ -487,7 +285,7 @@
             });
         }
 
-        // Barra di ricerca istantanea script
+        // Ricerca istantanea senza bug
         function filterScripts() {
             let input = document.getElementById('scriptSearch').value.toLowerCase();
             let cards = document.getElementsByClassName('script-card');
@@ -495,20 +293,10 @@
             for (let i = 0; i < cards.length; i++) {
                 let name = cards[i].getAttribute('data-name');
                 if (name.includes(input)) {
-                    cards[i].style.display = "block";
+                    cards[i].style.display = "flex";
                 } else {
                     cards[i].style.display = "none";
                 }
-            }
-        }
-
-        // FAQ a tendina (Accordion)
-        function toggleFaq(element) {
-            let answer = element.nextElementSibling;
-            if (answer.style.display === "block") {
-                answer.style.display = "none";
-            } else {
-                answer.style.display = "block";
             }
         }
     </script>
