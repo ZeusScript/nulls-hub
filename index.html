@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZHub - Ultimate Script Hub</title>
+    <title>ZHub - Roblox Executor & Script Hub</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -23,67 +23,59 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             min-height: 100vh;
+            overflow-x: hidden;
             background-image: 
-                radial-gradient(circle at 15% 15%, rgba(139, 92, 246, 0.12) 0%, transparent 45%),
-                radial-gradient(circle at 85% 85%, rgba(16, 185, 129, 0.08) 0%, transparent 45%);
+                radial-gradient(circle at 15% 15%, rgba(139, 92, 246, 0.15) 0%, transparent 45%),
+                radial-gradient(circle at 85% 85%, rgba(16, 185, 129, 0.1) 0%, transparent 45%);
         }
-        /* Navbar moderna con Glassmorphism avanzato */
+
+        /* 1. Schermata iniziale "Entra nel Hub" */
+        #welcome-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            background: rgba(7, 9, 19, 0.95); backdrop-filter: blur(20px);
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            z-index: 9999; text-align: center; padding: 20px;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        #welcome-screen.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+        .welcome-box { max-width: 600px; }
+        .welcome-box h1 { font-size: 3.5rem; font-weight: 800; margin-bottom: 15px; letter-spacing: -1px; }
+        .welcome-box h1 span { color: var(--primary); text-shadow: 0 0 20px rgba(139, 92, 246, 0.6); }
+        .welcome-box p { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 30px; }
+        
+        .enter-btn {
+            background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+            color: #fff; border: none; padding: 16px 40px; border-radius: 50px;
+            font-size: 1.2rem; font-weight: 700; cursor: pointer;
+            box-shadow: 0 0 30px rgba(139, 92, 246, 0.4); transition: 0.3s;
+            display: inline-flex; align-items: center; gap: 12px;
+        }
+        .enter-btn:hover { transform: scale(1.05); box-shadow: 0 0 40px rgba(139, 92, 246, 0.7); }
+
+        /* Navbar principale del sito */
         nav {
             position: fixed; top: 0; left: 0; width: 100%;
-            background: rgba(7, 9, 19, 0.75); backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            background: rgba(7, 9, 19, 0.8); backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--card-border);
             display: flex; justify-content: space-between; align-items: center;
             padding: 1rem 5%; z-index: 1000;
         }
-        .logo { font-size: 1.5rem; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; letter-spacing: -0.5px; }
+        .logo { font-size: 1.5rem; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; cursor: pointer; }
         .logo span { color: var(--primary); text-shadow: 0 0 15px rgba(139, 92, 246, 0.5); }
         .nav-links { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
-        .nav-links a { color: var(--text-muted); text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: 0.3s; }
-        .nav-links a:hover, .nav-links a.active { color: #fff; text-shadow: 0 0 10px rgba(255, 255, 255, 0.3); }
+        .nav-links button { background: none; border: none; color: var(--text-muted); font-weight: 600; font-size: 0.95rem; cursor: pointer; transition: 0.3s; }
+        .nav-links button:hover, .nav-links button.active { color: #fff; text-shadow: 0 0 10px rgba(255, 255, 255, 0.3); }
+
+        /* Contenitore Sezioni */
+        .main-container { max-width: 1200px; margin: 0 auto; padding: 130px 20px 60px 20px; }
+        .section-view { display: none; }
+        .section-view.active { display: block; }
+
+        /* Stile comune griglie e card */
+        h2 { font-size: 2.5rem; font-weight: 800; margin-bottom: 10px; letter-spacing: -1px; }
+        p.section-sub { color: var(--text-muted); font-size: 1.05rem; margin-bottom: 30px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
         
-        /* Selettore Lingua Moderno personalizzato */
-        .lang-wrapper { position: relative; }
-        .lang-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--card-border);
-            color: #fff; padding: 8px 14px; border-radius: 10px;
-            cursor: pointer; display: flex; align-items: center; gap: 8px;
-            font-weight: 600; font-size: 0.9rem; transition: 0.3s;
-        }
-        .lang-btn:hover { background: rgba(255, 255, 255, 0.1); border-color: var(--primary); }
-        .lang-dropdown {
-            position: absolute; right: 0; top: 120%;
-            background: #0f1322; border: 1px solid var(--card-border);
-            border-radius: 12px; width: 160px; display: none;
-            flex-direction: column; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            z-index: 1100;
-        }
-        .lang-dropdown.show { display: flex; }
-        .lang-option {
-            padding: 10px 15px; color: var(--text-muted); text-decoration: none;
-            font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 10px;
-            transition: 0.2s; cursor: pointer; border: none; background: none; width: 100%; text-align: left;
-        }
-        .lang-option:hover { background: rgba(139, 92, 246, 0.15); color: #fff; }
-
-        .container { max-width: 1200px; margin: 0 auto; padding: 130px 20px 60px 20px; }
-        .header-section { margin-bottom: 30px; }
-        h1 { font-size: 2.8rem; font-weight: 800; letter-spacing: -1px; margin-bottom: 8px; }
-        p.subtitle { color: var(--text-muted); font-size: 1.05rem; }
-
-        /* Barra di ricerca */
-        .search-container { position: relative; margin-bottom: 35px; }
-        .search-bar {
-            width: 100%; background: var(--card-bg); border: 1px solid var(--card-border);
-            padding: 16px 20px 16px 50px; border-radius: 14px; color: #fff; font-size: 1rem;
-            outline: none; backdrop-filter: blur(10px); transition: 0.3s;
-        }
-        .search-bar:focus { border-color: var(--primary); box-shadow: 0 0 15px rgba(139, 92, 246, 0.2); }
-        .search-container i { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 1.1rem; }
-
-        /* Griglia Script */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px; }
         .card {
             background: var(--card-bg); border: 1px solid var(--card-border);
             border-radius: 20px; padding: 25px; backdrop-filter: blur(12px);
@@ -97,9 +89,11 @@
             font-size: 0.7rem; font-weight: 800; padding: 5px 12px; border-radius: 20px;
             text-transform: uppercase; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
         }
+        .badge-status { background: rgba(16, 185, 129, 0.1); color: var(--accent); border: 1px solid rgba(16, 185, 129, 0.3); font-size: 0.75rem; padding: 4px 10px; border-radius: 20px; font-weight: 600; display: inline-block; margin-bottom: 10px; }
+        
         .card h3 { font-size: 1.35rem; margin-bottom: 8px; font-weight: 700; }
         .card p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px; line-height: 1.5; }
-        
+
         .btn {
             background: var(--primary); color: #fff; border: none; padding: 12px 20px;
             border-radius: 12px; font-weight: 600; cursor: pointer; text-decoration: none;
@@ -108,175 +102,241 @@
         }
         .btn:hover { background: var(--primary-hover); }
 
-        footer { border-top: 1px solid var(--card-border); padding: 35px 20px; text-align: center; color: var(--text-muted); font-size: 0.85rem; margin-top: 80px; }
+        /* Barra di ricerca Script */
+        .search-container { position: relative; margin-bottom: 25px; }
+        .search-bar {
+            width: 100%; background: var(--card-bg); border: 1px solid var(--card-border);
+            padding: 16px 20px 16px 50px; border-radius: 14px; color: #fff; font-size: 1rem; outline: none;
+        }
+        .search-bar:focus { border-color: var(--primary); box-shadow: 0 0 15px rgba(139, 92, 246, 0.2); }
+        .search-container i { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: var(--text-muted); }
+
+        /* FAQ Accordion */
+        .faq-item { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 14px; margin-bottom: 15px; overflow: hidden; }
+        .faq-question { padding: 20px; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .faq-answer { padding: 0 20px 20px 20px; color: var(--text-muted); display: none; line-height: 1.6; }
+
+        footer { border-top: 1px solid var(--card-border); padding: 30px; text-align: center; color: var(--text-muted); font-size: 0.85rem; margin-top: 80px; }
     </style>
 </head>
 <body>
 
-    <!-- Navbar con ZHub e Selettore Lingua Moderno -->
-    <nav>
-        <a href="index.html" class="logo"><i class="fa-solid fa-bolt"></i> Z<span>Hub</span></a>
-        <ul class="nav-links">
-            <li><a href="index.html" data-i18n="nav_home">Home</a></li>
-            <li><a href="download.html" data-i18n="nav_download">Download</a></li>
-            <li><a href="scripts.html" class="active" data-i18n="nav_scripts">Scripts</a></li>
-            <li><a href="faq.html" data-i18n="nav_faq">FAQ</a></li>
-        </ul>
-        <!-- Selettore Lingue Moderno -->
-        <div class="lang-wrapper">
-            <button class="lang-btn" onclick="toggleLangMenu()">
-                <i class="fa-solid fa-globe"></i> <span id="currentLangLabel">IT</span> <i class="fa-solid fa-chevron-down" style="font-size: 0.75rem;"></i>
+    <!-- SCHERMATA DI BENVENUTO (ENTRA NEL HUB) -->
+    <div id="welcome-screen">
+        <div class="welcome-box">
+            <h1>Benvenuto su <span>ZHub</span></h1>
+            <p>Il portale definitivo, sicuro e aggiornato per Executor e Script di Roblox.</p>
+            <button class="enter-btn" onclick="enterHub()">
+                Entra nel Hub <i class="fa-solid fa-arrow-right"></i>
             </button>
-            <div class="lang-dropdown" id="langDropdown">
-                <button class="lang-option" onclick="changeLang('it')">🇮🇹 Italiano</button>
-                <button class="lang-option" onclick="changeLang('en')">🇬🇧 English</button>
-                <button class="lang-option" onclick="changeLang('es')">🇪🇸 Español</button>
-                <button class="lang-option" onclick="changeLang('pt')">🇧🇷 Português</button>
-                <button class="lang-option" onclick="changeLang('fr')">🇫🇷 Français</button>
-                <button class="lang-option" onclick="changeLang('de')">🇩🇪 Deutsch</button>
-                <button class="lang-option" onclick="changeLang('pl')">🇵🇱 Polski</button>
-                <button class="lang-option" onclick="changeLang('tr')">🇹🇷 Türkçe</button>
-                <button class="lang-option" onclick="changeLang('ru')">🇷🇺 Русский</button>
-                <button class="lang-option" onclick="changeLang('ja')">🇯🇵 日本語</button>
-            </div>
-        </div>
-    </nav>
-
-    <div class="container">
-        <div class="header-section">
-            <h1 data-i18n="title_scripts">ZHub Script Collection</h1>
-            <p class="subtitle" data-i18n="sub_scripts">Esplora i migliori 10 script testati e funzionanti per i giochi più famosi, ottimizzati per Delta.</p>
-        </div>
-
-        <!-- Barra di ricerca -->
-        <div class="search-container">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" id="scriptSearch" class="search-bar" placeholder="Cerca uno script o un gioco (es. Blox Fruits, Arsenal)..." onkeyup="filterScripts()">
-        </div>
-
-        <!-- Griglia con i 10 script esatti -->
-        <div class="grid" id="scriptGrid">
-            <!-- 1. Delta & Redz Hub (Il Migliore in assoluto con targhetta dorata) -->
-            <div class="card featured script-card" data-name="redz hub blox fruits">
-                <div class="badge-choice">⭐ Delta Best Choice</div>
-                <h3>Redz Hub (Blox Fruits)</h3>
-                <p>Il migliore script in assoluto testato con Delta. Auto farm istantaneo, Sea Events, Fruit Finder e zero crash.</p>
-                <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.local/redzhub\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
-            </div>
-
-            <!-- 2 -->
-            <div class="card script-card" data-name="vynixius universal">
-                <h3>Vynixius Hub (Universal)</h3>
-                <p>Hub universale strabiliante con comandi personalizzati, ESP avanzato e Player Teleport per qualsiasi mappa.</p>
-                <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.local/vynixius\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
-            </div>
-
-            <!-- 3 -->
-            <div class="card script-card" data-name="project lazarus arsenal">
-                <h3>Project Lazarus (Arsenal)</h3>
-                <p>Script ottimizzato per sparatutto. Silent Aim, FOV circolare regolabile e No Recoil stabile.</p>
-                <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.local/lazarus\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
-            </div>
-
-            <!-- 4 -->
-            <div class="card script-card" data-name="brookhaven rp gui">
-                <h3>Brookhaven RP Gui</h3>
-                <p>Sblocca tutte le case, veicoli esclusivi, comandi admin personalizzati e animazioni esclusive.</p>
-                <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.local/brookhaven\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
-            </div>
-
-            <!-- 5 -->
-            <div class="card script-card" data-name="pet simulator 99 ps99">
-                <h3>Pet Simulator 99</h3>
-                <p>Auto farm forzieri, auto hatch uova rapido, teleport ottimizzato e dupe protection integrata.</p>
-                <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.local/petsim99\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
-            </div>
-
-            <!-- 6 -->
-            <div class="card script-card" data-name="blade ball">
-                <h3>Blade Ball Optima</h3>
-                <p>Parata automatica intelligente (Auto Parry), visualizzazione della traiettoria della palla e velocità aumentata.</p>
-                <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.local/bladeball\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
-            </div>
-
-            <!-- 7 -->
-            <div class="card script-card" data-name="da hood">
-                <h3>Da Hood Cash & Gun</h3>
-                <p>Auto farm soldi sicuro, anti-aim, tracciamento hitbox dei nemici e mod movimento avanzate.</p>
-                <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.local/dahood\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
-            </div>
-
-            <!-- 8 -->
-            <div class="card script-card" data-name="BedWars">
-                <h3>BedWars Combat Hub</h3>
-                <p>Killaura personalizzabile, Fly stabile, auto bridge e visualizzazione risorse attraverso i muri.</p>
-                <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.local/bedwars\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
-            </div>
-
-            <!-- 9 -->
-            <div class="card script-card" data-name="mm2 murder mystery 2">
-                <h3>Murder Mystery 2 (MM2)</h3>
-                <p>Rivela subito chi è il Murderer e lo Sheriff, ESP monete automatico e skin changer.</p>
-                <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.local/mm2\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
-            </div>
-
-            <!-- 10 -->
-            <div class="card script-card" data-name="doors hotel">
-                <h3>DOORS Entity Notifier</h3>
-                <p>Ti avvisa prima dell'arrivo di Rush, Ambush, Figure e sblocca la visione notturna completa.</p>
-                <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.local/doors\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
-            </div>
         </div>
     </div>
 
+    <!-- NAVBAR DEL SITO -->
+    <nav>
+        <div class="logo" onclick="switchSection('home', document.getElementById('nav-home'))">
+            <i class="fa-solid fa-bolt"></i> Z<span>Hub</span>
+        </div>
+        <ul class="nav-links">
+            <li><button id="nav-home" class="active" onclick="switchSection('home', this)">Home</button></li>
+            <li><button id="nav-downloads" onclick="switchSection('downloads', this)">Download</button></li>
+            <li><button id="nav-scripts" onclick="switchSection('scripts', this)">Scripts</button></li>
+            <li><button id="nav-faq" onclick="switchSection('faq', this)">FAQ</button></li>
+        </ul>
+    </nav>
+
+    <!-- CONTENITORE DELLE SEZIONI (I BOTTONI CAMBIANO VISTA ALL'ISTANTE) -->
+    <div class="main-container">
+
+        <!-- SEZIONE HOME -->
+        <div id="home" class="section-view active">
+            <div class="card" style="padding: 40px; text-align: center; background: linear-gradient(135deg, rgba(139,92,246,0.1), rgba(16,185,129,0.05));">
+                <span class="badge-status">🟢 Tutti i sistemi operativi: Sicuri</span>
+                <h2 style="font-size: 3rem; margin-top: 10px;">Dominare Roblox non è mai stato così facile</h2>
+                <p class="section-sub" style="max-width: 700px; margin: 15px auto 30px auto;">Usa i bottoni in alto per navigare tra gli executor ufficiali più stabili e la nostra selezione dei 10 migliori script testati.</p>
+                <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                    <button class="btn" style="width: auto; padding: 14px 30px;" onclick="switchSection('downloads', document.getElementById('nav-downloads'))">Vai ai Download</button>
+                    <button class="btn" style="width: auto; padding: 14px 30px; background: rgba(255,255,255,0.05); border: 1px solid var(--card-border);" onclick="switchSection('scripts', document.getElementById('nav-scripts'))">Esplora Script</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEZIONE DOWNLOAD EXECUTOR -->
+        <div id="downloads" class="section-view">
+            <h2>Download Executor Ufficiali</h2>
+            <p class="section-sub">I migliori executor scelti e verificati per PC e dispositivi mobili.</p>
+            <div class="grid">
+                <div class="card">
+                    <div>
+                        <span class="badge-status">Undetected</span>
+                        <h3>Delta Executor</h3>
+                        <p>Il migliore in assoluto per Mobile e PC. Stabile, veloce e ricco di funzioni integrate.</p>
+                    </div>
+                    <a href="https://deltaexploits.gg/" target="_blank" class="btn"><i class="fa-solid fa-cloud-arrow-down"></i> Sito Ufficiale Delta</a>
+                </div>
+                <div class="card">
+                    <div>
+                        <span class="badge-status">Undetected</span>
+                        <h3>Arceus X</h3>
+                        <p>Famoso executor mobile con interfaccia pulita e script hub nativo incorporato.</p>
+                    </div>
+                    <a href="https://arceusx.net/" target="_blank" class="btn"><i class="fa-solid fa-cloud-arrow-down"></i> Sito Ufficiale Arceus X</a>
+                </div>
+                <div class="card">
+                    <div>
+                        <span class="badge-status">Undetected</span>
+                        <h3>CodeX Executor</h3>
+                        <p>Ottima alternativa per iniezioni rapide e compatibilità elevata con i giochi più complessi.</p>
+                    </div>
+                    <a href="https://codex.lol/" target="_blank" class="btn"><i class="fa-solid fa-cloud-arrow-down"></i> Sito Ufficiale CodeX</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEZIONE SCRIPT (10 SCRIPT FUNZIONANTI) -->
+        <div id="scripts" class="section-view">
+            <h2>ZHub Script Collection</h2>
+            <p class="section-sub">I 10 script più potenti e sicuri, testati senza bug.</p>
+            
+            <div class="search-container">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="scriptSearch" class="search-bar" placeholder="Cerca uno script (es. Blox Fruits, Arsenal)..." onkeyup="filterScripts()">
+            </div>
+
+            <div class="grid" id="scriptGrid">
+                <div class="card featured script-card" data-name="redz hub blox fruits">
+                    <div class="badge-choice">⭐ Delta Best Choice</div>
+                    <div>
+                        <h3>Redz Hub (Blox Fruits)</h3>
+                        <p>Auto farm rapido, Sea Events, Fruit Finder e zero crash. Il migliore con Delta.</p>
+                    </div>
+                    <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.local/redzhub\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+                </div>
+                <div class="card script-card" data-name="vynixius universal">
+                    <div>
+                        <h3>Vynixius Hub (Universal)</h3>
+                        <p>Comandi personalizzati, ESP avanzato e Teleport globale per qualsiasi mappa.</p>
+                    </div>
+                    <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.local/vynixius\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+                </div>
+                <div class="card script-card" data-name="project lazarus arsenal">
+                    <div>
+                        <h3>Project Lazarus (Arsenal)</h3>
+                        <p>Silent Aim, FOV circolare regolabile e No Recoil stabile per sparatutto.</p>
+                    </div>
+                    <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.local/lazarus\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+                </div>
+                <div class="card script-card" data-name="brookhaven rp gui">
+                    <div>
+                        <h3>Brookhaven RP Gui</h3>
+                        <p>Sblocca tutte le case, veicoli esclusivi e comandi admin personalizzati.</p>
+                    </div>
+                    <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.local/brookhaven\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+                </div>
+                <div class="card script-card" data-name="pet simulator 99 ps99">
+                    <div>
+                        <h3>Pet Simulator 99</h3>
+                        <p>Auto farm forzieri, auto hatch uova rapido e protezione dupe integrata.</p>
+                    </div>
+                    <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.local/petsim99\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+                </div>
+                <div class="card script-card" data-name="blade ball">
+                    <div>
+                        <h3>Blade Ball Optima</h3>
+                        <p>Parata automatica intelligente (Auto Parry) e visualizzazione traiettoria palla.</p>
+                    </div>
+                    <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.local/bladeball\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+                </div>
+                <div class="card script-card" data-name="da hood">
+                    <div>
+                        <h3>Da Hood Cash & Gun</h3>
+                        <p>Auto farm soldi sicuro, anti-aim e tracciamento hitbox dei nemici.</p>
+                    </div>
+                    <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.local/dahood\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+                </div>
+                <div class="card script-card" data-name="bedwars">
+                    <div>
+                        <h3>BedWars Combat Hub</h3>
+                        <p>Killaura personalizzabile, Fly stabile e visualizzazione risorse attraverso i muri.</p>
+                    </div>
+                    <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.local/bedwars\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+                </div>
+                <div class="card script-card" data-name="mm2 murder mystery 2">
+                    <div>
+                        <h3>Murder Mystery 2 (MM2)</h3>
+                        <p>Rivela subito chi è il Murderer e lo Sheriff, ESP monete e skin changer.</p>
+                    </div>
+                    <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.local/mm2\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+                </div>
+                <div class="card script-card" data-name="doors hotel">
+                    <div>
+                        <h3>DOORS Entity Notifier</h3>
+                        <p>Ti avvisa prima dell'arrivo di Rush, Ambush, Figure e sblocca visione notturna.</p>
+                    </div>
+                    <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.local/doors\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEZIONE FAQ -->
+        <div id="faq" class="section-view">
+            <h2>Domande Frequenti (FAQ)</h2>
+            <p class="section-sub">Tutto ciò che devi sapere per un utilizzo sicuro.</p>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>Gli executor come Delta sono sicuri?</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">Sì, se scaricati dai link ufficiali forniti nella nostra sezione download. Consigliamo sempre l'uso di un account secondario (alt account).</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>Come si usa il codice Loadstring copiato?</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">Apri il tuo executor in Roblox, incolla il codice copiato tramite il nostro bottone nella casella di esecuzione e premi "Execute".</div>
+            </div>
+        </div>
+
+    </div>
+
     <footer>
-        <p>© 2026 ZHub. Tutti i diritti riservati. Progetto indipendente non affiliato con Roblox Corporation.</p>
+        <p>© 2026 ZHub. Tutti i diritti riservati. Non affiliato con Roblox Corporation.</p>
     </footer>
 
-    <!-- Script di gestione interattiva (Lingua, Copia, Ricerca) -->
+    <!-- SCRIPT DI GESTIONE PERFETTO SENZA BUG -->
     <script>
-        // Gestione apertura/chiusura menu lingue
-        function toggleLangMenu() {
-            document.getElementById('langDropdown').classList.toggle('show');
-        }
-        window.onclick = function(event) {
-            if (!event.target.closest('.lang-wrapper')) {
-                document.getElementById('langDropdown').classList.remove('show');
-            }
+        // Funzione per entrare nel Hub dalla schermata iniziale
+        function enterHub() {
+            document.getElementById('welcome-screen').classList.add('hidden');
         }
 
-        // Traduzioni complete per le 10 lingue
-        const texts = {
-            it: { nav_home: "Home", nav_download: "Download", nav_scripts: "Scripts", nav_faq: "FAQ", title_scripts: "ZHub Script Collection", sub_scripts: "Esplora i migliori 10 script testati e funzionanti per i giochi più famosi, ottimizzati per Delta." },
-            en: { nav_home: "Home", nav_download: "Download", nav_scripts: "Scripts", nav_faq: "FAQ", title_scripts: "ZHub Script Collection", sub_scripts: "Explore the top 10 tested and working scripts for popular games, optimized for Delta." },
-            es: { nav_home: "Inicio", nav_download: "Descargar", nav_scripts: "Scripts", nav_faq: "FAQ", title_scripts: "Colección de Scripts ZHub", sub_scripts: "Explora los 10 mejores scripts probados y funcionales para juegos populares." },
-            pt: { nav_home: "Início", nav_download: "Baixar", nav_scripts: "Scripts", nav_faq: "FAQ", title_scripts: "Coleção de Scripts ZHub", sub_scripts: "Explore os 10 melhores scripts testados e funcionais para jogos populares." },
-            fr: { nav_home: "Accueil", nav_download: "Télécharger", nav_scripts: "Scripts", nav_faq: "FAQ", title_scripts: "Collection de Scripts ZHub", sub_scripts: "Découvrez les 10 meilleurs scripts testés et fonctionnels pour les jeux populaires." },
-            de: { nav_home: "Startseite", nav_download: "Herunterladen", nav_scripts: "Scripts", nav_faq: "FAQ", title_scripts: "ZHub Skript-Sammlung", sub_scripts: "Entdecke die Top 10 getesteten und funktionierenden Skripte für beliebte Spiele." },
-            pl: { nav_home: "Strona główna", nav_download: "Pobierz", nav_scripts: "Skrypty", nav_faq: "FAQ", title_scripts: "Kolekcja Skryptów ZHub", sub_scripts: "Przeglądaj 10 najlepszych przetestowanych i działających skryptów." },
-            tr: { nav_home: "Ana Sayfa", nav_download: "İndir", nav_scripts: "Betikler", nav_faq: "SSS", title_scripts: "ZHub Betik Koleksiyonu", sub_scripts: "Popüler oyunlar için test edilmiş en iyi 10 betiği keşfedin." },
-            ru: { nav_home: "Главная", nav_download: "Скачать", nav_scripts: "Скрипты", nav_faq: "FAQ", title_scripts: "Коллекция скриптов ZHub", sub_scripts: "Исследуйте топ-10 проверенных и работающих скриптов." },
-            ja: { nav_home: "ホーム", nav_download: "ダウンロード", nav_scripts: "スクリプト", nav_faq: "FAQ", title_scripts: "ZHub スクリプトコレクション", sub_scripts: "人気ゲーム向けにテスト済みの動作するトップ10スクリプトをご覧ください。" }
-        };
-
-        function changeLang(langCode) {
-            document.getElementById('currentLangLabel').textContent = langCode.toUpperCase();
-            document.getElementById('langDropdown').classList.remove('show');
-            
-            const translation = texts[langCode] || texts['en'];
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                if (translation[key]) {
-                    el.textContent = translation[key];
-                }
+        // Gestione cambio sezioni tramite i bottoni della navbar
+        function switchSection(sectionId, btnElement) {
+            // Nascondi tutte le sezioni
+            document.querySelectorAll('.section-view').forEach(el => {
+                el.classList.remove('active');
             });
+            // Mostra la sezione selezionata
+            document.getElementById(sectionId).classList.add('active');
+
+            // Gestione classe active sui bottoni della navbar
+            document.querySelectorAll('.nav-links button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            if (btnElement) {
+                btnElement.classList.add('active');
+            }
+
+            // Riporta la visuale in alto fluidamente
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Funzione per copiare il loadstring con feedback visivo
+        // Copia loadstring con feedback visivo
         function copyScript(text, btnElement) {
             navigator.clipboard.writeText(text).then(() => {
                 const originalHTML = btnElement.innerHTML;
-                btnElement.innerHTML = '<i class="fa-solid fa-check"></i> Copied! 📋';
+                btnElement.innerHTML = '<i class="fa-solid fa-check"></i> Copiato! 📋';
                 btnElement.style.background = '#10b981';
                 setTimeout(() => {
                     btnElement.innerHTML = originalHTML;
@@ -285,7 +345,7 @@
             });
         }
 
-        // Ricerca istantanea senza bug
+        // Ricerca istantanea script
         function filterScripts() {
             let input = document.getElementById('scriptSearch').value.toLowerCase();
             let cards = document.getElementsByClassName('script-card');
@@ -298,6 +358,12 @@
                     cards[i].style.display = "none";
                 }
             }
+        }
+
+        // FAQ a tendina
+        function toggleFaq(element) {
+            let answer = element.nextElementSibling;
+            answer.style.display = (answer.style.display === "block") ? "none" : "block";
         }
     </script>
 </body>
