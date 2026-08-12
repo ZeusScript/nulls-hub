@@ -3,20 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZHub - Ultimate Roblox Executor & Script Hub</title>
+    <title>ZHub - Next-Gen Roblox Executor & Script Hub</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg-color: #070913;
-            --card-bg: rgba(255, 255, 255, 0.02);
-            --card-border: rgba(255, 255, 255, 0.07);
+            --bg-color: #03040b;
+            --card-bg: rgba(15, 23, 42, 0.65);
+            --card-border: rgba(139, 92, 246, 0.15);
             --primary: #8b5cf6;
             --primary-hover: #7c3aed;
-            --accent: #10b981;
+            --primary-glow: rgba(139, 92, 246, 0.35);
+            --accent: #00ffa3;
             --gold: #f59e0b;
-            --text-main: #f3f4f6;
-            --text-muted: #9ca3af;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
         body {
@@ -25,172 +26,188 @@
             min-height: 100vh;
             overflow-x: hidden;
             background-image: 
-                radial-gradient(circle at 15% 15%, rgba(139, 92, 246, 0.15) 0%, transparent 45%),
-                radial-gradient(circle at 85% 85%, rgba(16, 185, 129, 0.1) 0%, transparent 45%);
+                radial-gradient(circle at 10% 10%, rgba(139, 92, 246, 0.18) 0%, transparent 40%),
+                radial-gradient(circle at 90% 90%, rgba(0, 255, 163, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(15, 23, 42, 0.8) 0%, transparent 100%);
         }
 
         #welcome-screen {
             position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
-            background: rgba(7, 9, 19, 0.96); backdrop-filter: blur(20px);
+            background: rgba(3, 4, 11, 0.95); backdrop-filter: blur(25px);
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             z-index: 9999; text-align: center; padding: 20px;
             transition: opacity 0.5s ease, visibility 0.5s ease;
         }
         #welcome-screen.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-        .welcome-box { max-width: 600px; }
-        .welcome-box h1 { font-size: 3.5rem; font-weight: 800; margin-bottom: 15px; letter-spacing: -1px; }
-        .welcome-box h1 span { color: var(--primary); text-shadow: 0 0 20px rgba(139, 92, 246, 0.6); }
-        .welcome-box p { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 30px; }
+        .welcome-box { max-width: 650px; }
+        .welcome-box h1 { font-size: 3.8rem; font-weight: 800; margin-bottom: 15px; letter-spacing: -1.5px; }
+        .welcome-box h1 span { background: linear-gradient(135deg, #a78bfa, var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 25px rgba(139,92,246,0.5)); }
+        .welcome-box p { color: var(--text-muted); font-size: 1.15rem; margin-bottom: 35px; line-height: 1.6; }
         
         .enter-btn {
             background: linear-gradient(135deg, var(--primary), var(--primary-hover));
-            color: #fff; border: none; padding: 16px 40px; border-radius: 50px;
-            font-size: 1.2rem; font-weight: 700; cursor: pointer;
-            box-shadow: 0 0 30px rgba(139, 92, 246, 0.4); transition: 0.3s;
+            color: #fff; border: none; padding: 18px 45px; border-radius: 50px;
+            font-size: 1.25rem; font-weight: 700; cursor: pointer;
+            box-shadow: 0 0 35px var(--primary-glow); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             display: inline-flex; align-items: center; gap: 12px;
         }
-        .enter-btn:hover { transform: scale(1.05); box-shadow: 0 0 40px rgba(139, 92, 246, 0.7); }
+        .enter-btn:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 0 50px rgba(139, 92, 246, 0.6); }
 
         nav {
             position: fixed; top: 0; left: 0; width: 100%;
-            background: rgba(7, 9, 19, 0.85); backdrop-filter: blur(16px);
+            background: rgba(3, 4, 11, 0.8); backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--card-border);
             display: flex; justify-content: space-between; align-items: center;
-            padding: 0.8rem 3%; z-index: 1000; gap: 15px;
+            padding: 0.9rem 3%; z-index: 1000; gap: 15px;
         }
-        .logo { font-size: 1.5rem; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; cursor: pointer; white-space: nowrap; }
-        .logo span { color: var(--primary); text-shadow: 0 0 15px rgba(139, 92, 246, 0.5); }
+        .logo { font-size: 1.6rem; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; cursor: pointer; white-space: nowrap; }
+        .logo span { background: linear-gradient(135deg, #a78bfa, var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         
         .nav-center-wrapper {
             flex: 1; overflow-x: auto; white-space: nowrap;
             scrollbar-width: thin; scrollbar-color: rgba(139,92,246,0.4) transparent;
         }
-        .nav-center-wrapper::-webkit-scrollbar { height: 4px; }
-        .nav-center { display: inline-flex; gap: 1.2rem; list-style: none; align-items: center; padding: 4px 0; }
-        .nav-center button, .nav-center a { background: none; border: none; color: var(--text-muted); font-weight: 600; font-size: 0.92rem; cursor: pointer; transition: 0.3s; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
-        .nav-center button:hover, .nav-center button.active, .nav-center a:hover { color: #fff; }
+        .nav-center-wrapper::-webkit-scrollbar { height: 3px; }
+        .nav-center { display: inline-flex; gap: 1rem; list-style: none; align-items: center; padding: 4px 0; }
+        .nav-center button {
+            background: rgba(255, 255, 255, 0.02); border: 1px solid transparent;
+            color: var(--text-muted); font-weight: 600; font-size: 0.9rem; cursor: pointer;
+            transition: 0.3s; padding: 8px 16px; border-radius: 12px; display: inline-flex; align-items: center; gap: 8px;
+        }
+        .nav-center button:hover, .nav-center button.active {
+            color: #fff; background: rgba(139, 92, 246, 0.1); border-color: rgba(139, 92, 246, 0.3);
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.15);
+        }
 
         .nav-right { display: flex; align-items: center; gap: 15px; white-space: nowrap; }
         .lang-wrapper { position: relative; }
         .lang-btn {
-            background: rgba(255, 255, 255, 0.05); border: 1px solid var(--card-border);
-            color: #fff; padding: 7px 12px; border-radius: 10px; cursor: pointer;
-            display: flex; align-items: center; gap: 7px; font-weight: 600; font-size: 0.85rem; transition: 0.3s;
+            background: rgba(255, 255, 255, 0.04); border: 1px solid var(--card-border);
+            color: #fff; padding: 8px 14px; border-radius: 12px; cursor: pointer;
+            display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 0.85rem; transition: 0.3s;
         }
-        .lang-btn:hover { background: rgba(255, 255, 255, 0.1); border-color: var(--primary); }
+        .lang-btn:hover { background: rgba(255, 255, 255, 0.08); border-color: var(--primary); }
         
         .lang-dropdown {
-            position: absolute; right: 0; top: 130%; background: #0f1322;
-            border: 1px solid var(--card-border); border-radius: 12px; width: 170px;
-            max-height: 220px; overflow-y: auto; display: none; flex-direction: column;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6); z-index: 1100;
+            position: absolute; right: 0; top: 135%; background: rgba(11, 15, 30, 0.95);
+            backdrop-filter: blur(20px); border: 1px solid var(--card-border); border-radius: 14px; width: 180px;
+            max-height: 240px; overflow-y: auto; display: none; flex-direction: column;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.7); z-index: 1100; padding: 6px;
         }
         .lang-dropdown.show { display: flex; }
-        .lang-dropdown::-webkit-scrollbar { width: 6px; }
+        .lang-dropdown::-webkit-scrollbar { width: 5px; }
         .lang-dropdown::-webkit-scrollbar-thumb { background: rgba(139,92,246,0.4); border-radius: 10px; }
 
         .lang-option {
-            padding: 10px 14px; color: var(--text-muted); font-size: 0.82rem; font-weight: 600;
-            display: flex; align-items: center; gap: 10px; transition: 0.2s; cursor: pointer; border: none; background: none; width: 100%; text-align: left;
+            padding: 10px 12px; color: var(--text-muted); font-size: 0.82rem; font-weight: 600;
+            display: flex; align-items: center; gap: 10px; transition: 0.2s; cursor: pointer; border: none; background: none; width: 100%; text-align: left; border-radius: 8px;
         }
-        .lang-option:hover { background: rgba(139, 92, 246, 0.15); color: #fff; }
+        .lang-option:hover { background: rgba(139, 92, 246, 0.2); color: #fff; }
 
-        .main-container { max-width: 1200px; margin: 0 auto; padding: 120px 20px 60px 20px; }
+        .main-container { max-width: 1240px; margin: 0 auto; padding: 130px 24px 60px 24px; }
         .section-view { display: none; }
-        .section-view.active { display: block; }
+        .section-view.active { display: block; animation: fadeIn 0.4s ease forwards; }
 
-        h2 { font-size: 2.3rem; font-weight: 800; margin-bottom: 8px; letter-spacing: -1px; }
-        p.section-sub { color: var(--text-muted); font-size: 1.02rem; margin-bottom: 25px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 22px; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 { font-size: 2.5rem; font-weight: 800; margin-bottom: 8px; letter-spacing: -1px; }
+        p.section-sub { color: var(--text-muted); font-size: 1.05rem; margin-bottom: 30px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px; }
         
         .card {
             background: var(--card-bg); border: 1px solid var(--card-border);
-            border-radius: 18px; padding: 22px; backdrop-filter: blur(12px);
-            position: relative; transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between;
+            border-radius: 20px; padding: 26px; backdrop-filter: blur(16px);
+            position: relative; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column; justify-content: space-between;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
         .card.featured-delta {
-            border-color: var(--gold);
-            background: linear-gradient(135deg, rgba(245, 158, 11, 0.05), rgba(7, 9, 19, 0.4));
-            box-shadow: 0 0 30px rgba(245, 158, 11, 0.12);
+            border-color: rgba(245, 158, 11, 0.4);
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.07), rgba(15, 23, 42, 0.75));
+            box-shadow: 0 0 40px rgba(245, 158, 11, 0.15);
         }
-        .card:hover { border-color: rgba(139, 92, 246, 0.4); transform: translateY(-4px); }
+        .card:hover { border-color: rgba(139, 92, 246, 0.5); transform: translateY(-5px); box-shadow: 0 15px 40px rgba(139, 92, 246, 0.2); }
         
         /* Stile Cartelle Giochi */
         .folder-card {
-            background: linear-gradient(135deg, rgba(139, 92, 246, 0.06), rgba(255, 255, 255, 0.02));
-            border: 1px solid rgba(139, 92, 246, 0.2);
-            border-radius: 18px; padding: 25px; cursor: pointer; transition: 0.3s;
-            display: flex; align-items: center; gap: 20px;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(15, 23, 42, 0.7));
+            border: 1px solid rgba(139, 92, 246, 0.25);
+            border-radius: 20px; padding: 26px; cursor: pointer; transition: all 0.3s ease;
+            display: flex; align-items: center; gap: 22px; backdrop-filter: blur(16px);
         }
         .folder-card:hover {
             border-color: var(--primary);
-            transform: translateY(-4px);
-            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(139, 92, 246, 0.25);
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(15, 23, 42, 0.8));
         }
         .folder-icon {
-            font-size: 2.5rem; color: var(--gold);
-            background: rgba(245, 158, 11, 0.1); width: 70px; height: 70px;
-            border-radius: 14px; display: flex; align-items: center; justify-content: center;
+            font-size: 2.3rem; color: var(--gold);
+            background: rgba(245, 158, 11, 0.12); width: 75px; height: 75px;
+            border-radius: 16px; display: flex; align-items: center; justify-content: center;
+            border: 1px solid rgba(245, 158, 11, 0.3); box-shadow: 0 0 20px rgba(245, 158, 11, 0.1);
         }
-        .folder-info h3 { font-size: 1.25rem; margin-bottom: 5px; }
-        .folder-info p { color: var(--text-muted); font-size: 0.85rem; }
+        .folder-info h3 { font-size: 1.3rem; margin-bottom: 6px; font-weight: 700; }
+        .folder-info p { color: var(--text-muted); font-size: 0.88rem; }
 
         .back-folder-btn {
-            background: rgba(255, 255, 255, 0.05); border: 1px solid var(--card-border);
-            color: #fff; padding: 10px 20px; border-radius: 10px; cursor: pointer;
+            background: rgba(255, 255, 255, 0.04); border: 1px solid var(--card-border);
+            color: #fff; padding: 12px 22px; border-radius: 12px; cursor: pointer;
             font-weight: 600; display: inline-flex; align-items: center; gap: 8px; margin-bottom: 25px; transition: 0.3s;
         }
-        .back-folder-btn:hover { background: rgba(255, 255, 255, 0.1); border-color: var(--primary); }
+        .back-folder-btn:hover { background: rgba(139, 92, 246, 0.15); border-color: var(--primary); transform: translateX(-3px); }
 
         .badge-delta {
-            position: absolute; top: -14px; right: 20px; background: linear-gradient(135deg, #f59e0b, #d97706); color: #000;
+            position: absolute; top: -14px; right: 22px; background: linear-gradient(135deg, #f59e0b, #d97706); color: #000;
             font-size: 0.72rem; font-weight: 800; padding: 5px 14px; border-radius: 20px;
             text-transform: uppercase; box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
             display: flex; align-items: center; gap: 5px;
         }
 
-        .status-container { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 12px; }
+        .status-container { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 14px; }
         .badge-status { 
-            background: rgba(16, 185, 129, 0.1); color: var(--accent); border: 1px solid rgba(16, 185, 129, 0.3); 
-            font-size: 0.73rem; padding: 4px 10px; border-radius: 20px; font-weight: 600; display: inline-flex; align-items: center; gap: 5px;
+            background: rgba(0, 255, 163, 0.1); color: var(--accent); border: 1px solid rgba(0, 255, 163, 0.3); 
+            font-size: 0.73rem; padding: 4px 12px; border-radius: 20px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px;
         }
         .badge-working-modern {
-            background: linear-gradient(135deg, rgba(0, 191, 165, 0.15), rgba(26, 35, 126, 0.2));
-            color: #00bfa5; border: 1px solid rgba(0, 191, 165, 0.4); font-size: 0.73rem;
-            padding: 4px 12px; border-radius: 20px; font-weight: 700; display: inline-flex;
-            align-items: center; gap: 6px; text-transform: uppercase; box-shadow: 0 0 12px rgba(0, 191, 165, 0.2);
+            background: linear-gradient(135deg, rgba(0, 255, 163, 0.15), rgba(16, 185, 129, 0.05));
+            color: var(--accent); border: 1px solid rgba(0, 255, 163, 0.4); font-size: 0.73rem;
+            padding: 5px 12px; border-radius: 20px; font-weight: 700; display: inline-flex;
+            align-items: center; gap: 6px; text-transform: uppercase; box-shadow: 0 0 15px rgba(0, 255, 163, 0.2);
         }
         .badge-keyless {
-            background: rgba(139, 92, 246, 0.15); color: #a78bfa; border: 1px solid rgba(139, 92, 246, 0.4);
-            font-size: 0.73rem; padding: 4px 10px; border-radius: 20px; font-weight: 700; display: inline-flex; align-items: center; gap: 5px;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(167, 139, 250, 0.05)); color: #c4b5fd; border: 1px solid rgba(139, 92, 246, 0.45);
+            font-size: 0.73rem; padding: 5px 12px; border-radius: 20px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 0 15px rgba(139, 92, 246, 0.15);
         }
         .badge-key {
-            background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4);
-            font-size: 0.73rem; padding: 4px 10px; border-radius: 20px; font-weight: 700; display: inline-flex; align-items: center; gap: 5px;
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(251, 191, 36, 0.05)); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.45);
+            font-size: 0.73rem; padding: 5px 12px; border-radius: 20px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 0 15px rgba(245, 158, 11, 0.15);
         }
         
-        .device-support { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 15px; }
+        .device-support { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
         .device-badge {
-            background: rgba(255, 255, 255, 0.05); border: 1px solid var(--card-border);
-            padding: 4px 10px; border-radius: 8px; font-size: 0.75rem; font-weight: 600; color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.03); border: 1px solid var(--card-border);
+            padding: 5px 12px; border-radius: 10px; font-size: 0.75rem; font-weight: 600; color: var(--text-muted);
         }
 
-        .card h3 { font-size: 1.3rem; margin-bottom: 8px; font-weight: 700; }
-        .card p { color: var(--text-muted); font-size: 0.88rem; margin-bottom: 18px; line-height: 1.5; }
+        .card h3 { font-size: 1.35rem; margin-bottom: 8px; font-weight: 700; letter-spacing: -0.5px; }
+        .card p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px; line-height: 1.6; }
 
         .btn {
-            background: var(--primary); color: #fff; border: none; padding: 11px 18px;
-            border-radius: 10px; font-weight: 600; cursor: pointer; text-decoration: none;
+            background: linear-gradient(135deg, var(--primary), var(--primary-hover)); color: #fff; border: none; padding: 12px 20px;
+            border-radius: 12px; font-weight: 700; cursor: pointer; text-decoration: none;
             display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-            width: 100%; transition: 0.3s; font-size: 0.92rem;
+            width: 100%; transition: all 0.3s ease; font-size: 0.95rem; box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3);
         }
-        .btn:hover { background: var(--primary-hover); }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(139, 92, 246, 0.5); background: linear-gradient(135deg, #9333ea, #7c3aed); }
 
         .delta-highlight {
             background: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(139, 92, 246, 0.08));
-            border: 1px solid var(--gold); border-radius: 20px; padding: 30px;
-            margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap;
-            position: relative; box-shadow: 0 0 35px rgba(245, 158, 11, 0.15);
+            border: 1px solid rgba(245, 158, 11, 0.4); border-radius: 22px; padding: 32px;
+            margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap;
+            position: relative; box-shadow: 0 10px 35px rgba(245, 158, 11, 0.12); backdrop-filter: blur(16px);
         }
         .delta-badge-top {
             position: absolute; top: -14px; left: 25px; background: var(--gold); color: #000;
@@ -199,55 +216,58 @@
         }
 
         .custom-script-box {
-            background: rgba(139, 92, 246, 0.04); border: 1px dashed rgba(139, 92, 246, 0.3);
-            border-radius: 16px; padding: 20px; margin-bottom: 25px; display: flex; flex-direction: column; gap: 12px;
+            background: rgba(139, 92, 246, 0.03); border: 1px dashed rgba(139, 92, 246, 0.35);
+            border-radius: 18px; padding: 24px; margin-bottom: 30px; display: flex; flex-direction: column; gap: 14px;
+            backdrop-filter: blur(12px);
         }
-        .custom-script-box h3 { font-size: 1.1rem; display: flex; align-items: center; gap: 8px; color: var(--primary); }
-        .custom-row { display: flex; gap: 10px; flex-wrap: wrap; }
+        .custom-script-box h3 { font-size: 1.15rem; display: flex; align-items: center; gap: 8px; color: #c4b5fd; font-weight: 700; }
+        .custom-row { display: flex; gap: 12px; flex-wrap: wrap; }
         .custom-input {
-            flex: 1; min-width: 200px; background: rgba(255,255,255,0.03); border: 1px solid var(--card-border);
-            padding: 10px 14px; border-radius: 10px; color: #fff; font-size: 0.9rem; outline: none;
+            flex: 1; min-width: 220px; background: rgba(3, 4, 11, 0.5); border: 1px solid var(--card-border);
+            padding: 12px 16px; border-radius: 12px; color: #fff; font-size: 0.92rem; outline: none; transition: 0.3s;
         }
-        .custom-input:focus { border-color: var(--primary); }
+        .custom-input:focus { border-color: var(--primary); box-shadow: 0 0 15px rgba(139, 92, 246, 0.2); }
 
-        .search-container { position: relative; margin-bottom: 25px; }
+        .search-container { position: relative; margin-bottom: 30px; }
         .search-bar {
             width: 100%; background: var(--card-bg); border: 1px solid var(--card-border);
-            padding: 15px 20px 15px 48px; border-radius: 14px; color: #fff; font-size: 0.95rem; outline: none;
+            padding: 16px 20px 16px 50px; border-radius: 16px; color: #fff; font-size: 0.98rem; outline: none; backdrop-filter: blur(12px);
+            transition: all 0.3s ease; box-shadow: 0 4px 20px rgba(0,0,0,0.2);
         }
-        .search-bar:focus { border-color: var(--primary); }
-        .search-container i { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--text-muted); }
+        .search-bar:focus { border-color: var(--primary); box-shadow: 0 0 25px rgba(139, 92, 246, 0.25); background: rgba(15, 23, 42, 0.85); }
+        .search-container i { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: var(--primary); font-size: 1.1rem; }
 
         .social-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; margin-top: 20px; }
-        .social-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px; padding: 20px; text-align: center; transition: 0.3s; text-decoration: none; color: inherit; display: block; }
-        .social-card:hover { border-color: var(--primary); transform: translateY(-3px); }
-        .social-card i { font-size: 2rem; margin-bottom: 10px; color: var(--primary); }
+        .social-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 18px; padding: 22px; text-align: center; transition: all 0.3s ease; text-decoration: none; color: inherit; display: block; backdrop-filter: blur(16px); }
+        .social-card:hover { border-color: var(--primary); transform: translateY(-4px); box-shadow: 0 10px 30px rgba(139, 92, 246, 0.2); }
+        .social-card i { font-size: 2.2rem; margin-bottom: 12px; color: var(--primary); }
 
-        .contact-form { display: flex; flex-direction: column; gap: 15px; margin-top: 15px; }
+        .contact-form { display: flex; flex-direction: column; gap: 16px; margin-top: 15px; }
         .form-group { display: flex; flex-direction: column; gap: 6px; text-align: left; }
         .form-group label { font-size: 0.85rem; font-weight: 600; color: var(--text-muted); }
         .form-input, .form-textarea {
-            width: 100%; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--card-border);
-            padding: 12px 16px; border-radius: 10px; color: #fff; font-size: 0.9rem; outline: none; transition: 0.3s;
+            width: 100%; background: rgba(3, 4, 11, 0.5); border: 1px solid var(--card-border);
+            padding: 14px 18px; border-radius: 12px; color: #fff; font-size: 0.92rem; outline: none; transition: 0.3s;
         }
-        .form-input:focus, .form-textarea:focus { border-color: var(--primary); }
-        .form-textarea { resize: vertical; min-height: 100px; }
+        .form-input:focus, .form-textarea:focus { border-color: var(--primary); box-shadow: 0 0 15px rgba(139, 92, 246, 0.2); }
+        .form-textarea { resize: vertical; min-height: 110px; }
         #formResult { margin-top: 12px; font-size: 0.9rem; font-weight: 600; text-align: center; }
 
         #toast {
-            position: fixed; bottom: 30px; right: 30px; background: #10b981; color: #fff;
-            padding: 12px 24px; border-radius: 12px; font-weight: 700; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            display: flex; align-items: center; gap: 10px; z-index: 99999;
-            transform: translateY(100px); opacity: 0; transition: 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            position: fixed; bottom: 35px; right: 35px; background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 255, 163, 0.4); color: var(--accent);
+            padding: 14px 26px; border-radius: 16px; font-weight: 700; box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+            display: flex; align-items: center; gap: 12px; z-index: 99999;
+            transform: translateY(120px); opacity: 0; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         #toast.show { transform: translateY(0); opacity: 1; }
 
-        footer { border-top: 1px solid var(--card-border); padding: 30px; text-align: center; color: var(--text-muted); font-size: 0.85rem; margin-top: 80px; }
+        footer { border-top: 1px solid var(--card-border); padding: 35px; text-align: center; color: var(--text-muted); font-size: 0.88rem; margin-top: 90px; backdrop-filter: blur(10px); }
     </style>
 </head>
 <body>
 
-    <div id="toast"><i class="fa-solid fa-circle-check"></i> <span id="toastMsg">Operazione completata!</span></div>
+    <div id="toast"><i class="fa-solid fa-circle-check" style="font-size: 1.2rem;"></i> <span id="toastMsg" style="color: #fff;">Operazione completata!</span></div>
 
     <div id="welcome-screen">
         <div class="welcome-box">
@@ -261,7 +281,7 @@
 
     <nav>
         <div class="logo" onclick="switchSection('home', document.getElementById('nav-home'))">
-            <i class="fa-solid fa-bolt"></i> Z<span>Hub</span>
+            <i class="fa-solid fa-bolt" style="color: var(--primary);"></i> Z<span>Hub</span>
         </div>
         
         <div class="nav-center-wrapper">
@@ -276,7 +296,7 @@
         <div class="nav-right">
             <div class="lang-wrapper">
                 <button class="lang-btn" onclick="toggleLangMenu()">
-                    <i class="fa-solid fa-globe"></i> <span id="currentLangLabel">IT</span> <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i>
+                    <i class="fa-solid fa-globe" style="color: var(--primary);"></i> <span id="currentLangLabel">IT</span> <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i>
                 </button>
                 <div class="lang-dropdown" id="langDropdown">
                     <button class="lang-option" onclick="changeLang('it')">🇮🇹 Italiano</button>
@@ -297,13 +317,13 @@
     <div class="main-container">
 
         <div id="home" class="section-view active">
-            <div class="card" style="padding: 40px; text-align: center; background: linear-gradient(135deg, rgba(139,92,246,0.1), rgba(16,185,129,0.05));">
-                <span class="badge-status"><i class="fa-solid fa-circle" style="font-size: 8px;"></i> <span data-i18n="status_online">Stato Hub: Online & Aggiornato</span></span>
-                <h2 style="font-size: 2.8rem; margin-top: 10px;" data-i18n="home_title">Dominare Roblox non è mai stato così facile</h2>
-                <p class="section-sub" style="max-width: 700px; margin: 15px auto 30px auto;" data-i18n="home_sub">Sfrutta il nostro hub per trovare i migliori executor stabili e la nostra collezione esclusiva di script testati senza bug.</p>
+            <div class="card" style="padding: 50px; text-align: center; background: linear-gradient(135deg, rgba(139,92,246,0.12), rgba(0,255,163,0.04)); border-color: rgba(139,92,246,0.3);">
+                <span class="badge-status" style="margin: 0 auto 15px auto;"><i class="fa-solid fa-circle" style="font-size: 8px;"></i> <span data-i18n="status_online">Stato Hub: Online & Aggiornato</span></span>
+                <h2 style="font-size: 3rem; margin-top: 10px;" data-i18n="home_title">Dominare Roblox non è mai stato così facile</h2>
+                <p class="section-sub" style="max-width: 750px; margin: 15px auto 35px auto;" data-i18n="home_sub">Sfrutta il nostro hub per trovare i migliori executor stabili e la nostra collezione esclusiva di script testati senza bug.</p>
                 <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-                    <button class="btn" style="width: auto; padding: 14px 28px;" onclick="switchSection('downloads', document.getElementById('nav-downloads'))"><span data-i18n="home_btn1">Vai ai Download</span></button>
-                    <button class="btn" style="width: auto; padding: 14px 28px; background: rgba(255,255,255,0.05); border: 1px solid var(--card-border);" onclick="switchSection('scripts', document.getElementById('nav-scripts'))"><span data-i18n="home_btn2">Esplora Script</span></button>
+                    <button class="btn" style="width: auto; padding: 15px 32px;" onclick="switchSection('downloads', document.getElementById('nav-downloads'))"><span data-i18n="home_btn1">Vai ai Download</span></button>
+                    <button class="btn" style="width: auto; padding: 15px 32px; background: rgba(255,255,255,0.04); border: 1px solid var(--card-border); box-shadow: none;" onclick="switchSection('scripts', document.getElementById('nav-scripts'))"><span data-i18n="home_btn2">Esplora Script</span></button>
                 </div>
             </div>
         </div>
@@ -454,7 +474,7 @@
                     <!-- BARRA DI RICERCA INTERNA ALLA CARTELLA (CERCA SCRIPT) -->
                     <div class="search-container" style="flex: 1; min-width: 250px; margin-bottom: 0;">
                         <i class="fa-solid fa-magnifying-glass"></i>
-                        <input type="text" id="internalScriptSearch" class="search-bar" placeholder="Cerca script specifico in questa cartella..." onkeyup="filterInternalScripts()" style="padding: 12px 20px 12px 48px;">
+                        <input type="text" id="internalScriptSearch" class="search-bar" placeholder="Cerca script specifico in questa cartella..." onkeyup="filterInternalScripts()" style="padding: 13px 20px 13px 48px;">
                     </div>
                 </div>
 
@@ -860,6 +880,55 @@
                 desc_iy: "The world's most famous universal admin command panel for Roblox.",
                 desc_anim: "Apply any custom R15 animation to any Roblox game."
             },
+            es: {
+                toast_lang: "¡Idioma cambiado con éxito!", toast_copy: "¡Loadstring copiada al portapapeles!", toast_add: "¡Script añadido con éxito!",
+                welcome_title: "Bienvenido a <span>ZHub</span>", welcome_sub: "El portal definitivo, seguro y actualizado para Roblox.", welcome_btn: "Entrar al Hub",
+                nav_home: "Inicio", nav_downloads: "Descargas", nav_scripts: "Scripts", nav_social: "Social & Créditos",
+                script_title: "Colección de Scripts ZHub", script_sub: "Busca tu juego deseado o selecciona una carpeta.",
+                back_folders: "Volver a Carpetas", down_title: "Descargas de Executors", down_sub: "Los mejores executors verificados."
+            },
+            pt: {
+                toast_lang: "Idioma alterado com sucesso!", toast_copy: "Loadstring copiada para a área de transferência!", toast_add: "Script adicionado com sucesso!",
+                welcome_title: "Bem-vindo ao <span>ZHub</span>", welcome_sub: "O portal definitivo e seguro para Roblox.", welcome_btn: "Entrar no Hub",
+                nav_home: "Início", nav_downloads: "Downloads", nav_scripts: "Scripts", nav_social: "Social & Créditos",
+                script_title: "Coleção de Scripts ZHub", script_sub: "Pesquise o jogo desejado ou selecione uma pasta.",
+                back_folders: "Voltar para Pastas", down_title: "Downloads de Executors", down_sub: "Os melhores executors verificados."
+            },
+            fr: {
+                toast_lang: "Langue modifiée avec succès !", toast_copy: "Loadstring copiée dans le presse-papier !", toast_add: "Script ajouté avec succès !",
+                welcome_title: "Bienvenue sur <span>ZHub</span>", welcome_sub: "Le portail ultime et sécurisé pour Roblox.", welcome_btn: "Entrer dans le Hub",
+                nav_home: "Accueil", nav_downloads: "Téléchargements", nav_scripts: "Scripts", nav_social: "Social & Crédits",
+                script_title: "Collection de Scripts ZHub", script_sub: "Recherchez le jeu souhaité ou sélectionnez un dossier.",
+                back_folders: "Retour aux Dossiers", down_title: "Téléchargements d'Executors", down_sub: "Les meilleurs executors vérifiés."
+            },
+            de: {
+                toast_lang: "Sprache erfolgreich geändert!", toast_copy: "Loadstring in die Zwischenablage kopiert!", toast_add: "Script erfolgreich hinzugefügt!",
+                welcome_title: "Willkommen bei <span>ZHub</span>", welcome_sub: "Das ultimative und sichere Portal für Roblox.", welcome_btn: "Zum Hub",
+                nav_home: "Startseite", nav_downloads: "Downloads", nav_scripts: "Skripte", nav_social: "Social & Credits",
+                script_title: "ZHub Skript-Sammlung", script_sub: "Suche nach deinem Spiel oder wähle einen Ordner.",
+                back_folders: "Zurück zu Ordnern", down_title: "Offizielle Executor Downloads", down_sub: "Die besten verifizierten Executors."
+            },
+            pl: {
+                toast_lang: "Pomyślnie zmieniono język!", toast_copy: "Skopiowano loadstring do schowka!", toast_add: "Pomyślnie dodano skrypt!",
+                welcome_title: "Witaj w <span>ZHub</span>", welcome_sub: "Ostateczny i bezpieczny portal dla Roblox.", welcome_btn: "Wejdź do Hubu",
+                nav_home: "Strona główna", nav_downloads: "Pobieranie", nav_scripts: "Skrypty", nav_social: "Społeczność",
+                script_title: "Kolekcja Skryptów ZHub", script_sub: "Wyszukaj grę lub wybierz folder.",
+                back_folders: "Wróć do folderów", down_title: "Pobieranie Executorów", down_sub: "Najlepsze zweryfikowane executory."
+            },
+            tr: {
+                toast_lang: "Dil başarıyla değiştirildi!", toast_copy: "Loadstring panoya kopyalandı!", toast_add: "Script başarıyla eklendi!",
+                welcome_title: "<span>ZHub</span>'a Hoş Geldiniz", welcome_sub: "Roblox için en iyi ve güvenli portal.", welcome_btn: "Hub'a Gir",
+                nav_home: "Ana Sayfa", nav_downloads: "İndirmeler", nav_scripts: "Scriptler", nav_social: "Sosyal",
+                script_title: "ZHub Script Koleksiyonu", script_sub: "İstediğiniz oyunu arayın veya bir klasör seçin.",
+                back_folders: "Klasörlere Dön", down_title: "Resmi Executor İndirmeleri", down_sub: "Test edilmiş en iyi executor'lar."
+            },
+            ru: {
+                toast_lang: "Язык успешно изменен!", toast_copy: "Loadstring скопирован в буфер обмена!", toast_add: "Скрипт успешно добавлен!",
+                welcome_title: "Добро пожаловать в <span>ZHub</span>", welcome_sub: "Главный и безопасный портал для Roblox.", welcome_btn: "Войти в Hub",
+                nav_home: "Главная", nav_downloads: "Загрузки", nav_scripts: "Скрипты", nav_social: "Соцсети",
+                script_title: "Коллекция скриптов ZHub", script_sub: "Найдите игру или выберите папку.",
+                back_folders: "Назад к папкам", down_title: "Загрузки Executor", down_sub: "Лучшие проверенные executor."
+            },
             ja: {
                 welcome_title: "<span>ZHub</span>へようこそ", welcome_sub: "Robloxエグゼキューターとスクリプトの究極ポータル。", welcome_btn: "ハブに入る",
                 nav_home: "ホーム", nav_downloads: "ダウンロード", nav_scripts: "スクリプト", nav_social: "SNS & クレジット",
@@ -875,39 +944,7 @@
                 contact_box_title: "メッセージを送信", contact_box_sub: "質問やリクエストはこちらから：",
                 form_name: "お名前", form_email: "メールアドレス", form_message: "メッセージ", form_btn: "送信する",
                 toast_lang: "言語が正常に変更されました！", toast_copy: "ロードストリングがコピーされました！", toast_add: "スクリプトが追加されました！",
-                back_folders: "フォルダ一覧に戻る",
-                folder_bf: "専用スクリプト、自動ファーム & 海イベント",
-                folder_bb: "自動パリィ、軌道表示 & スパムクリッカー",
-                folder_bw: "Vape V4、キルオーラ & PvPモッド",
-                folder_doors: "エンティティESP、部屋 & ガイド",
-                folder_ars: "エイムボット、サイレントエイム & ウォールハック",
-                folder_sim: "ペットシム99、マッスルレジェンド",
-                folder_uni: "インフィニット・イールド、グローバルESP",
-                desc_redz: "インスタントオートファーム、海イベント、フルーツファインダー。",
-                desc_quantum: "骨や素材を集めるための軽量オルタナティブ。",
-                desc_zenith: "リヴァイアサンハントや海イベントに最適化。",
-                desc_hoho: "クリーンで安定したグラフィカルインターフェース。",
-                desc_king: "自動クエスト、ステータス最大化、ボス高速キラー。",
-                desc_blade: "スマート自動パリィと高度なスパムクリッカー。",
-                desc_horizon: "高度なカーブボールビジュアライザー。",
-                desc_vape: "キルオーラ、飛行、スピード、PvPモジュールカスタマイズ。",
-                desc_lunar: "カスタムPvPインターフェースとFPSブースター。",
-                desc_doors: "接近するエンティティや隠しアイテムを表示。",
-                desc_doors2: "全マップアンロック、ジャンプスケア防止。",
-                desc_rainbow: "青、緑、オレンジ、紫の正確な位置を表示。",
-                desc_piggy: "壁をすり抜けて鍵やアイテムを獲得。",
-                desc_lazarus: "サイレントエイム、調整可能なFOV。",
-                desc_arsenal: "カスタマイズ可能なサイレントエイムボット。",
-                desc_thunder: "クロスヘアカスタマイズ付きの完全なGUI。",
-                desc_ps99: "チェスト自動ファームと自動孵化。",
-                desc_bss: "自動花粉集めとマクロクエスト。",
-                desc_afs: "オートクリッカーと自動レイド。",
-                desc_strong: "自動筋トレと最大スピード。",
-                desc_arm: "腕相撲自動勝利。",
-                desc_muscle: "無限自動リフトとキルオーラ。",
-                desc_vynixius: "カスタムコマンドと高度なESP。",
-                desc_iy: "世界で最も有名な管理者コマンドパネル。",
-                desc_anim: "カスタムR15アニメーションの適用。"
+                back_folders: "フォルダ一覧に戻る"
             }
         };
 
@@ -923,7 +960,7 @@
                     el.innerHTML = translation[key];
                 }
             });
-            showToast(translation.toast_lang);
+            showToast(translation.toast_lang || texts['en'].toast_lang);
         }
 
         function openFolder(folderName) {
@@ -990,11 +1027,13 @@
                 const originalHTML = btnElement.innerHTML;
                 const translation = texts[currentActiveLang] || texts['en'];
                 btnElement.innerHTML = '<i class="fa-solid fa-check"></i> ' + (currentActiveLang === 'it' ? 'Copiato!' : 'Copied!');
-                btnElement.style.background = '#10b981';
+                btnElement.style.background = '#00ffa3';
+                btnElement.style.color = '#000';
                 showToast(translation.toast_copy);
                 setTimeout(() => {
                     btnElement.innerHTML = originalHTML;
                     btnElement.style.background = '';
+                    btnElement.style.color = '';
                 }, 2000);
             });
         }
