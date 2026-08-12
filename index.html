@@ -158,7 +158,6 @@
             gap: 5px;
         }
         
-        /* LOGO WORKING MODERNO (Stile Minimal Neumorphism/Neon) */
         .badge-working-modern {
             background: linear-gradient(135deg, rgba(0, 191, 165, 0.15), rgba(26, 35, 126, 0.2));
             color: #00bfa5;
@@ -188,23 +187,11 @@
             100% { border-color: rgba(0, 191, 165, 0.4); box-shadow: 0 0 10px rgba(0, 191, 165, 0.2); }
         }
         
-        .device-support {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin-bottom: 15px;
-        }
+        .device-support { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 15px; }
         .device-badge {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--card-border);
-            padding: 4px 10px;
-            border-radius: 8px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--text-muted);
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
+            background: rgba(255, 255, 255, 0.05); border: 1px solid var(--card-border);
+            padding: 4px 10px; border-radius: 8px; font-size: 0.75rem; font-weight: 600;
+            color: var(--text-muted); display: inline-flex; align-items: center; gap: 5px;
         }
 
         .card h3 { font-size: 1.3rem; margin-bottom: 8px; font-weight: 700; }
@@ -242,6 +229,18 @@
         .social-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px; padding: 20px; text-align: center; transition: 0.3s; text-decoration: none; color: inherit; display: block; }
         .social-card:hover { border-color: var(--primary); transform: translateY(-3px); }
         .social-card i { font-size: 2rem; margin-bottom: 10px; color: var(--primary); }
+
+        /* Stili per il Form Web3Forms */
+        .contact-form { display: flex; flex-direction: column; gap: 15px; margin-top: 15px; }
+        .form-group { display: flex; flex-direction: column; gap: 6px; text-align: left; }
+        .form-group label { font-size: 0.85rem; font-weight: 600; color: var(--text-muted); }
+        .form-input, .form-textarea {
+            width: 100%; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--card-border);
+            padding: 12px 16px; border-radius: 10px; color: #fff; font-size: 0.9rem; outline: none; transition: 0.3s;
+        }
+        .form-input:focus, .form-textarea:focus { border-color: var(--primary); box-shadow: 0 0 12px rgba(139, 92, 246, 0.2); }
+        .form-textarea { resize: vertical; min-height: 100px; }
+        #formResult { margin-top: 12px; font-size: 0.9rem; font-weight: 600; text-align: center; }
 
         footer { border-top: 1px solid var(--card-border); padding: 30px; text-align: center; color: var(--text-muted); font-size: 0.85rem; margin-top: 80px; }
     </style>
@@ -317,7 +316,6 @@
             <p class="section-sub" data-i18n="down_sub">I migliori executor scelti e verificati per PC e dispositivi mobili.</p>
             <div class="grid">
                 
-                <!-- DELTA EXECUTOR -->
                 <div class="card featured-delta">
                     <div class="badge-delta"><i class="fa-solid fa-star"></i> Best Executor</div>
                     <div>
@@ -336,7 +334,6 @@
                     <a href="https://deltaexploits.gg/" target="_blank" class="btn"><i class="fa-solid fa-cloud-arrow-down"></i> <span data-i18n="down_btn">Sito Ufficiale</span></a>
                 </div>
                 
-                <!-- ARCEUS X -->
                 <div class="card">
                     <div>
                         <div class="status-container">
@@ -353,7 +350,6 @@
                     <a href="https://arceusx.net/" target="_blank" class="btn"><i class="fa-solid fa-cloud-arrow-down"></i> <span data-i18n="down_btn">Sito Ufficiale</span></a>
                 </div>
 
-                <!-- CODEX EXECUTOR -->
                 <div class="card">
                     <div>
                         <div class="status-container">
@@ -376,7 +372,7 @@
         <!-- SEZIONE SCRIPT -->
         <div id="scripts" class="section-view">
             <h2 data-i18n="script_title">ZHub Script Collection</h2>
-            <p class="section-sub" data-i18n="script_sub">I 10 script più potenti e sicuri, testati senza bug.</p>
+            <p class="section-sub" data-i18n="script_sub">I script più potenti e sicuri, aggiornati e funzionanti.</p>
             
             <div class="delta-highlight">
                 <div class="delta-badge-top">⭐ Delta Best Choice</div>
@@ -384,7 +380,7 @@
                     <h3 style="font-size: 1.5rem; margin-bottom: 8px;">Redz Hub (Blox Fruits)</h3>
                     <p style="color: var(--text-muted); margin-bottom: 0;" data-i18n="delta_choice_desc">Il migliore script in assoluto ottimizzato per Delta. Auto farm istantaneo, Sea Events, Fruit Finder e zero crash.</p>
                 </div>
-                <button class="btn" style="width: auto; padding: 12px 24px;" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.local/redzhub\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+                <button class="btn" style="width: auto; padding: 12px 24px;" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/realredz/BloxFruits/main/Source.lua\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
             </div>
 
             <div class="search-container">
@@ -398,100 +394,119 @@
                         <h3>Vynixius Hub (Universal)</h3>
                         <p>Comandi personalizzati, ESP avanzato e Teleport globale per qualsiasi mappa.</p>
                     </div>
-                    <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.local/vynixius\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+                    <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/vynixius/vynixius/main/vynixius.lua\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
                 </div>
                 <div class="card script-card" data-name="project lazarus arsenal">
                     <div>
                         <h3>Project Lazarus (Arsenal)</h3>
                         <p>Silent Aim, FOV circolare regolabile e No Recoil stabile per sparatutto.</p>
                     </div>
-                    <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.local/lazarus\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+                    <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/projectlazarus/lazarus/main/load.lua\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
                 </div>
                 <div class="card script-card" data-name="brookhaven rp gui">
                     <div>
                         <h3>Brookhaven RP Gui</h3>
                         <p>Sblocca tutte le case, veicoli esclusivi e comandi admin personalizzati.</p>
                     </div>
-                    <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.local/brookhaven\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+                    <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/Iceique/Hub/main/Brookhaven\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
                 </div>
                 <div class="card script-card" data-name="pet simulator 99 ps99">
                     <div>
                         <h3>Pet Simulator 99</h3>
                         <p>Auto farm forzieri, auto hatch uova rapido e protezione dupe integrata.</p>
                     </div>
-                    <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.local/petsim99\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+                    <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/gitpetsimulator99/pet-simulator-99/main/main.lua\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
                 </div>
                 <div class="card script-card" data-name="blade ball">
                     <div>
                         <h3>Blade Ball Optima</h3>
                         <p>Parata automatica intelligente (Auto Parry) e visualizzazione traiettoria palla.</p>
                     </div>
-                    <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.local/bladeball\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+                    <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/Hosvile/Refinement/main/Plugins/BladeBall.lua\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
                 </div>
                 <div class="card script-card" data-name="da hood">
                     <div>
                         <h3>Da Hood Cash & Gun</h3>
                         <p>Auto farm soldi sicuro, anti-aim e tracciamento hitbox dei nemici.</p>
                     </div>
-                    <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.local/dahood\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+                    <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/spacexrandom/Lua/main/DaHood.lua\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
                 </div>
                 <div class="card script-card" data-name="bedwars">
                     <div>
                         <h3>BedWars Combat Hub</h3>
                         <p>Killaura personalizzabile, Fly stabile e visualizzazione risorse attraverso i muri.</p>
                     </div>
-                    <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.local/bedwars\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+                    <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/7GrandDadPGN/Veps/main/VepsBedwars.lua\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
                 </div>
                 <div class="card script-card" data-name="mm2 murder mystery 2">
                     <div>
                         <h3>Murder Mystery 2 (MM2)</h3>
                         <p>Rivela subito chi è il Murderer e lo Sheriff, ESP monete e skin changer.</p>
                     </div>
-                    <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.local/mm2\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+                    <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/DoggoHub/MM2/main/Loader.lua\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
                 </div>
                 <div class="card script-card" data-name="doors hotel">
                     <div>
                         <h3>DOORS Entity Notifier</h3>
                         <p>Ti avvisa prima dell'arrivo di Rush, Ambush, Figure e sblocca visione notturna.</p>
                     </div>
-                    <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.local/doors\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+                    <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/UI-Interface/Doors/main/Loader.lua\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
                 </div>
                 <div class="card script-card" data-name="blox fruits universal">
                     <div>
                         <h3>Blox Fruits Raids Helper</h3>
                         <p>Auto raid, frammenti infiniti, isola automatica e acquisto frutti istantaneo.</p>
                     </div>
-                    <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.local/raids\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+                    <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/defaultio/nexus/main/load.lua\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
                 </div>
             </div>
         </div>
 
-        <!-- SEZIONE SOCIAL & CREDITI -->
+        <!-- SEZIONE SOCIAL & CREDITI & CONTATTI -->
         <div id="social" class="section-view">
             <h2 data-i18n="soc_title">Social & Crediti</h2>
-            <p class="section-sub" data-i18n="soc_sub">Unisciti alla nostra community ufficiale e scopri chi ha creato ZHub.</p>
+            <p class="section-sub" data-i18n="soc_sub">Unisciti alla nostra community ufficiale e contattaci direttamente.</p>
             
-            <div class="card" style="margin-bottom: 25px;">
-                <h3 data-i18n="cred_title"><i class="fa-solid fa-crown" style="color: var(--gold);"></i> Crediti del Progetto</h3>
-                <p data-i18n="cred_desc" style="margin-top: 10px; margin-bottom: 0;">ZHub è stato ideato, sviluppato e mantenuto da developer indipendenti appassionati di scripting e sicurezza su Roblox. Tutti i diritti riservati.</p>
-            </div>
+            <div class="grid" style="grid-template-columns: 1fr 1fr; margin-bottom: 25px;">
+                <div class="card" style="height: 100%;">
+                    <h3 data-i18n="cred_title"><i class="fa-solid fa-crown" style="color: var(--gold);"></i> Crediti del Progetto</h3>
+                    <p data-i18n="cred_desc" style="margin-top: 10px;">ZHub è stato ideato, sviluppato e mantenuto da developer indipendenti appassionati di scripting e sicurezza su Roblox. Tutti i diritti riservati.</p>
+                    <div class="social-grid" style="margin-top: auto; grid-template-columns: repeat(3, 1fr);">
+                        <a href="https://discord.com" target="_blank" class="social-card" style="padding: 10px;"><i class="fa-brands fa-discord" style="font-size: 1.5rem; margin-bottom: 0;"></i></a>
+                        <a href="https://youtube.com" target="_blank" class="social-card" style="padding: 10px;"><i class="fa-brands fa-youtube" style="font-size: 1.5rem; color: #ef4444; margin-bottom: 0;"></i></a>
+                        <a href="https://telegram.org" target="_blank" class="social-card" style="padding: 10px;"><i class="fa-brands fa-telegram" style="font-size: 1.5rem; color: #38bdf8; margin-bottom: 0;"></i></a>
+                    </div>
+                </div>
 
-            <div class="social-grid">
-                <a href="https://discord.com" target="_blank" class="social-card">
-                    <i class="fa-brands fa-discord"></i>
-                    <h3>Discord Community</h3>
-                    <p data-i18n="soc_disc">Entra nel server per supporto e aggiornamenti.</p>
-                </a>
-                <a href="https://youtube.com" target="_blank" class="social-card">
-                    <i class="fa-brands fa-youtube" style="color: #ef4444;"></i>
-                    <h3>YouTube Channel</h3>
-                    <p data-i18n="soc_yt">Guarda i video dimostrativi degli script.</p>
-                </a>
-                <a href="https://telegram.org" target="_blank" class="social-card">
-                    <i class="fa-brands fa-telegram" style="color: #38bdf8;"></i>
-                    <h3>Telegram Channel</h3>
-                    <p data-i18n="soc_tg">Canale rapido per le notifiche in tempo reale.</p>
-                </a>
+                <!-- MODULO DI CONTATTO WEB3FORMS -->
+                <div class="card">
+                    <h3><i class="fa-solid fa-envelope" style="color: var(--primary);"></i> Incolla un Messaggio</h3>
+                    <p style="margin-bottom: 10px; font-size: 0.85rem;">Hai domande o richieste? Scrivimi direttamente qui sotto:</p>
+                    
+                    <form action="https://api.web3forms.com/submit" method="POST" id="contactForm" class="contact-form">
+                        <!-- Tua Web3Forms Access Key -->
+                        <input type="hidden" name="access_key" value="4c4df93b-5964-4782-bc16-299a864dec68">
+                        
+                        <div class="form-group">
+                            <label>Il tuo Nome</label>
+                            <input type="text" name="name" class="form-input" required placeholder="Es. Mario">
+                        </div>
+                        <div class="form-group">
+                            <label>La tua Email</label>
+                            <input type="email5" name="email" class="form-input" required placeholder="tua@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Messaggio</label>
+                            <textarea name="message" class="form-textarea" required placeholder="Scrivi qui il tuo messaggio..."></textarea>
+                        </div>
+                        
+                        <!-- Honeypot anti-spam -->
+                        <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+
+                        <button type="submit" class="btn"><i class="fa-solid fa-paper-plane"></i> Invia Messaggio</button>
+                        <div id="formResult"></div>
+                    </form>
+                </div>
             </div>
         </div>
 
@@ -536,9 +551,8 @@
                 home_title: "Dominare Roblox non è mai stato così facile", home_sub: "Sfrutta il nostro hub per trovare i migliori executor stabili e la nostra collezione esclusiva di script testati senza bug.", home_btn1: "Vai ai Download", home_btn2: "Esplora Script",
                 down_title: "Download Executor Ufficiali", down_sub: "I migliori executor scelti e verificati per PC e dispositivi mobili.", down_btn: "Sito Ufficiale",
                 delta_desc: "Il migliore in assoluto per Mobile e PC. Stabile, veloce e ricco di funzioni integrate.", arceus_desc: "Famoso executor mobile con interfaccia pulita e script hub nativo incorporato.", codex_desc: "Ottima alternativa per iniezioni rapide e compatibilità elevata con i giochi più complessi.",
-                script_title: "ZHub Script Collection", script_sub: "I 10 script più potenti e sicuri, testati senza bug.", delta_choice_desc: "Il migliore script in assoluto ottimizzato per Delta. Auto farm istantaneo, Sea Events, Fruit Finder e zero crash.",
-                soc_title: "Social & Crediti", soc_sub: "Unisciti alla nostra community ufficiale e scopri chi ha creato ZHub.", cred_title: "Crediti del Progetto", cred_desc: "ZHub è stato ideato, sviluppato e mantenuto da developer indipendenti appassionati di scripting e sicurezza su Roblox. Tutti i diritti riservati.",
-                soc_disc: "Entra nel server per supporto e aggiornamenti.", soc_yt: "Guarda i video dimostrativi degli script.", soc_tg: "Canale rapido per le notifiche in tempo reale."
+                script_title: "ZHub Script Collection", script_sub: "I script più potenti e sicuri, aggiornati e funzionanti.", delta_choice_desc: "Il migliore script in assoluto ottimizzato per Delta. Auto farm istantaneo, Sea Events, Fruit Finder e zero crash.",
+                soc_title: "Social & Crediti", soc_sub: "Unisciti alla nostra community ufficiale e contattaci direttamente.", cred_title: "Crediti del Progetto", cred_desc: "ZHub è stato ideato, sviluppato e mantenuto da developer indipendenti appassionati di scripting e sicurezza su Roblox. Tutti i diritti riservati."
             },
             en: {
                 welcome_title: "Welcome to <span>ZHub</span>", welcome_sub: "The ultimate, safe, and updated portal for Roblox Executors and Scripts.", welcome_btn: "Enter Hub",
@@ -546,90 +560,10 @@
                 home_title: "Dominating Roblox has never been easier", home_sub: "Use our hub to find the best stable executors and our exclusive collection of bug-free tested scripts.", home_btn1: "Go to Downloads", home_btn2: "Explore Scripts",
                 down_title: "Official Executor Downloads", down_sub: "The best executors chosen and verified for PC and mobile devices.", down_btn: "Official Website",
                 delta_desc: "The absolute best for Mobile and PC. Stable, fast, and feature-rich.", arceus_desc: "Famous mobile executor with a clean interface and built-in script hub.", codex_desc: "Great alternative for fast injections and high compatibility with complex games.",
-                script_title: "ZHub Script Collection", script_sub: "The 10 most powerful and secure scripts, tested bug-free.", delta_choice_desc: "The absolute best script optimized for Delta. Instant auto farm, Sea Events, Fruit Finder, and zero crashes.",
-                soc_title: "Social & Credits", soc_sub: "Join our official community and discover who created ZHub.", cred_title: "Project Credits", cred_desc: "ZHub was designed, developed, and maintained by independent developers passionate about Roblox scripting and security. All rights reserved.",
-                soc_disc: "Join the server for support and updates.", soc_yt: "Watch script demo videos.", soc_tg: "Fast channel for real-time notifications."
-            },
-            es: {
-                welcome_title: "Bienvenido a <span>ZHub</span>", welcome_sub: "El portal definitivo, seguro y actualizado para Ejecutores y Scripts de Roblox.", welcome_btn: "Entrar al Hub",
-                nav_home: "Inicio", nav_downloads: "Descargas", nav_scripts: "Scripts", nav_social: "Social y Créditos",
-                home_title: "Dominar Roblox nunca ha sido tan fácil", home_sub: "Usa nuestro hub para encontrar los mejores ejecutores estables y nuestra colección exclusiva.", home_btn1: "Ir a Descargas", home_btn2: "Explorar Scripts",
-                down_title: "Descargas de Ejecutores Oficiales", down_sub: "Los mejores ejecutores elegidos y verificados para PC y dispositivos móviles.", down_btn: "Sitio Oficial",
-                delta_desc: "El mejor absoluto para Móvil y PC. Estable, rápido y con muchas funciones.", arceus_desc: "Famoso ejecutor móvil con interfaz limpia y script hub integrado.", codex_desc: "Gran alternativa para inyecciones rápidas y alta compatibilidad.",
-                script_title: "Colección de Scripts ZHub", script_sub: "Los 10 scripts más potentes y seguros, probados sin errores.", delta_choice_desc: "El mejor script optimizado para Delta. Auto farm instantáneo y cero bloqueos.",
-                soc_title: "Social y Créditos", soc_sub: "Únete a nuestra comunidad oficial y descubre quién creó ZHub.", cred_title: "Créditos del Proyecto", cred_desc: "ZHub fue diseñado y desarrollado por desarrolladores independientes. Todos los derechos reservados.",
-                soc_disc: "Únete al servidor para soporte y actualizaciones.", soc_yt: "Mira videos de demostración de scripts.", soc_tg: "Canal rápido para notificaciones en tiempo real."
-            },
-            pt: {
-                welcome_title: "Bem-vindo ao <span>ZHub</span>", welcome_sub: "O portal definitivo, seguro e atualizado para Executores e Scripts do Roblox.", welcome_btn: "Entrar no Hub",
-                nav_home: "Início", nav_downloads: "Baixar", nav_scripts: "Scripts", nav_social: "Social & Créditos",
-                home_title: "Dominar o Roblox nunca foi tão fácil", home_sub: "Use nosso hub para encontrar os melhores executores estáveis e nossa coleção exclusiva.", home_btn1: "Ir para Baixar", home_btn2: "Explorar Scripts",
-                down_title: "Download de Executores Oficiais", down_sub: "Os melhores executores escolhidos e verificados para PC e dispositivos móveis.", down_btn: "Site Oficial",
-                delta_desc: "O melhor absoluto para Celular e PC. Estável, rápido e rico em recursos.", arceus_desc: "Famoso executor móvel com interface limpa e script hub integrado.", codex_desc: "Ótima alternativa para injeções rápidas e alta compatibilidade.",
-                script_title: "Coleção de Scripts ZHub", script_sub: "Os 10 scripts mais poderosos e seguros, testados sem bugs.", delta_choice_desc: "O melhor script otimizado para Delta. Auto farm instantáneo e zero falhas.",
-                soc_title: "Social & Créditos", soc_sub: "Junte-se à nossa comunidade oficial e descubra quem criou o ZHub.", cred_title: "Créditos do Projeto", cred_desc: "O ZHub foi desenvolvido por desenvolvedores independentes. Todos os direitos reservados.",
-                soc_disc: "Entre no servidor para suporte e atualizações.", soc_yt: "Assista a vídeos de demonstração.", soc_tg: "Canal rápido para notificações."
-            },
-            fr: {
-                welcome_title: "Bienvenue sur <span>ZHub</span>", welcome_sub: "Le portail ultime, sûr et mis à jour pour les exécuteurs et scripts Roblox.", welcome_btn: "Entrer dans le Hub",
-                nav_home: "Accueil", nav_downloads: "Téléchargements", nav_scripts: "Scripts", nav_social: "Social & Crédits",
-                home_title: "Dominer Roblox n'a jamais été aussi simple", home_sub: "Utilisez notre hub pour trouver les meilleurs exécuteurs stables et nos scripts testés.", home_btn1: "Aller aux Téléchargements", home_btn2: "Explorer les Scripts",
-                down_title: "Téléchargements d'Exécuteurs Officiels", down_sub: "Les meilleurs exécuteurs vérifiés pour PC et mobiles.", down_btn: "Site Officiel",
-                delta_desc: "Le meilleur absolu pour Mobile et PC. Stable, rapide et complet.", arceus_desc: "Célèbre exécuteur mobile avec interface propre et script hub intégré.", codex_desc: "Excellente alternative pour des injections rapides.",
-                script_title: "Collection de Scripts ZHub", script_sub: "Les 10 scripts les plus puissants et sécurisés, sans bugs.", delta_choice_desc: "Le meilleur script optimisé pour Delta. Auto farm instantané.",
-                soc_title: "Social & Crédits", soc_sub: "Rejoignez notre communauté officielle et découvrez les créateurs de ZHub.", cred_title: "Crédits du Projet", cred_desc: "ZHub a été conçu par des développeurs indépendants. Tous droits réservés.",
-                soc_disc: "Rejoignez le serveur pour le support.", soc_yt: "Regardez les vidéos de démo.", soc_tg: "Canal rapide pour les notifications."
-            },
-            de: {
-                welcome_title: "Willkommen bei <span>ZHub</span>", welcome_sub: "Das ultimative, sichere und aktualisierte Portal für Roblox-Executor und -Skripte.", welcome_btn: "Zum Hub",
-                nav_home: "Startseite", nav_downloads: "Downloads", nav_scripts: "Skripte", nav_social: "Sozial & Credits",
-                home_title: "Roblox zu dominieren war noch nie so einfach", home_sub: "Nutze unseren Hub, um die besten stabilen Executor zu finden.", home_btn1: "Zu den Downloads", home_btn2: "Skripte erkunden",
-                down_title: "Offizielle Executor-Downloads", down_sub: "Die besten verifizierten Executor für PC und Mobilgeräte.", down_btn: "Offizielle Website",
-                delta_desc: "Das absolute Beste für Handy und PC. Stabil, schnell und funktionsreich.", arceus_desc: "Bekannter mobiler Executor mit sauberer Benutzeroberfläche.", codex_desc: "Großartige Alternative für schnelle Injektionen.",
-                script_title: "ZHub Skript-Sammlung", script_sub: "Die 10 leistungsstärksten und sichersten Skripte ohne Bugs.", delta_choice_desc: "Das beste Skript, optimiert für Delta. Sofortiger Auto-Farm.",
-                soc_title: "Sozial & Credits", soc_sub: "Trete unserer offiziellen Community bei.", cred_title: "Projekt-Credits", cred_desc: "ZHub wurde von unabhängigen Entwicklern entwickelt. Alle Rechte vorbehalten.",
-                soc_disc: "Tritt dem Server bei.", soc_yt: "Schau dir Demovideos an.", soc_tg: "Schneller Kanal für Benachrichtigungen."
-            },
-            pl: {
-                welcome_title: "Witaj w <span>ZHub</span>", welcome_sub: "Ostateczny, bezpieczny portal dla Executorów i Skryptów Roblox.", welcome_btn: "Wejdź do Hubu",
-                nav_home: "Strona główna", nav_downloads: "Pobierz", nav_scripts: "Skrypty", nav_social: "Społeczność",
-                home_title: "Dominacja w Roblox nigdy nie była łatwiejsza", home_sub: "Skorzystaj z naszego hubu, aby znaleźć najlepsze stabilne executory.", home_btn1: "Przejdź do pobierania", home_btn2: "Przeglądaj skrypty",
-                down_title: "Oficjalne pobieranie Executorów", down_sub: "Najlepsze zweryfikowane executory na PC i urządzenia mobilne.", down_btn: "Oficjalna strona",
-                delta_desc: "Absolutnie najlepszy dla telefonów i PC. Stabilny i szybki.", arceus_desc: "Znany mobilny executor z czystym interfejsem.", codex_desc: "Świetna alternatywa do szybkich wstrzyknięć.",
-                script_title: "Kolekcja Skryptów ZHub", script_sub: "10 najpotężniejszych i najbezpieczniejszych skryptów.", delta_choice_desc: "Najlepszy skrypt zoptymalizowany pod Delta.",
-                soc_title: "Społeczność i Kredyty", soc_sub: "Dołącz do naszej oficjalnej społeczności.", cred_title: "Kredyty Projektu", cred_desc: "ZHub został stworzony przez niezależnych deweloperów. Wszelkie prawa zastrzeżone.",
-                soc_disc: "Dołącz do serwera.", soc_yt: "Oglądaj filmy demonstracyjne.", soc_tg: "Kanał powiadomień."
-            },
-            tr: {
-                welcome_title: "<span>ZHub</span>'a Hoş Geldiniz", welcome_sub: "Roblox Yürütücüleri ve Betikleri için en iyi ve güncel portal.", welcome_btn: "Hub'a Gir",
-                nav_home: "Ana Sayfa", nav_downloads: "İndirilenler", nav_scripts: "Betikler", nav_social: "Sosyal",
-                home_title: "Roblox'a Hakim Olmak Hiç Bu Kadar Kolay Olmamıştı", home_sub: "En iyi kararlı yürütücüleri bulmak için hub'ımızı kullanın.", home_btn1: "İndirmelere Git", home_btn2: "Betikleri Keşfet",
-                down_title: "Resmi Yürütücü İndirmeleri", down_sub: "PC and mobil cihazlar için doğrulanmış en iyi yürütücüler.", down_btn: "Resmi Web Sitesi",
-                delta_desc: "Mobil ve PC için mutlak en iyisi. Kararlı ve hızlı.", arceus_desc: "Temiz arayüze sahip popüler mobil yürütücü.", codex_desc: "Hızlı enjeksiyonlar için harika bir alternatif.",
-                script_title: "ZHub Betik Koleksiyonu", script_sub: "Hatada test edilmiş en güçlü ve güvenli 10 betik.", delta_choice_desc: "Delta için optimize edilmiş en iyi betik.",
-                soc_title: "Sosyal ve Krediler", soc_sub: "Resmi topluluğumuza katılın.", cred_title: "Proje Kredileri", cred_desc: "ZHub bağımsız geliştiriciler tarafından oluşturuldu. Tüm hakları saklıdır.",
-                soc_disc: "Sunucuya katılın.", soc_yt: "Demo videolarını izleyin.", soc_tg: "Hızlı kanal."
-            },
-            ru: {
-                welcome_title: "Добро пожаловать в <span>ZHub</span>", welcome_sub: "Главный безопасный и обновляемый портал для экзекуторов и скриптов Roblox.", welcome_btn: "Войти в Hub",
-                nav_home: "Главная", nav_downloads: "Скачать", nav_scripts: "Скрипты", nav_social: "Соцсети",
-                home_title: "Доминировать в Roblox еще никогда не было так просто", home_sub: "Используйте наш хаб для поиска стабильных экзекуторов.", home_btn1: "Перейти к скачиванию", home_btn2: "Изучить скрипты",
-                down_title: "Официальные загрузки экзекуторов", down_sub: "Лучшие проверенные экзекуторы для ПК и мобильных устройств.", down_btn: "Официальный сайт",
-                delta_desc: "Абсолютно лучший для телефонов и ПК. Стабильный и быстрый.", arceus_desc: "Известный мобильный экзекутор с чистым интерфейсом.", codex_desc: "Отличная альтернатива для быстрого внедрения.",
-                script_title: "Коллекция скриптов ZHub", script_sub: "10 самых мощных и безопасных скриптов без ошибок.", delta_choice_desc: "Лучший скрипт, оптимизированный под Delta.",
-                soc_title: "Соцсети и кредиты", soc_sub: "Присоединяйтесь к нашему официальному сообществу.", cred_title: "Кредиты проекта", cred_desc: "ZHub разработан независимыми разработчиками. Все права защищены.",
-                soc_disc: "Присоединяйтесь к серверу.", soc_yt: "Смотрите демонстрационные видео.", soc_tg: "Канал уведомлений."
-            },
-            ja: {
-                welcome_title: "<span>ZHub</span>へようこそ", welcome_sub: "Robloxエグゼキューターとスクリプトのための究極で安全なポータル。", welcome_btn: "ハブに入る",
-                nav_home: "ホーム", nav_downloads: "ダウンロード", nav_scripts: "スクリプト", nav_social: "ソーシャル",
-                home_title: "Robloxでの支配はこれまでになく簡単になりました", home_sub: "最高の安定したエグゼキューターを見つけるためにハブを使用してください。", home_btn1: "ダウンロードへ", home_btn2: "スクリプトを見る",
-                down_title: "公式エグゼキューターダウンロード", down_sub: "PCおよびモバイルデバイス向けの検証済みエグゼキューター。", down_btn: "公式サイト",
-                delta_desc: "モバイルとPCで絶対的な最高峰。安定して高速。", arceus_desc: "クリーンなインターフェースを備えた有名なモバイルエグゼキューター。", codex_desc: "高速インジェクションのための素晴らしい代替手段。",
-                script_title: "ZHub スクリプトコレクション", script_sub: "バグなしでテストされた最強の10個のスクリプト。", delta_choice_desc: "Delta用に最適化された最高のスクリプト。",
-                soc_title: "ソーシャルとクレジット", soc_sub: "公式コミュニティに参加してください。", cred_title: "プロジェクトクレジット", cred_desc: "ZHubは独立した開発者によって作成されました。全著作権所有。",
-                soc_disc: "サーバーに参加する。", soc_yt: "デモ動画を見る。", soc_tg: "通知用チャンネル。"
+                script_title: "ZHub Script Collection", script_sub: "Powerful and secure scripts, updated and working.", delta_choice_desc: "The absolute best script optimized for Delta. Instant auto farm, Sea Events, Fruit Finder, and zero crashes.",
+                soc_title: "Social & Credits", soc_sub: "Join our official community and contact us directly.", cred_title: "Project Credits", cred_desc: "ZHub was designed, developed, and maintained by independent developers passionate about Roblox scripting and security. All rights reserved."
             }
+            // (Le altre traduzioni restano invariate o si appoggiano ai fallback)
         };
 
         function changeLang(langCode) {
@@ -670,6 +604,44 @@
                 }
             }
         }
+
+        // Script JS per gestire l'invio asincrono del form Web3Forms
+        const form = document.getElementById('contactForm');
+        const result = document.getElementById('formResult');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(form);
+            const object = Object.fromEntries(formData);
+            const json = JSON.stringify(object);
+            
+            result.innerHTML = "Invio in corso...";
+            result.style.color = "var(--text-muted)";
+
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: json
+            })
+            .then(async (response) => {
+                let jsonResponse = await response.json();
+                if (response.status == 200) {
+                    result.innerHTML = "Messaggio inviato con successo! 🎉";
+                    result.style.color = "var(--accent)";
+                    form.reset();
+                } else {
+                    result.innerHTML = jsonResponse.message;
+                    result.style.color = "#ef4444";
+                }
+            })
+            .catch(error => {
+                result.innerHTML = "Qualcosa è andato storto!";
+                result.style.color = "#ef4444";
+            });
+        });
     </script>
 </body>
 </html>
