@@ -6,384 +6,464 @@
     <title>Zenik Hub | Ultimate Roblox Scripts & Executors</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Effetto Liquid Glass ispirato a iOS */
         .liquid-glass {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02));
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .liquid-glass:hover {
-            border-color: rgba(255, 255, 255, 0.25);
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.15);
         }
         .liquid-glass-featured {
-            background: linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(255, 255, 255, 0.03));
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border: 1.5px solid rgba(168, 85, 247, 0.4);
-            box-shadow: 0 20px 50px rgba(168, 85, 247, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.12), rgba(255, 255, 255, 0.02));
+            backdrop-filter: blur(25px);
+            border: 1.5px solid rgba(139, 92, 246, 0.4);
+            box-shadow: 0 20px 50px rgba(139, 92, 246, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+        .btn-violet {
+            background: linear-gradient(180deg, #9333ea, #7e22ce);
+            box-shadow: 0 10px 25px rgba(147, 51, 234, 0.4);
+            transition: all 0.2s ease;
+        }
+        .btn-violet:hover {
+            background: linear-gradient(180deg, #a855f7, #9333ea);
+            box-shadow: 0 15px 30px rgba(147, 51, 234, 0.6);
+            transform: translateY(-2px);
         }
         .btn-ios {
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             transition: all 0.2s ease;
         }
         .btn-ios:hover {
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.1));
-            transform: scale(1.02);
-        }
-        .btn-ios:active {
-            transform: scale(0.97);
-        }
-        .btn-purple-ios {
-            background: linear-gradient(180deg, rgba(168, 85, 247, 0.8), rgba(126, 34, 206, 0.9));
-            border: 1px solid rgba(216, 180, 254, 0.4);
-            box-shadow: 0 8px 20px rgba(168, 85, 247, 0.4);
-            transition: all 0.2s ease;
-        }
-        .btn-purple-ios:hover {
-            background: linear-gradient(180deg, rgba(192, 132, 252, 0.9), rgba(147, 51, 234, 0.95));
-            box-shadow: 0 12px 25px rgba(168, 85, 247, 0.6);
-            transform: scale(1.02);
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-1px);
         }
     </style>
 </head>
-<body class="bg-[#05070e] text-white font-sans antialiased selection:bg-purple-500 selection:text-white min-h-screen pb-12">
+<body class="bg-[#05070e] text-white font-sans antialiased selection:bg-purple-500 selection:text-white min-h-screen">
 
-    <!-- Header Principale con Selettore 10 Lingue -->
-    <header class="max-w-4xl mx-auto pt-6 px-4 md:px-6">
-        <div class="liquid-glass p-6 rounded-[28px] flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div class="flex items-center gap-4">
-                <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 via-indigo-600 to-purple-800 p-[2px] shadow-lg shadow-purple-500/30">
-                    <div class="w-full h-full bg-[#080e1b] rounded-[14px] flex items-center justify-center font-black text-2xl text-purple-400">Z</div>
-                </div>
-                <div>
-                    <h1 class="text-2xl md:text-3xl font-black tracking-tight">ZENIK HUB</h1>
-                    <p class="text-purple-400 font-bold uppercase text-[10px] md:text-xs tracking-widest" data-translate="subtitle">Liquid Glass Roblox Platform</p>
-                </div>
+    <!-- SEZIONE 1: WELCOME SCREEN (Primo impatto stile Delta) -->
+    <div id="welcomeScreen" class="fixed inset-0 z-50 bg-[#05070e] flex flex-col items-center justify-center p-4 text-center transition-opacity duration-500">
+        <div class="max-w-xl space-y-6 liquid-glass p-8 md:p-12 rounded-[32px]">
+            <div class="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-purple-500 to-indigo-700 p-[2px] shadow-xl shadow-purple-500/30">
+                <div class="w-full h-full bg-[#080e1b] rounded-[14px] flex items-center justify-center font-black text-3xl text-purple-400">Z</div>
             </div>
-            
-            <div class="flex items-center gap-3">
-                <select id="languageSelect" onchange="changeLanguage()" class="bg-black/40 border border-white/15 text-xs font-bold text-purple-300 px-3 py-2.5 rounded-xl focus:outline-none focus:border-purple-500 cursor-pointer backdrop-blur-md">
-                    <option value="it" class="bg-[#080e1b] text-white">ITA 🇮🇹</option>
-                    <option value="en" class="bg-[#080e1b] text-white">ENG 🇬🇧</option>
-                    <option value="es" class="bg-[#080e1b] text-white">ESP 🇪🇸</option>
-                    <option value="fr" class="bg-[#080e1b] text-white">FRA 🇫🇷</option>
-                    <option value="de" class="bg-[#080e1b] text-white">DEU 🇩🇪</option>
-                    <option value="pt" class="bg-[#080e1b] text-white">POR 🇧🇷</option>
-                    <option value="ru" class="bg-[#080e1b] text-white">RUS 🇷🇺</option>
-                    <option value="tr" class="bg-[#080e1b] text-white">TUR 🇹🇷</option>
-                    <option value="ja" class="bg-[#080e1b] text-white">JPN 🇯🇵</option>
-                    <option value="zh" class="bg-[#080e1b] text-white">CHI 🇨🇳</option>
-                </select>
-
-                <div class="hidden sm:flex items-center gap-2 bg-purple-500/10 border border-purple-500/30 px-4 py-2.5 rounded-full backdrop-blur-md">
-                    <span class="w-2.5 h-2.5 rounded-full bg-green-400 animate-pulse"></span>
-                    <span class="text-purple-300 text-xs font-black uppercase tracking-wider" data-translate="status">Online</span>
-                </div>
+            <div>
+                <p class="text-purple-400 font-bold uppercase text-xs tracking-widest mb-2" data-translate="welcome_top">THE SKY IS THE LIMIT</p>
+                <h1 class="text-3xl md:text-5xl font-black tracking-tight" data-translate="welcome_title">Revolutionizing the future of execution</h1>
+                <p class="text-slate-400 text-xs md:text-sm mt-3" data-translate="welcome_desc">A premium experience embedded with the latest technologies to enhance your scripting experience.</p>
             </div>
+            <button onclick="enterHub()" class="btn-violet w-full py-4 rounded-2xl font-black text-sm uppercase tracking-wider text-white flex items-center justify-center gap-2 cursor-pointer">
+                <span data-translate="btn_enter">Enter Hub</span> <span>→</span>
+            </button>
         </div>
-    </header>
-
-    <main class="max-w-4xl mx-auto px-4 md:px-6 mt-6 space-y-6">
-
-        <!-- Sezione Top 5 Executor con Delta al Primo Posto (Evidenziato) -->
-        <div class="space-y-4">
-            <div class="flex items-center justify-between px-2">
-                <div>
-                    <h2 class="text-xl font-black text-white flex items-center gap-2">
-                        <span class="text-purple-400">⚡</span> <span data-translate="executors_title">TOP 5 ROBLOX EXECUTORS</span>
-                    </h2>
-                    <p class="text-xs text-slate-400" data-translate="executors_desc">I migliori executor testati, sicuri e aggiornati</p>
-                </div>
-                <span class="text-[10px] font-black bg-purple-500/20 text-purple-300 border border-purple-500/30 px-3 py-1 rounded-full uppercase">Updated 2026</span>
-            </div>
-
-            <!-- 1. DELTA (Il Migliore in assoluto con targhetta) -->
-            <div class="liquid-glass-featured p-5 rounded-[24px] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                <div class="space-y-1">
-                    <div class="flex items-center gap-2.5">
-                        <h3 class="font-black text-lg text-white">Delta Executor</h3>
-                        <span class="bg-gradient-to-r from-yellow-400 to-amber-500 text-black text-[10px] font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider shadow-md shadow-yellow-500/20" data-translate="best_choice">⭐ BEST CHOICE</span>
-                        <span class="bg-green-500/20 text-green-400 border border-green-500/30 text-[10px] font-black px-2.5 py-0.5 rounded-full uppercase">Working</span>
-                    </div>
-                    <p class="text-xs text-slate-300" data-translate="delta_desc">Il re incontrastato degli executor mobile e PC. Stabile, velocissimo e con script hub integrato.</p>
-                </div>
-                <a href="https://deltaexploits.gg" target="_blank" class="btn-purple-ios w-full sm:w-auto text-center px-6 py-3 rounded-xl font-black text-xs uppercase tracking-wider text-white flex items-center justify-center gap-2">
-                    <span>📥</span> <span data-translate="btn_download">Download</span>
-                </a>
-            </div>
-
-            <!-- Gli altri 4 Executor -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                <!-- 2. Wave -->
-                <div class="liquid-glass p-4 rounded-2xl flex flex-col justify-between gap-3">
-                    <div class="space-y-1">
-                        <div class="flex items-center justify-between">
-                            <h3 class="font-black text-sm text-white">Wave Executor</h3>
-                            <span class="bg-green-500/15 text-green-400 border border-green-500/30 text-[10px] font-black px-2 py-0.5 rounded-full uppercase">PC / Web</span>
-                        </div>
-                        <p class="text-[11px] text-slate-400" data-translate="wave_desc">Eccellente livello di sicurezza e ottima esecuzione degli script complessi.</p>
-                    </div>
-                    <a href="#" target="_blank" class="btn-ios text-center py-2.5 rounded-xl font-black text-xs text-purple-300 flex items-center justify-center gap-2">
-                        <span>📥</span> <span data-translate="btn_download">Download</span>
-                    </a>
-                </div>
-
-                <!-- 3. Hydrogen -->
-                <div class="liquid-glass p-4 rounded-2xl flex flex-col justify-between gap-3">
-                    <div class="space-y-1">
-                        <div class="flex items-center justify-between">
-                            <h3 class="font-black text-sm text-white">Hydrogen</h3>
-                            <span class="bg-green-500/15 text-green-400 border border-green-500/30 text-[10px] font-black px-2 py-0.5 rounded-full uppercase">Mobile</span>
-                        </div>
-                        <p class="text-[11px] text-slate-400" data-translate="hydrogen_desc">Interfaccia pulita, leggerissimo e compatibile con tantissimi dispositivi.</p>
-                    </div>
-                    <a href="#" target="_blank" class="btn-ios text-center py-2.5 rounded-xl font-black text-xs text-purple-300 flex items-center justify-center gap-2">
-                        <span>📥</span> <span data-translate="btn_download">Download</span>
-                    </a>
-                </div>
-
-                <!-- 4. Celery -->
-                <div class="liquid-glass p-4 rounded-2xl flex flex-col justify-between gap-3">
-                    <div class="space-y-1">
-                        <div class="flex items-center justify-between">
-                            <h3 class="font-black text-sm text-white">Celery</h3>
-                            <span class="bg-yellow-500/15 text-yellow-400 border border-yellow-500/30 text-[10px] font-black px-2 py-0.5 rounded-full uppercase">Updating</span>
-                        </div>
-                        <p class="text-[11px] text-slate-400" data-translate="celery_desc">Ottima alternativa gratuita per PC, frequentemente aggiornata dopo le patch.</p>
-                    </div>
-                    <a href="#" target="_blank" class="btn-ios text-center py-2.5 rounded-xl font-black text-xs text-purple-300 flex items-center justify-center gap-2">
-                        <span>📥</span> <span data-translate="btn_download">Download</span>
-                    </a>
-                </div>
-
-                <!-- 5. Codex -->
-                <div class="liquid-glass p-4 rounded-2xl flex flex-col justify-between gap-3">
-                    <div class="space-y-1">
-                        <div class="flex items-center justify-between">
-                            <h3 class="font-black text-sm text-white">Codex</h3>
-                            <span class="bg-green-500/15 text-green-400 border border-green-500/30 text-[10px] font-black px-2 py-0.5 rounded-full uppercase">Mobile</span>
-                        </div>
-                        <p class="text-[11px] text-slate-400" data-translate="codex_desc">Famoso per la sua stabilità su iOS e Android con script hub integrato.</p>
-                    </div>
-                    <a href="#" target="_blank" class="btn-ios text-center py-2.5 rounded-xl font-black text-xs text-purple-300 flex items-center justify-center gap-2">
-                        <span>📥</span> <span data-translate="btn_download">Download</span>
-                    </a>
-                </div>
-            </div>
     </div>
-                          <!-- Sezione Script in Evidenza -->
-        <div class="liquid-glass p-6 md:p-8 rounded-[28px] space-y-6">
-            <div class="flex items-center justify-between border-b border-white/10 pb-4">
-                <div class="flex items-center gap-3">
-                    <span class="text-2xl">📜</span>
+
+    <!-- SEZIONE 2: MAIN HUB (Visibile dopo il click) -->
+    <div id="mainHub" class="opacity-0 pointer-events-none transition-opacity duration-700 min-h-screen pb-12">
+        
+        <!-- Header -->
+        <header class="max-w-4xl mx-auto pt-6 px-4 md:px-6">
+            <div class="liquid-glass p-6 rounded-[28px] flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-4">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500 to-indigo-700 p-[2px]">
+                        <div class="w-full h-full bg-[#080e1b] rounded-[14px] flex items-center justify-center font-black text-xl text-purple-400">Z</div>
+                    </div>
                     <div>
-                        <h2 class="text-lg font-black text-white" data-translate="scripts_title">TOP SCRIPT HUB & GAMES</h2>
-                        <p class="text-xs text-slate-400" data-translate="scripts_desc">Script testati, sicuri e privi di chiave o con key system facile</p>
+                        <h2 class="text-xl md:text-2xl font-black tracking-tight">ZENIK HUB</h2>
+                        <p class="text-purple-400 font-bold uppercase text-[10px] tracking-widest" data-translate="subtitle">Roblox Executors & Scripts</p>
                     </div>
                 </div>
-                <span class="text-[10px] font-black bg-purple-500/20 text-purple-300 border border-purple-500/30 px-3 py-1 rounded-full uppercase">Verified</span>
+                
+                <div class="flex items-center gap-3">
+                    <select id="languageSelect" onchange="changeLanguage()" class="bg-black/40 border border-white/15 text-xs font-bold text-purple-300 px-3 py-2.5 rounded-xl focus:outline-none focus:border-purple-500 cursor-pointer backdrop-blur-md">
+                        <option value="it" class="bg-[#080e1b] text-white">ITA 🇮🇹</option>
+                        <option value="en" class="bg-[#080e1b] text-white">ENG 🇬🇧</option>
+                        <option value="es" class="bg-[#080e1b] text-white">ESP 🇪🇸</option>
+                        <option value="fr" class="bg-[#080e1b] text-white">FRA 🇫🇷</option>
+                        <option value="de" class="bg-[#080e1b] text-white">DEU 🇩🇪</option>
+                        <option value="pt" class="bg-[#080e1b] text-white">POR 🇧🇷</option>
+                        <option value="ru" class="bg-[#080e1b] text-white">RUS 🇷🇺</option>
+                        <option value="tr" class="bg-[#080e1b] text-white">TUR 🇹🇷</option>
+                        <option value="ja" class="bg-[#080e1b] text-white">JPN 🇯🇵</option>
+                        <option value="zh" class="bg-[#080e1b] text-white">CHI 🇨🇳</option>
+                    </select>
+
+                    <div class="hidden sm:flex items-center gap-2 bg-purple-500/10 border border-purple-500/30 px-4 py-2.5 rounded-full backdrop-blur-md">
+                        <span class="w-2.5 h-2.5 rounded-full bg-green-400 animate-pulse"></span>
+                        <span class="text-purple-300 text-xs font-black uppercase tracking-wider" data-translate="status">Online</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="max-w-4xl mx-auto px-4 md:px-6 mt-6 space-y-6">
+
+            <!-- TOP 5 EXECUTORS -->
+            <div class="space-y-4">
+                <div class="flex items-center justify-between px-2">
+                    <div>
+                        <h3 class="text-lg md:text-xl font-black text-white flex items-center gap-2">
+                            <span class="text-purple-400">⚡</span> <span data-translate="executors_title">ROBLOX EXECUTORS</span>
+                        </h3>
+                        <p class="text-xs text-slate-400" data-translate="executors_desc">I migliori executor testati e sicuri</p>
+                    </div>
+                    <span class="text-[10px] font-black bg-purple-500/20 text-purple-300 border border-purple-500/30 px-3 py-1 rounded-full uppercase">Top 5</span>
+                </div>
+
+                <!-- 1. DELTA (Migliore con targhetta) -->
+                <div class="liquid-glass-featured p-5 rounded-[24px] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <div class="space-y-1">
+                        <div class="flex items-center gap-2.5 flex-wrap">
+                            <h4 class="font-black text-base text-white">Delta Executor</h4>
+                            <span class="bg-gradient-to-r from-yellow-400 to-amber-500 text-black text-[10px] font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider shadow-md shadow-yellow-500/20" data-translate="best_choice">⭐ BEST CHOICE</span>
+                            <span class="bg-green-500/20 text-green-400 border border-green-500/30 text-[10px] font-black px-2 py-0.5 rounded-full uppercase">Working</span>
+                        </div>
+                        <p class="text-xs text-slate-300" data-translate="delta_desc">Il re incontrastato degli executor mobile e PC. Stabile, velocissimo e con script hub integrato.</p>
+                    </div>
+                    <a href="https://deltaexploits.gg" target="_blank" class="btn-violet w-full sm:w-auto text-center px-6 py-3 rounded-xl font-black text-xs uppercase tracking-wider text-white flex items-center justify-center gap-2">
+                        <span>📥</span> <span data-translate="btn_download">Download</span>
+                    </a>
+                </div>
+
+                <!-- Altri 4 Executor -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <!-- Wave -->
+                    <div class="liquid-glass p-4 rounded-2xl flex flex-col justify-between gap-3">
+                        <div class="space-y-1">
+                            <div class="flex items-center justify-between">
+                                <h4 class="font-black text-sm text-white">Wave Executor</h4>
+                                <span class="bg-green-500/15 text-green-400 border border-green-500/30 text-[10px] font-black px-2 py-0.5 rounded-full uppercase">PC / Web</span>
+                            </div>
+                            <p class="text-[11px] text-slate-400" data-translate="wave_desc">Eccellente livello di sicurezza e ottima esecuzione degli script.</p>
+                        </div>
+                        <a href="#" target="_blank" class="btn-ios text-center py-2.5 rounded-xl font-black text-xs text-purple-300 flex items-center justify-center gap-2">
+                            <span>📥</span> <span data-translate="btn_download">Download</span>
+                        </a>
+                    </div>
+                    <!-- Hydrogen -->
+                    <div class="liquid-glass p-4 rounded-2xl flex flex-col justify-between gap-3">
+                        <div class="space-y-1">
+                            <div class="flex items-center justify-between">
+                                <h4 class="font-black text-sm text-white">Hydrogen</h4>
+                                <span class="bg-green-500/15 text-green-400 border border-green-500/30 text-[10px] font-black px-2 py-0.5 rounded-full uppercase">Mobile</span>
+                            </div>
+                            <p class="text-[11px] text-slate-400" data-translate="hydrogen_desc">Interfaccia pulita, leggerissimo e compatibile con dispositivi Android.</p>
+                        </div>
+                        <a href="#" target="_blank" class="btn-ios text-center py-2.5 rounded-xl font-black text-xs text-purple-300 flex items-center justify-center gap-2">
+                            <span>📥</span> <span data-translate="btn_download">Download</span>
+                        </a>
+                    </div>
+                    <!-- Celery -->
+                    <div class="liquid-glass p-4 rounded-2xl flex flex-col justify-between gap-3">
+                        <div class="space-y-1">
+                            <div class="flex items-center justify-between">
+                                <h4 class="font-black text-sm text-white">Celery</h4>
+                                <span class="bg-yellow-500/15 text-yellow-400 border border-yellow-500/30 text-[10px] font-black px-2 py-0.5 rounded-full uppercase">Updating</span>
+                            </div>
+                            <p class="text-[11px] text-slate-400" data-translate="celery_desc">Ottima alternativa gratuita per PC, frequentemente aggiornata.</p>
+                        </div>
+                        <a href="#" target="_blank" class="btn-ios text-center py-2.5 rounded-xl font-black text-xs text-purple-300 flex items-center justify-center gap-2">
+                            <span>📥</span> <span data-translate="btn_download">Download</span>
+                        </a>
+                    </div>
+                    <!-- Codex -->
+                    <div class="liquid-glass p-4 rounded-2xl flex flex-col justify-between gap-3">
+                        <div class="space-y-1">
+                            <div class="flex items-center justify-between">
+                                <h4 class="font-black text-sm text-white">Codex</h4>
+                                <span class="bg-green-500/15 text-green-400 border border-green-500/30 text-[10px] font-black px-2 py-0.5 rounded-full uppercase">Mobile</span>
+                            </div>
+                            <p class="text-[11px] text-slate-400" data-translate="codex_desc">Famoso per la sua stabilità su iOS e Android con script hub integrato.</p>
+                        </div>
+                        <a href="#" target="_blank" class="btn-ios text-center py-2.5 rounded-xl font-black text-xs text-purple-300 flex items-center justify-center gap-2">
+                            <span>📥</span> <span data-translate="btn_download">Download</span>
+                        </a>
+                    </div>
+                </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="bg-black/30 border border-white/10 p-5 rounded-2xl space-y-3 backdrop-blur-md">
-                    <h3 class="font-black text-sm text-purple-400 flex items-center gap-2"><span>⚔️</span> Blox Fruits Hub</h3>
-                    <p class="text-xs text-slate-300 leading-relaxed" data-translate="script_1_desc">Auto Farm, Boss Hop, Devil Fruit Sniper e configurazione avanzata.</p>
-                    <span class="inline-block text-[10px] font-black bg-purple-500/10 text-purple-300 border border-purple-500/20 px-2.5 py-1 rounded">Universal / Mobile</span>
+            <!-- SCRIPTS SECTION -->
+            <div class="liquid-glass p-6 md:p-8 rounded-[28px] space-y-6">
+                <div class="flex items-center justify-between border-b border-white/10 pb-4">
+                    <div class="flex items-center gap-3">
+                        <span class="text-2xl">📜</span>
+                        <div>
+                            <h3 class="text-lg font-black text-white" data-translate="scripts_title">ROBLOX SCRIPTS HUB</h3>
+                            <p class="text-xs text-slate-400" data-translate="scripts_desc">Script testati e sicuri per i giochi principali</p>
+                        </div>
+                    </div>
+                    <span class="text-[10px] font-black bg-purple-500/20 text-purple-300 border border-purple-500/30 px-3 py-1 rounded-full uppercase">Verified</span>
                 </div>
-                <div class="bg-black/30 border border-white/10 p-5 rounded-2xl space-y-3 backdrop-blur-md">
-                    <h3 class="font-black text-sm text-purple-400 flex items-center gap-2"><span>🔫</span> Arsenal & FPS Hub</h3>
-                    <p class="text-xs text-slate-300 leading-relaxed" data-translate="script_2_desc">Aimbot personalizzabile, ESP, Wallhack e Silent Aim sicuro.</p>
-                    <span class="inline-block text-[10px] font-black bg-purple-500/10 text-purple-300 border border-purple-500/20 px-2.5 py-1 rounded">PC & Mobile</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Form di Contatto e Richiesta Script -->
-        <div id="contatti" class="liquid-glass p-6 md:p-8 rounded-[28px]">
-            <h3 class="text-xl font-black mb-2 text-white" data-translate="contact_title">RICHIEDI SCRIPT O SUPPORTO</h3>
-            <p class="text-xs text-slate-400 mb-6" data-translate="contact_desc">Hai bisogno di uno script specifico o un executor non funziona? Scrivici un messaggio.</p>
-            
-            <form action="https://api.web3forms.com/submit" method="POST" class="space-y-4">
-                <input type="hidden" name="access_key" value="4c4df93b-5964-4782-bc16-299a864dec68">
-                <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <input type="text" name="name" id="inputName" placeholder="Il tuo Nome / Roblox Username" required class="w-full bg-black/40 border border-white/15 p-4 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-purple-500 transition-colors text-sm backdrop-blur-md">
-                    <input type="email" name="email" id="inputEmail" placeholder="La tua Email di Contatto" required class="w-full bg-black/40 border border-white/15 p-4 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-purple-500 transition-colors text-sm backdrop-blur-md">
+                    <div class="bg-black/30 border border-white/10 p-5 rounded-2xl space-y-3 backdrop-blur-md">
+                        <h4 class="font-black text-sm text-purple-400 flex items-center gap-2"><span>⚔️</span> Blox Fruits Hub</h4>
+                        <p class="text-xs text-slate-300 leading-relaxed" data-translate="script_1_desc">Auto Farm, Boss Hop, Devil Fruit Sniper e configurazione avanzata.</p>
+                        <span class="inline-block text-[10px] font-black bg-purple-500/10 text-purple-300 border border-purple-500/20 px-2.5 py-1 rounded">Universal / Mobile</span>
+                    </div>
+                    <div class="bg-black/30 border border-white/10 p-5 rounded-2xl space-y-3 backdrop-blur-md">
+                        <h4 class="font-black text-sm text-purple-400 flex items-center gap-2"><span>🔫</span> Arsenal & FPS Hub</h4>
+                        <p class="text-xs text-slate-300 leading-relaxed" data-translate="script_2_desc">Aimbot personalizzabile, ESP, Wallhack e Silent Aim sicuro.</p>
+                        <span class="inline-block text-[10px] font-black bg-purple-500/10 text-purple-300 border border-purple-500/20 px-2.5 py-1 rounded">PC & Mobile</span>
+                    </div>
                 </div>
+            </div>
 
-                <textarea name="message" id="inputMsg" placeholder="Scrivi qui quale script ti serve o che problema riscontri..." required class="w-full bg-black/40 border border-white/15 p-4 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-purple-500 transition-colors h-32 resize-none text-sm backdrop-blur-md"></textarea>
+            <!-- SUPPORTO & CONTATTI -->
+            <div id="supporto" class="liquid-glass p-6 md:p-8 rounded-[28px]">
+                <h3 class="text-xl font-black mb-2 text-white" data-translate="contact_title">SUPPORTO & RICHIESTA SCRIPT</h3>
+                <p class="text-xs text-slate-400 mb-6" data-translate="contact_desc">Hai bisogno di supporto tecnico o di uno script specifico? Scrivici un messaggio.</p>
                 
-                <button type="submit" class="btn-purple-ios w-full py-4 rounded-xl font-black uppercase tracking-wider text-sm cursor-pointer text-white text-center flex items-center justify-center gap-2" data-translate="btn_send">
-                    Invia Richiesta
-                </button>
-            </form>
-        </div>
+                <form action="https://api.web3forms.com/submit" method="POST" class="space-y-4">
+                    <input type="hidden" name="access_key" value="4c4df93b-5964-4782-bc16-299a864dec68">
+                    <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
 
-                        </main>
-           <!-- Footer -->
-    <footer class="max-w-4xl mx-auto text-center mt-12 text-slate-500 text-xs">
-        <p>&copy; 2026 Zenik Hub. Tutti i diritti riservati.</p>
-    </footer>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <input type="text" name="name" id="inputName" placeholder="Il tuo Nome / Roblox Username" required class="w-full bg-black/40 border border-white/15 p-4 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-purple-500 text-sm backdrop-blur-md">
+                        <input type="email" name="email" id="inputEmail" placeholder="La tua Email di Contatto" required class="w-full bg-black/40 border border-white/15 p-4 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-purple-500 text-sm backdrop-blur-md">
+                    </div>
 
-    <!-- Script multilingua per 10 lingue -->
+                    <textarea name="message" id="inputMsg" placeholder="Scrivi qui il tuo problema o lo script che cerchi..." required class="w-full bg-black/40 border border-white/15 p-4 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-purple-500 h-32 resize-none text-sm backdrop-blur-md"></textarea>
+                    
+                    <button type="submit" class="btn-violet w-full py-4 rounded-xl font-black uppercase tracking-wider text-sm cursor-pointer text-white text-center flex items-center justify-center gap-2" data-translate="btn_send">
+                        Invia Messaggio
+                    </button>
+                </form>
+            </div>
+
+            <!-- CREDITI E DIRITTI RISERVATI -->
+            <footer class="liquid-glass p-6 rounded-[24px] text-center space-y-2 text-xs text-slate-400">
+                <p class="font-bold text-white tracking-wider" data-translate="credits">CREATO E GESTITO DA ZENIK TEAM</p>
+                <p>&copy; 2026 Zenik Hub. <span data-translate="rights">Tutti i diritti riservati. Non affiliato con Roblox Corporation.</span></p>
+            </footer>
+
+        </main>
+    </div>
+
+    <!-- LOGICA JAVASCRIPT -->
     <script>
+        function enterHub() {
+            const welcome = document.getElementById('welcomeScreen');
+            const main = document.getElementById('mainHub');
+            
+            welcome.style.opacity = '0';
+            setTimeout(() => {
+                welcome.style.display = 'none';
+                main.classList.remove('opacity-0', 'pointer-events-none');
+            }, 500);
+        }
+
         const translations = {
             it: {
-                subtitle: "Liquid Glass Roblox Platform", status: "Online",
-                executors_title: "TOP 5 ROBLOX EXECUTORS", executors_desc: "I migliori executor testati, sicuri e aggiornati",
+                welcome_top: "THE SKY IS THE LIMIT",
+                welcome_title: "Revolutionizing the future of execution",
+                welcome_desc: "A premium experience embedded with the latest technologies to enhance your scripting experience.",
+                btn_enter: "Entra nella Hub",
+                subtitle: "Roblox Executors & Scripts", status: "Online",
+                executors_title: "ROBLOX EXECUTORS", executors_desc: "I migliori executor testati e sicuri",
                 best_choice: "⭐ SCELTA MIGLIORE", btn_download: "Download",
                 delta_desc: "Il re incontrastato degli executor mobile e PC. Stabile, velocissimo e con script hub integrato.",
-                wave_desc: "Eccellente livello di sicurezza e ottima esecuzione degli script complessi.",
-                hydrogen_desc: "Interfaccia pulita, leggerissimo e compatibile con tantissimi dispositivi.",
-                celery_desc: "Ottima alternativa gratuita per PC, frequentemente aggiornata dopo le patch.",
+                wave_desc: "Eccellente livello di sicurezza e ottima esecuzione degli script.",
+                hydrogen_desc: "Interfaccia pulita, leggerissimo e compatibile con dispositivi Android.",
+                celery_desc: "Ottima alternativa gratuita per PC, frequentemente aggiornata.",
                 codex_desc: "Famoso per la sua stabilità su iOS e Android con script hub integrato.",
-                scripts_title: "TOP SCRIPT HUB & GAMES", scripts_desc: "Script testati, sicuri e privi di chiave o con key system facile",
+                scripts_title: "ROBLOX SCRIPTS HUB", scripts_desc: "Script testati e sicuri per i giochi principali",
                 script_1_desc: "Auto Farm, Boss Hop, Devil Fruit Sniper e configurazione avanzata.",
                 script_2_desc: "Aimbot personalizzabile, ESP, Wallhack e Silent Aim sicuro.",
-                contact_title: "RICHIEDI SCRIPT O SUPPORTO", contact_desc: "Hai bisogno di uno script specifico o un executor non funziona? Scrivici un messaggio.",
-                btn_send: "Invia Richiesta"
+                contact_title: "SUPPORTO & RICHIESTA SCRIPT", contact_desc: "Hai bisogno di supporto tecnico o di uno script specifico? Scrivici un messaggio.",
+                btn_send: "Invia Messaggio",
+                credits: "CREATO E GESTITO DA ZENIK TEAM",
+                rights: "Tutti i diritti riservati. Non affiliato con Roblox Corporation."
             },
             en: {
-                subtitle: "Liquid Glass Roblox Platform", status: "Online",
-                executors_title: "TOP 5 ROBLOX EXECUTORS", executors_desc: "The best tested, safe and updated executors",
+                welcome_top: "THE SKY IS THE LIMIT",
+                welcome_title: "Revolutionizing the future of execution",
+                welcome_desc: "A premium experience embedded with the latest technologies to enhance your scripting experience.",
+                btn_enter: "Enter Hub",
+                subtitle: "Roblox Executors & Scripts", status: "Online",
+                executors_title: "ROBLOX EXECUTORS", executors_desc: "The best tested and safe executors",
                 best_choice: "⭐ BEST CHOICE", btn_download: "Download",
                 delta_desc: "The undisputed king of mobile and PC executors. Stable, lightning-fast with built-in script hub.",
                 wave_desc: "Excellent security level and great execution for complex scripts.",
-                hydrogen_desc: "Clean interface, lightweight, and compatible with numerous devices.",
+                hydrogen_desc: "Clean interface, lightweight, and compatible with Android devices.",
                 celery_desc: "Great free alternative for PC, frequently updated after patches.",
                 codex_desc: "Famous for its stability on iOS and Android with an integrated script hub.",
-                scripts_title: "TOP SCRIPT HUB & GAMES", scripts_desc: "Tested, safe scripts with no key or easy key systems",
+                scripts_title: "ROBLOX SCRIPTS HUB", scripts_desc: "Tested, safe scripts for main games",
                 script_1_desc: "Auto Farm, Boss Hop, Devil Fruit Sniper and advanced configuration.",
                 script_2_desc: "Customizable Aimbot, ESP, Wallhack, and safe Silent Aim.",
-                contact_title: "REQUEST SCRIPT OR SUPPORT", contact_desc: "Need a specific script or facing issues with an executor? Send us a message.",
-                btn_send: "Send Request"
+                contact_title: "SUPPORT & SCRIPT REQUEST", contact_desc: "Need technical support or a specific script? Send us a message.",
+                btn_send: "Send Message",
+                credits: "CREATED AND MANAGED BY ZENIK TEAM",
+                rights: "All rights reserved. Not affiliated with Roblox Corporation."
             },
             es: {
-                subtitle: "Plataforma Roblox Liquid Glass", status: "En línea",
-                executors_title: "TOP 5 EJECUTORES DE ROBLOX", executors_desc: "Los mejores ejecutores probados, seguros y actualizados",
+                welcome_top: "THE SKY IS THE LIMIT",
+                welcome_title: "Revolutionizing the future of execution",
+                welcome_desc: "Una experiencia premium integrada con las últimas tecnologías.",
+                btn_enter: "Entrar al Hub",
+                subtitle: "Ejecutores y Scripts de Roblox", status: "En línea",
+                executors_title: "EJECUTORES DE ROBLOX", executors_desc: "Los mejores ejecutores probados y seguros",
                 best_choice: "⭐ MEJOR OPCIÓN", btn_download: "Descargar",
                 delta_desc: "El rey indiscutible de ejecutores móviles y PC. Estable y rápido.",
-                wave_desc: "Excelente nivel de seguridad y gran ejecución de scripts complejos.",
-                hydrogen_desc: "Interfaz limpia, muy ligero y compatible con muchos dispositivos.",
+                wave_desc: "Excelente nivel de seguridad y gran ejecución de scripts.",
+                hydrogen_desc: "Interfaz limpia, muy ligero y compatible con Android.",
                 celery_desc: "Excelente alternativa gratuita para PC, actualizada tras parches.",
                 codex_desc: "Famoso por su estabilidad en iOS y Android con script hub integrado.",
-                scripts_title: "MEJORES SCRIPTS Y JUEGOS", scripts_desc: "Scripts seguros y probados sin clave o con sistemas sencillos",
+                scripts_title: "SCRIPTS DE ROBLOX", scripts_desc: "Scripts probados y seguros",
                 script_1_desc: "Auto Farm, Boss Hop, Devil Fruit Sniper y configuración avanzada.",
                 script_2_desc: "Aimbot personalizable, ESP, Wallhack y Silent Aim seguro.",
-                contact_title: "SOLICITAR SCRIPT O SOPORTE", contact_desc: "¿Necesitas un script específico o tienes problemas? Envíanos un mensaje.",
-                btn_send: "Enviar Solicitud"
+                contact_title: "SOPORTE Y SOLICITUD", contact_desc: "¿Necesitas soporte técnico o un script? Envíanos un mensaje.",
+                btn_send: "Enviar Mensaje",
+                credits: "CREADO Y GESTIONADO POR ZENIK TEAM",
+                rights: "Todos los derechos reservados. No afiliado a Roblox Corporation."
             },
             fr: {
-                subtitle: "Plateforme Roblox Liquid Glass", status: "En ligne",
-                executors_title: "TOP 5 EXÉCUTEURS ROBLOX", executors_desc: "Les meilleurs exécuteurs testés, sûrs et mis à jour",
+                welcome_top: "THE SKY IS THE LIMIT",
+                welcome_title: "Revolutionizing the future of execution",
+                welcome_desc: "Une expérience premium intégrée avec les dernières technologies.",
+                btn_enter: "Entrer dans le Hub",
+                subtitle: "Exécuteurs & Scripts Roblox", status: "En ligne",
+                executors_title: "EXÉCUTEURS ROBLOX", executors_desc: "Les meilleurs exécuteurs testés et sûrs",
                 best_choice: "⭐ MEILLEUR CHOIX", btn_download: "Télécharger",
                 delta_desc: "Le roi incontesté des exécuteurs mobile et PC. Stable et ultra-rapide.",
-                wave_desc: "Excellent niveau de sécurité et exécution fluide de scripts complexes.",
-                hydrogen_desc: "Interface épurée, très léger et compatible avec de nombreux appareils.",
+                wave_desc: "Excellent niveau de sécurité et exécution fluide.",
+                hydrogen_desc: "Interface épurée, très léger et compatible Android.",
                 celery_desc: "Excellente alternative gratuite pour PC, mise à jour après les patchs.",
                 codex_desc: "Célèbre pour sa stabilité sur iOS et Android avec hub intégré.",
-                scripts_title: "MEILLEURS SCRIPTS ET JEUX", scripts_desc: "Scripts testés et sécurisés sans clé ou avec système facile",
+                scripts_title: "SCRIPTS ROBLOX", scripts_desc: "Scripts testés et sécurisés",
                 script_1_desc: "Auto Farm, Boss Hop, Devil Fruit Sniper et configuration avancée.",
                 script_2_desc: "Aimbot personnalisable, ESP, Wallhack et Silent Aim sécurisé.",
-                contact_title: "DEMANDER UN SCRIPT OU DU SUPPORT", contact_desc: "Besoin d'un script spécifique ou un problème ? Envoyez-nous un message.",
-                btn_send: "Envoyer la Demande"
+                contact_title: "SUPPORT & DEMANDE DE SCRIPT", contact_desc: "Besoin de support technique ou d'un script ? Envoyez-nous un message.",
+                btn_send: "Envoyer le Message",
+                credits: "CRÉÉ ET GÉRÉ PAR ZENIK TEAM",
+                rights: "Tous droits réservés. Non affilié à Roblox Corporation."
             },
             de: {
-                subtitle: "Liquid Glass Roblox Platform", status: "Online",
-                executors_title: "TOP 5 ROBLOX EXECUTORS", executors_desc: "Die besten getesteten, sicheren und aktualisierten Executor",
+                welcome_top: "THE SKY IS THE LIMIT",
+                welcome_title: "Revolutionizing the future of execution",
+                welcome_desc: "Ein Premium-Erlebnis mit den neuesten Technologien.",
+                btn_enter: "Hub betreten",
+                subtitle: "Roblox Executors & Scripts", status: "Online",
+                executors_title: "ROBLOX EXECUTORS", executors_desc: "Die besten getesteten und sicheren Executor",
                 best_choice: "⭐ BESTE WAHL", btn_download: "Herunterladen",
-                delta_desc: "Der unbestrittene König der Mobile- und PC-Executor. Stabil und blitzschnell.",
+                delta_desc: "Der unbestrittene König der Mobile- und PC-Executor. Stabil und schnell.",
                 wave_desc: "Ausgezeichnetes Sicherheitsniveau und hervorragende Skriptausführung.",
-                hydrogen_desc: "Saubere Oberfläche, sehr leicht und kompatibel mit vielen Geräten.",
-                celery_desc: "Tolle kostenlose PC-Alternative, nach Patches regelmäßig aktualisiert.",
+                hydrogen_desc: "Saubere Oberfläche, sehr leicht und Android-kompatibel.",
+                celery_desc: "Tolle kostenlose PC-Alternative, regelmäßig aktualisiert.",
                 codex_desc: "Bekannt für Stabilität auf iOS und Android mit integriertem Hub.",
-                scripts_title: "TOP SCRIPT HUB & SPIELE", scripts_desc: "Getestete, sichere Skripte ohne Key oder mit einfachem Key-System",
+                scripts_title: "ROBLOX SCRIPTS", scripts_desc: "Getestete und sichere Skripte",
                 script_1_desc: "Auto Farm, Boss Hop, Devil Fruit Sniper und erweiterte Konfiguration.",
                 script_2_desc: "Anpassbarer Aimbot, ESP, Wallhack und sicheres Silent Aim.",
-                contact_title: "SKRIPT ODER SUPPORT ANFRAGEN", contact_desc: "Brauchst du ein spezifisches Skript oder hast Probleme? Sende uns eine Nachricht.",
-                btn_send: "Anfrage Senden"
+                contact_title: "SUPPORT & ANFRAGE", contact_desc: "Brauchst du technischen Support oder ein Skript? Sende uns eine Nachricht.",
+                btn_send: "Nachricht Senden",
+                credits: "ERSTELLT UND VERWALTET VON ZENIK TEAM",
+                rights: "Alle Rechte vorbehalten. Nicht mit Roblox Corporation verbunden."
             },
             pt: {
-                subtitle: "Plataforma Roblox Liquid Glass", status: "Online",
-                executors_title: "TOP 5 EXECUTORES DO ROBLOX", executors_desc: "Os melhores executores testados, seguros e atualizados",
+                welcome_top: "THE SKY IS THE LIMIT",
+                welcome_title: "Revolutionizing the future of execution",
+                welcome_desc: "Uma experiência premium integrada com as tecnologias mais recentes.",
+                btn_enter: "Entrar no Hub",
+                subtitle: "Executores e Scripts do Roblox", status: "Online",
+                executors_title: "EXECUTORES DO ROBLOX", executors_desc: "Os melhores executores testados e seguros",
                 best_choice: "⭐ MELHOR ESCOLHA", btn_download: "Baixar",
                 delta_desc: "O rei indiscutível dos executores mobile e PC. Estável e rápido.",
-                wave_desc: "Excelente nível de segurança e ótima execução de scripts complexos.",
-                hydrogen_desc: "Interface limpa, muito leve e compatível com diversos dispositivos.",
+                wave_desc: "Excelente nível de segurança e ótima execução de scripts.",
+                hydrogen_desc: "Interface limpa, muito leve e compatível com Android.",
                 celery_desc: "Ótima alternativa gratuita para PC, atualizada após patches.",
                 codex_desc: "Famoso pela estabilidade no iOS e Android com hub integrado.",
-                scripts_title: "MELHORES SCRIPTS E JOGOS", scripts_desc: "Scripts testados e seguros, sem chave ou com sistema fácil",
+                scripts_title: "SCRIPTS DO ROBLOX", scripts_desc: "Scripts testados e seguros",
                 script_1_desc: "Auto Farm, Boss Hop, Devil Fruit Sniper e configuração avançada.",
                 script_2_desc: "Aimbot personalizável, ESP, Wallhack e Silent Aim seguro.",
-                contact_title: "SOLICITAR SCRIPT OU SUPORTE", contact_desc: "Precisa de um script específico ou encontrou problemas? Envie uma mensagem.",
-                btn_send: "Enviar Solicitação"
+                contact_title: "SUPORTE E SOLICITAÇÃO", contact_desc: "Precisa de suporte técnico ou de um script? Envie uma mensagem.",
+                btn_send: "Enviar Mensagem",
+                credits: "CRIADO E GERENCIADO POR ZENIK TEAM",
+                rights: "Todos os direitos reservados. Não afiliado à Roblox Corporation."
             },
             ru: {
-                subtitle: "Платформа Roblox Liquid Glass", status: "Онлайн",
-                executors_title: "ТОП 5 ЭКЗЕКУТОРОВ ROBLOX", executors_desc: "Лучшие проверенные, безопасные и обновленные экзекуторы",
+                welcome_top: "THE SKY IS THE LIMIT",
+                welcome_title: "Revolutionizing the future of execution",
+                welcome_desc: "Премиальный опыт с новейшими технологиями.",
+                btn_enter: "Войти в Hub",
+                subtitle: "Экзекуторы и скрипты Roblox", status: "Онлайн",
+                executors_title: "ЭКЗЕКУТОРЫ ROBLOX", executors_desc: "Лучшие проверенные и безопасные экзекуторы",
                 best_choice: "⭐ ЛУЧШИЙ ВЫБОР", btn_download: "Скачать",
                 delta_desc: "Бесспорный король мобильных и ПК экзекуторов. Стабильный и быстрый.",
-                wave_desc: "Отличный уровень безопасности и выполнение сложных скриптов.",
-                hydrogen_desc: "Чистый интерфейс, легкий вес и совместимость с устройствами.",
-                celery_desc: "Отличная бесплатная альтернатива для ПК, обновляется после патчей.",
+                wave_desc: "Отличный уровень безопасности и выполнение скриптов.",
+                hydrogen_desc: "Чистый интерфейс, легкий вес и совместимость с Android.",
+                celery_desc: "Отличная бесплатная альтернатива для ПК, обновляется.",
                 codex_desc: "Известен своей стабильностью на iOS и Android со встроенным хабом.",
-                scripts_title: "ЛУЧШИЕ СКРИПТЫ И ИГРЫ", scripts_desc: "Проверенные и безопасные скрипты без ключа или с легким доступом",
-                script_1_desc: "Автофарм, телепорт по боссам, снайпер фруктов и расширенные настройки.",
+                scripts_title: "СКРИПТЫ ROBLOX", scripts_desc: "Проверенные и безопасные скрипты",
+                script_1_desc: "Автофарм, телепорт по боссам, снайпер фруктов и настройки.",
                 script_2_desc: "Настраиваемый Aimbot, ESP, Wallhack и безопасный Silent Aim.",
-                contact_title: "ЗАПРОСИТЬ СКРИПТ ИЛИ ПОДДЕРЖКУ", contact_desc: "Нужен особый скрипт или возникли проблемы? Напишите нам.",
-                btn_send: "Отправить Запрос"
+                contact_title: "ПОДДЕРЖКА И ЗАПРОС", contact_desc: "Нужна техподдержка или скрипт? Напишите нам.",
+                btn_send: "Отправить Сообщение",
+                credits: "СОЗДАНО И УПРАВЛЯЕТСЯ ZENIK TEAM",
+                rights: "Все права защищены. Не связано с Roblox Corporation."
             },
             tr: {
-                subtitle: "Liquid Glass Roblox Platformu", status: "Çevrimiçi",
-                executors_title: "EN İYİ 5 ROBLOX EXECUTOR", executors_desc: "En iyi test edilmiş, güvenli ve güncel executorlar",
+                welcome_top: "THE SKY IS THE LIMIT",
+                welcome_title: "Revolutionizing the future of execution",
+                welcome_desc: "En son teknolojilerle donatılmış premium bir deneyim.",
+                btn_enter: "Hub'a Giriş Yap",
+                subtitle: "Roblox Executor & Scriptleri", status: "Çevrimiçi",
+                executors_title: "ROBLOX EXECUTORLAR", executors_desc: "En iyi test edilmiş ve güvenli executorlar",
                 best_choice: "⭐ EN İYİ SEÇİM", btn_download: "İndir",
                 delta_desc: "Mobil ve PC executor'larının tartışmasız kralı. Stabil ve hızlı.",
-                wave_desc: "Mükemmel güvenlik seviyesi ve karmaşık scriptlerin kusursuz çalışması.",
-                hydrogen_desc: "Temiz arayüz, hafif yapı ve çok sayıda cihazla uyumluluk.",
-                celery_desc: "PC için harika ücretsiz alternatif, yamalardan sonra güncellenir.",
+                wave_desc: "Mükemmel güvenlik seviyesi ve kusursuz script çalıştırma.",
+                hydrogen_desc: "Temiz arayüz, hafif yapı ve Android desteği.",
+                celery_desc: "PC için harika ücretsiz alternatif, düzenli güncellenir.",
                 codex_desc: "iOS ve Android'de entegre script hub ile kararlılığıyla bilinir.",
-                scripts_title: "EN İYİ SCRIPT HUB & OYUNLAR", scripts_desc: "Keysiz veya kolay key sistemli, test edilmiş güvenli scriptler",
+                scripts_title: "ROBLOX SCRIPT HUB", scripts_desc: "Test edilmiş güvenli scriptler",
                 script_1_desc: "Auto Farm, Boss Hop, Devil Fruit Sniper ve gelişmiş yapılandırma.",
                 script_2_desc: "Özelleştirilebilir Aimbot, ESP, Wallhack ve güvenli Silent Aim.",
-                contact_title: "SCRIPT VEYA DESTEK İSTE", contact_desc: "Özel bir script mi lazım veya bir sorun mu var? Bize mesaj gönder.",
-                btn_send: "İsteği Gönder"
+                contact_title: "DESTEK & SCRIPT İSTE", contact_desc: "Teknik desteğe mi ihtiyacın var? Bize mesaj gönder.",
+                btn_send: "Mesajı Gönder",
+                credits: "ZENIK TEAM TARAFINDAN OLUŞTURULMUŞTUR",
+                rights: "Tüm hakları saklıdır. Roblox Corporation ile bağlantılı değildir."
             },
             ja: {
-                subtitle: "Liquid Glass Roblox プラットフォーム", status: "オンライン",
-                executors_title: "トップ5 Roblox エグゼキューター", executors_desc: "テスト済みで安全、最新のエグゼキューター",
+                welcome_top: "THE SKY IS THE LIMIT",
+                welcome_title: "Revolutionizing the future of execution",
+                welcome_desc: "最新技術を搭載したプレミアムな体験。",
+                btn_enter: "ハブに入る",
+                subtitle: "Roblox エグゼキューター＆スクリプト", status: "オンライン",
+                executors_title: "ROBLOX エグゼキューター", executors_desc: "テスト済みで安全な最高のエグゼキューター",
                 best_choice: "⭐ ベストチョイス", btn_download: "ダウンロード",
                 delta_desc: "モバイルおよびPCエグゼキューターの王様。安定して高速。",
-                wave_desc: "優れたセキュリティレベルと高度なスクリプトの実行。",
-                hydrogen_desc: "クリーンなインターフェース、軽量で多くのデバイスに対応。",
-                celery_desc: "PC向けの優れた無料代替品、パッチ後に頻繁に更新。",
+                wave_desc: "優れたセキュリティレベルとスムーズなスクリプト実行。",
+                hydrogen_desc: "クリーンなインターフェース、軽量でAndroid対応。",
+                celery_desc: "PC向けの優れた無料代替品、定期的に更新。",
                 codex_desc: "iOSおよびAndroidでの安定性と統合ハブで有名。",
-                scripts_title: "トップスクリプトハブ＆ゲーム", scripts_desc: "キー不要または簡単なキーシステムで安全にテストされたスクリプト",
+                scripts_title: "ROBLOX スクリプトハブ", scripts_desc: "テスト済みの安全なスクリプト",
                 script_1_desc: "自動ファーム、ボスホップ、悪魔の実スナイパーなどの高度な設定。",
                 script_2_desc: "カスタマイズ可能なエイムボット、ESP、ウォールハック。",
-                contact_title: "スクリプトまたはサポートのリクエスト", contact_desc: "特定のスクリプトが必要ですか？メッセージを送ってください。",
-                btn_send: "リクエストを送信"
+                contact_title: "サポート＆リクエスト", contact_desc: "技術サポートやスクリプトが必要ですか？メッセージを送信してください。",
+                btn_send: "メッセージを送信",
+                credits: "ZENIK TEAM によって作成および管理されています",
+                rights: "全著作権所有。Roblox Corporationとは提携していません。"
             },
             zh: {
-                subtitle: "Liquid Glass Roblox 平台", status: "在线",
-                executors_title: "热门 5 大 ROBLOX 注入器", executors_desc: "经过测试、安全且更新的最佳注入器",
+                welcome_top: "THE SKY IS THE LIMIT",
+                welcome_title: "Revolutionizing the future of execution",
+                welcome_desc: "集成最新技术的优质体验，提升您的脚本编写水平。",
+                btn_enter: "进入 Hub",
+                subtitle: "Roblox 注入器与脚本", status: "在线",
+                executors_title: "ROBLOX 注入器", executors_desc: "经过测试的最优、最安全注入器",
                 best_choice: "⭐ 最佳选择", btn_download: "下载",
                 delta_desc: "手机与电脑端当之无愧的注入器之王。稳定、极速且自带脚本中心。",
-                wave_desc: "出色的安全级别，完美运行复杂脚本。",
-                hydrogen_desc: "界面简洁、极其轻量，兼容多种设备。",
-                celery_desc: "出色的电脑端免费替代品，补丁后更新频繁。",
+                wave_desc: "出色的安全级别，完美运行各类复杂脚本。",
+                hydrogen_desc: "界面简洁、极其轻量，兼容安卓设备。",
+                celery_desc: "出色的电脑端免费替代品，更新频繁。",
                 codex_desc: "以 iOS 和 Android 端的稳定性和内置脚本中心闻名。",
-                scripts_title: "顶级脚本中心与游戏", scripts_desc: "经过测试的安全脚本，无密钥或简易密钥系统",
+                scripts_title: "ROBLOX 脚本中心", scripts_desc: "针对主流游戏测试的安全脚本",
                 script_1_desc: "自动刷怪、BOSS传送、恶魔果实狙击及高级配置。",
                 script_2_desc: "可定制自瞄、透视、墙透以及安全的静默自瞄。",
-                contact_title: "请求脚本或获取支持", contact_desc: "需要特定的脚本或遇到注入器问题？给我们发消息吧。",
-                btn_send: "发送请求"
+                contact_title: "支持与脚本请求", contact_desc: "需要技术支持或特定脚本？给我们发消息。",
+                btn_send: "发送消息",
+                credits: "由 ZENIK TEAM 创建和管理",
+                rights: "保留所有权利。与 Roblox Corporation 无关。"
             }
         };
 
@@ -403,43 +483,43 @@
             if (lang === 'en') {
                 nameInput.placeholder = "Your Name / Roblox Username";
                 emailInput.placeholder = "Your Contact Email";
-                msgInput.placeholder = "Write which script you need or what issue you are facing...";
+                msgInput.placeholder = "Write your issue or the script you are looking for...";
             } else if (lang === 'es') {
                 nameInput.placeholder = "Tu Nombre / Usuario de Roblox";
                 emailInput.placeholder = "Tu Email de Contacto";
-                msgInput.placeholder = "Escribe qué script necesitas o qué problema tienes...";
+                msgInput.placeholder = "Escribe tu problema o el script que buscas...";
             } else if (lang === 'fr') {
                 nameInput.placeholder = "Votre Nom / Pseudo Roblox";
                 emailInput.placeholder = "Votre Email de Contact";
-                msgInput.placeholder = "Écrivez le script dont vous avez besoin...";
+                msgInput.placeholder = "Écrivez votre problème ou le script recherché...";
             } else if (lang === 'de') {
                 nameInput.placeholder = "Dein Name / Roblox Benutzername";
                 emailInput.placeholder = "Deine Kontakt-E-Mail";
-                msgInput.placeholder = "Schreibe, welches Skript du benötigst...";
+                msgInput.placeholder = "Schreibe dein Problem oder das gesuchte Skript...";
             } else if (lang === 'pt') {
                 nameInput.placeholder = "Seu Nome / Usuário do Roblox";
                 emailInput.placeholder = "Seu E-mail de Contato";
-                msgInput.placeholder = "Escreva qual script você precisa...";
+                msgInput.placeholder = "Escreva seu problema ou o script que procura...";
             } else if (lang === 'ru') {
                 nameInput.placeholder = "Ваше имя / Ник в Roblox";
                 emailInput.placeholder = "Ваш email для связи";
-                msgInput.placeholder = "Напишите, какой скрипт вам нужен...";
+                msgInput.placeholder = "Опишите вашу проблему или нужный скрипт...";
             } else if (lang === 'tr') {
                 nameInput.placeholder = "Adınız / Roblox Kullanıcı Adı";
                 emailInput.placeholder = "İletişim E-postanız";
-                msgInput.placeholder = "Hangi script'e ihtiyacın var yaz...";
+                msgInput.placeholder = "Sorununuzu veya aradığınız scripti yazın...";
             } else if (lang === 'ja') {
                 nameInput.placeholder = "お名前 / Robloxユーザー名";
                 emailInput.placeholder = "連絡先メールアドレス";
-                msgInput.placeholder = "必要なスクリプトや問題を入力してください...";
+                msgInput.placeholder = "問題や探しているスクリプトを入力してください...";
             } else if (lang === 'zh') {
                 nameInput.placeholder = "你的名字 / Roblox 用户名";
                 emailInput.placeholder = "你的联系邮箱";
-                msgInput.placeholder = "写下你需要什么脚本或遇到的问题...";
+                msgInput.placeholder = "写下你的问题或寻找的脚本...";
             } else {
                 nameInput.placeholder = "Il tuo Nome / Roblox Username";
                 emailInput.placeholder = "La tua Email di Contatto";
-                msgInput.placeholder = "Scrivi qui quale script ti serve o che problema riscontri...";
+                msgInput.placeholder = "Scrivi qui il tuo problema o lo script che cerchi...";
             }
         }
     </script>
