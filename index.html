@@ -3,388 +3,513 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zenik Hub - Delta Style</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Roblox Executor & Script Hub</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --primary: #7c3aed;
+            --primary-hover: #6d28d9;
+            --accent: #10b981;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
+        }
+
         body {
-            background-color: #0b0f19;
-            color: #ffffff;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
             overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(124, 58, 237, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.1) 0%, transparent 40%);
+            min-height: 100vh;
         }
-        .browser-bar {
-            background-color: #121624;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+
+        /* Navbar */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(11, 15, 25, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--card-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
+            z-index: 1000;
         }
-        .url-box {
-            background-color: #1a1f30;
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
-        .btn-purple {
-            background: linear-gradient(135deg, #8a75ff, #7353f7);
-            box-shadow: 0 4px 20px rgba(115, 83, 247, 0.4);
-            transition: all 0.2s ease;
+
+        .logo span {
+            color: var(--primary);
         }
-        .btn-purple:hover {
-            opacity: 0.9;
-            transform: translateY(-1px);
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+            align-items: center;
         }
-        .btn-outline {
-            background-color: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: all 0.2s ease;
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: 0.3s;
+            cursor: pointer;
         }
-        .btn-outline:hover {
-            background-color: rgba(255, 255, 255, 0.07);
-            border-color: rgba(138, 117, 255, 0.4);
+
+        .nav-links a:hover, .nav-links a.active {
+            color: #fff;
         }
-        .delta-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: all 0.2s ease;
-        }
-        .delta-card:hover {
-            border-color: rgba(138, 117, 255, 0.4);
-        }
-        .menu-overlay {
-            background: rgba(11, 15, 25, 0.98);
-            backdrop-filter: blur(20px);
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-        }
-        .search-input {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.2s ease;
-        }
-        .search-input:focus {
-            border-color: #8a75ff;
+
+        .lang-select {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 8px;
+            cursor: pointer;
             outline: none;
-            background: rgba(255, 255, 255, 0.07);
+        }
+
+        /* Container principale */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 120px 20px 60px 20px;
+        }
+
+        section {
+            margin-bottom: 80px;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* Home / Status Banner */
+        .hero-banner {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 3rem;
+            backdrop-filter: blur(16px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .hero-text h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+
+        .hero-text p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 600px;
+        }
+
+        .status-badge {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: var(--accent);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.15);
+        }
+
+        .pulse-dot {
+            width: 10px;
+            height: 10px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+
+        /* Griglie download & script */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 25px;
+            backdrop-filter: blur(12px);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            border-color: rgba(124, 58, 237, 0.4);
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+
+        /* Bottoni */
+        .btn {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .btn:hover {
+            background: var(--primary-hover);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--card-border);
+        }
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Barra di ricerca Script */
+        .search-bar {
+            width: 100%;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 15px 20px;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 1rem;
+            margin-bottom: 25px;
+            outline: none;
+            transition: 0.3s;
+        }
+        .search-bar:focus {
+            border-color: var(--primary);
+        }
+
+        /* FAQ Accordion */
+        .faq-item {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-answer {
+            padding: 0 20px 20px 20px;
+            color: var(--text-muted);
+            display: none;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--card-border);
+            padding: 40px 5%;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            background: rgba(11, 15, 25, 0.5);
+        }
+
+        footer p {
+            margin-bottom: 10px;
+        }
+
+        .disclaimer {
+            font-size: 0.8rem;
+            color: #6b7280;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        @media(max-width: 768px) {
+            .nav-links { display: none; }
+            .hero-text h1 { font-size: 2.2rem; }
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between selection:bg-purple-500 selection:text-white">
+<body>
 
-    <!-- 1. MOBILE BROWSER CHROME (TOP) IDENTICO ALLO SCREENSHOT -->
-    <div class="w-full browser-bar py-2 px-3 sticky top-0 z-50">
-        <!-- Status Bar -->
-        <div class="flex justify-between items-center text-xs text-slate-300 pb-2 px-1">
-            <span class="font-medium">11:18</span>
-            <div class="flex items-center space-x-2 text-slate-400">
-                <span>📶</span>
-                <span>🔋</span>
-                <span class="text-white font-bold text-[10px]">78</span>
-            </div>
+    <!-- Navbar -->
+    <nav>
+        <div class="logo">
+            <i class="fa-solid fa-code"></i> Roblox<span>Hub</span>
         </div>
+        <ul class="nav-links">
+            <li><a href="#home" class="active" data-i18n="nav_home">Home</a></li>
+            <li><a href="#downloads" data-i18n="nav_downloads">Download</a></li>
+            <li><a href="#scripts" data-i18n="nav_scripts">Scripts</a></li>
+            <li><a href="#faq" data-i18n="nav_faq">FAQ</a></li>
+            <li><a href="https://discord.gg/tuolink" target="_blank"><i class="fa-brands fa-discord"></i> Discord</a></li>
+        </ul>
+        <select class="lang-select" id="langSelect" onchange="changeLanguage(this.value)">
+            <option value="it">🇮🇹 IT</option>
+            <option value="en">🇬🇧 EN</option>
+        </select>
+    </nav>
 
-        <!-- URL & Navigation Bar -->
-        <div class="flex items-center justify-between gap-2 px-1 py-1">
-            <button class="text-slate-300 p-1 cursor-pointer">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
-            </button>
+    <div class="container">
+
+        <!-- HOME / STATUS SECTION -->
+        <section id="home">
+            <div class="hero-banner">
+                <div class="hero-text">
+                    <div class="status-badge">
+                        <div class="pulse-dot"></div>
+                        <span id="statusText">Undetected (Hyperion Safe)</span>
+                    </div>
+                    <h1 style="margin-top: 15px;" data-i18n="hero_title">Il miglior Hub di Executor & Script</h1>
+                    <p data-i18n="hero_desc">Accedi ai migliori script aggiornati in tempo reale per i tuoi giochi preferiti di Roblox in tutta sicurezza.</p>
+                </div>
+                <a href="#downloads" class="btn" style="width: auto; padding: 15px 30px;" data-i18n="hero_btn">Scarica Ora</a>
+            </div>
+        </section>
+
+        <!-- DOWNLOAD SECTION -->
+        <section id="downloads">
+            <h2 class="section-title"><i class="fa-solid fa-download" style="color: var(--primary);"></i> <span data-i18n="sec_downloads">Download Executor</span></h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Delta Executor (PC)</h3>
+                    <p data-i18n="pc_desc">Stabile e veloce per Windows. Aggiornato all'ultima versione di Roblox.</p>
+                    <a href="https://link-al-download-pc.com" target="_blank" class="btn"><i class="fa-solid fa-cloud-arrow-down"></i> Download PC</a>
+                </div>
+                <div class="card">
+                    <h3>Delta Mobile (Android)</h3>
+                    <p data-i18n="mob_desc">La versione mobile più popolare e sicura per smartphone e tablet.</p>
+                    <a href="https://link-al-download-android.com" target="_blank" class="btn"><i class="fa-solid fa-cloud-arrow-down"></i> Download Android</a>
+                </div>
+                <div class="card">
+                    <h3>Fluxus / Alternative</h3>
+                    <p data-i18n="alt_desc">Soluzione alternativa per utenti che cercano massima compatibilità.</p>
+                    <a href="https://link-al-download-alt.com" target="_blank" class="btn btn-secondary"><i class="fa-solid fa-cloud-arrow-down"></i> Download Extra</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SCRIPTS HUB SECTION -->
+        <section id="scripts">
+            <h2 class="section-title"><i class="fa-solid fa-terminal" style="color: var(--primary);"></i> <span data-i18n="sec_scripts">Script Hub</span></h2>
+            <input type="text" id="scriptSearch" class="search-bar" placeholder="Cerca un gioco o script (es. Blox Fruits, Brookhaven)..." onkeyup="filterScripts()">
             
-            <div class="url-box flex-grow flex items-center justify-between px-4 py-2 rounded-full text-sm text-slate-200 border border-white/5 shadow-inner">
-                <div class="flex items-center space-x-2 truncate">
-                    <span class="text-slate-400 text-xs">🔒</span>
-                    <span class="tracking-wide text-xs font-normal">deltaexploits.gg</span>
+            <div class="grid" id="scriptGrid">
+                <div class="card script-card" data-name="blox fruits">
+                    <h3>Blox Fruits Hub</h3>
+                    <p>Auto Farm, Devil Fruit ESP, Boss Notifier & Raid Mod.</p>
+                    <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://example.com/bloxfruits\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
                 </div>
-                <div class="flex items-center space-x-3 text-slate-400">
-                    <span class="text-xs">▶</span>
-                    <span class="text-xs bg-slate-700/50 px-1.5 py-0.2 rounded text-slate-300 font-bold">36</span>
+                <div class="card script-card" data-name="brookhaven">
+                    <h3>Brookhaven RP Gui</h3>
+                    <p>Spawn Cars, House Mods, Admin Commands & Animation Pack.</p>
+                    <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://example.com/brookhaven\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+                </div>
+                <div class="card script-card" data-name="pet simulator 99">
+                    <h3>Pet Simulator 99</h3>
+                    <p>Auto Farm Chests, Auto Hatch, Best Pet Teleport.</p>
+                    <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://example.com/petsim99\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
                 </div>
             </div>
+        </section>
 
-            <button class="text-slate-300 p-1 cursor-pointer">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path></svg>
-            </button>
-        </div>
+        <!-- FAQ SECTION -->
+        <section id="faq">
+            <h2 class="section-title"><i class="fa-solid fa-circle-question" style="color: var(--primary);"></i> <span data-i18n="sec_faq">Domande Frequenti (FAQ)</span></h2>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span data-i18n="faq_q1">Gli executor sono sicuri?</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer" data-i18n="faq_a1">Sì, gli executor indicati nel sito sono testati regolarmente. Ricorda tuttavia di usare sempre un account secondario (alt account) per evitare rischi di ban sul tuo account principale.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span data-i18n="faq_q2">Come uso il codice loadstring copiato?</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer" data-i18n="faq_a2">Apri il tuo executor all'interno di Roblox, incolla il codice copiato nell'apposito spazio di esecuzione e clicca su "Execute".</div>
+            </div>
+        </section>
+
     </div>
 
-    <!-- 2. MENU A TENDINA A SCHERMO INTERO (Stile Immagine 3) -->
-    <div id="dropdownMenu" class="fixed inset-0 z-50 menu-overlay opacity-0 invisible flex flex-col items-center justify-center p-6">
-        <button onclick="toggleMenu()" class="absolute top-6 right-6 w-12 h-12 rounded-2xl border border-white/10 flex items-center justify-center text-white text-xl hover:bg-white/10 transition cursor-pointer">✕</button>
-        
-        <div class="w-full max-w-xs space-y-3 text-center">
-            <button onclick="navigate('executors')" class="w-full py-4 rounded-xl border border-white/15 text-white font-bold tracking-wider hover:bg-white/10 transition cursor-pointer">EXECUTORS</button>
-            <button onclick="navigate('scripts')" class="w-full py-4 rounded-xl border border-white/15 text-white font-bold tracking-wider hover:bg-white/10 transition cursor-pointer">SCRIPTS HUB</button>
-            <button onclick="navigate('support')" class="w-full py-4 rounded-xl border border-white/15 text-white font-bold tracking-wider hover:bg-white/10 transition cursor-pointer">SUPPORTO</button>
-            <button onclick="navigate('credits')" class="w-full py-4 rounded-xl border border-white/15 text-white font-bold tracking-wider hover:bg-white/10 transition cursor-pointer">CREDITI</button>
-        </div>
-    </div>
+    <!-- Footer -->
+    <footer>
+        <p data-i18n="footer_rights">© 2026 RobloxHub. Tutti i diritti riservati.</p>
+        <p class="disclaimer" data-i18n="footer_dmca">Disclaimer: Questo sito non è affiliato, associato, autorizzato o sponsorizzato da Roblox Corporation. Tutti i marchi registrati appartengono ai rispettivi proprietari. Progetto creato a solo scopo informativo ed educativo.</p>
+    </footer>
 
-    <!-- CONTENUTO PRINCIPALE DEL SITO (Multi-Sezione Dinamica) -->
-    <main class="flex-grow flex flex-col justify-center px-6 py-8 max-w-xl mx-auto w-full">
-        
-        <!-- HEADER INTERNO DEL SITO (Logo Zenik / Delta Style) -->
-        <header class="flex items-center justify-between w-full mb-12">
-            <a href="#" onclick="showSection('home')" class="text-2xl font-bold tracking-tight text-white cursor-pointer">Zenik</a>
-            <div class="flex items-center space-x-3">
-                <a href="#" onclick="showSection('executors')" class="btn-outline px-4 py-1.5 rounded-xl text-xs font-medium text-slate-200">Download</a>
-                <button onclick="toggleMenu()" class="text-white p-1 focus:outline-none cursor-pointer">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                </button>
-            </div>
-        </header>
-
-        <!-- SEZIONE 1: HOME (Identica allo screenshot) -->
-        <section id="sec-home" class="page-section text-center space-y-6 my-auto">
-            <div class="space-y-4">
-                <p class="text-purple-400 font-bold text-[10px] tracking-widest uppercase">THE SKY IS THE LIMIT</p>
-                <h2 class="text-4xl font-extrabold tracking-tight text-white leading-tight">
-                    Revolutionizing<br>the future of<br>execution
-                </h2>
-                <p class="text-slate-400 text-xs leading-relaxed max-w-[280px] mx-auto px-2">
-                    A premium experience embedded with the latest technologies to enhance your scripting experience to the next level.
-                </p>
-            </div>
-
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-3 w-full pt-2">
-                <a href="#" onclick="showSection('executors')" class="btn-purple w-full py-3.5 rounded-xl font-semibold text-xs text-white text-center shadow-lg cursor-pointer">Download</a>
-                <a href="#" onclick="showSection('scripts')" class="btn-outline w-full py-3.5 rounded-xl font-semibold text-xs text-white text-center flex items-center justify-center space-x-2 cursor-pointer">
-                    <span>Learn more</span>
-                    <span class="text-sm">→</span>
-                </a>
-            </div>
-
-            <div class="flex justify-center pt-4">
-                <div class="w-2 h-2 rounded-full bg-purple-500/60"></div>
-            </div>
-        </section>
-
-        <!-- SEZIONE 2: EXECUTORS (3 Executor con link web reali) -->
-        <section id="sec-executors" class="page-section hidden space-y-6">
-            <div class="text-center space-y-2">
-                <h2 class="text-2xl font-black">Roblox Executors</h2>
-                <p class="text-slate-400 text-xs">I 3 migliori executor testati e sicuri per Roblox.</p>
-            </div>
-
-            <div class="grid grid-cols-1 gap-4">
-                <!-- Delta -->
-                <div class="delta-card p-5 rounded-2xl space-y-3">
-                    <div class="flex justify-between items-center">
-                        <h3 class="font-bold text-sm">Delta Executor</h3>
-                        <span class="text-[10px] bg-purple-500/20 text-purple-300 px-2.5 py-0.5 rounded-full border border-purple-500/30 font-bold">⭐ Best</span>
-                    </div>
-                    <p class="text-xs text-slate-400">Il re incontrastato degli executor mobile e PC con script hub integrato.</p>
-                    <a href="https://deltaexploits.gg" target="_blank" class="btn-purple block text-center py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider text-white">Download Delta</a>
-                </div>
-
-                <!-- Hydrogen -->
-                <div class="delta-card p-5 rounded-2xl space-y-3">
-                    <div class="flex justify-between items-center">
-                        <h3 class="font-bold text-sm">Hydrogen</h3>
-                        <span class="text-[10px] bg-green-500/20 text-green-300 px-2.5 py-0.5 rounded-full border border-green-500/30 font-bold">Mobile</span>
-                    </div>
-                    <p class="text-xs text-slate-400">Interfaccia pulita, leggerissimo e altamente compatibile con Android.</p>
-                    <a href="https://hydrogen.sh" target="_blank" class="btn-purple block text-center py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider text-white">Download Hydrogen</a>
-                </div>
-
-                <!-- Codex -->
-                <div class="delta-card p-5 rounded-2xl space-y-3">
-                    <div class="flex justify-between items-center">
-                        <h3 class="font-bold text-sm">Codex Executor</h3>
-                        <span class="text-[10px] bg-blue-500/20 text-blue-300 px-2.5 py-0.5 rounded-full border border-blue-500/30 font-bold">iOS/Android</span>
-                    </div>
-                    <p class="text-xs text-slate-400">Famoso per la sua incredibile stabilità e supporto multi-piattaforma.</p>
-                    <a href="https://codex.lol" target="_blank" class="btn-purple block text-center py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider text-white">Download Codex</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- SEZIONE 3: SCRIPTS HUB (10 Mappe + Ricerca + Tasto Copia) -->
-        <section id="sec-scripts" class="page-section hidden space-y-4">
-            <div class="text-center space-y-1">
-                <h2 class="text-2xl font-black">Scripts Hub</h2>
-                <p class="text-slate-400 text-xs">Cerca tra 10 script per mappe Roblox e copiali con un click.</p>
-            </div>
-
-            <!-- Barra di Ricerca -->
-            <div>
-                <input type="text" id="scriptSearch" onkeyup="filterScripts()" placeholder="Cerca mappa (es. Blox Fruits, Arsenal...)" class="search-input w-full p-3 rounded-xl text-xs text-white placeholder-slate-500">
-            </div>
-
-            <!-- Lista dei 10 Script -->
-            <div id="scriptsContainer" class="space-y-3 max-h-[350px] overflow-y-auto pr-1">
-                
-                <div class="script-card delta-card p-4 rounded-xl space-y-2" data-name="blox fruits auto farm op">
-                    <div class="flex justify-between items-center"><h3 class="font-bold text-xs text-purple-300">⚔️ Blox Fruits</h3><span class="text-[9px] bg-white/10 px-2 py-0.5 rounded text-slate-300">Universal</span></div>
-                    <div class="flex items-center gap-2">
-                        <input type="text" readonly value='loadstring(game:HttpGet("https://raw.githubusercontent.com/Zenik/BloxFruits.lua"))()' class="search-input w-full p-2 rounded-lg text-[10px] font-mono text-purple-200 select-all truncate">
-                        <button onclick="copyScript(this)" class="btn-purple px-3 py-2 rounded-lg text-[10px] font-bold whitespace-nowrap cursor-pointer">Copia</button>
-                    </div>
-                </div>
-
-                <div class="script-card delta-card p-4 rounded-xl space-y-2" data-name="arsenal aimbot esp">
-                    <div class="flex justify-between items-center"><h3 class="font-bold text-xs text-purple-300">🔫 Arsenal</h3><span class="text-[9px] bg-white/10 px-2 py-0.5 rounded text-slate-300">FPS</span></div>
-                    <div class="flex items-center gap-2">
-                        <input type="text" readonly value='loadstring(game:HttpGet("https://raw.githubusercontent.com/Zenik/Arsenal.lua"))()' class="search-input w-full p-2 rounded-lg text-[10px] font-mono text-purple-200 select-all truncate">
-                        <button onclick="copyScript(this)" class="btn-purple px-3 py-2 rounded-lg text-[10px] font-bold whitespace-nowrap cursor-pointer">Copia</button>
-                    </div>
-                </div>
-
-                <div class="script-card delta-card p-4 rounded-xl space-y-2" data-name="pet sim 99 auto hatch farm">
-                    <div class="flex justify-between items-center"><h3 class="font-bold text-xs text-purple-300">🐾 Pet Simulator 99</h3><span class="text-[9px] bg-white/10 px-2 py-0.5 rounded text-slate-300">Simulator</span></div>
-                    <div class="flex items-center gap-2">
-                        <input type="text" readonly value='loadstring(game:HttpGet("https://raw.githubusercontent.com/Zenik/PetSim99.lua"))()' class="search-input w-full p-2 rounded-lg text-[10px] font-mono text-purple-200 select-all truncate">
-                        <button onclick="copyScript(this)" class="btn-purple px-3 py-2 rounded-lg text-[10px] font-bold whitespace-nowrap cursor-pointer">Copia</button>
-                    </div>
-                </div>
-
-                <div class="script-card delta-card p-4 rounded-xl space-y-2" data-name="bedwars kit unlocker killaura">
-                    <div class="flex justify-between items-center"><h3 class="font-bold text-xs text-purple-300">🛌 BedWars</h3><span class="text-[9px] bg-white/10 px-2 py-0.5 rounded text-slate-300">PvP</span></div>
-                    <div class="flex items-center gap-2">
-                        <input type="text" readonly value='loadstring(game:HttpGet("https://raw.githubusercontent.com/Zenik/BedWars.lua"))()' class="search-input w-full p-2 rounded-lg text-[10px] font-mono text-purple-200 select-all truncate">
-                        <button onclick="copyScript(this)" class="btn-purple px-3 py-2 rounded-lg text-[10px] font-bold whitespace-nowrap cursor-pointer">Copia</button>
-                    </div>
-                </div>
-
-                <div class="script-card delta-card p-4 rounded-xl space-y-2" data-name="brookhaven rp admin gui spawn">
-                    <div class="flex justify-between items-center"><h3 class="font-bold text-xs text-purple-300">🏠 Brookhaven RP</h3><span class="text-[9px] bg-white/10 px-2 py-0.5 rounded text-slate-300">Roleplay</span></div>
-                    <div class="flex items-center gap-2">
-                        <input type="text" readonly value='loadstring(game:HttpGet("https://raw.githubusercontent.com/Zenik/Brookhaven.lua"))()' class="search-input w-full p-2 rounded-lg text-[10px] font-mono text-purple-200 select-all truncate">
-                        <button onclick="copyScript(this)" class="btn-purple px-3 py-2 rounded-lg text-[10px] font-bold whitespace-nowrap cursor-pointer">Copia</button>
-                    </div>
-                </div>
-
-                <div class="script-card delta-card p-4 rounded-xl space-y-2" data-name="blade ball auto parry spammer">
-                    <div class="flex justify-between items-center"><h3 class="font-bold text-xs text-purple-300">⚔️ Blade Ball</h3><span class="text-[9px] bg-white/10 px-2 py-0.5 rounded text-slate-300">Action</span></div>
-                    <div class="flex items-center gap-2">
-                        <input type="text" readonly value='loadstring(game:HttpGet("https://raw.githubusercontent.com/Zenik/BladeBall.lua"))()' class="search-input w-full p-2 rounded-lg text-[10px] font-mono text-purple-200 select-all truncate">
-                        <button onclick="copyScript(this)" class="btn-purple px-3 py-2 rounded-lg text-[10px] font-bold whitespace-nowrap cursor-pointer">Copia</button>
-                    </div>
-                </div>
-
-                <div class="script-card delta-card p-4 rounded-xl space-y-2" data-name="doors elevator floor 2 speed bypass">
-                    <div class="flex justify-between items-center"><h3 class="font-bold text-xs text-purple-300">🚪 DOORS</h3><span class="text-[9px] bg-white/10 px-2 py-0.5 rounded text-slate-300">Horror</span></div>
-                    <div class="flex items-center gap-2">
-                        <input type="text" readonly value='loadstring(game:HttpGet("https://raw.githubusercontent.com/Zenik/Doors.lua"))()' class="search-input w-full p-2 rounded-lg text-[10px] font-mono text-purple-200 select-all truncate">
-                        <button onclick="copyScript(this)" class="btn-purple px-3 py-2 rounded-lg text-[10px] font-bold whitespace-nowrap cursor-pointer">Copia</button>
-                    </div>
-                </div>
-
-                <div class="script-card delta-card p-4 rounded-xl space-y-2" data-name="mm2 murder mystery 2 sheriff gun esp">
-                    <div class="flex justify-between items-center"><h3 class="font-bold text-xs text-purple-300">🔪 Murder Mystery 2</h3><span class="text-[9px] bg-white/10 px-2 py-0.5 rounded text-slate-300">Mini-game</span></div>
-                    <div class="flex items-center gap-2">
-                        <input type="text" readonly value='loadstring(game:HttpGet("https://raw.githubusercontent.com/Zenik/MM2.lua"))()' class="search-input w-full p-2 rounded-lg text-[10px] font-mono text-purple-200 select-all truncate">
-                        <button onclick="copyScript(this)" class="btn-purple px-3 py-2 rounded-lg text-[10px] font-bold whitespace-nowrap cursor-pointer">Copia</button>
-                    </div>
-                </div>
-
-                <div class="script-card delta-card p-4 rounded-xl space-y-2" data-name="jailbreak auto rob money card">
-                    <div class="flex justify-between items-center"><h3 class="font-bold text-xs text-purple-300">👮 Jailbreak</h3><span class="text-[9px] bg-white/10 px-2 py-0.5 rounded text-slate-300">Open World</span></div>
-                    <div class="flex items-center gap-2">
-                        <input type="text" readonly value='loadstring(game:HttpGet("https://raw.githubusercontent.com/Zenik/Jailbreak.lua"))()' class="search-input w-full p-2 rounded-lg text-[10px] font-mono text-purple-200 select-all truncate">
-                        <button onclick="copyScript(this)" class="btn-purple px-3 py-2 rounded-lg text-[10px] font-bold whitespace-nowrap cursor-pointer">Copia</button>
-                    </div>
-                </div>
-
-                <div class="script-card delta-card p-4 rounded-xl space-y-2" data-name="da hood cash aura macro godmode">
-                    <div class="flex justify-between items-center"><h3 class="font-bold text-xs text-purple-300">🏙️ Da Hood</h3><span class="text-[9px] bg-white/10 px-2 py-0.5 rounded text-slate-300">PvP</span></div>
-                    <div class="flex items-center gap-2">
-                        <input type="text" readonly value='loadstring(game:HttpGet("https://raw.githubusercontent.com/Zenik/DaHood.lua"))()' class="search-input w-full p-2 rounded-lg text-[10px] font-mono text-purple-200 select-all truncate">
-                        <button onclick="copyScript(this)" class="btn-purple px-3 py-2 rounded-lg text-[10px] font-bold whitespace-nowrap cursor-pointer">Copia</button>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- SEZIONE 4: SUPPORTO -->
-        <section id="sec-support" class="page-section hidden space-y-4">
-            <div class="text-center space-y-1">
-                <h2 class="text-2xl font-black">Supporto</h2>
-                <p class="text-slate-400 text-xs">Hai riscontrato problemi? Scrivici.</p>
-            </div>
-            <form onsubmit="event.preventDefault(); alert('Messaggio inviato con successo!');" class="space-y-3">
-                <input type="text" placeholder="Il tuo Username Roblox" required class="search-input w-full p-3 rounded-xl text-xs text-white placeholder-slate-500">
-                <textarea placeholder="Descrivi il tuo problema..." rows="3" required class="search-input w-full p-3 rounded-xl text-xs text-white placeholder-slate-500 resize-none"></textarea>
-                <button type="submit" class="btn-purple w-full py-3 rounded-xl font-bold text-xs uppercase tracking-wider text-white cursor-pointer">Invia Richiesta</button>
-            </form>
-        </section>
-
-        <!-- SEZIONE 5: CREDITI -->
-        <section id="sec-credits" class="page-section hidden text-center space-y-4 my-auto">
-            <h2 class="text-2xl font-black">Crediti</h2>
-            <div class="delta-card p-5 rounded-2xl space-y-2 text-xs text-slate-400">
-                <p class="font-bold text-white tracking-wider">ZENIK HUB</p>
-                <p>© 2026 Zenik Hub. Tutti i diritti riservati.</p>
-                <p class="text-[10px]">Non affiliato con Roblox Corporation.</p>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- 3. MOBILE NAVIGATION BAR (BOTTOM) IDENTICA ALLO SCREENSHOT -->
-    <div class="w-full py-3 bg-[#080b13] border-t border-white/5 flex justify-around items-center text-slate-400 text-sm">
-        <button class="p-2 cursor-pointer">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-        </button>
-        <button class="p-2 cursor-pointer">
-            <div class="w-4 h-4 border-2 border-slate-400 rounded-sm"></div>
-        </button>
-        <button class="p-2 cursor-pointer">
-            <svg class="w-5 h-5 rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-        </button>
-    </div>
-
-    <!-- SCRIPT DI CONTROLLO -->
+    <!-- JavaScript Integrato -->
     <script>
-        function toggleMenu() {
-            const menu = document.getElementById('dropdownMenu');
-            if (menu.classList.contains('opacity-0')) {
-                menu.classList.remove('opacity-0', 'invisible');
-                menu.classList.add('opacity-100', 'visible');
-            } else {
-                menu.classList.remove('opacity-100', 'visible');
-                menu.classList.add('opacity-0', 'invisible');
+        // Sistema traduzioni semplice IT / EN
+        const translations = {
+            it: {
+                nav_home: "Home",
+                nav_downloads: "Download",
+                nav_scripts: "Scripts",
+                nav_faq: "FAQ",
+                hero_title: "Il miglior Hub di Executor & Script",
+                hero_desc: "Accedi ai migliori script aggiornati in tempo reale per i tuoi giochi preferiti di Roblox in tutta sicurezza.",
+                hero_btn: "Scarica Ora",
+                sec_downloads: "Download Executor",
+                pc_desc: "Stabile e veloce per Windows. Aggiornato all'ultima versione di Roblox.",
+                mob_desc: "La versione mobile più popolare e sicura per smartphone e tablet.",
+                alt_desc: "Soluzione alternativa per utenti che cercano massima compatibilità.",
+                sec_scripts: "Script Hub",
+                sec_faq: "Domande Frequenti (FAQ)",
+                faq_q1: "Gli executor sono sicuri?",
+                faq_a1: "Sì, gli executor indicati nel sito sono testati regolarmente. Ricorda tuttavia di usare sempre un account secondario (alt account) per evitare rischi di ban sul tuo account principale.",
+                faq_q2: "Come uso il codice loadstring copiato?",
+                faq_a2: "Apri il tuo executor all'interno di Roblox, incolla il codice copiato nell'apposito spazio di esecuzione e clicca su 'Execute'.",
+                footer_rights: "© 2026 RobloxHub. Tutti i diritti riservati.",
+                footer_dmca: "Disclaimer: Questo sito non è affiliato, associato, autorizzato o sponsorizzato da Roblox Corporation. Tutti i marchi registrati appartengono ai rispettivi proprietari. Progetto creato a solo scopo informativo ed educativo."
+            },
+            en: {
+                nav_home: "Home",
+                nav_downloads: "Downloads",
+                nav_scripts: "Scripts",
+                nav_faq: "FAQ",
+                hero_title: "The Best Executor & Script Hub",
+                hero_desc: "Access the best real-time updated scripts for your favorite Roblox games safely.",
+                hero_btn: "Download Now",
+                sec_downloads: "Executor Downloads",
+                pc_desc: "Stable and fast for Windows. Updated to the latest Roblox version.",
+                mob_desc: "The most popular and secure mobile version for smartphones and tablets.",
+                alt_desc: "Alternative solution for users looking for maximum compatibility.",
+                sec_scripts: "Script Hub",
+                sec_faq: "Frequently Asked Questions (FAQ)",
+                faq_q1: "Are executors safe?",
+                faq_a1: "Yes, the executors listed on the site are tested regularly. However, always remember to use an alt account to avoid ban risks on your main account.",
+                faq_q2: "How do I use the copied loadstring code?",
+                faq_a2: "Open your executor inside Roblox, paste the copied code into the execution space, and click 'Execute'.",
+                footer_rights: "© 2026 RobloxHub. All rights reserved.",
+                footer_dmca: "Disclaimer: This site is not affiliated, associated, authorized, or sponsored by Roblox Corporation. All trademarks belong to their respective owners. Created for informational and educational purposes only."
+            }
+        };
+
+        function changeLanguage(lang) {
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
+            });
+        }
+
+        // Tasto copia loadstring con feedback visivo
+        function copyScript(text, btnElement) {
+            navigator.clipboard.writeText(text).then(() => {
+                const originalHTML = btnElement.innerHTML;
+                btnElement.innerHTML = '<i class="fa-solid fa-check"></i> Copied! 📋';
+                btnElement.style.background = '#10b981';
+                setTimeout(() => {
+                    btnElement.innerHTML = originalHTML;
+                    btnElement.style.background = '';
+                }, 2000);
+            });
+        }
+
+        // Barra di ricerca istantanea script
+        function filterScripts() {
+            let input = document.getElementById('scriptSearch').value.toLowerCase();
+            let cards = document.getElementsByClassName('script-card');
+            
+            for (let i = 0; i < cards.length; i++) {
+                let name = cards[i].getAttribute('data-name');
+                if (name.includes(input)) {
+                    cards[i].style.display = "block";
+                } else {
+                    cards[i].style.display = "none";
+                }
             }
         }
 
-        function showSection(sectionId) {
-            document.querySelectorAll('.page-section').forEach(sec => {
-                sec.classList.add('hidden');
-            });
-            document.getElementById('sec-' + sectionId).classList.remove('hidden');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function navigate(sectionId) {
-            toggleMenu();
-            showSection(sectionId);
-        }
-
-        function copyScript(button) {
-            const inputField = button.previousElementSibling;
-            inputField.select();
-            inputField.setSelectionRange(0, 99999);
-            
-            navigator.clipboard.writeText(inputField.value).then(() => {
-                const originalText = button.textContent;
-                button.textContent = "Copiato!";
-                button.style.background = "linear-gradient(135deg, #22c55e, #16a34a)";
-                
-                setTimeout(() => {
-                    button.textContent = originalText;
-                    button.style.background = "";
-                }, 2000);
-            }).catch(err => {
-                alert("Errore durante la copia.");
-            });
-        }
-
-        function filterScripts() {
-            const query = document.getElementById('scriptSearch').value.toLowerCase();
-            const cards = document.querySelectorAll('.script-card');
-
-            cards.forEach(card => {
-                const name = card.getAttribute('data-name');
-                if (name.includes(query)) {
-                    card.style.display = "block";
-                } else {
-                    card.style.display = "none";
-                }
-            });
+        // FAQ a tendina (Accordion)
+        function toggleFaq(element) {
+            let answer = element.nextElementSibling;
+            if (answer.style.display === "block") {
+                answer.style.display = "none";
+            } else {
+                answer.style.display = "block";
+            }
         }
     </script>
 </body>
