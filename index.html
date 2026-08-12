@@ -52,7 +52,7 @@
         }
         .enter-btn:hover { transform: scale(1.05); box-shadow: 0 0 40px rgba(139, 92, 246, 0.7); }
 
-        /* Navbar con supporto allo scorrimento orizzontale */
+        /* Navbar */
         nav {
             position: fixed; top: 0; left: 0; width: 100%;
             background: rgba(7, 9, 19, 0.85); backdrop-filter: blur(16px);
@@ -138,9 +138,56 @@
             display: flex; align-items: center; gap: 5px;
         }
 
-        .badge-status { background: rgba(16, 185, 129, 0.1); color: var(--accent); border: 1px solid rgba(16, 185, 129, 0.3); font-size: 0.73rem; padding: 4px 10px; border-radius: 20px; font-weight: 600; display: inline-block; margin-bottom: 10px; }
+        .status-container {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+        .badge-status { 
+            background: rgba(16, 185, 129, 0.1); 
+            color: var(--accent); 
+            border: 1px solid rgba(16, 185, 129, 0.3); 
+            font-size: 0.73rem; 
+            padding: 4px 10px; 
+            border-radius: 20px; 
+            font-weight: 600; 
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
         
-        /* Stili per le supportazioni dei dispositivi */
+        /* LOGO WORKING MODERNO (Stile Minimal Neumorphism/Neon) */
+        .badge-working-modern {
+            background: linear-gradient(135deg, rgba(0, 191, 165, 0.15), rgba(26, 35, 126, 0.2));
+            color: #00bfa5;
+            border: 1px solid rgba(0, 191, 165, 0.4);
+            font-size: 0.73rem;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            box-shadow: 0 0 12px rgba(0, 191, 165, 0.2);
+            animation: modern-pulse 2.5s infinite;
+        }
+        .badge-working-modern i {
+            font-size: 0.65rem;
+            background: #00bfa5;
+            color: #070913;
+            padding: 3px;
+            border-radius: 50%;
+        }
+        @keyframes modern-pulse {
+            0% { border-color: rgba(0, 191, 165, 0.4); box-shadow: 0 0 10px rgba(0, 191, 165, 0.2); }
+            50% { border-color: rgba(0, 191, 165, 0.8); box-shadow: 0 0 20px rgba(0, 191, 165, 0.4); }
+            100% { border-color: rgba(0, 191, 165, 0.4); box-shadow: 0 0 10px rgba(0, 191, 165, 0.2); }
+        }
+        
         .device-support {
             display: flex;
             gap: 8px;
@@ -212,7 +259,7 @@
         </div>
     </div>
 
-    <!-- NAVBAR CON SCORRIMENTO ORIZZONTALE -->
+    <!-- NAVBAR -->
     <nav>
         <div class="logo" onclick="switchSection('home', document.getElementById('nav-home'))">
             <i class="fa-solid fa-bolt"></i> Z<span>Hub</span>
@@ -254,7 +301,7 @@
         <!-- SEZIONE HOME -->
         <div id="home" class="section-view active">
             <div class="card" style="padding: 40px; text-align: center; background: linear-gradient(135deg, rgba(139,92,246,0.1), rgba(16,185,129,0.05));">
-                <span class="badge-status">🟢 Stato Hub: Online & Aggiornato</span>
+                <span class="badge-status"><i class="fa-solid fa-circle" style="font-size: 8px;"></i> Stato Hub: Online & Aggiornato</span>
                 <h2 style="font-size: 2.8rem; margin-top: 10px;" data-i18n="home_title">Dominare Roblox non è mai stato così facile</h2>
                 <p class="section-sub" style="max-width: 700px; margin: 15px auto 30px auto;" data-i18n="home_sub">Sfrutta il nostro hub per trovare i migliori executor stabili e la nostra collezione esclusiva di script testati senza bug.</p>
                 <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
@@ -264,7 +311,7 @@
             </div>
         </div>
 
-        <!-- SEZIONE DOWNLOAD EXECUTOR (CON SUPPORTO DISPOSITIVI) -->
+        <!-- SEZIONE DOWNLOAD EXECUTOR -->
         <div id="downloads" class="section-view">
             <h2 data-i18n="down_title">Download Executor Ufficiali</h2>
             <p class="section-sub" data-i18n="down_sub">I migliori executor scelti e verificati per PC e dispositivi mobili.</p>
@@ -274,9 +321,11 @@
                 <div class="card featured-delta">
                     <div class="badge-delta"><i class="fa-solid fa-star"></i> Best Executor</div>
                     <div>
-                        <span class="badge-status">Undetected</span>
+                        <div class="status-container">
+                            <span class="badge-status">Undetected</span>
+                            <span class="badge-working-modern"><i class="fa-solid fa-check"></i> Working</span>
+                        </div>
                         <h3>Delta Executor</h3>
-                        <!-- Supporti dispositivi -->
                         <div class="device-support">
                             <span class="device-badge"><i class="fa-brands fa-android" style="color: #34d399;"></i> Android</span>
                             <span class="device-badge"><i class="fa-brands fa-apple" style="color: #94a3b8;"></i> iOS</span>
@@ -290,9 +339,11 @@
                 <!-- ARCEUS X -->
                 <div class="card">
                     <div>
-                        <span class="badge-status">Undetected</span>
+                        <div class="status-container">
+                            <span class="badge-status">Undetected</span>
+                            <span class="badge-working-modern"><i class="fa-solid fa-check"></i> Working</span>
+                        </div>
                         <h3>Arceus X</h3>
-                        <!-- Supporti dispositivi -->
                         <div class="device-support">
                             <span class="device-badge"><i class="fa-brands fa-android" style="color: #34d399;"></i> Android</span>
                             <span class="device-badge"><i class="fa-brands fa-apple" style="color: #94a3b8;"></i> iOS</span>
@@ -305,9 +356,11 @@
                 <!-- CODEX EXECUTOR -->
                 <div class="card">
                     <div>
-                        <span class="badge-status">Undetected</span>
+                        <div class="status-container">
+                            <span class="badge-status">Undetected</span>
+                            <span class="badge-working-modern"><i class="fa-solid fa-check"></i> Working</span>
+                        </div>
                         <h3>CodeX Executor</h3>
-                        <!-- Supporti dispositivi -->
                         <div class="device-support">
                             <span class="device-badge"><i class="fa-brands fa-android" style="color: #34d399;"></i> Android</span>
                             <span class="device-badge"><i class="fa-brands fa-apple" style="color: #94a3b8;"></i> iOS</span>
@@ -513,7 +566,7 @@
                 home_title: "Dominar o Roblox nunca foi tão fácil", home_sub: "Use nosso hub para encontrar os melhores executores estáveis e nossa coleção exclusiva.", home_btn1: "Ir para Baixar", home_btn2: "Explorar Scripts",
                 down_title: "Download de Executores Oficiais", down_sub: "Os melhores executores escolhidos e verificados para PC e dispositivos móveis.", down_btn: "Site Oficial",
                 delta_desc: "O melhor absoluto para Celular e PC. Estável, rápido e rico em recursos.", arceus_desc: "Famoso executor móvel com interface limpa e script hub integrado.", codex_desc: "Ótima alternativa para injeções rápidas e alta compatibilidade.",
-                script_title: "Coleção de Scripts ZHub", script_sub: "Os 10 scripts mais poderosos e seguros, testados sem bugs.", delta_choice_desc: "O melhor script otimizado para Delta. Auto farm instantâneo e zero falhas.",
+                script_title: "Coleção de Scripts ZHub", script_sub: "Os 10 scripts mais poderosos e seguros, testados sem bugs.", delta_choice_desc: "O melhor script otimizado para Delta. Auto farm instantáneo e zero falhas.",
                 soc_title: "Social & Créditos", soc_sub: "Junte-se à nossa comunidade oficial e descubra quem criou o ZHub.", cred_title: "Créditos do Projeto", cred_desc: "O ZHub foi desenvolvido por desenvolvedores independentes. Todos os direitos reservados.",
                 soc_disc: "Entre no servidor para suporte e atualizações.", soc_yt: "Assista a vídeos de demonstração.", soc_tg: "Canal rápido para notificações."
             },
