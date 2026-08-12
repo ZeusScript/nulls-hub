@@ -63,45 +63,20 @@
         .logo { font-size: 1.6rem; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; cursor: pointer; white-space: nowrap; }
         .logo span { background: linear-gradient(135deg, #a78bfa, var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         
-        /* CONTENITORE NAVIGAZIONE CENTRALE CON SFUMATURA DINAMICA E PEEK */
-        .nav-center-container {
-            position: relative;
-            flex: 1;
-            max-width: 600px;
-        }
         .nav-center-wrapper {
-            overflow-x: auto; white-space: nowrap;
-            scrollbar-width: none; scrollbar-color: rgba(139,92,246,0.4) transparent;
-            scroll-behavior: smooth;
+            flex: 1; overflow-x: auto; white-space: nowrap;
+            scrollbar-width: thin; scrollbar-color: rgba(139,92,246,0.4) transparent;
         }
-        .nav-center-wrapper::-webkit-scrollbar { display: none; }
+        .nav-center-wrapper::-webkit-scrollbar { height: 3px; }
         .nav-center { display: inline-flex; gap: 1rem; list-style: none; align-items: center; padding: 4px 0; }
         .nav-center button {
             background: rgba(255, 255, 255, 0.02); border: 1px solid transparent;
             color: var(--text-muted); font-weight: 600; font-size: 0.9rem; cursor: pointer;
             transition: 0.3s; padding: 8px 16px; border-radius: 12px; display: inline-flex; align-items: center; gap: 8px;
-            flex-shrink: 0;
         }
         .nav-center button:hover, .nav-center button.active {
             color: #fff; background: rgba(139, 92, 246, 0.1); border-color: rgba(139, 92, 246, 0.3);
             box-shadow: 0 0 15px rgba(139, 92, 246, 0.15);
-        }
-
-        /* Sfumatura laterale barra di navigazione */
-        .nav-center-container::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 50px;
-            height: 100%;
-            background: linear-gradient(to right, rgba(3, 4, 11, 0), rgba(3, 4, 11, 1) 80%);
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        .nav-center-container.show-fade::after {
-            opacity: 1;
         }
 
         .nav-right { display: flex; align-items: center; gap: 15px; white-space: nowrap; }
@@ -155,6 +130,7 @@
         }
         .card:hover { border-color: rgba(139, 92, 246, 0.5); transform: translateY(-5px); box-shadow: 0 15px 40px rgba(139, 92, 246, 0.2); }
         
+        /* Stile Cartelle Giochi */
         .folder-card {
             background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(15, 23, 42, 0.7));
             border: 1px solid rgba(139, 92, 246, 0.25);
@@ -308,16 +284,13 @@
             <i class="fa-solid fa-bolt" style="color: var(--primary);"></i> Z<span>Hub</span>
         </div>
         
-        <!-- BARRA CENTRALE CON SFUMATURA DINAMICA E PEEK -->
-        <div class="nav-center-container show-fade" id="navContainer">
-            <div class="nav-center-wrapper" id="navScroll">
-                <ul class="nav-center">
-                    <li><button id="nav-home" class="active" onclick="switchSection('home', this)"><i class="fa-solid fa-house"></i> <span data-i18n="nav_home">Home</span></button></li>
-                    <li><button id="nav-downloads" onclick="switchSection('downloads', this)"><i class="fa-solid fa-download"></i> <span data-i18n="nav_downloads">Download</span></button></li>
-                    <li><button id="nav-scripts" onclick="switchSection('scripts', this)"><i class="fa-solid fa-code"></i> <span data-i18n="nav_scripts">Scripts</span></button></li>
-                    <li><button id="nav-social" onclick="switchSection('social', this)"><i class="fa-solid fa-share-nodes"></i> <span data-i18n="nav_social">Social & Crediti</span></button></li>
-                </ul>
-            </div>
+        <div class="nav-center-wrapper">
+            <ul class="nav-center">
+                <li><button id="nav-home" class="active" onclick="switchSection('home', this)"><i class="fa-solid fa-house"></i> <span data-i18n="nav_home">Home</span></button></li>
+                <li><button id="nav-downloads" onclick="switchSection('downloads', this)"><i class="fa-solid fa-download"></i> <span data-i18n="nav_downloads">Download</span></button></li>
+                <li><button id="nav-scripts" onclick="switchSection('scripts', this)"><i class="fa-solid fa-code"></i> <span data-i18n="nav_scripts">Scripts</span></button></li>
+                <li><button id="nav-social" onclick="switchSection('social', this)"><i class="fa-solid fa-share-nodes"></i> <span data-i18n="nav_social">Social & Crediti</span></button></li>
+            </ul>
         </div>
 
         <div class="nav-right">
@@ -434,11 +407,13 @@
                 </div>
             </div>
 
+            <!-- BARRA DI RICERCA PRINCIPALE (CERCA GIOCHI) -->
             <div class="search-container">
                 <i class="fa-solid fa-magnifying-glass"></i>
                 <input type="text" id="gameSearch" class="search-bar" placeholder="Cerca un gioco (es. Blox Fruits, Arsenal, BedWars)..." onkeyup="filterGames()">
             </div>
 
+            <!-- VISTA CARTELLE GIOCHI -->
             <div id="foldersContainer" class="grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
                 <div class="folder-card game-folder-card" data-gamename="blox fruits bloxfruits">
                     <div class="folder-icon" onclick="openFolder('bloxfruits')"><i class="fa-solid fa-folder-open"></i></div>
@@ -491,10 +466,12 @@
                 </div>
             </div>
 
+            <!-- CONTENITORE SCRIPT INTERNI ALLA CARTELLA CON BARRA DI RICERCA INTERNA -->
             <div id="folderView" style="display: none;">
                 <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; margin-bottom: 20px;">
                     <button class="back-folder-btn" style="margin-bottom: 0;" onclick="closeFolder()"><i class="fa-solid fa-arrow-left"></i> <span data-i18n="back_folders">Torna alle Cartelle</span></button>
                     
+                    <!-- BARRA DI RICERCA INTERNA ALLA CARTELLA (CERCA SCRIPT) -->
                     <div class="search-container" style="flex: 1; min-width: 250px; margin-bottom: 0;">
                         <i class="fa-solid fa-magnifying-glass"></i>
                         <input type="text" id="internalScriptSearch" class="search-bar" placeholder="Cerca script specifico in questa cartella..." onkeyup="filterInternalScripts()" style="padding: 13px 20px 13px 48px;">
@@ -502,6 +479,7 @@
                 </div>
 
                 <div class="grid" id="scriptGrid">
+                    <!-- BLOX FRUITS -->
                     <div class="card script-card" data-folder="bloxfruits" data-name="redz hub blox fruits">
                         <div class="status-container">
                             <span class="badge-working-modern"><i class="fa-solid fa-check"></i> Working</span>
@@ -543,6 +521,7 @@
                         <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/ZenHub/KingLegacy/main/Source.lua\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
                     </div>
 
+                    <!-- BLADE BALL -->
                     <div class="card script-card" data-folder="bladeball" data-name="blade ball">
                         <div class="status-container">
                             <span class="badge-working-modern"><i class="fa-solid fa-check"></i> Working</span>
@@ -560,6 +539,7 @@
                         <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/HorizonHub/BladeBall/main/source.lua\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
                     </div>
 
+                    <!-- BEDWARS -->
                     <div class="card script-card" data-folder="bedwars" data-name="bedwars">
                         <div class="status-container">
                             <span class="badge-working-modern"><i class="fa-solid fa-check"></i> Working</span>
@@ -577,6 +557,7 @@
                         <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/LunarBedwars/Main/main/source.lua\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
                     </div>
 
+                    <!-- DOORS & HORROR -->
                     <div class="card script-card" data-folder="doors" data-name="doors">
                         <div class="status-container">
                             <span class="badge-working-modern"><i class="fa-solid fa-check"></i> Working</span>
@@ -610,6 +591,7 @@
                         <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/PiggyHub/Main/main/source.lua\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
                     </div>
 
+                    <!-- ARSENAL & FPS -->
                     <div class="card script-card" data-folder="arsenal" data-name="project lazarus arsenal">
                         <div class="status-container">
                             <span class="badge-working-modern"><i class="fa-solid fa-check"></i> Working</span>
@@ -635,6 +617,7 @@
                         <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/ThunderClient/Main/main/source.lua\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
                     </div>
 
+                    <!-- SIMULATOR GAMES -->
                     <div class="card script-card" data-folder="simulators" data-name="pet simulator 99 ps99">
                         <div class="status-container">
                             <span class="badge-working-modern"><i class="fa-solid fa-check"></i> Working</span>
@@ -684,6 +667,7 @@
                         <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/MuscleLegendsHub/Main/main/source.lua\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
                     </div>
 
+                    <!-- UNIVERSAL & ADMIN -->
                     <div class="card script-card" data-folder="universal" data-name="vynixius universal">
                         <div class="status-container">
                             <span class="badge-working-modern"><i class="fa-solid fa-check"></i> Working</span>
@@ -1006,6 +990,7 @@
             }
         }
 
+        // BARRA DI RICERCA PRINCIPALE (FILTRA I GIOCHI / CARTELLA)
         function filterGames() {
             let input = document.getElementById('gameSearch').value.toLowerCase();
             let folders = document.getElementsByClassName('game-folder-card');
@@ -1020,6 +1005,7 @@
             }
         }
 
+        // BARRA DI RICERCA INTERNA (FILTRA I SINGOLI SCRIPT NELLA CARTELLA)
         function filterInternalScripts() {
             let input = document.getElementById('internalScriptSearch').value.toLowerCase();
             let cards = document.getElementsByClassName('script-card');
@@ -1083,33 +1069,6 @@
             document.getElementById('customCode').value = '';
             showToast(translation.toast_add);
         }
-
-        // GESTIONE DINAMICA NAV BAR (SFUMATURA + RIMBALZO INIZIALE)
-        document.addEventListener("DOMContentLoaded", function () {
-            const navScroll = document.getElementById("navScroll");
-            const navContainer = document.getElementById("navContainer");
-
-            function updateFade() {
-                const maxScrollLeft = navScroll.scrollWidth - navScroll.clientWidth;
-                if (navScroll.scrollLeft >= maxScrollLeft - 5) {
-                    navContainer.classList.remove("show-fade");
-                } else {
-                    navContainer.classList.add("show-fade");
-                }
-            }
-
-            navScroll.addEventListener("scroll", updateFade);
-            updateFade();
-
-            if (navScroll) {
-                setTimeout(() => {
-                    navScroll.scrollBy({ left: 160, behavior: 'smooth' });
-                    setTimeout(() => {
-                        navScroll.scrollBy({ left: -160, behavior: 'smooth' });
-                    }, 600);
-                }, 600);
-            }
-        });
 
         const form = document.getElementById('contactForm');
         const result = document.getElementById('formResult');
