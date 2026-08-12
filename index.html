@@ -63,9 +63,18 @@
         .logo { font-size: 1.6rem; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; cursor: pointer; white-space: nowrap; }
         .logo span { background: linear-gradient(135deg, #a78bfa, var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         
+        /* Contenitore Navigazione Centrale con stili moderni per lo scroll */
+        .nav-outer-container {
+            position: relative;
+            flex: 1;
+            max-width: 600px;
+            display: flex;
+            align-items: center;
+        }
         .nav-center-wrapper {
             flex: 1; overflow-x: auto; white-space: nowrap;
             scrollbar-width: thin; scrollbar-color: rgba(139,92,246,0.4) transparent;
+            scroll-behavior: smooth;
         }
         .nav-center-wrapper::-webkit-scrollbar { height: 3px; }
         .nav-center { display: inline-flex; gap: 1rem; list-style: none; align-items: center; padding: 4px 0; }
@@ -78,6 +87,32 @@
             color: #fff; background: rgba(139, 92, 246, 0.1); border-color: rgba(139, 92, 246, 0.3);
             box-shadow: 0 0 15px rgba(139, 92, 246, 0.15);
         }
+
+        /* Indicatore grafico di scorrimento con freccetta moderna */
+        .nav-scroll-indicator {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(90deg, transparent, rgba(3, 4, 11, 0.9) 50%);
+            padding: 10px 12px 10px 25px;
+            color: var(--primary);
+            font-size: 0.9rem;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: opacity 0.3s ease;
+            z-index: 5;
+        }
+        .nav-scroll-indicator i {
+            animation: bounceArrow 1.5s infinite ease-in-out;
+        }
+        @keyframes bounceArrow {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(4px); }
+        }
+        .nav-scroll-indicator.hidden { opacity: 0; }
 
         .nav-right { display: flex; align-items: center; gap: 15px; white-space: nowrap; }
         .lang-wrapper { position: relative; }
@@ -284,13 +319,19 @@
             <i class="fa-solid fa-bolt" style="color: var(--primary);"></i> Z<span>Hub</span>
         </div>
         
-        <div class="nav-center-wrapper">
-            <ul class="nav-center">
-                <li><button id="nav-home" class="active" onclick="switchSection('home', this)"><i class="fa-solid fa-house"></i> <span data-i18n="nav_home">Home</span></button></li>
-                <li><button id="nav-downloads" onclick="switchSection('downloads', this)"><i class="fa-solid fa-download"></i> <span data-i18n="nav_downloads">Download</span></button></li>
-                <li><button id="nav-scripts" onclick="switchSection('scripts', this)"><i class="fa-solid fa-code"></i> <span data-i18n="nav_scripts">Scripts</span></button></li>
-                <li><button id="nav-social" onclick="switchSection('social', this)"><i class="fa-solid fa-share-nodes"></i> <span data-i18n="nav_social">Social & Crediti</span></button></li>
-            </ul>
+        <!-- Navigazione centrale con indicatore di scorrimento moderno -->
+        <div class="nav-outer-container">
+            <div class="nav-center-wrapper" id="navCenterWrapper">
+                <ul class="nav-center">
+                    <li><button id="nav-home" class="active" onclick="switchSection('home', this)"><i class="fa-solid fa-house"></i> <span data-i18n="nav_home">Home</span></button></li>
+                    <li><button id="nav-downloads" onclick="switchSection('downloads', this)"><i class="fa-solid fa-download"></i> <span data-i18n="nav_downloads">Download</span></button></li>
+                    <li><button id="nav-scripts" onclick="switchSection('scripts', this)"><i class="fa-solid fa-code"></i> <span data-i18n="nav_scripts">Scripts</span></button></li>
+                    <li><button id="nav-social" onclick="switchSection('social', this)"><i class="fa-solid fa-share-nodes"></i> <span data-i18n="nav_social">Social & Crediti</span></button></li>
+                </ul>
+            </div>
+            <div class="nav-scroll-indicator" id="navScrollIndicator">
+                <span style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px;">Scroll</span> <i class="fa-solid fa-chevron-right"></i>
+            </div>
         </div>
 
         <div class="nav-right">
@@ -333,7 +374,7 @@
             <p class="section-sub" data-i18n="down_sub">I migliori executor scelti e verificati per PC e dispositivi mobili.</p>
             <div class="grid">
                 <div class="card featured-delta">
-                    <div class="badge-delta"><i class="fa-solid fa-star"></i> Best Executor</div>
+                    <div class="badge-delta"><i class="fa-solid fa-star"></i> <span data-i18n="badge_best">Best Executor</span></div>
                     <div>
                         <div class="status-container">
                             <span class="badge-status" data-i18n="badge_undetected">Undetected</span>
@@ -390,19 +431,19 @@
             <p class="section-sub" data-i18n="script_sub">Cerca il gioco desiderato oppure seleziona una cartella.</p>
             
             <div class="delta-highlight">
-                <div class="delta-badge-top">⭐ Delta Best Choice</div>
+                <div class="delta-badge-top" data-i18n="delta_best_choice">⭐ Delta Best Choice</div>
                 <div style="max-width: 700px;">
                     <h3 style="font-size: 1.5rem; margin-bottom: 8px;">Redz Hub (Blox Fruits)</h3>
                     <p style="color: var(--text-muted); margin-bottom: 0;" data-i18n="delta_choice_desc">Il migliore script in assoluto ottimizzato per Delta. Auto farm istantaneo, Sea Events, Fruit Finder e zero crash.</p>
                 </div>
-                <button class="btn" style="width: auto; padding: 12px 24px;" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/realredz/BloxFruits/main/Source.lua\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+                <button class="btn" style="width: auto; padding: 12px 24px;" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/realredz/BloxFruits/main/Source.lua\'))()', this)"><i class="fa-regular fa-copy"></i> <span data-i18n="copy_loadstring">Copy Loadstring</span></button>
             </div>
 
             <div class="custom-script-box">
                 <h3><i class="fa-solid fa-plus-circle"></i> <span data-i18n="custom_box_title">Aggiungi il tuo Script personalizzato alla lista</span></h3>
                 <div class="custom-row">
-                    <input type="text" id="customName" class="custom-input" placeholder="Nome Gioco / Script (es. Blade Ball)">
-                    <input type="text" id="customCode" class="custom-input" placeholder="loadstring(game:HttpGet(...))()">
+                    <input type="text" id="customName" class="custom-input" data-i18n-placeholder="custom_name_placeholder" placeholder="Nome Gioco / Script (es. Blade Ball)">
+                    <input type="text" id="customCode" class="custom-input" data-i18n-placeholder="custom_code_placeholder" placeholder="loadstring(game:HttpGet(...))()">
                     <button class="btn" style="width: auto;" onclick="addCustomScript()"><i class="fa-solid fa-upload"></i> <span data-i18n="custom_box_btn">Aggiungi</span></button>
                 </div>
             </div>
@@ -410,7 +451,7 @@
             <!-- BARRA DI RICERCA PRINCIPALE (CERCA GIOCHI) -->
             <div class="search-container">
                 <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" id="gameSearch" class="search-bar" placeholder="Cerca un gioco (es. Blox Fruits, Arsenal, BedWars)..." onkeyup="filterGames()">
+                <input type="text" id="gameSearch" class="search-bar" data-i18n-placeholder="search_game_placeholder" placeholder="Cerca un gioco (es. Blox Fruits, Arsenal, BedWars)..." onkeyup="filterGames()">
             </div>
 
             <!-- VISTA CARTELLE GIOCHI -->
@@ -474,7 +515,7 @@
                     <!-- BARRA DI RICERCA INTERNA ALLA CARTELLA (CERCA SCRIPT) -->
                     <div class="search-container" style="flex: 1; min-width: 250px; margin-bottom: 0;">
                         <i class="fa-solid fa-magnifying-glass"></i>
-                        <input type="text" id="internalScriptSearch" class="search-bar" placeholder="Cerca script specifico in questa cartella..." onkeyup="filterInternalScripts()" style="padding: 13px 20px 13px 48px;">
+                        <input type="text" id="internalScriptSearch" class="search-bar" data-i18n-placeholder="search_internal_placeholder" placeholder="Cerca script specifico in questa cartella..." onkeyup="filterInternalScripts()" style="padding: 13px 20px 13px 48px;">
                     </div>
                 </div>
 
@@ -482,215 +523,215 @@
                     <!-- BLOX FRUITS -->
                     <div class="card script-card" data-folder="bloxfruits" data-name="redz hub blox fruits">
                         <div class="status-container">
-                            <span class="badge-working-modern"><i class="fa-solid fa-check"></i> Working</span>
-                            <span class="badge-keyless"><i class="fa-solid fa-shield-halved"></i> Keyless</span>
+                            <span class="badge-working-modern"><i class="fa-solid fa-check"></i> <span data-i18n="badge_working">Working</span></span>
+                            <span class="badge-keyless"><i class="fa-solid fa-shield-halved"></i> <span data-i18n="badge_keyless">Keyless</span></span>
                         </div>
                         <div><h3>Redz Hub (Blox Fruits)</h3><p data-i18n="desc_redz">Auto farm istantaneo, Sea Events, Fruit Finder e zero crash.</p></div>
-                        <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/realredz/BloxFruits/main/Source.lua\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+                        <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/realredz/BloxFruits/main/Source.lua\'))()', this)"><i class="fa-regular fa-copy"></i> <span data-i18n="copy_loadstring">Copy Loadstring</span></button>
                     </div>
                     <div class="card script-card" data-folder="bloxfruits" data-name="quantum hub blox fruits">
                         <div class="status-container">
-                            <span class="badge-working-modern"><i class="fa-solid fa-check"></i> Working</span>
-                            <span class="badge-key"><i class="fa-solid fa-key"></i> Key System</span>
+                            <span class="badge-working-modern"><i class="fa-solid fa-check"></i> <span data-i18n="badge_working">Working</span></span>
+                            <span class="badge-key"><i class="fa-solid fa-key"></i> <span data-i18n="badge_key">Key System</span></span>
                         </div>
                         <div><h3>Quantum Hub (Blox Fruits)</h3><p data-i18n="desc_quantum">Alternativa leggera per farmare ossa, materiali e frammenti marini.</p></div>
-                        <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/TrustMediocre/Quantum/main/BloxFruits.lua\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+                        <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/TrustMediocre/Quantum/main/BloxFruits.lua\'))()', this)"><i class="fa-regular fa-copy"></i> <span data-i18n="copy_loadstring">Copy Loadstring</span></button>
                     </div>
                     <div class="card script-card" data-folder="bloxfruits" data-name="zenith hub blox fruits">
                         <div class="status-container">
-                            <span class="badge-working-modern"><i class="fa-solid fa-check"></i> Working</span>
-                            <span class="badge-keyless"><i class="fa-solid fa-shield-halved"></i> Keyless</span>
+                            <span class="badge-working-modern"><i class="fa-solid fa-check"></i> <span data-i18n="badge_working">Working</span></span>
+                            <span class="badge-keyless"><i class="fa-solid fa-shield-halved"></i> <span data-i18n="badge_keyless">Keyless</span></span>
                         </div>
                         <div><h3>Zenith Hub (Blox Fruits)</h3><p data-i18n="desc_zenith">Ottimizzato per Leviathan hunting, terror shark e auto sea events.</p></div>
-                        <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/ZenithHub/BloxFruits/main/source.lua\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+                        <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/ZenithHub/BloxFruits/main/source.lua\'))()', this)"><i class="fa-regular fa-copy"></i> <span data-i18n="copy_loadstring">Copy Loadstring</span></button>
                     </div>
                     <div class="card script-card" data-folder="bloxfruits" data-name="hoho hub blox fruits">
                         <div class="status-container">
-                            <span class="badge-working-modern"><i class="fa-solid fa-check"></i> Working</span>
-                            <span class="badge-keyless"><i class="fa-solid fa-shield-halved"></i> Keyless</span>
+                            <span class="badge-working-modern"><i class="fa-solid fa-check"></i> <span data-i18n="badge_working">Working</span></span>
+                            <span class="badge-keyless"><i class="fa-solid fa-shield-halved"></i> <span data-i18n="badge_keyless">Keyless</span></span>
                         </div>
                         <div><h3>HoHo Hub (Blox Fruits)</h3><p data-i18n="desc_hoho">Famosissimo script hub con interfaccia grafica pulita e stabile.</p></div>
-                        <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+                        <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI\'))()', this)"><i class="fa-regular fa-copy"></i> <span data-i18n="copy_loadstring">Copy Loadstring</span></button>
                     </div>
                     <div class="card script-card" data-folder="bloxfruits" data-name="king legacy">
                         <div class="status-container">
-                            <span class="badge-working-modern"><i class="fa-solid fa-check"></i> Working</span>
-                            <span class="badge-keyless"><i class="fa-solid fa-shield-halved"></i> Keyless</span>
+                            <span class="badge-working-modern"><i class="fa-solid fa-check"></i> <span data-i18n="badge_working">Working</span></span>
+                            <span class="badge-keyless"><i class="fa-solid fa-shield-halved"></i> <span data-i18n="badge_keyless">Keyless</span></span>
                         </div>
                         <div><h3>King Legacy Auto Farm</h3><p data-i18n="desc_king">Auto quest, stat maxer, collect sea artifacts e boss killer rapido.</p></div>
-                        <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/ZenHub/KingLegacy/main/Source.lua\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+                        <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/ZenHub/KingLegacy/main/Source.lua\'))()', this)"><i class="fa-regular fa-copy"></i> <span data-i18n="copy_loadstring">Copy Loadstring</span></button>
                     </div>
 
                     <!-- BLADE BALL -->
                     <div class="card script-card" data-folder="bladeball" data-name="blade ball">
                         <div class="status-container">
-                            <span class="badge-working-modern"><i class="fa-solid fa-check"></i> Working</span>
-                            <span class="badge-keyless"><i class="fa-solid fa-shield-halved"></i> Keyless</span>
+                            <span class="badge-working-modern"><i class="fa-solid fa-check"></i> <span data-i18n="badge_working">Working</span></span>
+                            <span class="badge-keyless"><i class="fa-solid fa-shield-halved"></i> <span data-i18n="badge_keyless">Keyless</span></span>
                         </div>
                         <div><h3>Blade Ball Hub</h3><p data-i18n="desc_blade">Auto parry intelligente, visualizzatore di traiettoria e spam clicker avanzato.</p></div>
-                        <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/FFJabez/BladeBall/main/Main.lua\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+                        <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/FFJabez/BladeBall/main/Main.lua\'))()', this)"><i class="fa-regular fa-copy"></i> <span data-i18n="copy_loadstring">Copy Loadstring</span></button>
                     </div>
                     <div class="card script-card" data-folder="bladeball" data-name="horizon blade ball">
                         <div class="status-container">
-                            <span class="badge-working-modern"><i class="fa-solid fa-check"></i> Working</span>
-                            <span class="badge-key"><i class="fa-solid fa-key"></i> Key System</span>
+                            <span class="badge-working-modern"><i class="fa-solid fa-check"></i> <span data-i18n="badge_working">Working</span></span>
+                            <span class="badge-key"><i class="fa-solid fa-key"></i> <span data-i18n="badge_key">Key System</span></span>
                         </div>
                         <div><h3>Horizon Hub (Blade Ball)</h3><p data-i18n="desc_horizon">Visualizzatore avanzato di curveball e auto parry a zero latenza.</p></div>
-                        <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/HorizonHub/BladeBall/main/source.lua\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+                        <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/HorizonHub/BladeBall/main/source.lua\'))()', this)"><i class="fa-regular fa-copy"></i> <span data-i18n="copy_loadstring">Copy Loadstring</span></button>
                     </div>
 
                     <!-- BEDWARS -->
                     <div class="card script-card" data-folder="bedwars" data-name="bedwars">
                         <div class="status-container">
-                            <span class="badge-working-modern"><i class="fa-solid fa-check"></i> Working</span>
-                            <span class="badge-keyless"><i class="fa-solid fa-shield-halved"></i> Keyless</span>
+                            <span class="badge-working-modern"><i class="fa-solid fa-check"></i> <span data-i18n="badge_working">Working</span></span>
+                            <span class="badge-keyless"><i class="fa-solid fa-shield-halved"></i> <span data-i18n="badge_keyless">Keyless</span></span>
                         </div>
                         <div><h3>BedWars Vape V4</h3><p data-i18n="desc_vape">Killaura, Fly, Speed, Scaffold e personalizzazione totale dei moduli PvP.</p></div>
-                        <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/7granddadPGN/VapeV4ForRoblox/main/NewMainScript.lua\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+                        <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/7granddadPGN/VapeV4ForRoblox/main/NewMainScript.lua\'))()', this)"><i class="fa-regular fa-copy"></i> <span data-i18n="copy_loadstring">Copy Loadstring</span></button>
                     </div>
                     <div class="card script-card" data-folder="bedwars" data-name="lunar client bedwars">
                         <div class="status-container">
-                            <span class="badge-working-modern"><i class="fa-solid fa-check"></i> Working</span>
-                            <span class="badge-keyless"><i class="fa-solid fa-shield-halved"></i> Keyless</span>
+                            <span class="badge-working-modern"><i class="fa-solid fa-check"></i> <span data-i18n="badge_working">Working</span></span>
+                            <span class="badge-keyless"><i class="fa-solid fa-shield-halved"></i> <span data-i18n="badge_keyless">Keyless</span></span>
                         </div>
                         <div><h3>Lunar Client (BedWars Mod)</h3><p data-i18n="desc_lunar">Interfaccia personalizzata per PvP, FPS booster e visuale ottimizzata.</p></div>
-                        <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/LunarBedwars/Main/main/source.lua\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+                        <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/LunarBedwars/Main/main/source.lua\'))()', this)"><i class="fa-regular fa-copy"></i> <span data-i18n="copy_loadstring">Copy Loadstring</span></button>
                     </div>
 
                     <!-- DOORS & HORROR -->
                     <div class="card script-card" data-folder="doors" data-name="doors">
                         <div class="status-container">
-                            <span class="badge-working-modern"><i class="fa-solid fa-check"></i> Working</span>
-                            <span class="badge-keyless"><i class="fa-solid fa-shield-halved"></i> Keyless</span>
+                            <span class="badge-working-modern"><i class="fa-solid fa-check"></i> <span data-i18n="badge_working">Working</span></span>
+                            <span class="badge-keyless"><i class="fa-solid fa-shield-halved"></i> <span data-i18n="badge_keyless">Keyless</span></span>
                         </div>
                         <div><h3>Doors Entity ESP & Helper</h3><p data-i18n="desc_doors">Rivela entità in arrivo, oggetti nascosti e guida automatica per le stanze buie.</p></div>
-                        <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/KryptonHub/Doors/main/Source.lua\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+                        <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/KryptonHub/Doors/main/Source.lua\'))()', this)"><i class="fa-regular fa-copy"></i> <span data-i18n="copy_loadstring">Copy Loadstring</span></button>
                     </div>
                     <div class="card script-card" data-folder="doors" data-name="doors floor 2">
                         <div class="status-container">
-                            <span class="badge-working-modern"><i class="fa-solid fa-check"></i> Working</span>
-                            <span class="badge-keyless"><i class="fa-solid fa-shield-halved"></i> Keyless</span>
+                            <span class="badge-working-modern"><i class="fa-solid fa-check"></i> <span data-i18n="badge_working">Working</span></span>
+                            <span class="badge-keyless"><i class="fa-solid fa-shield-halved"></i> <span data-i18n="badge_keyless">Keyless</span></span>
                         </div>
                         <div><h3>Doors Floor 2 ESP & Mod</h3><p data-i18n="desc_doors2">Mappa completa sbloccata, anti-jump scare e speed boost.</p></div>
-                        <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/DoorsFloor2Hub/Main/main/source.lua\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+                        <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/DoorsFloor2Hub/Main/main/source.lua\'))()', this)"><i class="fa-regular fa-copy"></i> <span data-i18n="copy_loadstring">Copy Loadstring</span></button>
                     </div>
                     <div class="card script-card" data-folder="doors" data-name="rainbow friends">
                         <div class="status-container">
-                            <span class="badge-working-modern"><i class="fa-solid fa-check"></i> Working</span>
-                            <span class="badge-keyless"><i class="fa-solid fa-shield-halved"></i> Keyless</span>
+                            <span class="badge-working-modern"><i class="fa-solid fa-check"></i> <span data-i18n="badge_working">Working</span></span>
+                            <span class="badge-keyless"><i class="fa-solid fa-shield-halved"></i> <span data-i18n="badge_keyless">Keyless</span></span>
                         </div>
                         <div><h3>Rainbow Friends ESP Monsters</h3><p data-i18n="desc_rainbow">Mostra la posizione esatta di Blu, Green, Orange e Purple in tempo reale.</p></div>
-                        <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/RainbowFriendsHub/Main/main/source.lua\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+                        <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/RainbowFriendsHub/Main/main/source.lua\'))()', this)"><i class="fa-regular fa-copy"></i> <span data-i18n="copy_loadstring">Copy Loadstring</span></button>
                     </div>
                     <div class="card script-card" data-folder="doors" data-name="piggy">
                         <div class="status-container">
-                            <span class="badge-working-modern"><i class="fa-solid fa-check"></i> Working</span>
-                            <span class="badge-keyless"><i class="fa-solid fa-shield-halved"></i> Keyless</span>
+                            <span class="badge-working-modern"><i class="fa-solid fa-check"></i> <span data-i18n="badge_working">Working</span></span>
+                            <span class="badge-keyless"><i class="fa-solid fa-shield-halved"></i> <span data-i18n="badge_keyless">Keyless</span></span>
                         </div>
                         <div><h3>Piggy GUI & All Items</h3><p data-i18n="desc_piggy">Prendi qualsiasi chiave o oggetto attraverso i muri e teletrasporto all'uscita.</p></div>
-                        <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/PiggyHub/Main/main/source.lua\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+                        <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/PiggyHub/Main/main/source.lua\'))()', this)"><i class="fa-regular fa-copy"></i> <span data-i18n="copy_loadstring">Copy Loadstring</span></button>
                     </div>
 
                     <!-- ARSENAL & FPS -->
                     <div class="card script-card" data-folder="arsenal" data-name="project lazarus arsenal">
                         <div class="status-container">
-                            <span class="badge-working-modern"><i class="fa-solid fa-check"></i> Working</span>
-                            <span class="badge-keyless"><i class="fa-solid fa-shield-halved"></i> Keyless</span>
+                            <span class="badge-working-modern"><i class="fa-solid fa-check"></i> <span data-i18n="badge_working">Working</span></span>
+                            <span class="badge-keyless"><i class="fa-solid fa-shield-halved"></i> <span data-i18n="badge_keyless">Keyless</span></span>
                         </div>
                         <div><h3>Project Lazarus (Arsenal)</h3><p data-i18n="desc_lazarus">Silent Aim, FOV circolare regolabile e No Recoil stabile per sparatutto.</p></div>
-                        <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/projectlazarus/lazarus/main/load.lua\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+                        <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/projectlazarus/lazarus/main/load.lua\'))()', this)"><i class="fa-regular fa-copy"></i> <span data-i18n="copy_loadstring">Copy Loadstring</span></button>
                     </div>
                     <div class="card script-card" data-folder="arsenal" data-name="arsenal aimbot">
                         <div class="status-container">
-                            <span class="badge-working-modern"><i class="fa-solid fa-check"></i> Working</span>
-                            <span class="badge-key"><i class="fa-solid fa-key"></i> Key System</span>
+                            <span class="badge-working-modern"><i class="fa-solid fa-check"></i> <span data-i18n="badge_working">Working</span></span>
+                            <span class="badge-key"><i class="fa-solid fa-key"></i> <span data-i18n="badge_key">Key System</span></span>
                         </div>
                         <div><h3>Arsenal Aimbot Pro</h3><p data-i18n="desc_arsenal">Aimbot silenzioso personalizzabile, ESP box e wallhack completi.</p></div>
-                        <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/ArsenalPro/Main/main/source.lua\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+                        <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/ArsenalPro/Main/main/source.lua\'))()', this)"><i class="fa-regular fa-copy"></i> <span data-i18n="copy_loadstring">Copy Loadstring</span></button>
                     </div>
                     <div class="card script-card" data-folder="arsenal" data-name="thunderclient arsenal">
                         <div class="status-container">
-                            <span class="badge-working-modern"><i class="fa-solid fa-check"></i> Working</span>
-                            <span class="badge-keyless"><i class="fa-solid fa-shield-halved"></i> Keyless</span>
+                            <span class="badge-working-modern"><i class="fa-solid fa-check"></i> <span data-i18n="badge_working">Working</span></span>
+                            <span class="badge-keyless"><i class="fa-solid fa-shield-halved"></i> <span data-i18n="badge_keyless">Keyless</span></span>
                         </div>
                         <div><h3>ThunderClient (Arsenal)</h3><p data-i18n="desc_thunder">GUI completa con personalizzazione mirino, colori player e audio pack.</p></div>
-                        <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/ThunderClient/Main/main/source.lua\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+                        <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/ThunderClient/Main/main/source.lua\'))()', this)"><i class="fa-regular fa-copy"></i> <span data-i18n="copy_loadstring">Copy Loadstring</span></button>
                     </div>
 
                     <!-- SIMULATOR GAMES -->
                     <div class="card script-card" data-folder="simulators" data-name="pet simulator 99 ps99">
                         <div class="status-container">
-                            <span class="badge-working-modern"><i class="fa-solid fa-check"></i> Working</span>
-                            <span class="badge-keyless"><i class="fa-solid fa-shield-halved"></i> Keyless</span>
+                            <span class="badge-working-modern"><i class="fa-solid fa-check"></i> <span data-i18n="badge_working">Working</span></span>
+                            <span class="badge-keyless"><i class="fa-solid fa-shield-halved"></i> <span data-i18n="badge_keyless">Keyless</span></span>
                         </div>
                         <div><h3>Pet Simulator 99</h3><p data-i18n="desc_ps99">Auto farm forzieri, auto hatch uova rapido e protezione dupe integrata.</p></div>
-                        <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/gitpetsimulator99/pet-simulator-99/main/main.lua\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+                        <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/gitpetsimulator99/pet-simulator-99/main/main.lua\'))()', this)"><i class="fa-regular fa-copy"></i> <span data-i18n="copy_loadstring">Copy Loadstring</span></button>
                     </div>
                     <div class="card script-card" data-folder="simulators" data-name="bee swarm simulator bss">
                         <div class="status-container">
-                            <span class="badge-working-modern"><i class="fa-solid fa-check"></i> Working</span>
-                            <span class="badge-keyless"><i class="fa-solid fa-shield-halved"></i> Keyless</span>
+                            <span class="badge-working-modern"><i class="fa-solid fa-check"></i> <span data-i18n="badge_working">Working</span></span>
+                            <span class="badge-keyless"><i class="fa-solid fa-shield-halved"></i> <span data-i18n="badge_keyless">Keyless</span></span>
                         </div>
                         <div><h3>Bee Swarm Macro</h3><p data-i18n="desc_bss">Auto pollen, auto farm fiori specifici, collect token e macro quest.</p></div>
-                        <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/BSSHub/Main/main/source.lua\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+                        <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/BSSHub/Main/main/source.lua\'))()', this)"><i class="fa-regular fa-copy"></i> <span data-i18n="copy_loadstring">Copy Loadstring</span></button>
                     </div>
                     <div class="card script-card" data-folder="simulators" data-name="anime fighters simulator afs">
                         <div class="status-container">
-                            <span class="badge-working-modern"><i class="fa-solid fa-check"></i> Working</span>
-                            <span class="badge-keyless"><i class="fa-solid fa-shield-halved"></i> Keyless</span>
+                            <span class="badge-working-modern"><i class="fa-solid fa-check"></i> <span data-i18n="badge_working">Working</span></span>
+                            <span class="badge-keyless"><i class="fa-solid fa-shield-halved"></i> <span data-i18n="badge_keyless">Keyless</span></span>
                         </div>
                         <div><h3>Anime Fighters Auto Raid</h3><p data-i18n="desc_afs">Auto clicker, auto open stelle, auto raid e collect yen automatico.</p></div>
-                        <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/AFSHub/Main/main/source.lua\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+                        <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/AFSHub/Main/main/source.lua\'))()', this)"><i class="fa-regular fa-copy"></i> <span data-i18n="copy_loadstring">Copy Loadstring</span></button>
                     </div>
                     <div class="card script-card" data-folder="simulators" data-name="strongman simulator">
                         <div class="status-container">
-                            <span class="badge-working-modern"><i class="fa-solid fa-check"></i> Working</span>
-                            <span class="badge-keyless"><i class="fa-solid fa-shield-halved"></i> Keyless</span>
+                            <span class="badge-working-modern"><i class="fa-solid fa-check"></i> <span data-i18n="badge_working">Working</span></span>
+                            <span class="badge-keyless"><i class="fa-solid fa-shield-halved"></i> <span data-i18n="badge_keyless">Keyless</span></span>
                         </div>
                         <div><h3>Strongman Simulator Auto Lift</h3><p data-i18n="desc_strong">Auto allenamento forza, velocità massima e collect energia.</p></div>
-                        <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/StrongmanHub/Main/main/source.lua\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+                        <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/StrongmanHub/Main/main/source.lua\'))()', this)"><i class="fa-regular fa-copy"></i> <span data-i18n="copy_loadstring">Copy Loadstring</span></button>
                     </div>
                     <div class="card script-card" data-folder="simulators" data-name="arm wrestle simulator">
                         <div class="status-container">
-                            <span class="badge-working-modern"><i class="fa-solid fa-check"></i> Working</span>
-                            <span class="badge-keyless"><i class="fa-solid fa-shield-halved"></i> Keyless</span>
+                            <span class="badge-working-modern"><i class="fa-solid fa-check"></i> <span data-i18n="badge_working">Working</span></span>
+                            <span class="badge-keyless"><i class="fa-solid fa-shield-halved"></i> <span data-i18n="badge_keyless">Keyless</span></span>
                         </div>
                         <div><h3>Arm Wrestle Auto Clicker</h3><p data-i18n="desc_arm">Auto win braccio di ferro, auto uova e training rapido.</p></div>
-                        <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/ArmWrestleHub/Main/main/source.lua\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+                        <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/ArmWrestleHub/Main/main/source.lua\'))()', this)"><i class="fa-regular fa-copy"></i> <span data-i18n="copy_loadstring">Copy Loadstring</span></button>
                     </div>
                     <div class="card script-card" data-folder="simulators" data-name="muscle legends">
                         <div class="status-container">
-                            <span class="badge-working-modern"><i class="fa-solid fa-check"></i> Working</span>
-                            <span class="badge-keyless"><i class="fa-solid fa-shield-halved"></i> Keyless</span>
+                            <span class="badge-working-modern"><i class="fa-solid fa-check"></i> <span data-i18n="badge_working">Working</span></span>
+                            <span class="badge-keyless"><i class="fa-solid fa-shield-halved"></i> <span data-i18n="badge_keyless">Keyless</span></span>
                         </div>
                         <div><h3>Muscle Legends God Stats</h3><p data-i18n="desc_muscle">Auto lift infinito, sblocco aree senza requisiti e kill aura.</p></div>
-                        <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/MuscleLegendsHub/Main/main/source.lua\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+                        <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/MuscleLegendsHub/Main/main/source.lua\'))()', this)"><i class="fa-regular fa-copy"></i> <span data-i18n="copy_loadstring">Copy Loadstring</span></button>
                     </div>
 
                     <!-- UNIVERSAL & ADMIN -->
                     <div class="card script-card" data-folder="universal" data-name="vynixius universal">
                         <div class="status-container">
-                            <span class="badge-working-modern"><i class="fa-solid fa-check"></i> Working</span>
-                            <span class="badge-keyless"><i class="fa-solid fa-shield-halved"></i> Keyless</span>
+                            <span class="badge-working-modern"><i class="fa-solid fa-check"></i> <span data-i18n="badge_working">Working</span></span>
+                            <span class="badge-keyless"><i class="fa-solid fa-shield-halved"></i> <span data-i18n="badge_keyless">Keyless</span></span>
                         </div>
                         <div><h3>Vynixius Hub (Universal)</h3><p data-i18n="desc_vynixius">Comandi personalizzati, ESP avanzato e Teleport globale per qualsiasi mappa.</p></div>
-                        <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/vynixius/vynixius/main/vynixius.lua\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+                        <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/vynixius/vynixius/main/vynixius.lua\'))()', this)"><i class="fa-regular fa-copy"></i> <span data-i18n="copy_loadstring">Copy Loadstring</span></button>
                     </div>
                     <div class="card script-card" data-folder="universal" data-name="infinite yield admin">
                         <div class="status-container">
-                            <span class="badge-working-modern"><i class="fa-solid fa-check"></i> Working</span>
-                            <span class="badge-keyless"><i class="fa-solid fa-shield-halved"></i> Keyless</span>
+                            <span class="badge-working-modern"><i class="fa-solid fa-check"></i> <span data-i18n="badge_working">Working</span></span>
+                            <span class="badge-keyless"><i class="fa-solid fa-shield-halved"></i> <span data-i18n="badge_keyless">Keyless</span></span>
                         </div>
                         <div><h3>Infinite Yield (Admin Commands)</h3><p data-i18n="desc_iy">Il pannello di comandi admin universale più famoso al mondo per Roblox.</p></div>
-                        <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+                        <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source\'))()', this)"><i class="fa-regular fa-copy"></i> <span data-i18n="copy_loadstring">Copy Loadstring</span></button>
                     </div>
                     <div class="card script-card" data-folder="universal" data-name="animation changer r15">
                         <div class="status-container">
-                            <span class="badge-working-modern"><i class="fa-solid fa-check"></i> Working</span>
-                            <span class="badge-keyless"><i class="fa-solid fa-shield-halved"></i> Keyless</span>
+                            <span class="badge-working-modern"><i class="fa-solid fa-check"></i> <span data-i18n="badge_working">Working</span></span>
+                            <span class="badge-keyless"><i class="fa-solid fa-shield-halved"></i> <span data-i18n="badge_keyless">Keyless</span></span>
                         </div>
                         <div><h3>Universal Animation Changer</h3><p data-i18n="desc_anim">Applica qualsiasi animazione R15 personalizzata a qualsiasi gioco Roblox.</p></div>
-                        <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/AnimationHub/Main/main/source.lua\'))()', this)"><i class="fa-regular fa-copy"></i> Copy Loadstring</button>
+                        <button class="btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/AnimationHub/Main/main/source.lua\'))()', this)"><i class="fa-regular fa-copy"></i> <span data-i18n="copy_loadstring">Copy Loadstring</span></button>
                     </div>
                 </div>
             </div>
@@ -720,15 +761,15 @@
                         
                         <div class="form-group">
                             <label data-i18n="form_name">Il tuo Nome</label>
-                            <input type="text" name="name" class="form-input" required placeholder="Es. Mario">
+                            <input type="text" name="name" class="form-input" data-i18n-placeholder="form_name_placeholder" required placeholder="Es. Mario">
                         </div>
                         <div class="form-group">
                             <label data-i18n="form_email">La tua Email</label>
-                            <input type="email" name="email" class="form-input" required placeholder="tua@email.com">
+                            <input type="email" name="email" class="form-input" data-i18n-placeholder="form_email_placeholder" required placeholder="tua@email.com">
                         </div>
                         <div class="form-group">
                             <label data-i18n="form_message">Messaggio</label>
-                            <textarea name="message" class="form-textarea" required placeholder="Scrivi qui il tuo messaggio..."></textarea>
+                            <textarea name="message" class="form-textarea" data-i18n-placeholder="form_message_placeholder" required placeholder="Scrivi qui il tuo messaggio..."></textarea>
                         </div>
                         
                         <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
@@ -743,7 +784,7 @@
     </div>
 
     <footer>
-        <p>© 2026 ZHub. Tutti i diritti riservati. Non affiliato con Roblox Corporation.</p>
+        <p data-i18n="footer_text">© 2026 ZHub. Tutti i diritti riservati. Non affiliato con Roblox Corporation.</p>
     </footer>
 
     <script>
@@ -781,6 +822,21 @@
             setTimeout(() => { toast.classList.remove('show'); }, 3000);
         }
 
+        // Controllo dinamico dello scroll della navbar centrale
+        const navWrapper = document.getElementById('navCenterWrapper');
+        const scrollIndicator = document.getElementById('navScrollIndicator');
+
+        function checkNavScroll() {
+            if (navWrapper.scrollWidth > navWrapper.clientWidth && navWrapper.scrollLeft < (navWrapper.scrollWidth - navWrapper.clientWidth - 10)) {
+                scrollIndicator.classList.remove('hidden');
+            } else {
+                scrollIndicator.classList.add('hidden');
+            }
+        }
+        navWrapper.addEventListener('scroll', checkNavScroll);
+        window.addEventListener('resize', checkNavScroll);
+        window.addEventListener('DOMContentLoaded', checkNavScroll);
+
         const texts = {
             it: {
                 welcome_title: "Benvenuto su <span>ZHub</span>", welcome_sub: "Il portale definitivo, sicuro e aggiornato per Executor e Script di Roblox.", welcome_btn: "Entra nel Hub",
@@ -788,14 +844,20 @@
                 status_online: "Stato Hub: Online & Aggiornato",
                 home_title: "Dominare Roblox non è mai stato così facile", home_sub: "Sfrutta il nostro hub per trovare i migliori executor stabili e la nostra collezione esclusiva di script testati senza bug.", home_btn1: "Vai ai Download", home_btn2: "Esplora Script",
                 down_title: "Download Executor Ufficiali", down_sub: "I migliori executor scelti e verificati per PC e dispositivi mobili.", down_btn: "Sito Ufficiale",
-                badge_undetected: "Undetected", badge_working: "Working",
+                badge_best: "Best Executor", badge_undetected: "Undetected", badge_working: "Working", badge_keyless: "Keyless", badge_key: "Key System",
                 delta_desc: "Il migliore in assoluto per Mobile e PC. Stabile, veloce e ricco di funzioni integrate.", arceus_desc: "Famoso executor mobile con interfaccia pulita e script hub nativo incorporato.", codex_desc: "Ottima alternativa per iniezioni rapide e compatibilità elevata con i giochi più complessi.",
-                script_title: "ZHub Script Collection", script_sub: "Cerca il gioco desiderato oppure seleziona una cartella.", delta_choice_desc: "Il migliore script in assoluto ottimizzato per Delta. Auto farm istantaneo, Sea Events, Fruit Finder e zero crash.",
+                script_title: "ZHub Script Collection", script_sub: "Cerca il gioco desiderato oppure seleziona una cartella.", delta_best_choice: "⭐ Delta Best Choice", delta_choice_desc: "Il migliore script in assoluto ottimizzato per Delta. Auto farm istantaneo, Sea Events, Fruit Finder e zero crash.",
+                copy_loadstring: "Copy Loadstring",
                 custom_box_title: "Aggiungi il tuo Script personalizzato alla lista", custom_box_btn: "Aggiungi",
+                custom_name_placeholder: "Nome Gioco / Script (es. Blade Ball)", custom_code_placeholder: "loadstring(game:HttpGet(...))()",
+                search_game_placeholder: "Cerca un gioco (es. Blox Fruits, Arsenal, BedWars)...",
+                search_internal_placeholder: "Cerca script specifico in questa cartella...",
                 soc_title: "Social & Crediti", soc_sub: "Unisciti alla nostra community ufficiale e contattaci direttamente.",
                 cred_title: "Crediti del Progetto", cred_desc: "ZHub è stato ideato, sviluppato e mantenuto da developer indipendenti appassionati di scripting e sicurezza su Roblox. Tutti i diritti riservati.",
                 contact_box_title: "Mandami un Messaggio", contact_box_sub: "Hai domande o richieste? Scrivimi direttamente qui sotto:",
                 form_name: "Il tuo Nome", form_email: "La tua Email", form_message: "Messaggio", form_btn: "Invia Messaggio",
+                form_name_placeholder: "Es. Mario", form_email_placeholder: "tua@email.com", form_message_placeholder: "Scrivi qui il tuo messaggio...",
+                footer_text: "© 2026 ZHub. Tutti i diritti riservati. Non affiliato con Roblox Corporation.",
                 toast_lang: "Lingua cambiata con successo!", toast_copy: "Loadstring copiata negli appunti!", toast_add: "Script aggiunto con successo alla lista!",
                 back_folders: "Torna alle Cartelle",
                 folder_bf: "Script dedicati, Auto Farm & Sea Events",
@@ -837,14 +899,20 @@
                 status_online: "Hub Status: Online & Updated",
                 home_title: "Dominating Roblox has never been easier", home_sub: "Use our hub to find the best stable executors and our exclusive collection of bug-free tested scripts.", home_btn1: "Go to Downloads", home_btn2: "Explore Scripts",
                 down_title: "Official Executor Downloads", down_sub: "The best executors chosen and verified for PC and mobile devices.", down_btn: "Official Website",
-                badge_undetected: "Undetected", badge_working: "Working",
+                badge_best: "Best Executor", badge_undetected: "Undetected", badge_working: "Working", badge_keyless: "Keyless", badge_key: "Key System",
                 delta_desc: "The absolute best for Mobile and PC. Stable, fast, and feature-rich.", arceus_desc: "Famous mobile executor with a clean interface and built-in script hub.", codex_desc: "Great alternative for fast injections and high compatibility with complex games.",
-                script_title: "ZHub Script Collection", script_sub: "Search for your desired game or select a folder.", delta_choice_desc: "The absolute best script optimized for Delta. Instant auto farm, Sea Events, Fruit Finder, and zero crashes.",
+                script_title: "ZHub Script Collection", script_sub: "Search for your desired game or select a folder.", delta_best_choice: "⭐ Delta Best Choice", delta_choice_desc: "The absolute best script optimized for Delta. Instant auto farm, Sea Events, Fruit Finder, and zero crashes.",
+                copy_loadstring: "Copy Loadstring",
                 custom_box_title: "Add your custom Script to the list", custom_box_btn: "Add",
+                custom_name_placeholder: "Game Name / Script (e.g. Blade Ball)", custom_code_placeholder: "loadstring(game:HttpGet(...))()",
+                search_game_placeholder: "Search for a game (e.g. Blox Fruits, Arsenal, BedWars)...",
+                search_internal_placeholder: "Search specific script in this folder...",
                 soc_title: "Social & Credits", soc_sub: "Join our official community and contact us directly.",
                 cred_title: "Project Credits", cred_desc: "ZHub was designed, developed, and maintained by independent developers passionate about Roblox scripting and security. All rights reserved.",
                 contact_box_title: "Send me a Message", contact_box_sub: "Got questions or requests? Write directly below:",
                 form_name: "Your Name", form_email: "Your Email", form_message: "Message", form_btn: "Send Message",
+                form_name_placeholder: "E.g. John", form_email_placeholder: "your@email.com", form_message_placeholder: "Type your message here...",
+                footer_text: "© 2026 ZHub. All rights reserved. Not affiliated with Roblox Corporation.",
                 toast_lang: "Language changed successfully!", toast_copy: "Loadstring copied to clipboard!", toast_add: "Script successfully added to the list!",
                 back_folders: "Back to Folders",
                 folder_bf: "Dedicated scripts, Auto Farm & Sea Events",
@@ -881,70 +949,444 @@
                 desc_anim: "Apply any custom R15 animation to any Roblox game."
             },
             es: {
-                toast_lang: "¡Idioma cambiado con éxito!", toast_copy: "¡Loadstring copiada al portapapeles!", toast_add: "¡Script añadido con éxito!",
                 welcome_title: "Bienvenido a <span>ZHub</span>", welcome_sub: "El portal definitivo, seguro y actualizado para Roblox.", welcome_btn: "Entrar al Hub",
                 nav_home: "Inicio", nav_downloads: "Descargas", nav_scripts: "Scripts", nav_social: "Social & Créditos",
-                script_title: "Colección de Scripts ZHub", script_sub: "Busca tu juego deseado o selecciona una carpeta.",
-                back_folders: "Volver a Carpetas", down_title: "Descargas de Executors", down_sub: "Los mejores executors verificados."
+                status_online: "Estado del Hub: En línea y actualizado",
+                home_title: "Dominar Roblox nunca ha sido tan fácil", home_sub: "Usa nuestro hub para encontrar los mejores executors estables y nuestra colección exclusiva.", home_btn1: "Ir a Descargas", home_btn2: "Explorar Scripts",
+                down_title: "Descargas de Executors Oficiales", down_sub: "Los mejores executors elegidos y verificados para PC y móviles.", down_btn: "Sitio Oficial",
+                badge_best: "Mejor Executor", badge_undetected: "Indetectado", badge_working: "Funcionando", badge_keyless: "Sin Key", badge_key: "Sistema de Key",
+                delta_desc: "El mejor absoluto para Móvil y PC. Estable, rápido y con muchas funciones.", arceus_desc: "Famoso executor móvil con interfaz limpia y script hub integrado.", codex_desc: "Gran alternativa para inyecciones rápidas y alta compatibilidad.",
+                script_title: "Colección de Scripts ZHub", script_sub: "Busca tu juego deseado o selecciona una carpeta.", delta_best_choice: "⭐ Mejor opción Delta", delta_choice_desc: "El mejor script optimizado para Delta. Auto farm instantáneo, eventos y cero errores.",
+                copy_loadstring: "Copiar Loadstring",
+                custom_box_title: "Añade tu Script personalizado a la lista", custom_box_btn: "Añadir",
+                custom_name_placeholder: "Nombre del juego / Script (ej. Blade Ball)", custom_code_placeholder: "loadstring(game:HttpGet(...))()",
+                search_game_placeholder: "Busca un juego (ej. Blox Fruits, Arsenal)...",
+                search_internal_placeholder: "Busca un script específico...",
+                soc_title: "Social & Créditos", soc_sub: "Únete a nuestra comunidad oficial y contáctanos directamente.",
+                cred_title: "Créditos del Proyecto", cred_desc: "ZHub fue diseñado y desarrollado por desarrolladores independientes. Todos los derechos reservados.",
+                contact_box_title: "Envíame un mensaje", contact_box_sub: "¿Tienes dudas o peticiones? Escríbenos directamente abajo:",
+                form_name: "Tu Nombre", form_email: "Tu Correo", form_message: "Mensaje", form_btn: "Enviar Mensaje",
+                form_name_placeholder: "Ej. Juan", form_email_placeholder: "tu@correo.com", form_message_placeholder: "Escribe tu mensaje aquí...",
+                footer_text: "© 2026 ZHub. Todos los derechos reservados. No afiliado con Roblox Corporation.",
+                toast_lang: "¡Idioma cambiado con éxito!", toast_copy: "¡Loadstring copiada al portapapeles!", toast_add: "¡Script añadido con éxito!",
+                back_folders: "Volver a Carpetas",
+                folder_bf: "Scripts dedicados, Auto Farm y más",
+                folder_bb: "Auto Parry, Trayectorias y Spam",
+                folder_bw: "Vape V4, Killaura y Mods PvP",
+                folder_doors: "Entity ESP, Habitaciones y Guía",
+                folder_ars: "Aimbot, Silent Aim y Wallhack",
+                folder_sim: "Pet Sim 99, Muscle Legends, etc.",
+                folder_uni: "Infinite Yield, ESP Global y más",
+                desc_redz: "Auto farm instantáneo, eventos y cero bloqueos.",
+                desc_quantum: "Alternativa ligera para farmear huesos y materiales.",
+                desc_zenith: "Optimizado para caza de Leviatán y tiburones.",
+                desc_hoho: "Famoso script hub con interfaz gráfica limpia y estable.",
+                desc_king: "Auto misiones, max de estadísticas y jefe rápido.",
+                desc_blade: "Auto parry inteligente y visualizador de trayectoria.",
+                desc_horizon: "Visualizador avanzado de curvas y cero latencia.",
+                desc_vape: "Killaura, Fly, Speed y personalización total.",
+                desc_lunar: "Interfaz PvP personalizada y optimizador de FPS.",
+                desc_doors: "Revela entidades, objetos y guía de cuartos oscuros.",
+                desc_doors2: "Mapa completo desbloqueado y speed boost.",
+                desc_rainbow: "Muestra la ubicación exacta de monstruos en tiempo real.",
+                desc_piggy: "Agarra llaves a través de paredes y teletransporte.",
+                desc_lazarus: "Silent Aim, FOV ajustable y sin retroceso.",
+                desc_arsenal: "Aimbot silencioso personalizable y wallhack.",
+                desc_thunder: "GUI completa con opciones de mira y colores.",
+                desc_ps99: "Auto farm de cofres y apertura rápida de huevos.",
+                desc_bss: "Auto polen, recolección de tokens y macros.",
+                desc_afs: "Auto clicker, apertura de estrellas y redadas.",
+                desc_strong: "Entrenamiento de fuerza y velocidad máxima.",
+                desc_arm: "Victoria automática en pulso y entrenamiento rápido.",
+                desc_muscle: "Auto levantamiento infinito y áreas desbloqueadas.",
+                desc_vynixius: "Comandos personalizados y teletransporte global.",
+                desc_iy: "El panel de comandos admin más famoso del mundo.",
+                desc_anim: "Aplica cualquier animación R15 personalizada."
             },
             pt: {
-                toast_lang: "Idioma alterado com sucesso!", toast_copy: "Loadstring copiada para a área de transferência!", toast_add: "Script adicionado com sucesso!",
-                welcome_title: "Bem-vindo ao <span>ZHub</span>", welcome_sub: "O portal definitivo e seguro para Roblox.", welcome_btn: "Entrar no Hub",
+                welcome_title: "Bem-vindo ao <span>ZHub</span>", welcome_sub: "O portal definitivo, seguro e atualizado para Roblox.", welcome_btn: "Entrar no Hub",
                 nav_home: "Início", nav_downloads: "Downloads", nav_scripts: "Scripts", nav_social: "Social & Créditos",
-                script_title: "Coleção de Scripts ZHub", script_sub: "Pesquise o jogo desejado ou selecione uma pasta.",
-                back_folders: "Voltar para Pastas", down_title: "Downloads de Executors", down_sub: "Os melhores executors verificados."
+                status_online: "Status do Hub: Online & Atualizado",
+                home_title: "Dominar o Roblox nunca foi tão fácil", home_sub: "Use nosso hub para encontrar os melhores executors estáveis.", home_btn1: "Ir para Downloads", home_btn2: "Explorar Scripts",
+                down_title: "Downloads de Executors Oficiais", down_sub: "Os melhores executors verificados para PC e dispositivos móveis.", down_btn: "Site Oficial",
+                badge_best: "Melhor Executor", badge_undetected: "Indetectado", badge_working: "Funcionando", badge_keyless: "Sem Key", badge_key: "Sistema de Key",
+                delta_desc: "O melhor absoluto para Mobile e PC. Estável, rápido e cheio de recursos.", arceus_desc: "Famoso executor mobile com interface limpa e script hub integrado.", codex_desc: "Ótima alternativa para injeções rápidas e alta compatibilidade.",
+                script_title: "Coleção de Scripts ZHub", script_sub: "Pesquise o jogo desejado ou selecione uma pasta.", delta_best_choice: "⭐ Melhor Escolha Delta", delta_choice_desc: "O melhor script otimizado para Delta. Auto farm instantâneo e zero travamentos.",
+                copy_loadstring: "Copiar Loadstring",
+                custom_box_title: "Adicione seu Script personalizado à lista", custom_box_btn: "Adicionar",
+                custom_name_placeholder: "Nome do Jogo / Script (ex. Blade Ball)", custom_code_placeholder: "loadstring(game:HttpGet(...))()",
+                search_game_placeholder: "Pesquise um jogo (ex. Blox Fruits, Arsenal)...",
+                search_internal_placeholder: "Pesquise um script específico...",
+                soc_title: "Social & Créditos", soc_sub: "Entre na nossa comunidade oficial e entre em contato conosco.",
+                cred_title: "Créditos do Projeto", cred_desc: "O ZHub foi idealizado e desenvolvido por desenvolvedores independentes. Todos os direitos reservados.",
+                contact_box_title: "Envie-me uma Mensagem", contact_box_sub: "Tem dúvidas ou pedidos? Escreva diretamente abaixo:",
+                form_name: "Seu Nome", form_email: "Seu E-mail", form_message: "Mensagem", form_btn: "Enviar Mensagem",
+                form_name_placeholder: "Ex. João", form_email_placeholder: "seu@email.com", form_message_placeholder: "Escreva sua mensagem aqui...",
+                footer_text: "© 2026 ZHub. Todos os direitos reservados. Não afiliado à Roblox Corporation.",
+                toast_lang: "Idioma alterado com sucesso!", toast_copy: "Loadstring copiada para a área de transferência!", toast_add: "Script adicionado com sucesso!",
+                back_folders: "Voltar para Pastas",
+                folder_bf: "Scripts dedicados, Auto Farm & Sea Events",
+                folder_bb: "Auto Parry, Trajetórias & Spam Clicker",
+                folder_bw: "Vape V4, Killaura & PvP Mods",
+                folder_doors: "Entity ESP, Rooms & Guia de Salas",
+                folder_ars: "Aimbot, Silent Aim & Wallhack",
+                folder_sim: "Pet Sim 99, Muscle Legends, Bee Swarm",
+                folder_uni: "Infinite Yield, ESP Global & Outros",
+                desc_redz: "Auto farm instantâneo, Sea Events, Fruit Finder e zero crash.",
+                desc_quantum: "Alternativa leve para farmar ossos e materiais.",
+                desc_zenith: "Otimizado para caça ao Leviatã e tubarões.",
+                desc_hoho: "Famoso script hub com interface gráfica limpa e estável.",
+                desc_king: "Auto missões, max stat, coleta de artefatos e boss killer.",
+                desc_blade: "Auto parry inteligente e visualizador de trajetória.",
+                desc_horizon: "Visualizador avançado de curvas e zero latência.",
+                desc_vape: "Killaura, Fly, Speed, Scaffold e customização PvP.",
+                desc_lunar: "Interface PvP personalizada e otimizador de FPS.",
+                desc_doors: "Revela entidades, itens ocultos e guia de salas escuras.",
+                desc_doors2: "Mapa completo desbloqueado e speed boost.",
+                desc_rainbow: "Mostra a localização exata de monstros em tempo real.",
+                desc_piggy: "Pegue qualquer chave através de paredes e teletransporte.",
+                desc_lazarus: "Silent Aim, FOV circular ajustável e sem recuo.",
+                desc_arsenal: "Aimbot silencioso personalizável, ESP box e wallhack.",
+                desc_thunder: "GUI completa com personalização de mira e cores.",
+                desc_ps99: "Auto farm de baús e abertura rápida de ovos.",
+                desc_bss: "Auto pólen, farm de flores específicas e macros.",
+                desc_afs: "Auto clicker, abertura de estrelas e raids.",
+                desc_strong: "Treinamento automático de força e velocidade.",
+                desc_arm: "Vitória automática em cabo de guerra.",
+                desc_muscle: "Auto lift infinito e áreas desbloqueadas.",
+                desc_vynixius: "Comandos customizados e teletransporte global.",
+                desc_iy: "O painel de comandos admin universal mais famoso.",
+                desc_anim: "Aplique qualquer animação R15 personalizada."
             },
             fr: {
-                toast_lang: "Langue modifiée avec succès !", toast_copy: "Loadstring copiée dans le presse-papier !", toast_add: "Script ajouté avec succès !",
-                welcome_title: "Bienvenue sur <span>ZHub</span>", welcome_sub: "Le portail ultime et sécurisé pour Roblox.", welcome_btn: "Entrer dans le Hub",
+                welcome_title: "Bienvenue sur <span>ZHub</span>", welcome_sub: "Le portail ultime, sûr et mis à jour pour les scripts et executors Roblox.", welcome_btn: "Entrer dans le Hub",
                 nav_home: "Accueil", nav_downloads: "Téléchargements", nav_scripts: "Scripts", nav_social: "Social & Crédits",
-                script_title: "Collection de Scripts ZHub", script_sub: "Recherchez le jeu souhaité ou sélectionnez un dossier.",
-                back_folders: "Retour aux Dossiers", down_title: "Téléchargements d'Executors", down_sub: "Les meilleurs executors vérifiés."
+                status_online: "Statut du Hub : En ligne & Mis à jour",
+                home_title: "Dominer Roblox n'a jamais été aussi simple", home_sub: "Utilisez notre hub pour trouver les meilleurs executors stables.", home_btn1: "Aller aux Téléchargements", home_btn2: "Explorer les Scripts",
+                down_title: "Téléchargements d'Executors Officiels", down_sub: "Les meilleurs executors choisis et vérifiés pour PC et mobiles.", down_btn: "Site Officiel",
+                badge_best: "Meilleur Executor", badge_undetected: "Indétecté", badge_working: "Fonctionnel", badge_keyless: "Sans Clé", badge_key: "Système de Clé",
+                delta_desc: "Le meilleur absolu pour Mobile et PC. Stable, rapide et riche en fonctionnalités.", arceus_desc: "Célèbre executor mobile avec une interface propre et script hub intégré.", codex_desc: "Excellente alternative pour des injections rapides et une haute compatibilité.",
+                script_title: "Collection de Scripts ZHub", script_sub: "Recherchez le jeu souhaité ou sélectionnez un dossier.", delta_best_choice: "⭐ Meilleur Choix Delta", delta_choice_desc: "Le meilleur script optimisé pour Delta. Auto farm instantané et zéro crash.",
+                copy_loadstring: "Copier la Loadstring",
+                custom_box_title: "Ajoutez votre Script personnalisé à la liste", custom_box_btn: "Ajouter",
+                custom_name_placeholder: "Nom du Jeu / Script (ex. Blade Ball)", custom_code_placeholder: "loadstring(game:HttpGet(...))()",
+                search_game_placeholder: "Rechercher un jeu (ex. Blox Fruits, Arsenal)...",
+                search_internal_placeholder: "Rechercher un script spécifique...",
+                soc_title: "Social & Crédits", soc_sub: "Rejoignez notre communauté officielle et contactez-nous directement.",
+                cred_title: "Crédits du Projet", cred_desc: "ZHub a été conçu et développé par des développeurs indépendants. Tous droits réservés.",
+                contact_box_title: "Envoyez-moi un Message", contact_box_sub: "Des questions ou des demandes ? Écrivez-nous directement ci-dessous :",
+                form_name: "Votre Nom", form_email: "Votre E-mail", form_message: "Message", form_btn: "Envoyer le Message",
+                form_name_placeholder: "Ex. Jean", form_email_placeholder: "votre@email.com", form_message_placeholder: "Écrivez votre message ici...",
+                footer_text: "© 2026 ZHub. Tous droits réservés. Non affilié à Roblox Corporation.",
+                toast_lang: "Langue modifiée avec succès !", toast_copy: "Loadstring copiée dans le presse-papier !", toast_add: "Script ajouté avec succès à la liste !",
+                back_folders: "Retour aux Dossiers",
+                folder_bf: "Scripts dédiés, Auto Farm & Sea Events",
+                folder_bb: "Auto Parry, Trajectoires & Spam Clicker",
+                folder_bw: "Vape V4, Killaura & Mods PvP",
+                folder_doors: "Entity ESP, Rooms & Guide des Salles",
+                folder_ars: "Aimbot, Silent Aim & Wallhack",
+                folder_sim: "Pet Sim 99, Muscle Legends, Bee Swarm",
+                folder_uni: "Infinite Yield, ESP Global & Plus",
+                desc_redz: "Auto farm instantané, Sea Events, Fruit Finder et zéro crash.",
+                desc_quantum: "Alternative légère pour farmer des os et des matériaux.",
+                desc_zenith: "Optimisé pour la chasse au Léviathan et requins.",
+                desc_hoho: "Célèbre script hub avec une interface graphique propre.",
+                desc_king: "Auto quêtes, max stat, collecte d'artefacts.",
+                desc_blade: "Auto parry intelligent et visualiseur de trajectoire.",
+                desc_horizon: "Visualiseur de courbes avancé et zéro latence.",
+                desc_vape: "Killaura, Fly, Speed, Scaffold et personnalisation PvP.",
+                desc_lunar: "Interface PvP personnalisée et booster de FPS.",
+                desc_doors: "Révèle les entités, objets cachés et guide des salles.",
+                desc_doors2: "Carte complète débloquée et boost de vitesse.",
+                desc_rainbow: "Affiche l'emplacement exact des monstres en temps réel.",
+                desc_piggy: "Prenez n'importe quelle clé à travers les murs.",
+                desc_lazarus: "Silent Aim, FOV ajustable et sans recul.",
+                desc_arsenal: "Aimbot silencieux personnalisable et wallhack.",
+                desc_thunder: "GUI complète avec personnalisation du réticule.",
+                desc_ps99: "Auto farm de coffres et éclosion rapide d'œufs.",
+                desc_bss: "Auto pollen, farm de fleurs spécifiques et macros.",
+                desc_afs: "Auto clicker, ouverture d'étoiles et raids auto.",
+                desc_strong: "Entraînement de force automatique et vitesse max.",
+                desc_arm: "Victoire automatique au bras de fer.",
+                desc_muscle: "Auto lift infini et zones débloquées.",
+                desc_vynixius: "Commandes personnalisées et téléportation globale.",
+                desc_iy: "Le panneau de commandes admin le plus célèbre du monde.",
+                desc_anim: "Appliquez n'importe quelle animation R15 personnalisée."
             },
             de: {
-                toast_lang: "Sprache erfolgreich geändert!", toast_copy: "Loadstring in die Zwischenablage kopiert!", toast_add: "Script erfolgreich hinzugefügt!",
-                welcome_title: "Willkommen bei <span>ZHub</span>", welcome_sub: "Das ultimative und sichere Portal für Roblox.", welcome_btn: "Zum Hub",
+                welcome_title: "Willkommen bei <span>ZHub</span>", welcome_sub: "Das ultimative, sichere und aktualisierte Portal für Roblox-Executors und Scripts.", welcome_btn: "Zum Hub",
                 nav_home: "Startseite", nav_downloads: "Downloads", nav_scripts: "Skripte", nav_social: "Social & Credits",
-                script_title: "ZHub Skript-Sammlung", script_sub: "Suche nach deinem Spiel oder wähle einen Ordner.",
-                back_folders: "Zurück zu Ordnern", down_title: "Offizielle Executor Downloads", down_sub: "Die besten verifizierten Executors."
+                status_online: "Hub-Status: Online & Aktualisiert",
+                home_title: "Roblox zu dominieren war noch nie so einfach", home_sub: "Nutze unser Hub, um die besten stabilen Executors zu finden.", home_btn1: "Zu den Downloads", home_btn2: "Skripte erkunden",
+                down_title: "Offizielle Executor Downloads", down_sub: "Die besten ausgewählten und verifizierten Executors für PC und Mobilgeräte.", down_btn: "Offizielle Website",
+                badge_best: "Bester Executor", badge_undetected: "Unentdeckt", badge_working: "Funktioniert", badge_keyless: "Ohne Key", badge_key: "Key-System",
+                delta_desc: "Das absolute Beste für Mobile und PC. Stabil, schnell und funktionsreich.", arceus_desc: "Bekannter Mobile-Executor mit sauberem Interface und integriertem Hub.", codex_desc: "Großartige Alternative für schnelle Injektionen und hohe Kompatibilität.",
+                script_title: "ZHub Skript-Sammlung", script_sub: "Suche nach deinem gewünschten Spiel oder wähle einen Ordner.", delta_best_choice: "⭐ Delta Beste Wahl", delta_choice_desc: "Das absolute beste Skript optimiert für Delta. Instant Auto-Farm und Null Abstürze.",
+                copy_loadstring: "Loadstring kopieren",
+                custom_box_title: "Füge dein eigenes benutzerdefiniertes Skript hinzu", custom_box_btn: "Hinzufügen",
+                custom_name_placeholder: "Spielname / Skript (z.B. Blade Ball)", custom_code_placeholder: "loadstring(game:HttpGet(...))()",
+                search_game_placeholder: "Suche nach einem Spiel (z.B. Blox Fruits, Arsenal)...",
+                search_internal_placeholder: "Suche nach spezifischem Skript in diesem Ordner...",
+                soc_title: "Social & Credits", soc_sub: "Trete unserer offiziellen Community bei und kontaktiere uns direkt.",
+                cred_title: "Projekt-Credits", cred_desc: "ZHub wurde von unabhängigen Entwicklern entworfen und gewartet. Alle Rechte vorbehalten.",
+                contact_box_title: "Sende mir eine Nachricht", contact_box_sub: "Fragen oder Wünsche? Schreibe uns direkt hier:",
+                form_name: "Dein Name", form_email: "Deine E-Mail", form_message: "Nachricht", form_btn: "Nachricht senden",
+                form_name_placeholder: "Z.B. Max", form_email_placeholder: "deine@email.com", form_message_placeholder: "Schreibe hier deine Nachricht...",
+                footer_text: "© 2026 ZHub. Alle Rechte vorbehalten. Nicht mit der Roblox Corporation affiliiert.",
+                toast_lang: "Sprache erfolgreich geändert!", toast_copy: "Loadstring in die Zwischenablage kopiert!", toast_add: "Skript erfolgreich zur Liste hinzugefügt!",
+                back_folders: "Zurück zu Ordnern",
+                folder_bf: "Spezifische Skripte, Auto Farm & Sea Events",
+                folder_bb: "Auto Parry, Flugbahnen & Spam Clicker",
+                folder_bw: "Vape V4, Killaura & PvP Mods",
+                folder_doors: "Entity ESP, Rooms & Raum-Guide",
+                folder_ars: "Aimbot, Silent Aim & Wallhack",
+                folder_sim: "Pet Sim 99, Muscle Legends, Bee Swarm",
+                folder_uni: "Infinite Yield, Globales ESP & Mehr",
+                desc_redz: "Instant Auto-Farm, Sea Events, Fruit Finder und Null Abstürze.",
+                desc_quantum: "Leichte Alternative zum Farmen von Knochen und Materialien.",
+                desc_zenith: "Optiminiert für Leviathan-Jagd und Haie.",
+                desc_hoho: "Sehr bekanntes Skript-Hub mit sauberer grafischer Benutzeroberfläche.",
+                desc_king: "Auto-Quests, Stat Maxer, Artefakte sammeln.",
+                desc_blade: "Intelligenter Auto-Parry und Flugbahn-Visualisierer.",
+                desc_horizon: "Erweiterter Curveball-Visualisierer und Latenzfrei.",
+                desc_vape: "Killaura, Fly, Speed, Scaffold und PvP-Anpassung.",
+                desc_lunar: "Benutzerdefinierte PvP-Oberfläche und FPS-Booster.",
+                desc_doors: "Enthüllt Entitäten, versteckte Gegenstände und Raum-Guide.",
+                desc_doors2: "Vollständige Karte freigeschaltet und Speed-Boost.",
+                desc_rainbow: "Zeigt exakte Echtzeit-Standorte von Monstern.",
+                desc_piggy: "Nimm Schlüssel durch Wände und Teleport zum Ausgang.",
+                desc_lazarus: "Silent Aim, einstellbares FOV und stabiles No Recoil.",
+                desc_arsenal: "Anpassbarer Silent Aimbot, ESP-Boxen und Wallhack.",
+                desc_thunder: "Komplette GUI mit Fadenkreuz-Anpassung.",
+                desc_ps99: "Truhen Auto-Farm und schnelles Eier-Hatching.",
+                desc_bss: "Auto-Pollen, Blumen-Farm und Makros.",
+                desc_afs: "Auto-Clicker, Sterne öffnen und Auto-Raids.",
+                desc_strong: "Automatisches Krafttraining und maximale Geschwindigkeit.",
+                desc_arm: "Automatischer Armdrücken-Sieg.",
+                desc_muscle: "Unendlicher Auto-Lift und freigeschaltete Bereiche.",
+                desc_vynixius: "Benutzerdefinierte Befehle und globale Teleportation.",
+                desc_iy: "Das weltweit berühmteste universelle Admin-Panel.",
+                desc_anim: "Wende jede benutzerdefinierte R15-Animation an."
             },
             pl: {
-                toast_lang: "Pomyślnie zmieniono język!", toast_copy: "Skopiowano loadstring do schowka!", toast_add: "Pomyślnie dodano skrypt!",
-                welcome_title: "Witaj w <span>ZHub</span>", welcome_sub: "Ostateczny i bezpieczny portal dla Roblox.", welcome_btn: "Wejdź do Hubu",
+                welcome_title: "Witaj w <span>ZHub</span>", welcome_sub: "Ostateczny, bezpieczny i zaktualizowany portal z executorami i skryptami do Roblox.", welcome_btn: "Wejdź do Hubu",
                 nav_home: "Strona główna", nav_downloads: "Pobieranie", nav_scripts: "Skrypty", nav_social: "Społeczność",
-                script_title: "Kolekcja Skryptów ZHub", script_sub: "Wyszukaj grę lub wybierz folder.",
-                back_folders: "Wróć do folderów", down_title: "Pobieranie Executorów", down_sub: "Najlepsze zweryfikowane executory."
+                status_online: "Status Hubu: Online i zaktualizowany",
+                home_title: "Dominacja w Roblox nigdy nie była łatwiejsza", home_sub: "Skorzystaj z naszego hubu, aby znaleźć najlepsze stabilne executory.", home_btn1: "Przejdź do pobierania", home_btn2: "Przeglądaj skrypty",
+                down_title: "Oficjalne pobieranie executorów", down_sub: "Najlepsze wybrane i zweryfikowane executory na PC i urządzenia mobilne.", down_btn: "Oficjalna strona",
+                badge_best: "Najlepszy Executor", badge_undetected: "Niewykrywalny", badge_working: "Działa", badge_keyless: "Bez klucza", badge_key: "Wymaga klucza",
+                delta_desc: "Absolutnie najlepszy na urządzenia mobilne i PC. Stabilny, szybki i bogaty w funkcje.", arceus_desc: "Słynny mobilny executor z czystym interfejsem i wbudowanym hubem.", codex_desc: "Świetna alternatywa do szybkich wstrzyknięć i wysokiej kompatybilności.",
+                script_title: "Kolekcja skryptów ZHub", script_sub: "Wyszukaj żądaną grę lub wybierz folder.", delta_best_choice: "⭐ Najlepszy wybór Delta", delta_choice_desc: "Najlepszy skrypt zoptymalizowany pod Deltę. Błyskawiczny auto farm i zero błędów.",
+                copy_loadstring: "Kopiuj Loadstring",
+                custom_box_title: "Dodaj swój niestandardowy skrypt do listy", custom_box_btn: "Dodaj",
+                custom_name_placeholder: "Nazwa gry / Skryptu (np. Blade Ball)", custom_code_placeholder: "loadstring(game:HttpGet(...))()",
+                search_game_placeholder: "Szukaj gry (np. Blox Fruits, Arsenal)...",
+                search_internal_placeholder: "Szukaj konkretnego skryptu...",
+                soc_title: "Społeczność i kredyty", soc_sub: "Dołącz do naszej oficjalnej społeczności i skontaktuj się z nami.",
+                cred_title: "Kredyty projektu", cred_desc: "ZHub został zaprojektowany i utrzymywany przez niezależnych deweloperów. Wszelkie prawa zastrzeżone.",
+                contact_box_title: "Wyślij mi wiadomość", contact_box_sub: "Masz pytania lub prośby? Napisz do nas bezpośrednio poniżej:",
+                form_name: "Twoje imię", form_email: "Twój e-mail", form_message: "Wiadomość", form_btn: "Wyślij wiadomość",
+                form_name_placeholder: "Np. Jan", form_email_placeholder: "twoj@email.com", form_message_placeholder: "Wpisz swoją wiadomość tutaj...",
+                footer_text: "© 2026 ZHub. Wszelkie prawa zastrzeżone. Niepowiązany z Roblox Corporation.",
+                toast_lang: "Pomyślnie zmieniono język!", toast_copy: "Skopiowano loadstring do schowka!", toast_add: "Pomyślnie dodano skrypt do listy!",
+                back_folders: "Wróć do folderów",
+                folder_bf: "Dedykowane skrypty, Auto Farm i Sea Events",
+                folder_bb: "Auto Parry, Trajektorie i Spam Clicker",
+                folder_bw: "Vape V4, Killaura i mody PvP",
+                folder_doors: "Entity ESP, Pokoje i Poradnik",
+                folder_ars: "Aimbot, Silent Aim i Wallhack",
+                folder_sim: "Pet Sim 99, Muscle Legends, Bee Swarm",
+                folder_uni: "Infinite Yield, Globalny ESP i inne",
+                desc_redz: "Natychmiastowy auto farm, Sea Events i zero awarii.",
+                desc_quantum: "Lekka alternatywa do farmienia kości i materiałów.",
+                desc_zenith: "Zoptymalizowany pod kątem polowań na Lewiatana.",
+                desc_hoho: "Bardzo popularny hub skryptów z czystym interfejsem.",
+                desc_king: "Automatyczne misje, statystyki i szybki boss.",
+                desc_blade: "Inteligentne auto parry i wizualizator trajektorii.",
+                desc_horizon: "Zaawansowany wizualizator i brak opóźnień.",
+                desc_vape: "Killaura, Fly, Speed, Scaffold i modyfikacje PvP.",
+                desc_lunar: "Niestandardowy interfejs PvP i booster FPS.",
+                desc_doors: "Odsłania istoty, ukryte przedmioty i prowadzi przez mrok.",
+                desc_doors2: "Odblokowana pełna mapa i zwiększenie prędkości.",
+                desc_rainbow: "Pokazuje dokładną lokalizację potworów w czasie rzeczywistym.",
+                desc_piggy: "Zabierz dowolny klucz przez ściany i teleportuj się.",
+                desc_lazarus: "Silent Aim, regulowane pole widzenia i brak odrzutu.",
+                desc_arsenal: "Konfigurowable aimbot, skrzynki ESP i wallhack.",
+                desc_thunder: "Pełny interfejs GUI z personalizacją celownika.",
+                desc_ps99: "Auto farm skrzyń i szybkie wylęganie jaj.",
+                desc_bss: "Auto pyłek, zbieranie tokenów i makra.",
+                desc_afs: "Auto clicker, otwieranie gwiazd i rajdy.",
+                desc_strong: "Automatyczny trening siły i prędkość maksymalna.",
+                desc_arm: "Automatyczna wygrana w siłowaniu się na rękę.",
+                desc_muscle: "Nieskończony auto lift i odblokowane obszary.",
+                desc_vynixius: "Niestandardowe komendy i globalny teleport.",
+                desc_iy: "Najsłynniejszy uniwersalny panel admina.",
+                desc_anim: "Zastosuj dowolną niestandardową animację R15."
             },
             tr: {
-                toast_lang: "Dil başarıyla değiştirildi!", toast_copy: "Loadstring panoya kopyalandı!", toast_add: "Script başarıyla eklendi!",
-                welcome_title: "<span>ZHub</span>'a Hoş Geldiniz", welcome_sub: "Roblox için en iyi ve güvenli portal.", welcome_btn: "Hub'a Gir",
-                nav_home: "Ana Sayfa", nav_downloads: "İndirmeler", nav_scripts: "Scriptler", nav_social: "Sosyal",
-                script_title: "ZHub Script Koleksiyonu", script_sub: "İstediğiniz oyunu arayın veya bir klasör seçin.",
-                back_folders: "Klasörlere Dön", down_title: "Resmi Executor İndirmeleri", down_sub: "Test edilmiş en iyi executor'lar."
+                welcome_title: "<span>ZHub</span>'a Hoş Geldiniz", welcome_sub: "Roblox Executor'ları ve Script'leri için nihai, güvenli ve güncel portal.", welcome_btn: "Hub'a Gir",
+                nav_home: "Ana Sayfa", nav_downloads: "İndirmeler", nav_scripts: "Script'ler", nav_social: "Sosyal & Krediler",
+                status_online: "Hub Durumu: Çevrimiçi ve Güncel",
+                home_title: "Roblox'a hükdetmek hiç bu kadar kolay olmamıştı", home_sub: "En iyi kararlı executor'ları bulmak için hub'ımızı kullanın.", home_btn1: "İndirmelere Git", home_btn2: "Script'leri İncele",
+                down_title: "Resmi Executor İndirmeleri", down_sub: "PC ve mobil cihazlar için seçilmiş ve doğrulanmış en iyi executor'lar.", down_btn: "Resmi Web Sitesi",
+                badge_best: "En İyi Executor", badge_undetected: "Algılanmıyor", badge_working: "Çalışıyor", badge_keyless: "Key'siz", badge_key: "Key Sistemi",
+                delta_desc: "Mobil ve PC için mutlak en iyisi. Kararlı, hızlı ve özellik dolu.", arceus_desc: "Temiz arayüze ve yerleşik script hub'ına sahip popüler mobil executor.", codex_desc: "Hızlı enjeksiyonlar ve yüksek uyumluluk için harika bir alternatif.",
+                script_title: "ZHub Script Koleksiyonu", script_sub: "İstediğiniz oyunu arayın veya bir klasör seçin.", delta_best_choice: "⭐ Delta En İyi Seçim", delta_choice_desc: "Delta için optimize edilmiş en iyi script. Anında oto farm ve sıfır çökme.",
+                copy_loadstring: "Loadstring Kopyala",
+                custom_box_title: "Özel Script'inizi listeye ekleyin", custom_box_btn: "Ekle",
+                custom_name_placeholder: "Oyun Adı / Script (örn. Blade Ball)", custom_code_placeholder: "loadstring(game:HttpGet(...))()",
+                search_game_placeholder: "Bir oyun arayın (örn. Blox Fruits, Arsenal)...",
+                search_internal_placeholder: "Bu klasörde özel script ara...",
+                soc_title: "Sosyal & Krediler", soc_sub: "Resmi topluluğumuza katılın ve doğrudan bizimle iletişime geçin.",
+                cred_title: "Proje Kredileri", cred_desc: "ZHub bağımsız geliştiriciler tarafından tasarlanmış ve sürdürülmüştür. Tüm hakları saklıdır.",
+                contact_box_title: "Bana Bir Mesaj Gönder", contact_box_sub: "Sorularınız veya istekleriniz mi var? Doğrudan aşağıdan yazın:",
+                form_name: "Adınız", form_email: "E-postanız", form_message: "Mesajınız", form_btn: "Mesaj Gönder",
+                form_name_placeholder: "Örn. Ahmet", form_email_placeholder: "sizin@email.com", form_message_placeholder: "Mesajınızı buraya yazın...",
+                footer_text: "© 2026 ZHub. Tüm hakları saklıdır. Roblox Corporation ile bağlantılı değildir.",
+                toast_lang: "Dil başarıyla değiştirildi!", toast_copy: "Loadstring panoya kopyalandı!", toast_add: "Script başarıyla listeye eklendi!",
+                back_folders: "Klasörlere Dön",
+                folder_bf: "Özel scriptler, Auto Farm & Sea Events",
+                folder_bb: "Auto Parry, Yörüngeler & Spam Clicker",
+                folder_bw: "Vape V4, Killaura & PvP Modları",
+                folder_doors: "Entity ESP, Odalar & Oda Rehberi",
+                folder_ars: "Aimbot, Silent Aim & Wallhack",
+                folder_sim: "Pet Sim 99, Muscle Legends, Bee Swarm",
+                folder_uni: "Infinite Yield, Global ESP & Diğerleri",
+                desc_redz: "Anında oto farm, deniz etkinlikleri ve sıfır çökme.",
+                desc_quantum: "Kemik ve malzeme farmamak için hafif alternatif.",
+                desc_zenith: "Leviathan avı ve köpekbalıkları için optimize edildi.",
+                desc_hoho: "Temiz arayüze sahip çok popüler script hub.",
+                desc_king: "Oto görevler, stat maxer ve hızlı patron katili.",
+                desc_blade: "Akıllı auto parry ve yörünge görüntüleyici.",
+                desc_horizon: "Gelişmiş curveball görüntüleyici ve sıfır gecikme.",
+                desc_vape: "Killaura, Fly, Speed, Scaffold ve PvP özelleştirmesi.",
+                desc_lunar: "Özel PvP arayüzü ve FPS artırıcı.",
+                desc_doors: "Varlıkları, gizli öğeleri ve karanlık oda rehberini gösterir.",
+                desc_doors2: "Tam harita kilidi açık ve hız artışı.",
+                desc_rainbow: "Canavarların gerçek zamanlı konumlarını gösterir.",
+                desc_piggy: "Duvarlardan herhangi bir anahtarı alın ve ışınlanın.",
+                desc_lazarus: "Silent Aim, ayarlanabilir FOV ve geri tepmesiz.",
+                desc_arsenal: "Özelleştirilebilir silent aimbot, ESP kutuları ve wallhack.",
+                desc_thunder: "Nişangah özelleştirmesine sahip tam GUI.",
+                desc_ps99: "Sandık oto farm ve hızlı yumurta açma.",
+                desc_bss: "Oto polen, çiçek farmı ve makrolar.",
+                desc_afs: "Oto tıklayıcı, yıldız açma ve baskınlar.",
+                desc_strong: "Otomatik güç antrenmanı ve maksimum hız.",
+                desc_arm: "Bilek güreşinde otomatik zafer.",
+                desc_muscle: "Sınırsız oto kaldırma ve açılmış alanlar.",
+                desc_vynixius: "Özel komutlar ve küresel ışınlanma.",
+                desc_iy: "Dünyanın en ünlü evrensel admin paneli.",
+                desc_anim: "Herhangi bir özel R15 animasyonu uygulayın."
             },
             ru: {
-                toast_lang: "Язык успешно изменен!", toast_copy: "Loadstring скопирован в буфер обмена!", toast_add: "Скрипт успешно добавлен!",
-                welcome_title: "Добро пожаловать в <span>ZHub</span>", welcome_sub: "Главный и безопасный портал для Roblox.", welcome_btn: "Войти в Hub",
+                welcome_title: "Добро пожаловать в <span>ZHub</span>", welcome_sub: "Главный, безопасный и актуальный портал для Executor и скриптов Roblox.", welcome_btn: "Войти в Hub",
                 nav_home: "Главная", nav_downloads: "Загрузки", nav_scripts: "Скрипты", nav_social: "Соцсети",
-                script_title: "Коллекция скриптов ZHub", script_sub: "Найдите игру или выберите папку.",
-                back_folders: "Назад к папкам", down_title: "Загрузки Executor", down_sub: "Лучшие проверенные executor."
+                status_online: "Статус Hub: Онлайн и обновлен",
+                home_title: "Доминировать в Roblox еще никогда не было так просто", home_sub: "Используйте наш хаб, чтобы найти лучшие стабильные executor.", home_btn1: "Перейти к загрузкам", home_btn2: "Изучить скрипты",
+                down_title: "Официальные загрузки Executor", down_sub: "Лучшие проверенные executor для ПК и мобильных устройств.", down_btn: "Официальный сайт",
+                badge_best: "Лучший Executor", badge_undetected: "Необнаружимый", badge_working: "Работает", badge_keyless: "Без ключа", badge_key: "Система ключей",
+                delta_desc: "Абсолютно лучший выбор для Mobile и PC. Стабильный, быстрый и многофункциональный.", arceus_desc: "Популярный мобильный executor с чистым интерфейсом и встроенным хабом.", codex_desc: "Отличная альтернатива для быстрых инъекций и высокой совместимости.",
+                script_title: "Коллекция скриптов ZHub", script_sub: "Найдите нужную игру или выберите папку.", delta_best_choice: "⭐ Лучший выбор Delta", delta_choice_desc: "Лучший скрипт, оптимизированный для Delta. Автофарм и ноль вылетов.",
+                copy_loadstring: "Копировать Loadstring",
+                custom_box_title: "Добавьте свой пользовательский скрипт в список", custom_box_btn: "Добавить",
+                custom_name_placeholder: "Название игры / Скрипт (напр. Blade Ball)", custom_code_placeholder: "loadstring(game:HttpGet(...))()",
+                search_game_placeholder: "Поиск игры (напр. Blox Fruits, Arsenal)...",
+                search_internal_placeholder: "Поиск скрипта в этой папке...",
+                soc_title: "Соцсети и кредиты", soc_sub: "Присоединяйтесь к нашему официальному сообществу и свяжитесь с нами.",
+                cred_title: "Кредиты проекта", cred_desc: "ZHub был разработан независимыми разработчиками. Все права защищены.",
+                contact_box_title: "Отправить мне сообщение", contact_box_sub: "Есть вопросы или пожелания? Пишите напрямую ниже:",
+                form_name: "Ваше имя", form_email: "Ваш Email", form_message: "Сообщение", form_btn: "Отправить сообщение",
+                form_name_placeholder: "Иван", form_email_placeholder: "vash@email.com", form_message_placeholder: "Напишите сообщение здесь...",
+                footer_text: "© 2026 ZHub. Все права защищены. Не аффилировано с Roblox Corporation.",
+                toast_lang: "Язык успешно изменен!", toast_copy: "Loadstring скопирован в буфер обмена!", toast_add: "Скрипт успешно добавлен в список!",
+                back_folders: "Назад к папкам",
+                folder_bf: "Специальные скрипты, автофарм и ивенты",
+                folder_bb: "Авто-парирование, траектории и спам-кликер",
+                folder_bw: "Vape V4, Killaura и PvP моды",
+                folder_doors: "Entity ESP, комнаты и гид",
+                folder_ars: "Aimbot, Silent Aim и Wallhack",
+                folder_sim: "Pet Sim 99, Muscle Legends, Bee Swarm",
+                folder_uni: "Infinite Yield, глобальный ESP и прочее",
+                desc_redz: "Мгновенный автофарм, морские события и ноль вылетов.",
+                desc_quantum: "Легкая альтернатива для фарма костей и материалов.",
+                desc_zenith: "Оптимизирован для охоты на Левиафана и акул.",
+                desc_hoho: "Известный хаб скриптов с чистым интерфейсом.",
+                desc_king: "Автоквесты, макс. статы и быстрые боссы.",
+                desc_blade: "Умное авто-парирование и визуализатор траекторий.",
+                desc_horizon: "Продвинутый визуализатор и нулевая задержка.",
+                desc_vape: "Killaura, Fly, Speed, Scaffold и настройки PvP.",
+                desc_lunar: "Кастомный PvP интерфейс и бустер FPS.",
+                desc_doors: "Показывает сущности, скрытые предметы и темные комнаты.",
+                desc_doors2: "Полная карта разблокирована и ускорение.",
+                desc_rainbow: "Отображает точное расположение монстров в реальном времени.",
+                desc_piggy: "Берите ключи сквозь стены и телепортируйтесь.",
+                desc_lazarus: "Silent Aim, настраиваемый FOV и без отдачи.",
+                desc_arsenal: "Настраиваемый аимбот, ESP боксы и вх.",
+                desc_thunder: "Полный GUI с настройкой прицела.",
+                desc_ps99: "Автофарм сундуков и быстрое открытие яиц.",
+                desc_bss: "Авто-пыльца, фарм цветов и макросы.",
+                desc_afs: "Автокликер, открытие звезд и рейды.",
+                desc_strong: "Автоматическая тренировка силы и макс. скорость.",
+                desc_arm: "Автоматическая победа в армрестлинге.",
+                desc_muscle: "Бесконечный авто-лифт и открытые зоны.",
+                desc_vynixius: "Кастомные команды и глобальный телепорт.",
+                desc_iy: "Самая известная универсальная админ-панель.",
+                desc_anim: "Применяйте любую кастомную анимацию R15."
             },
             ja: {
-                welcome_title: "<span>ZHub</span>へようこそ", welcome_sub: "Robloxエグゼキューターとスクリプトの究極ポータル。", welcome_btn: "ハブに入る",
+                welcome_title: "<span>ZHub</span>へようこそ", welcome_sub: "Robloxエグゼキューターとスクリプトの究極のポータル。", welcome_btn: "ハブに入る",
                 nav_home: "ホーム", nav_downloads: "ダウンロード", nav_scripts: "スクリプト", nav_social: "SNS & クレジット",
                 status_online: "ステータス: オンライン",
                 home_title: "Robloxを制覇しよう", home_sub: "最高の安定したエグゼキューターとスクリプトを見つけよう。", home_btn1: "ダウンロードへ", home_btn2: "スクリプトを見る",
                 down_title: "公式エグゼキューター", down_sub: "PC・モバイル向けの検証済みツール。", down_btn: "公式サイト",
-                badge_undetected: "安全 (Undetected)", badge_working: "稼働中",
-                delta_desc: "モバイルとPCで最高のパフォーマンスを発揮。", arceus_desc: "人気のモバイル向けエグゼキューター。", codex_desc: "高速インジェクションの優れた代替品。",
-                script_title: "ZHubスクリプトコレクション", script_sub: "ゲームを検索するか、フォルダを選択してください。", delta_choice_desc: "Delta向けに最適化された最高のスクリプト。",
+                badge_best: "ベストツール", badge_undetected: "安全 (Undetected)", badge_working: "稼働中", badge_keyless: "キーなし", badge_key: "キーシステム",
+                delta_desc: "モバイルとPCで最高のパフォーマンスを発揮。安定・高速。", arceus_desc: "クリーンなインターフェースを持つ人気のモバイルエグゼキューター。", codex_desc: "高速インジェクションと高い互換性を持つ優れた代替品。",
+                script_title: "ZHubスクリプトコレクション", script_sub: "ゲームを検索するか、フォルダを選択してください。", delta_best_choice: "⭐ Deltaおすすめ", delta_choice_desc: "Deltaに最適化された最高のスクリプト。自動ファーム・クラッシュなし。",
+                copy_loadstring: "ロードストリングをコピー",
                 custom_box_title: "カスタムスクリプトを追加", custom_box_btn: "追加",
-                soc_title: "SNS & クレジット", soc_sub: "コミュニティに参加しよう。",
-                cred_title: "プロジェクトクレジット", cred_desc: "独立した開発者によって維持されています。",
-                contact_box_title: "メッセージを送信", contact_box_sub: "質問やリクエストはこちらから：",
+                custom_name_placeholder: "ゲーム名 / スクリプト (例: Blade Ball)", custom_code_placeholder: "loadstring(game:HttpGet(...))()",
+                search_game_placeholder: "ゲームを検索 (例: Blox Fruits, Arsenal)...",
+                search_internal_placeholder: "このフォルダ内のスクリプトを検索...",
+                soc_title: "SNS & クレジット", soc_sub: "公式コミュニティに参加して直接お問い合わせください。",
+                cred_title: "プロジェクトクレジット", cred_desc: "独立した開発者によって設計・保守されています。全著作権所有。",
+                contact_box_title: "メッセージを送信", contact_box_sub: "質問やリクエストはこちらからどうぞ：",
                 form_name: "お名前", form_email: "メールアドレス", form_message: "メッセージ", form_btn: "送信する",
-                toast_lang: "言語が正常に変更されました！", toast_copy: "ロードストリングがコピーされました！", toast_add: "スクリプトが追加されました！",
-                back_folders: "フォルダ一覧に戻る"
+                form_name_placeholder: "例: 太郎", form_email_placeholder: "your@email.com", form_message_placeholder: "ここにメッセージを入力...",
+                footer_text: "© 2026 ZHub. 全著作権所有. Roblox Corporationとは一切関係ありません。",
+                toast_lang: "言語が正常に変更されました！", toast_copy: "ロードストリングがコピーされました！", toast_add: "スクリプトがリストに追加されました！",
+                back_folders: "フォルダ一覧に戻る",
+                folder_bf: "専用スクリプト、自動ファームなど",
+                folder_bb: "自動パリィ、軌道表示など",
+                folder_bw: "Vape V4, Killaura & PvPモッド",
+                folder_doors: "エンティティESP、部屋ガイド",
+                folder_ars: "エイムボット、サイレントエイム",
+                folder_sim: "ペットシム99、マッスルレジェンド等",
+                folder_uni: "インフィニット・イールド、グローバルESP",
+                desc_redz: "インスタント自動ファーム、クラッシュゼロ。",
+                desc_quantum: "軽量な代替スクリプト。",
+                desc_zenith: "リヴァイアサン狩りに最適化。",
+                desc_hoho: "クリーンで安定したGUIを持つ有名スクリプトハブ。",
+                desc_king: "自動クエスト、ステータス最大化。",
+                desc_blade: "スマート自動パリィと軌道ビジュアライザー。",
+                desc_horizon: "高度なカーブボールビジュアライザー。",
+                desc_vape: "Killaura、Fly、Speed、PvPモジュール。",
+                desc_lunar: "カスタムPvPインターフェース。",
+                desc_doors: "エンティティと隠しアイテムを表示。",
+                desc_doors2: "全マップアンロックとスピードブースト。",
+                desc_rainbow: "モンスターの位置をリアルタイム表示。",
+                desc_piggy: "壁越しにアイテムを取得してテレポート。",
+                desc_lazarus: "サイレントエイムと安定したリコイル制御。",
+                desc_arsenal: "カスタマイズ可能なエイムボット。",
+                desc_thunder: "クロスヘアカスタマイズ付きGUI。",
+                desc_ps99: "チェスト自動ファームと高速孵化。",
+                desc_bss: "自動ポーレンとマクロ。",
+                desc_afs: "オートクリッカーと自動レイド。",
+                desc_strong: "自動筋力トレーニング。",
+                desc_arm: "腕相撲自動勝利。",
+                desc_muscle: "無限自動リフト。",
+                desc_vynixius: "カスタムコマンドとグローバルテレポート。",
+                desc_iy: "世界で最も有名な管理者コマンドパネル。",
+                desc_anim: "カスタムR15アニメーションを適用。"
             }
         };
 
@@ -954,12 +1396,23 @@
             document.getElementById('langDropdown').classList.remove('show');
             
             const translation = texts[langCode] || texts['en'];
+            
+            // Traduzione testi normali
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
                 if (translation[key]) {
                     el.innerHTML = translation[key];
                 }
             });
+
+            // Traduzione placeholders degli input
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                if (translation[key]) {
+                    el.placeholder = translation[key];
+                }
+            });
+
             showToast(translation.toast_lang || texts['en'].toast_lang);
         }
 
@@ -990,7 +1443,6 @@
             }
         }
 
-        // BARRA DI RICERCA PRINCIPALE (FILTRA I GIOCHI / CARTELLA)
         function filterGames() {
             let input = document.getElementById('gameSearch').value.toLowerCase();
             let folders = document.getElementsByClassName('game-folder-card');
@@ -1005,7 +1457,6 @@
             }
         }
 
-        // BARRA DI RICERCA INTERNA (FILTRA I SINGOLI SCRIPT NELLA CARTELLA)
         function filterInternalScripts() {
             let input = document.getElementById('internalScriptSearch').value.toLowerCase();
             let cards = document.getElementsByClassName('script-card');
