@@ -236,10 +236,17 @@
         .search-bar:focus { border-color: var(--primary); box-shadow: 0 0 25px rgba(139, 92, 246, 0.25); background: rgba(15, 23, 42, 0.85); }
         .search-container i { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: var(--primary); font-size: 1.1rem; }
 
-        .social-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 15px; }
-        .social-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 18px; padding: 22px; text-align: center; transition: all 0.3s ease; text-decoration: none; color: inherit; display: block; backdrop-filter: blur(16px); }
-        .social-card:hover { border-color: var(--primary); transform: translateY(-4px); box-shadow: 0 10px 30px rgba(139, 92, 246, 0.2); }
-        .social-card i { font-size: 2.2rem; margin-bottom: 12px; color: var(--primary); }
+        /* Social Bottoni Grandi e uno sotto l'altro */
+        .social-grid { display: flex; flex-direction: column; gap: 16px; margin-top: 15px; }
+        .social-card { 
+            background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 18px; 
+            padding: 24px; text-align: center; transition: all 0.3s ease; text-decoration: none; 
+            color: inherit; display: flex; align-items: center; justify-content: center; gap: 15px; 
+            backdrop-filter: blur(16px); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+        .social-card:hover { border-color: var(--primary); transform: translateY(-4px); box-shadow: 0 12px 35px rgba(139, 92, 246, 0.25); background: rgba(139, 92, 246, 0.05); }
+        .social-card i { font-size: 2.8rem; color: var(--primary); }
+        .social-card h4 { font-size: 1.3rem; font-weight: 700; }
 
         .contact-form { display: flex; flex-direction: column; gap: 16px; margin-top: 15px; }
         .form-group { display: flex; flex-direction: column; gap: 6px; text-align: left; }
@@ -688,22 +695,31 @@
             <h2 data-i18n="soc_title">Social & Crediti</h2>
             <p class="section-sub" data-i18n="soc_sub">Unisciti alla nostra community ufficiale e contattaci direttamente.</p>
             
-            <!-- 1. SOCIAL BOTTONI IN ALTO -->
+            <!-- 1. SOCIAL BOTTONI GRANDI E IN VERTICALE -->
             <div class="card" style="margin-bottom: 25px;">
-                <h3 style="margin-bottom: 5px;"><i class="fa-solid fa-share-nodes" style="color: var(--primary);"></i> Community Social</h3>
-                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0;">Seguici sui nostri canali ufficiali per rimanere sempre aggiornato.</p>
+                <h3 style="margin-bottom: 5px;" data-i18n="social_comm_title"><i class="fa-solid fa-share-nodes" style="color: var(--primary);"></i> Community Social</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0;" data-i18n="social_comm_sub">Seguici sui nostri canali ufficiali per rimanere sempre aggiornato.</p>
                 <div class="social-grid">
                     <a href="https://discord.com" target="_blank" class="social-card">
                         <i class="fa-brands fa-discord"></i>
-                        <h4 style="font-size: 1rem; font-weight: 700;">Discord</h4>
+                        <div>
+                            <h4 data-i18n="soc_discord_title">Discord Ufficiale</h4>
+                            <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 0;" data-i18n="soc_discord_desc">Unisciti al nostro server per supporto e chat</p>
+                        </div>
                     </a>
                     <a href="https://youtube.com" target="_blank" class="social-card">
                         <i class="fa-brands fa-youtube" style="color: #ef4444;"></i>
-                        <h4 style="font-size: 1rem; font-weight: 700;">YouTube</h4>
+                        <div>
+                            <h4 data-i18n="soc_youtube_title">Canale YouTube</h4>
+                            <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 0;" data-i18n="soc_youtube_desc">Scopri video dimostrativi e showcase di script</p>
+                        </div>
                     </a>
                     <a href="https://telegram.org" target="_blank" class="social-card">
                         <i class="fa-brands fa-telegram" style="color: #38bdf8;"></i>
-                        <h4 style="font-size: 1rem; font-weight: 700;">Telegram</h4>
+                        <div>
+                            <h4 data-i18n="soc_telegram_title">Canale Telegram</h4>
+                            <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 0;" data-i18n="soc_telegram_desc">Aggiornamenti rapidi e notifiche in tempo reale</p>
+                        </div>
                     </a>
                 </div>
             </div>
@@ -768,6 +784,10 @@
                 search_game_placeholder: "Cerca un gioco (es. Blox Fruits, Arsenal, BedWars)...",
                 search_script_placeholder: "Cerca script specifico in questa cartella...",
                 soc_title: "Social & Crediti", soc_sub: "Unisciti alla nostra community ufficiale e contattaci direttamente.",
+                social_comm_title: "Community Social", social_comm_sub: "Seguici sui nostri canali ufficiali per rimanere sempre aggiornato.",
+                soc_discord_title: "Discord Ufficiale", soc_discord_desc: "Unisciti al nostro server per supporto e chat",
+                soc_youtube_title: "Canale YouTube", soc_youtube_desc: "Scopri video dimostrativi e showcase di script",
+                soc_telegram_title: "Canale Telegram", soc_telegram_desc: "Aggiornamenti rapidi e notifiche in tempo reale",
                 cred_title: "Crediti del Progetto", cred_desc: "ZHub è stato ideato, sviluppato e mantenuto da developer indipendenti appassionati di scripting e sicurezza su Roblox. Tutti i diritti riservati.",
                 contact_box_title: "Mandami un Messaggio", contact_box_sub: "Hai domande o richieste? Scrivimi direttamente qui sotto:",
                 form_name: "Il tuo Nome", form_name_ph: "Es. Mario", form_email: "La tua Email", form_message: "Messaggio", form_msg_ph: "Scrivi qui il tuo messaggio...", form_btn: "Invia Messaggio",
@@ -822,6 +842,10 @@
                 search_game_placeholder: "Search for a game (e.g. Blox Fruits, Arsenal, BedWars)...",
                 search_script_placeholder: "Search specific script in this folder...",
                 soc_title: "Social & Credits", soc_sub: "Join our official community and contact us directly.",
+                social_comm_title: "Social Community", social_comm_sub: "Follow our official channels to stay always up to date.",
+                soc_discord_title: "Official Discord", soc_discord_desc: "Join our server for support and chat",
+                soc_youtube_title: "YouTube Channel", soc_youtube_desc: "Check out demo videos and script showcases",
+                soc_telegram_title: "Telegram Channel", soc_telegram_desc: "Fast updates and real-time notifications",
                 cred_title: "Project Credits", cred_desc: "ZHub was designed, developed, and maintained by independent developers passionate about Roblox scripting and security. All rights reserved.",
                 contact_box_title: "Send me a Message", contact_box_sub: "Got questions or requests? Write directly below:",
                 form_name: "Your Name", form_name_ph: "E.g. Mario", form_email: "Your Email", form_message: "Message", form_msg_ph: "Write your message here...", form_btn: "Send Message",
@@ -873,7 +897,11 @@
                 btn_copy_loadstring: "Copiar Loadstring",
                 custom_box_title: "Añade tu Script personalizado", custom_box_btn: "Añadir",
                 custom_placeholder_name: "Nombre del juego", search_game_placeholder: "Buscar juego...", search_script_placeholder: "Buscar script...",
-                soc_title: "Social & Créditos", soc_sub: "Únete a nuestra comunidad.",
+                soc_title: "Social & Créditos", soc_sub: "Únete a nuestra comunidad y contáctanos.",
+                social_comm_title: "Comunidad Social", social_comm_sub: "Síguenos en nuestros canales oficiales.",
+                soc_discord_title: "Discord Oficial", soc_discord_desc: "Únete a nuestro servidor",
+                soc_youtube_title: "Canal de YouTube", soc_youtube_desc: "Vídeos demostrativos",
+                soc_telegram_title: "Canal de Telegram", soc_telegram_desc: "Actualizaciones rápidas",
                 cred_title: "Créditos del Proyecto", cred_desc: "ZHub fue creado por desarrolladores independientes.",
                 contact_box_title: "Envíame un Mensaje", contact_box_sub: "¿Preguntas o peticiones? Escribe abajo:",
                 form_name: "Tu Nombre", form_name_ph: "Ej. Mario", form_email: "Tu Correo", form_message: "Mensaje", form_msg_ph: "Escribe tu mensaje...", form_btn: "Enviar Mensaje",
@@ -894,7 +922,11 @@
                 btn_copy_loadstring: "Copiar Loadstring",
                 custom_box_title: "Adicione seu Script personalizado", custom_box_btn: "Adicionar",
                 custom_placeholder_name: "Nome do jogo", search_game_placeholder: "Pesquisar jogo...", search_script_placeholder: "Pesquisar script...",
-                soc_title: "Social & Créditos", soc_sub: "Entre na nossa comunidade.",
+                soc_title: "Social & Créditos", soc_sub: "Entre na nossa comunidade e entre em contato.",
+                social_comm_title: "Comunidade Social", social_comm_sub: "Siga nossos canais oficiais.",
+                soc_discord_title: "Discord Oficial", soc_discord_desc: "Entre no nosso servidor",
+                soc_youtube_title: "Canal do YouTube", soc_youtube_desc: "Vídeos e demonstrações",
+                soc_telegram_title: "Canal do Telegram", soc_telegram_desc: "Atualizações em tempo real",
                 cred_title: "Créditos do Projeto", cred_desc: "ZHub desenvolvido por independentes.",
                 contact_box_title: "Envie-me uma Mensagem", contact_box_sub: "Dúvidas? Escreva abaixo:",
                 form_name: "Seu Nome", form_name_ph: "Ex. Mário", form_email: "Seu Email", form_message: "Mensagem", form_msg_ph: "Escreva sua mensagem...", form_btn: "Enviar Mensagem",
@@ -915,7 +947,11 @@
                 btn_copy_loadstring: "Copier la Loadstring",
                 custom_box_title: "Ajoutez votre Script personnalisé", custom_box_btn: "Ajouter",
                 custom_placeholder_name: "Nom du jeu", search_game_placeholder: "Rechercher un jeu...", search_script_placeholder: "Rechercher un script...",
-                soc_title: "Social & Crédits", soc_sub: "Rejoignez notre communauté.",
+                soc_title: "Social & Crédits", soc_sub: "Rejoignez notre communauté et contactez-nous.",
+                social_comm_title: "Communauté Sociale", social_comm_sub: "Suivez nos canaux officiels.",
+                soc_discord_title: "Discord Officiel", soc_discord_desc: "Rejoignez notre serveur",
+                soc_youtube_title: "Chaîne YouTube", soc_youtube_desc: "Vidéos de démonstration",
+                soc_telegram_title: "Canal Telegram", soc_telegram_desc: "Mises à jour rapides",
                 cred_title: "Crédits du Projet", cred_desc: "ZHub conçu par des développeurs indépendants.",
                 contact_box_title: "Envoyez-moi un Message", contact_box_sub: "Des questions ? Écrivez ci-dessous :",
                 form_name: "Votre Nom", form_name_ph: "Ex. Mario", form_email: "Votre Email", form_message: "Message", form_msg_ph: "Écrivez votre message...", form_btn: "Envoyer le Message",
@@ -936,7 +972,11 @@
                 btn_copy_loadstring: "Loadstring kopieren",
                 custom_box_title: "Füge dein eigenes Skript hinzu", custom_box_btn: "Hinzufügen",
                 custom_placeholder_name: "Spielname", search_game_placeholder: "Spiel suchen...", search_script_placeholder: "Skript suchen...",
-                soc_title: "Social & Credits", soc_sub: "Trete unserer Community bei.",
+                soc_title: "Social & Credits", soc_sub: "Trete unserer Community bei und kontaktiere uns.",
+                social_comm_title: "Social Community", social_comm_sub: "Folge unseren offiziellen Kanälen.",
+                soc_discord_title: "Offizieller Discord", soc_discord_desc: "Tritt unserem Server bei",
+                soc_youtube_title: "YouTube-Kanal", soc_youtube_desc: "Demo-Videos und Skripte",
+                soc_telegram_title: "Telegram-Kanal", soc_telegram_desc: "Schnelle Updates",
                 cred_title: "Projekt-Credits", cred_desc: "ZHub wurde von unabhängigen Entwicklern erstellt.",
                 contact_box_title: "Schreibe mir eine Nachricht", contact_box_sub: "Fragen? Schreibe unten:",
                 form_name: "Dein Name", form_name_ph: "Z.B. Mario", form_email: "Deine E-Mail", form_message: "Nachricht", form_msg_ph: "Schreibe deine Nachricht...", form_btn: "Nachricht senden",
@@ -957,7 +997,11 @@
                 btn_copy_loadstring: "Skopiuj Loadstring",
                 custom_box_title: "Dodaj własny skrypt", custom_box_btn: "Dodaj",
                 custom_placeholder_name: "Nazwa gry", search_game_placeholder: "Szukaj gry...", search_script_placeholder: "Szukaj skryptu...",
-                soc_title: "Społeczność", soc_sub: "Dołącz do naszej społeczności.",
+                soc_title: "Społeczność", soc_sub: "Dołącz do naszej społeczności i skontaktuj się z nami.",
+                social_comm_title: "Społeczność Społeczna", social_comm_sub: "Śledź nasze oficjalne kanały.",
+                soc_discord_title: "Oficjalny Discord", soc_discord_desc: "Dołącz do naszego serwera",
+                soc_youtube_title: "Kanał YouTube", soc_youtube_desc: "Filmy demonstracyjne",
+                soc_telegram_title: "Kanał Telegram", soc_telegram_desc: "Szybkie aktualizacje",
                 cred_title: "Kredyty projektu", cred_desc: "ZHub został stworzony przez niezależnych programistów.",
                 contact_box_title: "Napisz do mnie", contact_box_sub: "Masz pytania? Napisz poniżej:",
                 form_name: "Twoje imię", form_name_ph: "np. Marek", form_email: "Twój E-mail", form_message: "Wiadomość", form_msg_ph: "Wpisz wiadomość...", form_btn: "Wyślij wiadomość",
@@ -973,12 +1017,16 @@
                 home_title: "Roblox'u fethetmek hiç bu kadar kolay olmamıştı", home_sub: "En iyi executor'ları bulun.", home_btn1: "İndirmelere Git", home_btn2: "Scriptleri Keşfet",
                 down_title: "Resmi Executor İndirmeleri", down_sub: "Test edilmiş en iyi executor'lar.", down_btn: "Resmi Web Sitesi",
                 badge_best: "En İyi", badge_undetected: "Algılanmadı", badge_working: "Çalışıyor", badge_keyless: "Keyless", badge_keysystem: "Key Sistemi",
-                delta_desc: "Mobil ve PC için mutlak en iyisi.", arceus_desc: "Popüler mobil executor.", codex_desc: "Hızlı enjeksiyon için harika alternatif.",
+                delta_desc: "Mobil dan PC için mutlak en iyisi.", arceus_desc: "Popüler mobil executor.", codex_desc: "Hızlı enjeksiyon için harika alternatif.",
                 script_title: "ZHub Script Koleksiyonu", script_sub: "İstediğiniz oyunu arayın.", delta_badge_choice: "⭐ Delta En İyi Seçim", delta_choice_desc: "Delta için optimize edilmiş en iyi script.",
                 btn_copy_loadstring: "Loadstring Kopyala",
                 custom_box_title: "Özel Scriptini Ekle", custom_box_btn: "Ekle",
                 custom_placeholder_name: "Oyun Adı", search_game_placeholder: "Oyun ara...", search_script_placeholder: "Script ara...",
-                soc_title: "Sosyal", soc_sub: "Topluluğumuza katılın.",
+                soc_title: "Sosyal", soc_sub: "Topluluğumuza katılın ve bizimle iletişime geçin.",
+                social_comm_title: "Sosyal Topluluk", social_comm_sub: "Resmi kanallarımızı takip edin.",
+                soc_discord_title: "Resmi Discord", soc_discord_desc: "Sunucumuza katılın",
+                soc_youtube_title: "YouTube Kanalı", soc_youtube_desc: "Tanıtım videoları ve scriptler",
+                soc_telegram_title: "Telegram Kanalı", soc_telegram_desc: "Hızlı güncellemeler",
                 cred_title: "Proje Kredileri", cred_desc: "ZHub bağımsız geliştiriciler tarafından oluşturuldu.",
                 contact_box_title: "Bana Mesaj Gönder", contact_box_sub: "Sorularınız mı var? Aşağıya yazın:",
                 form_name: "Adınız", form_name_ph: "Örn. Ali", form_email: "E-postanız", form_message: "Mesaj", form_msg_ph: "Mesajınızı yazın...", form_btn: "Mesaj Gönder",
@@ -999,7 +1047,11 @@
                 btn_copy_loadstring: "Копировать Loadstring",
                 custom_box_title: "Добавить свой скрипт", custom_box_btn: "Добавить",
                 custom_placeholder_name: "Название игры", search_game_placeholder: "Поиск игры...", search_script_placeholder: "Поиск скрипта...",
-                soc_title: "Соцсети", soc_sub: "Присоединяйтесь к сообществу.",
+                soc_title: "Соцсети", soc_sub: "Присоединяйтесь к сообществу и свяжитесь с нами.",
+                social_comm_title: "Сообщество", social_comm_sub: "Следите за нашими официальными каналами.",
+                soc_discord_title: "Официальный Discord", soc_discord_desc: "Присоединяйтесь к серверу",
+                soc_youtube_title: "YouTube канал", soc_youtube_desc: "Демонстрационные видео",
+                soc_telegram_title: "Telegram канал", soc_telegram_desc: "Быстрые обновления",
                 cred_title: "Кредиты проекта", cred_desc: "ZHub создан независимыми разработчиками.",
                 contact_box_title: "Отправить сообщение", contact_box_sub: "Есть вопросы? Пишите ниже:",
                 form_name: "Ваше имя", form_name_ph: "Иван", form_email: "Ваш Email", form_message: "Сообщение", form_msg_ph: "Введите сообщение...", form_btn: "Отправить",
@@ -1020,7 +1072,11 @@
                 btn_copy_loadstring: "Loadstringをコピー",
                 custom_box_title: "カスタムスクリプトを追加", custom_box_btn: "追加",
                 custom_placeholder_name: "ゲーム名", search_game_placeholder: "ゲームを検索...", search_script_placeholder: "スクリプトを検索...",
-                soc_title: "SNS & クレジット", soc_sub: "コミュニティに参加しよう。",
+                soc_title: "SNS & クレジット", soc_sub: "コミュニティに参加して連絡を取ろう。",
+                social_comm_title: "ソーシャルコミュニティ", social_comm_sub: "公式チャンネルをフォローしよう。",
+                soc_discord_title: "公式Discord", soc_discord_desc: "サーバーに参加",
+                soc_youtube_title: "YouTubeチャンネル", soc_youtube_desc: "デモ動画やスクリプト紹介",
+                soc_telegram_title: "Telegramチャンネル", soc_telegram_desc: "最新情報をリアルタイムで",
                 cred_title: "プロジェクトクレジット", cred_desc: "独立した開発者によって維持されています。",
                 contact_box_title: "メッセージを送信", contact_box_sub: "質問やリクエストはこちらから：",
                 form_name: "お名前", form_name_ph: "山田太郎", form_email: "メールアドレス", form_message: "メッセージ", form_msg_ph: "メッセージを入力...", form_btn: "送信する",
